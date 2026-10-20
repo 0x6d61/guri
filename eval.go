@@ -8,6 +8,7 @@ type Interpreter struct{ global *environment }
 func NewInterpreter() *Interpreter {
 	i := &Interpreter{global: newEnvironment(nil)}
 	i.installNumbers()
+	i.installCollections()
 	return i
 }
 
