@@ -3,6 +3,15 @@
 GuriはLispのS式を使う、動的かつ強い型付けの言語です。
 Goで実装したASTインタプリタが、シングルスレッドでプログラムを評価します。
 
+## 言語仕様と関数リファレンス
+
+- [言語仕様](https://github.com/0x6d61/guri/wiki/Language-Specification)
+- [特殊形式](https://github.com/0x6d61/guri/wiki/Special-Forms)
+- [全組み込み関数のリファレンス](https://github.com/0x6d61/guri/wiki/Functions)
+
+原稿は [docs/wiki](docs/wiki) で管理します。
+仕様や関数を変更するときは同じPRで原稿を更新し、マージ後に [Wiki公開手順](docs/WIKI.md) に従って同期します。
+
 ## ファイルの実行
 
 Go 1.26以降を使用します。

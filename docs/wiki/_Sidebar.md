@@ -1,0 +1,4 @@
+- [ホーム](https://github.com/0x6d61/guri/wiki)
+- [言語仕様](https://github.com/0x6d61/guri/wiki/Language-Specification)
+- [特殊形式](https://github.com/0x6d61/guri/wiki/Special-Forms)
+- [関数リファレンス](https://github.com/0x6d61/guri/wiki/Functions)
