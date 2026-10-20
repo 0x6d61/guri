@@ -116,8 +116,11 @@ func (r *reader) readExpr() (Expr, error) {
 			{Kind: Symbol, Value: "quote", Position: pos}, quoted,
 		}}, nil
 	case '"':
-		return r.readString()
+		return r.readString(String)
 	default:
+		if ch == 'b' && r.offset+1 < len(r.input) && r.input[r.offset+1] == '"' {
+			return r.readString(Bytes)
+		}
 		return r.readAtom()
 	}
 }
@@ -146,15 +149,18 @@ func (r *reader) readCollection(kind Kind, closing rune) (Expr, error) {
 	}
 }
 
-func (r *reader) readString() (Expr, error) {
+func (r *reader) readString(kind Kind) (Expr, error) {
 	pos := r.position()
+	if kind == Bytes {
+		r.advance()
+	}
 	r.advance()
 	var value strings.Builder
 	for !r.done() {
 		charPos := r.position()
 		switch ch := r.advance(); ch {
 		case '"':
-			return Expr{Kind: String, Value: value.String(), Position: pos}, nil
+			return Expr{Kind: kind, Value: value.String(), Position: pos}, nil
 		case '\\':
 			if r.done() {
 				return Expr{}, &ReaderError{pos, "unclosed string"}
@@ -169,6 +175,20 @@ func (r *reader) readString() (Expr, error) {
 				value.WriteByte('\r')
 			case 't':
 				value.WriteByte('\t')
+			case 'x':
+				if kind != Bytes {
+					return Expr{}, &ReaderError{charPos, "hex byte escape is only supported in Bytes"}
+				}
+				if r.offset+2 > len(r.input) {
+					return Expr{}, &ReaderError{charPos, "expected two hexadecimal digits after \\x"}
+				}
+				n, err := strconv.ParseUint(string(r.input[r.offset:r.offset+2]), 16, 8)
+				if err != nil {
+					return Expr{}, &ReaderError{charPos, "expected two hexadecimal digits after \\x"}
+				}
+				r.advance()
+				r.advance()
+				value.WriteByte(byte(n))
 			default:
 				return Expr{}, &ReaderError{charPos, fmt.Sprintf("unsupported escape \\%c", escaped)}
 			}

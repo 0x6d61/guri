@@ -17,7 +17,7 @@ func TestVectorBuiltins(t *testing.T) {
 		{"(def a [1 2]) (def b (clone a)) (assoc! b 0 7) a", VectorValue{int64(1), int64(2)}},
 		{"(def a [[1]]) (def b (clone a)) (assoc! (nth b 0) 0 9) (nth (nth a 0) 0)", int64(9)},
 		{"(cap [1 2 3])", int64(3)}, {"(cap [])", int64(0)},
-		{"(len \"日本語\")", int64(9)}, {"(len '(1 2))", int64(2)},
+		{"(len \"日本語\")", int64(3)}, {"(len '(1 2))", int64(2)},
 		{"(conj [1] 2 3)", VectorValue{int64(1), int64(2), int64(3)}},
 		{"(= append conj)", true}, {"(reduce + 10 [1 2 3])", int64(16)},
 		{"(set! conj (fn [x] x)) (append [1] 2)", VectorValue{int64(1), int64(2)}},

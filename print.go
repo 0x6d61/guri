@@ -31,6 +31,8 @@ func format(value Value, path map[equalityPair]bool) string {
 	case string:
 		escape := strings.NewReplacer("\\", "\\\\", "\"", "\\\"", "\n", "\\n", "\r", "\\r", "\t", "\\t")
 		return "\"" + escape.Replace(v) + "\""
+	case BytesValue:
+		return formatBytes(v)
 	case SymbolValue:
 		return string(v)
 	case KeywordValue:
@@ -66,6 +68,33 @@ func format(value Value, path map[equalityPair]bool) string {
 		parts[index] = format(element, path)
 	}
 	return open + strings.Join(parts, " ") + close
+}
+
+func formatBytes(value BytesValue) string {
+	var out strings.Builder
+	out.WriteString("b\"")
+	for index := 0; index < len(value); index++ {
+		b := value[index]
+		switch b {
+		case '"', '\\':
+			out.WriteByte('\\')
+			out.WriteByte(b)
+		case '\n':
+			out.WriteString("\\n")
+		case '\r':
+			out.WriteString("\\r")
+		case '\t':
+			out.WriteString("\\t")
+		default:
+			if b >= 0x20 && b <= 0x7e {
+				out.WriteByte(b)
+			} else {
+				fmt.Fprintf(&out, "\\x%02x", b)
+			}
+		}
+	}
+	out.WriteByte('"')
+	return out.String()
 }
 
 func (i *Interpreter) installPrinting() {

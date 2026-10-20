@@ -79,15 +79,25 @@ Mapは参照を共有し、`assoc`、`dissoc`、`update` は浅いコピーを�
 | `dissoc`、`dissoc!` | Map、1個以上のキー |
 | `update`、`update!` | Map、キー、関数、その関数への追加引数 |
 | `append`、`conj` | Vector、0個以上の追加要素 |
-| `nth` | Vector、0始まりの添字 |
-| `slice` | Vector、開始位置、終了位置 |
+| `nth` | Vector、StringまたはBytes、0始まりの添字 |
+| `slice` | Vector、StringまたはBytes、開始位置、終了位置 |
 | `reduce` | 関数、初期値、Vector |
 | `println` | 0個以上。表示後にnilを返す |
 
 `=` はIntegerとFloatを数値として比較します。
 Mapのキーの型はGoのMapと同様に区別するため、キーの `1` と `1.0` は別のキーになります。
 Mapの列挙順序と表示順序は保証しません。
-`len` はStringに対してUTF-8のバイト長を返します。
+Stringの `len`、`nth`、`slice` はUnicodeコードポイント単位です。
+不変のバイト列は `b"..."` と書き、バイト単位で扱います。
+Bytesの `nth` は0〜255のIntegerを返し、`slice` はBytesを返します。
+従来のStringの `len` がバイト長だった仕様から変更しています。
+
+```clojure
+(println (len "日本語") (len b"日本語")) ; 3 9
+(println (nth "日本語" 1)) ; 本
+(println (slice "Alice" 0 3)) ; Ali
+(println (nth b"Alice" 0)) ; 65
+```
 
 ## Goからの利用
 

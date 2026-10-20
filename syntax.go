@@ -9,6 +9,7 @@ const (
 	Integer Kind = "Integer"
 	Float   Kind = "Float"
 	String  Kind = "String"
+	Bytes   Kind = "Bytes"
 	Symbol  Kind = "Symbol"
 	Keyword Kind = "Keyword"
 	List    Kind = "List"
@@ -26,6 +27,7 @@ type Position struct {
 // Expr is reader syntax, not a runtime collection. Map elements alternate keys
 // and values in source order so evaluation can preserve side effects.
 // Value is nil, bool, int64, float64, or string according to Kind.
+// String and Bytes both store a Go string in syntax; their runtime types differ.
 // Symbol and Keyword names use string; Keyword names omit the leading colon.
 type Expr struct {
 	Kind     Kind

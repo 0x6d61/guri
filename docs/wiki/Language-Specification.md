@@ -2,7 +2,7 @@
 
 GuriはGoで実装した、シングルスレッドのASTインタプリタです。
 動的かつ強い型付けを採用し、LispのS式を使います。
-このページは初期仕様v0.0.1に `defn` を追加した現在の実装を説明します。
+このページは初期仕様v0.0.1に `defn` とString／Bytesの区別を追加した現在の実装を説明します。
 
 ## データ型
 
@@ -12,7 +12,8 @@ GuriはGoで実装した、シングルスレッドのASTインタプリタで�
 | Boolean | `true`、`false` | 真偽値 |
 | Integer | `42`、`-3` | 符号付き64ビット整数 |
 | Float | `3.14`、`1e3` | 有限の64ビット浮動小数点数 |
-| String | `"hello"` | UTF-8、不変 |
+| String | `"hello"` | Unicode文字列、不変 |
+| Bytes | `b"hello"` | 任意のバイト列、不変 |
 | Symbol | `name` | 変数名や識別子 |
 | Keyword | `:name` | 自己評価する識別子。Mapを引数に呼び出せる |
 | List | `'(1 2 3)` | 連結構造は不変 |
@@ -36,6 +37,11 @@ UTF-8のソースを読み取ります。
 Integerの範囲外リテラルと、Floatの範囲を超えるリテラルも `ReaderError` になります。
 実行時の算術演算によるオーバーフローは `ArithmeticError` です。
 
+Bytesリテラルは `b"..."` と書き、Stringと同じエスケープに加えて `\xHH` を使用できます。
+HHは正確に2桁の16進数で、たとえば `b"\x00\xff"` は2バイトです。
+ソース内に直接書いたUnicode文字はUTF-8のバイト列として格納します。
+Bytesのエスケープが不正な場合も `ReaderError` になります。
+
 ## 評価順と真偽
 
 トップレベルの式を上から順に評価し、最後の値を返します。
@@ -44,7 +50,7 @@ CLIでは返り値を自動表示せず、`println` を呼び出したときに�
 
 | 式 | 評価 |
 |---|---|
-| 数値、String、Boolean、nil、Keyword | その値を返す |
+| 数値、String、Bytes、Boolean、nil、Keyword | その値を返す |
 | Symbol | 環境から名前を検索する |
 | `()` | 空Listを返す |
 | `(f a b)` | f、a、bの順に評価して呼び出す |
@@ -92,7 +98,8 @@ Functionは参照同一性で比較します。
 (println (= {:a 1 :b 2} {:b 2 :a 1.0})) ; => true
 ```
 
-Mapのキーに使える型はNil、Boolean、Integer、Float、String、Symbol、Keywordです。
+Mapのキーに使える型はNil、Boolean、Integer、Float、String、Bytes、Symbol、Keywordです。
+StringとBytesは暗黙に変換せず、等価性とMapのキー検索でも区別します。
 キー検索はGoのMapと同じく型を区別するため、`1` と `1.0` は別のキーになります。
 Mapの等価性でも、キーはこの検索規則で対応付けます。
 `=` による数値比較と、Mapのキー検索は規則が異なります。
@@ -101,6 +108,29 @@ Mapの等価性でも、キーはこの検索規則で対応付けます。
 (def m {1 "integer" 1.0 "float"})
 (println (get m 1)) ; => integer
 (println (get m 1.0)) ; => float
+```
+
+## StringとBytes
+
+Stringの `len`、`nth`、`slice` はUnicodeコードポイント単位です。
+`nth` は1コードポイントのString、`slice` は部分Stringを返します。
+StringをUTF-8の途中で分割しません。
+コードポイントは表示上の1文字と異なる場合があり、結合文字のまとめやUnicode正規化は行いません。
+
+Bytesの `len`、`nth`、`slice` はバイト単位です。
+`nth` は0〜255のInteger、`slice` はBytesを返します。
+どちらの型も不変で、負の添字を許しません。
+`nth` の境界は `0 <= index < len`、`slice` の境界は `0 <= low <= high <= len` です。
+
+初期仕様v0.0.1ではStringのlenをバイト長としていましたが、この仕様ではコードポイント数へ変更しています。
+
+```clojure
+(println (len "日本語") (len b"日本語")) ; => 3 9
+(println (nth "日本語" 1)) ; => 本
+(println (slice "A😀B" 1 2)) ; => 😀
+(println (nth b"Alice" 0)) ; => 65
+(println (slice b"Alice" 0 3)) ; => b"Ali"
+(println (= "A" b"A")) ; => false
 ```
 
 ## Vectorの共有
@@ -144,7 +174,7 @@ Mapの代入では本体を共有します。
 | DefinitionError | 不正な定義、再定義、未定義名へのset! |
 | ArityError | 引数数の不一致 |
 | TypeError | 型が一致しない操作、無効なMapキー |
-| IndexError | Vectorの添字やsliceの範囲外アクセス |
+| IndexError | Vector、String、Bytesの添字やsliceの範囲外アクセス |
 | ArithmeticError | 整数オーバーフロー、ゼロ除算、非有限Float値を生む演算 |
 
 エラーには可能な範囲でファイル名、1始まりの行と列、原因を含めます。
