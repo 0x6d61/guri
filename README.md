@@ -27,7 +27,7 @@ CLIはファイルを1つ受け取り、トップレベルの式を上から順�
 ## 関数とデータ
 
 ```clojure
-(def make-adder (fn [n] (fn [x] (+ n x))))
+(defn make-adder [n] (fn [x] (+ n x)))
 (def add10 (make-adder 10))
 (println (add10 5)) ; 15
 
@@ -40,6 +40,10 @@ CLIはファイルを1つ受け取り、トップレベルの式を上から順�
 (assoc! b 0 9)
 (println a) ; [9 2 3]
 ```
+
+`(defn name [args...] body...)` は `(def name (fn [args...] body...))` の糖衣構文です。
+`defn` はトップレベルで関数を定義し、定義した関数を返します。
+同じ名前の再定義はエラーになるため、値の再代入には `set!` を使います。
 
 偽値は `nil` と `false` だけです。
 `and` と `or` は短絡評価します。
