@@ -1,0 +1,12 @@
+(def make-adder (fn [n] (fn [x] (+ n x))))
+(def add10 (make-adder 10))
+(println (add10 5))
+(def make-counter
+  (fn [] (let [n 0] (fn [] (set! n (+ n 1))))))
+(def next (make-counter))
+(println (next))
+(println (next))
+(def pair (let [n 0] [(fn [] (set! n (inc n))) (fn [] n)]))
+((nth pair 0))
+(println ((nth pair 1)))
+(println ((fn [x & rest] rest) 1 2 3))

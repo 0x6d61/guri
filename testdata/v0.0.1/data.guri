@@ -1,0 +1,13 @@
+; UTF-8, quote and immutable List structure containing mutable data.
+(println (len "日本語") '(a :b nil true))
+(def xs '({:count 0} [1]))
+(println (len xs))
+(println (= xs '({:count 0.0} [1.0])))
+(println (= [1 2] '(1 2)))
+(println (= {:a 1 :b [2]} {:b [2.0] :a 1.0}))
+(def identity (fn [x] x))
+(println (= identity identity) (= identity (fn [x] x)))
+(println (= 9007199254740993 9007199254740992.0))
+(println (< 9223372036854775807 9223372036854775808.0))
+(println (= -9223372036854775808 -9223372036854775808.0))
+(println (/ 1 2))
