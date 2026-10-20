@@ -90,6 +90,8 @@ func (i *Interpreter) installCollections() {
 		switch v := args[0].(type) {
 		case VectorValue:
 			return cloneVector(v), nil
+		case *MapValue:
+			return cloneMap(v), nil
 		}
 		return nil, failure(TypeError, "clone requires Vector or Map")
 	})
@@ -110,6 +112,15 @@ func (i *Interpreter) installCollections() {
 }
 
 func associate(collection, key, value Value, mutate bool) (Value, error) {
+	if m, ok := collection.(*MapValue); ok {
+		if !mutate {
+			m = cloneMap(m)
+		}
+		if err := m.Set(key, value); err != nil {
+			return nil, err
+		}
+		return m, nil
+	}
 	v, err := vector(collection)
 	if err != nil {
 		return nil, err
