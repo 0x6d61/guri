@@ -18,6 +18,7 @@ func TestRun(t *testing.T) {
 		{"\n(/ 1 0)", 1, "", ":2:1: ArithmeticError:"},
 		{"[", 1, "", ":1:1: ReaderError:"},
 		{"missing", 1, "", ":1:1: NameError:"},
+		{"\n(error \"invalid brackets\") (println \"unreachable\")", 1, "", ":2:1: UserError: invalid brackets"},
 	} {
 		t.Run(tt.source, func(t *testing.T) {
 			path := filepath.Join(t.TempDir(), "sample.guri")

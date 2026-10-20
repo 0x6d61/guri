@@ -2,7 +2,8 @@
 
 GuriはGoで実装した、シングルスレッドのASTインタプリタです。
 動的かつ強い型付けを採用し、LispのS式を使います。
-このページは初期仕様v0.0.1に `defn`、String／Bytesの区別、while、condを追加した現在の実装を説明します。
+このページはv0.0.1の現在の実装を説明します。
+`defn`、String／Bytesの区別、while、cond、errorを含みます。
 
 ## データ型
 
@@ -181,7 +182,15 @@ Mapの代入では本体を共有します。
 | TypeError | 型が一致しない操作、無効なMapキー |
 | IndexError | Vector、String、Bytesの添字やsliceの範囲外アクセス |
 | ArithmeticError | 整数オーバーフロー、ゼロ除算、非有限Float値を生む演算 |
+| UserError | error関数による明示的な評価中断 |
 
 エラーには可能な範囲でファイル名、1始まりの行と列、原因を含めます。
 列はUnicodeコードポイント単位です。
 関数本体で発生したエラーには、本体の定義元の位置を使用します。
+
+`(error message)` はStringを1引数取り、指定メッセージのUserErrorを返します。
+空のメッセージも許可し、`%` を含む文字列を書式として解釈しません。
+error自体は出力やプロセス終了を行いません。
+エラー後の式は評価せず、エラー前の副作用は保持します。
+Go APIではEvalがerrorを返し、同じInterpreterを引き続き使用できます。
+CLIは診断を標準エラーへ出力し、終了コード1で終了します。

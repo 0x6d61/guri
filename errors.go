@@ -12,6 +12,7 @@ const (
 	TypeError       ErrorKind = "TypeError"
 	IndexError      ErrorKind = "IndexError"
 	ArithmeticError ErrorKind = "ArithmeticError"
+	UserError       ErrorKind = "UserError"
 )
 
 type RuntimeError struct {
@@ -29,4 +30,14 @@ func (e *RuntimeError) Error() string {
 
 func failure(kind ErrorKind, format string, args ...any) error {
 	return &RuntimeError{Kind: kind, Cause: fmt.Sprintf(format, args...)}
+}
+
+func (i *Interpreter) installErrors() {
+	i.native("error", 1, 1, func(args []Value) (Value, error) {
+		message, ok := args[0].(string)
+		if !ok {
+			return nil, failure(TypeError, "error requires a String message, got %T", args[0])
+		}
+		return nil, failure(UserError, "%s", message)
+	})
 }

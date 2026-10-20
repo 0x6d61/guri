@@ -1,11 +1,10 @@
-; Build a bidirectional bracket table. The result's :ok is false for unmatched brackets.
+; Return a bidirectional bracket Map or raise UserError for unmatched brackets.
 ; code is a Unicode String; positions are Unicode code point indices.
 (defn search-brackets [code]
   (let [pc 0
         stack []
-        brackets {}
-        valid true]
-    (while (and valid (< pc (len code)))
+        brackets {}]
+    (while (< pc (len code))
       (let [command (nth code pc)]
         (cond
           (= command "[")
@@ -13,15 +12,15 @@
 
           (= command "]")
           (if (= (len stack) 0)
-            (set! valid false)
+            (error "] に対応する [ がありません。")
             (let [left (nth stack (- (len stack) 1))]
               (assoc! brackets left pc)
               (assoc! brackets pc left)
               (set! stack (slice stack 0 (- (len stack) 1)))))))
       (set! pc (inc pc)))
-    {:ok (and valid (= (len stack) 0)) :brackets brackets}))
+    (if (!= (len stack) 0)
+      (error "[が閉じられていません。"))
+    brackets))
 
-(def result (search-brackets "[[]]"))
-(def pairs (:brackets result))
-(println (:ok result))
+(def pairs (search-brackets "[[]]"))
 (println (get pairs 0) (get pairs 1) (get pairs 2) (get pairs 3))
