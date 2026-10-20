@@ -55,6 +55,8 @@ func (i *Interpreter) eval(expr Expr, env *environment) (result Value, err error
 	switch expr.Kind {
 	case Nil, Boolean, Integer, Float, String:
 		return expr.Value, nil
+	case Bytes:
+		return BytesValue(expr.Value.(string)), nil
 	case Keyword:
 		return KeywordValue(expr.Value.(string)), nil
 	case Symbol:
@@ -331,6 +333,8 @@ func (i *Interpreter) function(args []Expr, env *environment) (Value, error) {
 
 func quoted(expr Expr) (Value, error) {
 	switch expr.Kind {
+	case Bytes:
+		return BytesValue(expr.Value.(string)), nil
 	case Symbol:
 		return SymbolValue(expr.Value.(string)), nil
 	case Keyword:

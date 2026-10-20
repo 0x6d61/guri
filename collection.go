@@ -1,5 +1,7 @@
 package guri
 
+import "unicode/utf8"
+
 func vector(value Value) (VectorValue, error) {
 	v, ok := value.(VectorValue)
 	if !ok {
@@ -31,38 +33,8 @@ func (i *Interpreter) installCollections() {
 		return append(v, args[1:]...), nil
 	})
 	i.global.bindings["conj"] = &cell{i.global.bindings["append"].value}
-	i.native("nth", 2, 2, func(args []Value) (Value, error) {
-		v, err := vector(args[0])
-		if err != nil {
-			return nil, err
-		}
-		n, err := indexValue(args[1])
-		if err != nil {
-			return nil, err
-		}
-		if n < 0 || n >= int64(len(v)) {
-			return nil, failure(IndexError, "index %d outside Vector length %d", n, len(v))
-		}
-		return v[n], nil
-	})
-	i.native("slice", 3, 3, func(args []Value) (Value, error) {
-		v, err := vector(args[0])
-		if err != nil {
-			return nil, err
-		}
-		low, err := indexValue(args[1])
-		if err != nil {
-			return nil, err
-		}
-		high, err := indexValue(args[2])
-		if err != nil {
-			return nil, err
-		}
-		if low < 0 || high < low || high > int64(cap(v)) {
-			return nil, failure(IndexError, "slice [%d:%d] outside capacity %d", low, high, cap(v))
-		}
-		return v[low:high], nil
-	})
+	i.native("nth", 2, 2, nthValue)
+	i.native("slice", 3, 3, sliceValue)
 	i.native("cap", 1, 1, func(args []Value) (Value, error) {
 		v, err := vector(args[0])
 		if err != nil {
@@ -77,11 +49,13 @@ func (i *Interpreter) installCollections() {
 		case ListValue:
 			return int64(v.length), nil
 		case string:
+			return int64(utf8.RuneCountInString(v)), nil
+		case BytesValue:
 			return int64(len(v)), nil
 		case *MapValue:
 			return int64(len(v.entries)), nil
 		}
-		return nil, failure(TypeError, "len requires List, Vector, Map or String")
+		return nil, failure(TypeError, "len requires List, Vector, Map, String or Bytes")
 	})
 	for _, name := range []string{"assoc", "assoc!"} {
 		i.native(name, 3, 3, func(args []Value) (Value, error) { return associate(args[0], args[1], args[2], name == "assoc!") })

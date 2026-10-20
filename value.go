@@ -7,6 +7,9 @@ import "math/big"
 type Value = any
 type SymbolValue string
 type KeywordValue string
+
+// BytesValue is an immutable sequence of arbitrary bytes, distinct from String.
+type BytesValue string
 type VectorValue []Value
 
 type listNode struct {
@@ -43,7 +46,7 @@ func NewMap() *MapValue { return &MapValue{entries: make(map[Value]Value)} }
 
 func validKey(key Value) bool {
 	switch key.(type) {
-	case nil, bool, int64, float64, string, SymbolValue, KeywordValue:
+	case nil, bool, int64, float64, string, BytesValue, SymbolValue, KeywordValue:
 		return true
 	}
 	return false
@@ -116,6 +119,9 @@ func equal(a, b Value, seen map[equalityPair]bool) bool {
 		return ok && x == y
 	case string:
 		y, ok := b.(string)
+		return ok && x == y
+	case BytesValue:
+		y, ok := b.(BytesValue)
 		return ok && x == y
 	case SymbolValue:
 		y, ok := b.(SymbolValue)

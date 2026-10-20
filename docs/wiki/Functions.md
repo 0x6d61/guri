@@ -30,9 +30,9 @@
 | `update!` | `(update! map key f args...)` | Map、呼び出し可能な値 | 関数の結果で元のMapを更新して返す |
 | `append` | `(append vector value...)` | Vector | 追加後のVectorヘッダ。配列を再利用する場合がある |
 | `conj` | `(conj vector value...)` | Vector | appendの別名。同じ関数値 |
-| `nth` | `(nth vector index)` | Vector、Integer | 要素。変更なし |
-| `slice` | `(slice vector low high)` | Vector、Integer | 基底配列を共有する部分Vector |
-| `len` | `(len value)` | List、Vector、Map、String | 要素数またはバイト長のInteger。変更なし |
+| `nth` | `(nth sequence index)` | Vector／String／Bytes、Integer | 要素、1コードポイントのString、またはバイト値のInteger。変更なし |
+| `slice` | `(slice sequence low high)` | Vector／String／Bytes、Integer | 入力と同じ型の部分列。Vectorは基底配列を共有 |
+| `len` | `(len value)` | List、Vector、Map、String、Bytes | 要素数、コードポイント数またはバイト長のInteger。変更なし |
 | `cap` | `(cap vector)` | Vector | 容量のInteger。変更なし |
 | `clone` | `(clone collection)` | Vector、Map | 独立した配列またはMapへの浅いコピー |
 | `reduce` | `(reduce f initial vector)` | 呼び出し可能な値、Vector | 畳み込み結果。関数の副作用は発生する |
@@ -179,13 +179,16 @@ fが失敗した場合、その結果をキーに保存しません。
 
 ## nth
 
-Vectorの0始まりの添字で要素を取得します。
+Vector、String、Bytesの0始まりの添字で要素を取得します。
+StringではUnicodeコードポイント単位で1コードポイントのStringを返し、Bytesでは1バイトを0〜255のIntegerで返します。
 添字はIntegerで、`0 <= index < len` が必要です。
 対象や添字の型が不正なら `TypeError`、範囲外なら `IndexError` です。
-String、List、Mapには対応していません。
+List、Mapには対応していません。
 
 ```clojure
 (println (nth [10 20 30] 1)) ; => 20
+(println (nth "日本語" 1)) ; => 本
+(println (nth b"Alice" 0)) ; => 65
 ```
 
 ## slice
@@ -196,8 +199,8 @@ lowとhighはIntegerで、終了位置の要素を含みません。
 境界はGoの2添字Sliceと同じく `0 <= low <= high <= cap` です。
 対象や境界値の型が不正なら `TypeError`、境界条件を満たさなければ `IndexError` です。
 
-現在はVector専用です。
-`(slice "Alice" 0 3)` は `TypeError` になります。
+StringではUnicodeコードポイント単位、Bytesではバイト単位で部分列を返します。
+この2型の境界は `0 <= low <= high <= len` で、元の値を変更せず同じ型の部分列を返します。
 
 ```clojure
 (def a [1 2 3])
@@ -205,18 +208,23 @@ lowとhighはIntegerで、終了位置の要素を含みません。
 (println part (len part) (cap part)) ; => [2 3] 2 2
 (assoc! part 0 9)
 (println a) ; => [1 9 3]
+(println (slice "Alice" 0 3)) ; => Ali
+(println (slice "日本語" 1 3)) ; => 本語
+(println (slice b"Alice" 0 3)) ; => b"Ali"
 ```
 
 ## lenとcap
 
 `len` はList、Vector、Mapの要素数をIntegerで返します。
-Stringでは文字数ではなくUTF-8のバイト長です。
+StringではUnicodeコードポイント数、Bytesではバイト長です。
+結合文字のまとめやUnicode正規化は行いません。
 `cap` はVectorの容量をIntegerで返します。
 対応する型以外を渡すと `TypeError` です。
 
 ```clojure
 (println (len '(1 2)) (len [1 2 3]) (len {})) ; => 2 3 0
-(println (len "Alice") (len "日本語")) ; => 5 9
+(println (len "Alice") (len "日本語")) ; => 5 3
+(println (len b"日本語")) ; => 9
 (println (cap [1 2 3])) ; => 3
 ```
 
@@ -258,6 +266,7 @@ reduce自体はVectorを変更しませんが、fの副作用は実行されま�
 Stringは引用符を付けず、コレクション内のStringには引用符を付けます。
 Mapの表示順序は保証しません。
 Functionは `#<function>`、循環参照は `#<cycle>` と表示します。
+Bytesは `b"..."` の形式で表示し、非ASCIIや制御バイトをエスケープします。
 Go APIでは `Interpreter.Output` で出力先を変更でき、出力先の書き込みエラーは呼び出し元に返します。
 
 ```clojure
