@@ -136,6 +136,16 @@ func (i *Interpreter) apply(callee Value, args []Value) (Value, error) {
 	return nil, failure(TypeError, "%T is not callable", callee)
 }
 
+func callable(value Value) bool {
+	switch v := value.(type) {
+	case KeywordValue:
+		return true
+	case *FunctionValue:
+		return v != nil && v.call != nil
+	}
+	return false
+}
+
 func arity(name string, count, min, max int) error {
 	if count < min || (max >= 0 && count > max) {
 		if max < 0 {

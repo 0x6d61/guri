@@ -96,6 +96,9 @@ func (i *Interpreter) installCollections() {
 		return nil, failure(TypeError, "clone requires Vector or Map")
 	})
 	i.native("reduce", 3, 3, func(args []Value) (Value, error) {
+		if !callable(args[0]) {
+			return nil, failure(TypeError, "reduce requires a callable value")
+		}
 		v, err := vector(args[2])
 		if err != nil {
 			return nil, err
