@@ -171,6 +171,8 @@ func (i *Interpreter) special(name string, args []Expr, env *environment) (Value
 		value, err = i.body(args, env)
 	case "while":
 		value, err = i.while(args, env)
+	case "cond":
+		value, err = i.cond(args, env)
 	case "if":
 		err = arity(name, len(args), 2, 3)
 		if err == nil {
@@ -235,6 +237,22 @@ func (i *Interpreter) while(args []Expr, env *environment) (Value, error) {
 			return nil, err
 		}
 	}
+}
+
+func (i *Interpreter) cond(args []Expr, env *environment) (Value, error) {
+	if len(args)%2 != 0 {
+		return nil, failure(ArityError, "cond requires condition/expression pairs, got %d arguments", len(args))
+	}
+	for index := 0; index < len(args); index += 2 {
+		condition, err := i.eval(args[index], env)
+		if err != nil {
+			return nil, err
+		}
+		if Truthy(condition) {
+			return i.eval(args[index+1], env)
+		}
+	}
+	return nil, nil
 }
 
 func (i *Interpreter) binding(name string, args []Expr, env *environment) (Value, error) {

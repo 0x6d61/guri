@@ -1,12 +1,12 @@
 # Guriの言語仕様と関数リファレンス
 
 このWikiは、Guriで使用できる構文と関数を説明します。
-初期仕様v0.0.1を起点に、`defn` とString／Bytesの区別を追加した現在の実装を対象にします。
+初期仕様v0.0.1を起点に、`defn`、String／Bytesの区別、while、condを追加した現在の実装を対象にします。
 
 | ページ | 内容 |
 |---|---|
 | [言語仕様](https://github.com/0x6d61/guri/wiki/Language-Specification) | 型、Reader、評価規則、共有、エラー |
-| [特殊形式](https://github.com/0x6d61/guri/wiki/Special-Forms) | `def`、`defn`、`fn`、条件分岐、束縛など全11形式 |
+| [特殊形式](https://github.com/0x6d61/guri/wiki/Special-Forms) | `def`、`defn`、`fn`、条件分岐、束縛など全12形式 |
 | [関数リファレンス](https://github.com/0x6d61/guri/wiki/Functions) | 全28関数の引数、型、返り値、変更の有無、使用例、エラー |
 
 ## 実行方法
@@ -33,6 +33,9 @@ CLIは各式を評価します。
 - `b"..."` は不変のBytesで、バイト単位の `len`、`nth`、`slice` に対応します。
 - 入出力の組み込み関数は `println` です。バイト入力と改行なしのバイト出力は未実装です。
 - `while` で、再帰によるスタックの増加なしに反復できます。末尾呼び出し最適化は未実装です。
+- `cond` で条件を順に調べ、最初に一致した分岐だけを実行できます。
+
+[括弧対応表を作る例](https://github.com/0x6d61/guri/blob/master/examples/search-brackets.guri) は、Stringのnth、while、condを組み合わせて動作します。
 
 未実装の機能を使用可能な関数として記載せず、追加した機能の仕様と使用例を実装と同じPRで更新します。
 原稿は [docs/wiki](https://github.com/0x6d61/guri/tree/master/docs/wiki) で管理します。
