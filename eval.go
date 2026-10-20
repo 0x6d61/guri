@@ -195,6 +195,16 @@ func (i *Interpreter) special(name string, args []Expr, env *environment) (Value
 		}
 	case "def", "set!":
 		value, err = i.binding(name, args, env)
+	case "defn":
+		err = arity(name, len(args), 2, -1)
+		if err == nil {
+			// Reuse def and fn so their scope and validation rules stay identical.
+			function := Expr{
+				Kind: List, Position: args[1].Position,
+				Elements: append([]Expr{{Kind: Symbol, Value: "fn", Position: args[1].Position}}, args[1:]...),
+			}
+			value, err = i.binding("def", []Expr{args[0], function}, env)
+		}
 	case "fn":
 		value, err = i.function(args, env)
 	case "let":
