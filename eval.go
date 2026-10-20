@@ -1,15 +1,24 @@
 package guri
 
-import "errors"
+import (
+	"errors"
+	"io"
+	"os"
+)
 
 // Interpreter owns a persistent top-level environment. It is single-threaded.
-type Interpreter struct{ global *environment }
+type Interpreter struct {
+	global *environment
+	// Output receives println output. It defaults to standard output.
+	Output io.Writer
+}
 
 func NewInterpreter() *Interpreter {
-	i := &Interpreter{global: newEnvironment(nil)}
+	i := &Interpreter{global: newEnvironment(nil), Output: os.Stdout}
 	i.installNumbers()
 	i.installCollections()
 	i.installMaps()
+	i.installPrinting()
 	return i
 }
 

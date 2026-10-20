@@ -1,0 +1,98 @@
+# Guri
+
+GuriはLispのS式を使う、動的かつ強い型付けの言語です。
+Goで実装したASTインタプリタが、シングルスレッドでプログラムを評価します。
+
+## ファイルの実行
+
+Go 1.26以降を使用します。
+リポジトリのルートで次のコマンドを実行すると、カウンターが `1`、`2` の順に出力されます。
+
+```sh
+go run ./cmd/guri examples/counter.guri
+```
+
+実行ファイルを作る場合は、次のコマンドを使います。
+
+```sh
+go build -o guri ./cmd/guri
+./guri examples/counter.guri
+```
+
+CLIはファイルを1つ受け取り、トップレベルの式を上から順に評価します。
+出力には `println` を使います。
+評価エラーは標準エラー出力にファイル名、行、列と原因を表示し、終了コード1で終了します。
+引数の使い方が不正な場合の終了コードは2です。
+
+## 関数とデータ
+
+```clojure
+(def make-adder (fn [n] (fn [x] (+ n x))))
+(def add10 (make-adder 10))
+(println (add10 5)) ; 15
+
+(def user {:name "Alice" :age 25})
+(assoc! user :age 26)
+(println (:age user)) ; 26
+
+(def a [1 2 3])
+(def b a)
+(assoc! b 0 9)
+(println a) ; [9 2 3]
+```
+
+偽値は `nil` と `false` だけです。
+`and` と `or` は短絡評価します。
+`fn` はレキシカルスコープを持ち、外側の束縛セルを共有します。
+可変長引数は `[x & rest]` と書き、残りの引数をVectorとして受け取ります。
+
+Listの連結構造は不変です。
+VectorはGoのSliceと同じく、代入時にヘッダをコピーして基底配列を共有します。
+`append` の返り値を変数に保持するには、`(set! b (append b 4))` と書きます。
+Mapは参照を共有し、`assoc`、`dissoc`、`update` は浅いコピーを、末尾に `!` がある操作は元のMapを変更します。
+
+## 組み込み関数の引数
+
+| 関数 | 引数 |
+|---|---|
+| `+`、`*` | 0個以上。空ならそれぞれ0、1 |
+| `-` | 1個以上。1個なら符号反転 |
+| `/` | 2個以上。常にFloatを返す |
+| `=`、`<`、`<=`、`>`、`>=` | 2個以上 |
+| `!=` | 2個 |
+| `inc`、`not`、`len`、`cap`、`clone` | 1個 |
+| `get` | Map、キー、省略可能なデフォルト値 |
+| `assoc`、`assoc!` | MapまたはVector、キーまたは添字、値 |
+| `dissoc`、`dissoc!` | Map、1個以上のキー |
+| `update`、`update!` | Map、キー、関数、その関数への追加引数 |
+| `append`、`conj` | Vector、0個以上の追加要素 |
+| `nth` | Vector、0始まりの添字 |
+| `slice` | Vector、開始位置、終了位置 |
+| `reduce` | 関数、初期値、Vector |
+| `println` | 0個以上。表示後にnilを返す |
+
+`=` はIntegerとFloatを数値として比較します。
+Mapのキーの型はGoのMapと同様に区別するため、キーの `1` と `1.0` は別のキーになります。
+Mapの列挙順序と表示順序は保証しません。
+`len` はStringに対してUTF-8のバイト長を返します。
+
+## Goからの利用
+
+```go
+interpreter := guri.NewInterpreter()
+value, err := interpreter.Eval("example.guri", "(+ 1 2)")
+```
+
+`Eval` は最後の式の値を返し、空入力ではnilを返します。
+同じInterpreterに対する呼び出しはトップレベルの定義を保持します。
+`interpreter.Output` に `io.Writer` を設定すると、`println` の出力先を変更できます。
+Interpreterは複数のgoroutineから同時に使用できません。
+
+## 開発時の検証
+
+```sh
+go test ./...
+go vet ./...
+```
+
+開発手順は [AGENTS.md](AGENTS.md) に従います。
