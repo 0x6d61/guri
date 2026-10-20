@@ -63,6 +63,8 @@ go vet ./...
 
 - 差分を確認し、必要なレビューへの対応を完了する。
 - unitテスト、および設定されているCIとマージ条件をすべて満たしてからmergeする。
+- squash mergeは禁止する。
+- 作業ブランチの履歴と合流点を残すため、merge commitを作成する通常のマージを使用する。GitHub CLIでは `gh pr merge --merge` を使用する。
 - merge後、対象のIssueがクローズされたことを確認する。
 
 ## Goコードの方針
