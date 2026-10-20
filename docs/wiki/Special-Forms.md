@@ -2,7 +2,7 @@
 
 特殊形式は、引数を評価するかどうかや評価する環境を制御します。
 通常の関数のようにすべての引数を先に評価するわけではありません。
-このページでは現在の全11形式を説明します。
+このページでは現在の全12形式を説明します。
 構文の `...` は繰り返しを示し、実際のソースには書きません。
 
 | 形式 | 構文 | 返り値 |
@@ -17,6 +17,7 @@
 | or | `(or expr...)` | 最初の真値、または最後の偽値。空ならnil |
 | do | `(do expr...)` | 最後の値。空ならnil |
 | while | `(while condition body...)` | 終了時にnil |
+| cond | `(cond condition expression ...)` | 最初の真値に対応する式の値。一致なしや空ならnil |
 | quote | `(quote expr)` または `'expr` | 評価前のデータ |
 
 引数数が不正な場合は `ArityError` になります。
@@ -153,6 +154,30 @@ breakとcontinueは未対応です。
     total))
 (println (sum-to 4)) ; => 10
 (println (while false 1)) ; => nil
+```
+
+## cond
+
+条件と式を交互に並べます。
+条件を左から順に評価し、最初の真値に対応する式だけを評価して返します。
+その後の条件や式は評価しません。
+空の場合やすべての条件が偽値の場合はnilを返します。
+デフォルト分岐は最後に `true` を条件として書けます。
+
+条件と式が対にならない奇数引数は、条件を評価する前に `ArityError` になります。
+新しいスコープは作らず、条件や選択した式のエラーは元の位置を保って伝播します。
+1分岐で複数の式を実行するにはdoを使用します。
+
+```clojure
+(defn classify [command]
+  (cond
+    (= command ">") :right
+    (= command "<") :left
+    true :other))
+(println (classify ">")) ; => :right
+(println (classify "+")) ; => :other
+(println (cond false (/ 1 0) true "safe")) ; => safe
+(println (cond)) ; => nil
 ```
 
 ## quote

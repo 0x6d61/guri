@@ -69,6 +69,20 @@ CLIはファイルを1つ受け取り、トップレベルの式を上から順�
     (set! n (inc n))))
 ```
 
+複数条件の分岐は `(cond condition expression ...)` と書きます。
+最初の真値に対応する式だけを評価し、一致しなければnilを返します。
+
+```clojure
+(defn direction [command]
+  (cond
+    (= command ">") 1
+    (= command "<") -1
+    true 0))
+(println (direction ">")) ; 1
+```
+
+[括弧対応表を作るサンプル](examples/search-brackets.guri) では、Stringのnth、while、condを組み合わせています。
+
 Listの連結構造は不変です。
 VectorはGoのSliceと同じく、代入時にヘッダをコピーして基底配列を共有します。
 `append` の返り値を変数に保持するには、`(set! b (append b 4))` と書きます。
