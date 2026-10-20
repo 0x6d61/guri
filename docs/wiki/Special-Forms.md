@@ -2,7 +2,7 @@
 
 特殊形式は、引数を評価するかどうかや評価する環境を制御します。
 通常の関数のようにすべての引数を先に評価するわけではありません。
-このページでは現在の全10形式を説明します。
+このページでは現在の全11形式を説明します。
 構文の `...` は繰り返しを示し、実際のソースには書きません。
 
 | 形式 | 構文 | 返り値 |
@@ -16,6 +16,7 @@
 | and | `(and expr...)` | 最初の偽値、または最後の値。空ならtrue |
 | or | `(or expr...)` | 最初の真値、または最後の偽値。空ならnil |
 | do | `(do expr...)` | 最後の値。空ならnil |
+| while | `(while condition body...)` | 終了時にnil |
 | quote | `(quote expr)` または `'expr` | 評価前のデータ |
 
 引数数が不正な場合は `ArityError` になります。
@@ -128,6 +129,30 @@ noを省略してcondが偽ならnilを返します。
 (def n 0)
 (println (do (set! n 1) (inc n))) ; => 2
 (println (do)) ; => nil
+```
+
+## while
+
+各反復の前にconditionを評価し、真値の間は本体を左から順に実行します。
+conditionがnilまたはfalseになったら終了してnilを返します。
+本体の最後の値は返しません。
+条件は必須で、省略すると `ArityError` です。
+本体は0式以上を指定できます。
+
+新しいスコープを作らず、既存の束縛セルやコレクションの更新を共有します。
+条件や本体のエラーは、発生した式の位置を保って伝播します。
+ループは再帰呼び出しで実装していないため、反復回数に比例してスタックを増やしません。
+breakとcontinueは未対応です。
+
+```clojure
+(defn sum-to [limit]
+  (let [n 0 total 0]
+    (while (< n limit)
+      (set! n (inc n))
+      (set! total (+ total n)))
+    total))
+(println (sum-to 4)) ; => 10
+(println (while false 1)) ; => nil
 ```
 
 ## quote
