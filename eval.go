@@ -9,6 +9,7 @@ func NewInterpreter() *Interpreter {
 	i := &Interpreter{global: newEnvironment(nil)}
 	i.installNumbers()
 	i.installCollections()
+	i.installMaps()
 	return i
 }
 
@@ -110,6 +111,16 @@ func (i *Interpreter) eval(expr Expr, env *environment) (result Value, err error
 }
 
 func (i *Interpreter) apply(callee Value, args []Value) (Value, error) {
+	if key, ok := callee.(KeywordValue); ok {
+		if err := arity("Keyword", len(args), 1, 2); err != nil {
+			return nil, err
+		}
+		values := []Value{args[0], key}
+		if len(args) == 2 {
+			values = append(values, args[1])
+		}
+		return mapGet(values)
+	}
 	if f, ok := callee.(*FunctionValue); ok && f.call != nil {
 		return f.call(args)
 	}
