@@ -1,6 +1,6 @@
 # 関数リファレンス
 
-このページは現在の全28組み込み関数を説明します。
+このページは現在の全29組み込み関数を説明します。
 各関数の引数は、呼び出し前に左から右へ評価します。
 `...` は0個以上の繰り返し、`?` は省略可能な引数を示し、実際のソースには書きません。
 特殊形式の `defn` や `if` は [特殊形式](https://github.com/0x6d61/guri/wiki/Special-Forms) を参照してください。
@@ -37,6 +37,7 @@
 | `clone` | `(clone collection)` | Vector、Map | 独立した配列またはMapへの浅いコピー |
 | `reduce` | `(reduce f initial vector)` | 呼び出し可能な値、Vector | 畳み込み結果。関数の副作用は発生する |
 | `println` | `(println value...)` | すべての値 | 標準出力に表示し、nilを返す |
+| `error` | `(error message)` | String | UserErrorで評価を中断。正常な返り値なし |
 
 引数数が表の形式に合わない場合は、どの関数も `ArityError` を返します。
 関数自体が変更を行わない場合でも、引数の評価や渡した関数に副作用があれば実行されます。
@@ -271,4 +272,28 @@ Go APIでは `Interpreter.Output` で出力先を変更でき、出力先の書�
 
 ```clojure
 (println "hello" ["Alice" 1]) ; => hello ["Alice" 1]
+```
+
+## error
+
+`(error message)` はStringを1引数取り、指定メッセージのUserErrorで現在の評価を中断します。
+正常な返り値はありません。
+空のメッセージも許可し、文字列内の `%` はそのまま保持します。
+String以外はTypeError、引数数が1個でなければArityErrorになります。
+通常の関数なので、引数は先に評価され、別の変数に保持したりコールバックとして渡したりできます。
+
+error自体は出力やプロセス終了を行いません。
+関数、while、condなどを通してエラーが伝播し、その後の式は評価しません。
+エラー前の副作用は取り消しません。
+ファイル名、行、列とメッセージを持つエラーをGo APIへ返し、CLIでは既存の処理で標準エラーへ表示して終了コード1で終了します。
+同じInterpreterはエラー後も再利用できます。
+
+```clojure
+(error "] に対応する [ がありません。") ; error: UserError: ] に対応する [ がありません。
+```
+
+短絡評価で選択されなかった式のerrorは実行しません。
+
+```clojure
+(println (if true "safe" (error "not evaluated"))) ; => safe
 ```

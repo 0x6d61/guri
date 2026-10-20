@@ -74,15 +74,18 @@ func TestBracketSearchExample(t *testing.T) {
 				t.Fatal(err)
 			}
 			value, err := i.Eval("bracket-test.guri", "(search-brackets "+Format(tt.code)+")")
+			if !tt.ok {
+				var e *RuntimeError
+				if !errors.As(err, &e) || e.Kind != UserError || e.Position.Filename != "examples/search-brackets.guri" {
+					t.Fatalf("expected bracket UserError, got %v", err)
+				}
+				return
+			}
 			if err != nil {
 				t.Fatal(err)
 			}
-			m := value.(*MapValue)
-			if m.entries[KeywordValue("ok")] != tt.ok {
-				t.Fatalf("unexpected result: %s", Format(m))
-			}
+			pairs := value.(*MapValue)
 			if tt.code == "[[]]" {
-				pairs := m.entries[KeywordValue("brackets")].(*MapValue)
 				for left, right := range map[int64]int64{0: 3, 3: 0, 1: 2, 2: 1} {
 					if pairs.entries[left] != right {
 						t.Fatalf("missing bracket %d -> %d", left, right)
@@ -90,7 +93,6 @@ func TestBracketSearchExample(t *testing.T) {
 				}
 			}
 			if tt.code == "日[本]語" {
-				pairs := m.entries[KeywordValue("brackets")].(*MapValue)
 				if pairs.entries[int64(1)] != int64(3) || pairs.entries[int64(3)] != int64(1) {
 					t.Fatal("bracket positions must use code points")
 				}

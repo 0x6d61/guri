@@ -107,6 +107,7 @@ Mapは参照を共有し、`assoc`、`dissoc`、`update` は浅いコピーを�
 | `slice` | Vector、StringまたはBytes、開始位置、終了位置 |
 | `reduce` | 関数、初期値、Vector |
 | `println` | 0個以上。表示後にnilを返す |
+| `error` | Stringのメッセージ1個。UserErrorで評価を中断 |
 
 `=` はIntegerとFloatを数値として比較します。
 Mapのキーの型はGoのMapと同様に区別するため、キーの `1` と `1.0` は別のキーになります。
@@ -122,6 +123,21 @@ Bytesの `nth` は0〜255のIntegerを返し、`slice` はBytesを返します�
 (println (slice "Alice" 0 3)) ; Ali
 (println (nth b"Alice" 0)) ; 65
 ```
+
+## エラーによる中断
+
+v0.0.1では `(error message)` で、指定したStringをメッセージとするUserErrorを発生させます。
+関数やループからも評価を中断でき、CLIは診断を表示して終了コード1で終了します。
+Go APIではerrorが返り、ホストプロセスは終了しません。
+
+```clojure
+(defn positive [n]
+  (if (<= n 0) (error "n must be positive") n))
+(println (positive 3)) ; 3
+```
+
+末尾呼び出し最適化、apply、return、break、exitはv0.0.2の計画です。
+詳細は [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap) を参照してください。
 
 ## Goからの利用
 

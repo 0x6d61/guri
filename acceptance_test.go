@@ -50,6 +50,7 @@ func TestV0001ErrorClasses(t *testing.T) {
 		{"missing", guri.NameError}, {"(set! missing 1)", guri.DefinitionError},
 		{"(inc)", guri.ArityError}, {"(+ 1 true)", guri.TypeError},
 		{"(nth [] 0)", guri.IndexError}, {"(/ 1 0)", guri.ArithmeticError},
+		{`(error "user failure")`, guri.UserError},
 	} {
 		t.Run(string(tt.kind), func(t *testing.T) {
 			_, err := guri.NewInterpreter().Eval("errors.guri", "\n "+tt.source)
