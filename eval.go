@@ -5,7 +5,11 @@ import "errors"
 // Interpreter owns a persistent top-level environment. It is single-threaded.
 type Interpreter struct{ global *environment }
 
-func NewInterpreter() *Interpreter { return &Interpreter{global: newEnvironment(nil)} }
+func NewInterpreter() *Interpreter {
+	i := &Interpreter{global: newEnvironment(nil)}
+	i.installNumbers()
+	return i
+}
 
 // Eval reads and evaluates every form in order, returning the last value or nil.
 func (i *Interpreter) Eval(filename, source string) (Value, error) {
@@ -113,6 +117,9 @@ func (i *Interpreter) apply(callee Value, args []Value) (Value, error) {
 
 func arity(name string, count, min, max int) error {
 	if count < min || (max >= 0 && count > max) {
+		if max < 0 {
+			return failure(ArityError, "%s expects at least %d arguments, got %d", name, min, count)
+		}
 		return failure(ArityError, "%s expects %d..%d arguments, got %d", name, min, max, count)
 	}
 	return nil
