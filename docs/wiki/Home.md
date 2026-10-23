@@ -52,3 +52,5 @@ CLIは各式を評価します。
 
 未実装の機能を使用可能な関数として記載せず、追加した機能の仕様と使用例を実装と同じPRで更新します。
 原稿は [docs/wiki](https://github.com/0x6d61/guri/tree/master/docs/wiki) で管理します。
+
+- [バイトコードVMの設計](https://github.com/0x6d61/guri/wiki/Bytecode-VM)
