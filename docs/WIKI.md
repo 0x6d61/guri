@@ -14,6 +14,7 @@ GitHub Wikiは公開先として使用します。
 | [R7RS-Testing.md](wiki/R7RS-Testing.md) | [適合性テスト](https://github.com/0x6d61/guri/wiki/R7RS-Testing) |
 | [Runtime-Data-Model.md](wiki/Runtime-Data-Model.md) | [内部データモデル](https://github.com/0x6d61/guri/wiki/Runtime-Data-Model) |
 | [R7RS-Reader.md](wiki/R7RS-Reader.md) | [標準Reader](https://github.com/0x6d61/guri/wiki/R7RS-Reader) |
+| [Bytecode-VM.md](wiki/Bytecode-VM.md) | [バイトコードVMの設計](https://github.com/0x6d61/guri/wiki/Bytecode-VM) |
 | [_Sidebar.md](wiki/_Sidebar.md) | サイドバー |
 
 ## 変更時の手順
@@ -38,7 +39,7 @@ Wikiへのpush権限を持つ認証が必要です。
 wiki_dir=$(mktemp -d)
 git clone https://github.com/0x6d61/guri.wiki.git "$wiki_dir"
 cp docs/wiki/*.md "$wiki_dir/"
-git -C "$wiki_dir" add Home.md Language-Specification.md Special-Forms.md Functions.md Roadmap.md R7RS-Conformance.md R7RS-Testing.md Runtime-Data-Model.md R7RS-Reader.md _Sidebar.md
+git -C "$wiki_dir" add Home.md Language-Specification.md Special-Forms.md Functions.md Roadmap.md R7RS-Conformance.md R7RS-Testing.md Runtime-Data-Model.md R7RS-Reader.md Bytecode-VM.md _Sidebar.md
 git -C "$wiki_dir" diff --cached --check
 git -C "$wiki_dir" diff --cached
 ```
