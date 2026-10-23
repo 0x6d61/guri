@@ -3,6 +3,10 @@
 GuriはLispのS式を使う、動的かつ強い型付けの言語です。
 Goで実装したASTインタプリタが、シングルスレッドでプログラムを評価します。
 
+R7RS-smallへの移行を計画しています。
+現在の実装は独自仕様のGuriであり、R7RS-small準拠ではありません。
+移行方針と未決事項は [準拠計画の原稿](docs/wiki/R7RS-Conformance.md) で管理します。
+
 ## 言語仕様と関数リファレンス
 
 - [言語仕様](https://github.com/0x6d61/guri/wiki/Language-Specification)

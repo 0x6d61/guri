@@ -3,6 +3,9 @@
 このWikiは、Guriで使用できる構文と関数を説明します。
 v0.0.1の基本機能である`defn`、String／Bytes、while、cond、errorを含みます。
 v0.0.2向けの末尾呼び出し対応とapplyを追加しています。
+R7RS-smallへの移行を計画しています。
+現在の処理系はR7RS-small準拠ではありません。
+[準拠計画と要求追跡](https://github.com/0x6d61/guri/wiki/R7RS-Conformance)では、目標仕様と設計の未決事項を現在の仕様から区別します。
 実装済みの機能と残りの計画は [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap) で区別します。
 
 | ページ | 内容 |
@@ -10,7 +13,8 @@ v0.0.2向けの末尾呼び出し対応とapplyを追加しています。
 | [言語仕様](https://github.com/0x6d61/guri/wiki/Language-Specification) | 型、Reader、評価規則、共有、エラー |
 | [特殊形式](https://github.com/0x6d61/guri/wiki/Special-Forms) | `def`、`defn`、`fn`、条件分岐、束縛など全12形式 |
 | [関数リファレンス](https://github.com/0x6d61/guri/wiki/Functions) | 全30関数の引数、型、返り値、変更の有無、使用例、エラー |
-| [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap) | v0.0.1とv0.0.2の対象機能 |
+| [準拠計画と要求追跡](https://github.com/0x6d61/guri/wiki/R7RS-Conformance) | R7RS-smallの要求台帳、差分、設計相談と受入条件 |
+| [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap) | R7RS-smallへの移行順序と既存バージョンの実装記録 |
 
 ## 実行方法
 

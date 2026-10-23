@@ -10,6 +10,7 @@ GitHub Wikiは公開先として使用します。
 | [Special-Forms.md](wiki/Special-Forms.md) | [特殊形式](https://github.com/0x6d61/guri/wiki/Special-Forms) |
 | [Functions.md](wiki/Functions.md) | [関数リファレンス](https://github.com/0x6d61/guri/wiki/Functions) |
 | [Roadmap.md](wiki/Roadmap.md) | [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap) |
+| [R7RS-Conformance.md](wiki/R7RS-Conformance.md) | [R7RS-small準拠計画](https://github.com/0x6d61/guri/wiki/R7RS-Conformance) |
 | [_Sidebar.md](wiki/_Sidebar.md) | サイドバー |
 
 ## 変更時の手順
@@ -34,7 +35,7 @@ Wikiへのpush権限を持つ認証が必要です。
 wiki_dir=$(mktemp -d)
 git clone https://github.com/0x6d61/guri.wiki.git "$wiki_dir"
 cp docs/wiki/*.md "$wiki_dir/"
-git -C "$wiki_dir" add Home.md Language-Specification.md Special-Forms.md Functions.md Roadmap.md _Sidebar.md
+git -C "$wiki_dir" add Home.md Language-Specification.md Special-Forms.md Functions.md Roadmap.md R7RS-Conformance.md _Sidebar.md
 git -C "$wiki_dir" diff --cached --check
 git -C "$wiki_dir" diff --cached
 ```
