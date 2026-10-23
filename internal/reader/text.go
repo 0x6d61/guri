@@ -6,6 +6,7 @@ import (
 	"unicode/utf8"
 
 	"github.com/0x6d61/guri/internal/scheme"
+	"github.com/0x6d61/guri/internal/textcase"
 )
 
 func (r *Reader) quoted(quote rune) (string, error) {
@@ -116,7 +117,7 @@ func (r *Reader) character() (*Node, error) {
 		}
 	default:
 		if r.foldCase {
-			text = r.folder.String(text)
+			text = textcase.Fold(text)
 		}
 		names := map[string]rune{"alarm": 7, "backspace": 8, "delete": 127, "escape": 27, "newline": 10, "null": 0, "return": 13, "space": 32, "tab": 9}
 		var ok bool
