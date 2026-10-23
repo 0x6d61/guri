@@ -132,7 +132,7 @@ D01の数値プロファイルは承認済みで、D04の通常の内部表現�
 | ID | 判断事項と推奨案 | 影響と別案 | 確認時期 |
 |---|---|---|---|
 | D01 | 任意精度整数、正確な有理数、binary64と正確/不正確な複素数を採用。任意精度浮動小数点は対象外 | #45で保持と正確性を検証。構文と算術は#54で接続 | 承認済み |
-| D02 | 値層はUnicode scalar valueを保持。Readerの分類と完全なcase foldingはGo 1.26に合わせUnicode 15.0.0を使う | Readerではx/text/cases v0.43.0を使用。標準の文字と文字列手続きは#56で接続 | 値層とReaderは実装済み。文字ライブラリは未実装 |
+| D02 | 値層はUnicode scalar valueを保持。Readerの分類と完全なcase foldingはGo 1.26に合わせUnicode 15.0.0を使う | Readerと文字手続きはinternal/textcaseを共有。x/text v0.43.0のCherokeeのfoldingを補正 | #56で内部VMの50手続きを接続。CLI/import未接続 |
 | D03 | baseと15の任意ライブラリをすべて提供する | baseを先に完成させ、任意ライブラリを段階的に追加する案も可能。採用範囲はfeaturesとr5rsの再公開へ影響する | #43の後続相談、#61の公開契約前 |
 | D04 | 通常の内部表現は実装側へ委任。Goの構造体とポインタを使い、標準の意味をunitテストで確認する | #45で同一性、コピー、定数、共有と循環を検証 | 委任済み |
 | D05 | ユーザー指定のVM化に従い、スタック型バイトコードVMとコピー可能な継続フレームを採用 | 方式の選択は委任済み。ネイティブ呼び出しはAction/Resume。dynamic-windと例外の転送は#52/#53 | #47で基盤実装。設計書はBytecode-VM |
@@ -222,3 +222,5 @@ quote/lambda/if/set!/define/begin、各let形式、内部定義、レキシカ�
 - [標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers): 内部VMの数値塔、比較、整数演算、数学関数、数値と文字列の変換。公開CLIとimportは未接続。
 
 - [Pair、List、Symbolと等価性](https://github.com/0x6d61/guri/wiki/Pairs-Lists-Symbols): 内部VMの63手続きと、循環の比較、共有とコピー、mapと探索の継続。
+
+- [CharacterとString](https://github.com/0x6d61/guri/wiki/Characters-Strings): 内部VMの50手続き、Unicodeの分類と大小変換、可変Stringと継続。

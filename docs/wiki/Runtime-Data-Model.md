@@ -143,3 +143,7 @@ Go GCでオブジェクト、束縛、コードや資源の参照を管理しま
 
 今回の値層のunitテストが通っても、独自作成17件とChibi由来62件の結合テストが通ったことにはなりません。
 要求台帳の下位IDに値層の検証範囲を記録し、言語での検証は後続PRの証拠として追加します。
+
+#56でCharacter/Stringの標準手続きを内部VMへ接続しました。
+Stringの重複copyとfillは空範囲でも不変性を検査し、不正な範囲を変更前に診断します。
+[CharacterとString](https://github.com/0x6d61/guri/wiki/Characters-Strings)に型、範囲、共有とUnicodeの契約を記載します。

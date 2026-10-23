@@ -212,3 +212,6 @@ R7RS全体の準拠済みとは扱いません。
 #55で[Pair、List、Symbolと等価性](https://github.com/0x6d61/guri/wiki/Pairs-Lists-Symbols)の63手続きを内部環境へ追加しました。
 caseの同値判定は標準のeqv?と同じ実装を使います。
 公開CLIとimportは引き続き未接続です。
+
+#56で[CharacterとString](https://github.com/0x6d61/guri/wiki/Characters-Strings)の50手続きを内部環境へ登録しました。
+文字列のmap/for-eachは複数回再開できるVMのコールバックを使います。

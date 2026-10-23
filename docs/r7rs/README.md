@@ -61,3 +61,6 @@ CSVはUTF-8で保存し、カンマや引用符を含む欄はCSVの規則でエ
 
 #55でPair/List/Symbol/等価性とコールバック継続の7下位要求を追加しました。
 63の手続き名とライブラリの公開束縛は、内部実装とimportの未接続を区別します。
+
+#56でCharacter/String/Unicodeとコールバック継続の6下位要求を追加しました。
+50手続きの内部登録とimportの未接続を区別し、Unicode版の固定とReaderのfoldingも検証します。

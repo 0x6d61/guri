@@ -10,7 +10,7 @@ import (
 	"unicode/utf8"
 
 	"github.com/0x6d61/guri/internal/scheme"
-	"golang.org/x/text/cases"
+	"github.com/0x6d61/guri/internal/textcase"
 )
 
 // Node retains source information at every pair link and vector element.
@@ -44,11 +44,10 @@ type Reader struct {
 	afterCR  bool
 	symbols  *scheme.SymbolTable
 	foldCase bool
-	folder   cases.Caser
 }
 
 func New(filename, source string, symbols *scheme.SymbolTable) (*Reader, error) {
-	r := &Reader{position: scheme.Source{Filename: filename, Line: 1, Column: 1}, symbols: symbols, folder: cases.Fold()}
+	r := &Reader{position: scheme.Source{Filename: filename, Line: 1, Column: 1}, symbols: symbols}
 	if r.symbols == nil {
 		r.symbols = scheme.NewSymbolTable()
 	}
@@ -248,7 +247,7 @@ func (r *Reader) datum() (*Node, error) {
 		}
 		if quote == '|' {
 			if r.foldCase {
-				text = r.folder.String(text)
+				text = textcase.Fold(text)
 			}
 			return r.atom(r.symbols.Intern(text), pos), nil
 		}
@@ -293,7 +292,7 @@ func (r *Reader) datum() (*Node, error) {
 		return nil, &Error{Position: pos, Message: "invalid token: " + numberErr.Error(), Cause: numberErr}
 	}
 	if r.foldCase {
-		text = r.folder.String(text)
+		text = textcase.Fold(text)
 	}
 	return r.atom(r.symbols.Intern(text), pos), nil
 }

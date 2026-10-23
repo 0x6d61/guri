@@ -157,3 +157,31 @@ func (s *String) Set(i int, c Character) error {
 	return nil
 }
 func (s *String) Copy() *String { return &String{chars: append([]rune(nil), s.chars...)} }
+
+// CopyFrom validates the complete operation before changing any character.
+// Go copy provides the required temporary-copy semantics for overlapping ranges.
+func (s *String) CopyFrom(at int, source *String, start, end int) error {
+	if s.frozen {
+		return ErrImmutable
+	}
+	if source == nil {
+		return ErrInvalidValue
+	}
+	if start < 0 || start > end || end > source.Len() || at < 0 || at > s.Len() || end-start > s.Len()-at {
+		return ErrIndex
+	}
+	copy(s.chars[at:], source.chars[start:end])
+	return nil
+}
+func (s *String) Fill(start, end int, c Character) error {
+	if s.frozen {
+		return ErrImmutable
+	}
+	if start < 0 || start > end || end > s.Len() {
+		return ErrIndex
+	}
+	for i := start; i < end; i++ {
+		s.chars[i] = c.code
+	}
+	return nil
+}

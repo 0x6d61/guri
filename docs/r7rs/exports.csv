@@ -42,14 +42,14 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),cddr,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),cdr,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),ceiling,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme base),char->integer,6.6,56,必須,未実装,,
+(scheme base),char->integer,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),char-ready?,6.13,60,必須,未実装,,
-(scheme base),char<=?,6.6,56,必須,未実装,,
-(scheme base),char<?,6.6,56,必須,未実装,,
-(scheme base),char=?,6.6,56,必須,未実装,,
-(scheme base),char>=?,6.6,56,必須,未実装,,
-(scheme base),char>?,6.6,56,必須,未実装,,
-(scheme base),char?,6.6,56,必須,未実装,,
+(scheme base),char<=?,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),char<?,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),char=?,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),char>=?,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),char>?,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),char?,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),close-input-port,6.13.1,59,必須,未実装,,
 (scheme base),close-output-port,6.13.1,59,必須,未実装,,
 (scheme base),close-port,6.13.1,59,必須,未実装,,
@@ -102,7 +102,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),inexact?,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),input-port-open?,6.13.1,59,必須,未実装,,
 (scheme base),input-port?,6.13.1,59,必須,未実装,,
-(scheme base),integer->char,6.6,56,必須,未実装,,
+(scheme base),integer->char,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),integer?,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),lambda,4.1,48,必須,未実装,,
 (scheme base),lcm,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
@@ -116,7 +116,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),letrec*,4.1,48,必須,未実装,,
 (scheme base),letrec-syntax,4.3,49,必須,未実装,,
 (scheme base),list,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
-(scheme base),list->string,6.7,56,必須,未実装,,
+(scheme base),list->string,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),list->vector,6.8,57,必須,未実装,,
 (scheme base),list-copy,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),list-ref,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
@@ -126,7 +126,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),make-bytevector,6.9,57,必須,未実装,,
 (scheme base),make-list,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),make-parameter,4.2.6,53,必須,未実装,,
-(scheme base),make-string,6.7,56,必須,未実装,,
+(scheme base),make-string,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),make-vector,6.8,57,必須,未実装,,
 (scheme base),map,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),max,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
@@ -179,28 +179,28 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),set-car!,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),set-cdr!,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),square,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme base),string,6.7,56,必須,未実装,,
-(scheme base),string->list,6.7,56,必須,未実装,,
+(scheme base),string,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string->list,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),string->number,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),string->symbol,6.5,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),string->utf8,6.9,57,必須,未実装,,
 (scheme base),string->vector,6.8,57,必須,未実装,,
-(scheme base),string-append,6.7,56,必須,未実装,,
-(scheme base),string-copy,6.7,56,必須,未実装,,
-(scheme base),string-copy!,6.7,56,必須,未実装,,
-(scheme base),string-fill!,6.7,56,必須,未実装,,
-(scheme base),string-for-each,6.7,56,必須,未実装,,
-(scheme base),string-length,6.7,56,必須,未実装,,
-(scheme base),string-map,6.7,56,必須,未実装,,
-(scheme base),string-ref,6.7,56,必須,未実装,,
-(scheme base),string-set!,6.7,56,必須,未実装,,
-(scheme base),string<=?,6.7,56,必須,未実装,,
-(scheme base),string<?,6.7,56,必須,未実装,,
-(scheme base),string=?,6.7,56,必須,未実装,,
-(scheme base),string>=?,6.7,56,必須,未実装,,
-(scheme base),string>?,6.7,56,必須,未実装,,
-(scheme base),string?,6.7,56,必須,未実装,,
-(scheme base),substring,6.7,56,必須,未実装,,
+(scheme base),string-append,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string-copy,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string-copy!,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string-fill!,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string-for-each,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string-length,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string-map,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string-ref,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string-set!,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string<=?,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string<?,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string=?,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string>=?,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string>?,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),string?,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme base),substring,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),symbol->string,6.5,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),symbol=?,6.5,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),symbol?,6.5,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
@@ -238,28 +238,28 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),write-u8,6.13,60,必須,未実装,,
 (scheme base),zero?,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme case-lambda),case-lambda,4.2.9,50,任意ライブラリ採用時に必要,未実装,,
-(scheme char),char-alphabetic?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),char-ci<=?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),char-ci<?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),char-ci=?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),char-ci>=?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),char-ci>?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),char-downcase,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),char-foldcase,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),char-lower-case?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),char-numeric?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),char-upcase,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),char-upper-case?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),char-whitespace?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),digit-value,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),string-ci<=?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),string-ci<?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),string-ci=?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),string-ci>=?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),string-ci>?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),string-downcase,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),string-foldcase,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme char),string-upcase,6.7,56,任意ライブラリ採用時に必要,未実装,,
+(scheme char),char-alphabetic?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),char-ci<=?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),char-ci<?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),char-ci=?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),char-ci>=?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),char-ci>?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),char-downcase,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),char-foldcase,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),char-lower-case?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),char-numeric?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),char-upcase,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),char-upper-case?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),char-whitespace?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),digit-value,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),string-ci<=?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),string-ci<?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),string-ci=?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),string-ci>=?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),string-ci>?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),string-downcase,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),string-foldcase,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme char),string-upcase,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme complex),angle,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme complex),imag-part,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme complex),magnitude,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
@@ -395,26 +395,26 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),cddr,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),cdr,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),ceiling,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme r5rs),char->integer,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char-alphabetic?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char-ci<=?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char-ci<?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char-ci=?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char-ci>=?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char-ci>?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char-downcase,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char-lower-case?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char-numeric?,6.6,56,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),char->integer,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char-alphabetic?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char-ci<=?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char-ci<?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char-ci=?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char-ci>=?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char-ci>?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char-downcase,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char-lower-case?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char-numeric?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme r5rs),char-ready?,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char-upcase,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char-upper-case?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char-whitespace?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char<=?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char<?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char=?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char>=?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char>?,6.6,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),char?,6.6,56,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),char-upcase,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char-upper-case?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char-whitespace?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char<=?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char<?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char=?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char>=?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char>?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),char?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme r5rs),close-input-port,6.13.1,59,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),close-output-port,6.13.1,59,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),complex?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
@@ -450,7 +450,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),inexact->exact,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),inexact?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),input-port?,6.13.1,59,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),integer->char,6.6,56,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),integer->char,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme r5rs),integer?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),interaction-environment,6.12,64,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),lambda,4.1,48,任意ライブラリ採用時に必要,未実装,,
@@ -462,7 +462,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),letrec,4.1,48,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),letrec-syntax,4.3,49,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),list,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
-(scheme r5rs),list->string,6.7,56,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),list->string,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme r5rs),list->vector,6.8,57,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),list-ref,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),list-tail,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
@@ -472,7 +472,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),magnitude,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),make-polar,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),make-rectangular,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme r5rs),make-string,6.7,56,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),make-string,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme r5rs),make-vector,6.8,57,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),map,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),max,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
@@ -516,28 +516,28 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),set-cdr!,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),sin,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),sqrt,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme r5rs),string,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string->list,6.7,56,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),string,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string->list,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme r5rs),string->number,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),string->symbol,6.5,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
-(scheme r5rs),string-append,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string-ci<=?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string-ci<?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string-ci=?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string-ci>=?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string-ci>?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string-copy,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string-fill!,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string-length,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string-ref,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string-set!,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string<=?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string<?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string=?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string>=?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string>?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),string?,6.7,56,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),substring,6.7,56,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),string-append,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string-ci<=?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string-ci<?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string-ci=?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string-ci>=?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string-ci>?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string-copy,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string-fill!,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string-length,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string-ref,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string-set!,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string<=?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string<?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string=?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string>=?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string>?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),string?,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
+(scheme r5rs),substring,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme r5rs),symbol->string,6.5,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),symbol?,6.5,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),syntax-rules,4.3,49,任意ライブラリ採用時に必要,未実装,,

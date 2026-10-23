@@ -115,3 +115,10 @@ datum labelの`#n=`と`#n#`による共有と循環は#58の作業です。
 現在はErrDatumLabelsを原因として返し、Symbolや別の値に置き換えません。
 datum comment内のlabelも、同じ未対応範囲に含みます。
 このReaderをR7RS全体の準拠完了として扱いません。
+
+## 文字手続きとのfoldingの共有
+
+#56でReaderとchar/stringのfoldingをinternal/textcaseへ共通化しました。
+Unicode 15.0.0でCherokeeが大文字へfoldされる規則を、回帰テストで保持します。
+x/textの該当版の大文字86文字の誤変換を補正し、全スカラー値を公式CaseFolding.txtと照合しました。
+詳細と照合した版は[CharacterとString](https://github.com/0x6d61/guri/wiki/Characters-Strings)に記載します。
