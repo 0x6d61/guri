@@ -14,6 +14,8 @@ R7RS-smallへの移行を計画しています。
 | [特殊形式](https://github.com/0x6d61/guri/wiki/Special-Forms) | `def`、`defn`、`fn`、条件分岐、束縛など全12形式 |
 | [関数リファレンス](https://github.com/0x6d61/guri/wiki/Functions) | 全30関数の引数、型、返り値、変更の有無、使用例、エラー |
 | [準拠計画と要求追跡](https://github.com/0x6d61/guri/wiki/R7RS-Conformance) | R7RS-smallの要求台帳、差分、設計相談と受入条件 |
+| [バイトコードVMの設計](https://github.com/0x6d61/guri/wiki/Bytecode-VM) | 命令、フレーム、末尾呼び出し、継続とネイティブの契約 |
+| [Schemeのコア構文](https://github.com/0x6d61/guri/wiki/Core-Syntax) | 内部環境の全10構文と、束縛解決・バイトコード生成 |
 | [標準Reader](https://github.com/0x6d61/guri/wiki/R7RS-Reader) | R7RS datumの読み取りと、実行への未接続範囲 |
 | [内部データモデル](https://github.com/0x6d61/guri/wiki/Runtime-Data-Model) | R7RS値層の契約、unitテストと未接続の機能 |
 | [適合性テスト](https://github.com/0x6d61/guri/wiki/R7RS-Testing) | ケースの実行方法、結果の分類と未対応の測定 |
@@ -52,5 +54,3 @@ CLIは各式を評価します。
 
 未実装の機能を使用可能な関数として記載せず、追加した機能の仕様と使用例を実装と同じPRで更新します。
 原稿は [docs/wiki](https://github.com/0x6d61/guri/tree/master/docs/wiki) で管理します。
-
-- [バイトコードVMの設計](https://github.com/0x6d61/guri/wiki/Bytecode-VM)

@@ -2,7 +2,7 @@
 
 #46で、標準の記法を`internal/scheme`の値へ読み取る`internal/reader`を実装しました。
 このページは新しい内部Readerの対応範囲です。
-現在のCLIと`Interpreter.Eval`はまだ旧Readerと評価器を使い、新Readerの接続は#47と#48で進めます。
+現在のCLIと`Interpreter.Eval`はまだ旧Readerと評価器を使い、新Readerは#48の内部コンパイラへ接続済みですが、公開CLIの切替は後続の移行作業です。
 現在使える言語の仕様は[言語仕様](https://github.com/0x6d61/guri/wiki/Language-Specification)を参照してください。
 
 ## 読み取れる記法
