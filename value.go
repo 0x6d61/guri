@@ -68,7 +68,10 @@ func (m *MapValue) Get(key Value) (Value, error) {
 }
 
 // FunctionValue has reference identity, including for native functions.
-type FunctionValue struct{ call func([]Value) (Value, error) }
+type FunctionValue struct {
+	call    func([]Value) (Value, error)
+	closure *closure
+}
 
 func Truthy(value Value) bool {
 	if value == nil {

@@ -1,7 +1,6 @@
 package guri
 
 import (
-	"errors"
 	"io"
 	"os"
 )
@@ -44,15 +43,12 @@ func (i *Interpreter) body(forms []Expr, env *environment) (Value, error) {
 	return result, nil
 }
 
-func (i *Interpreter) eval(expr Expr, env *environment) (result Value, err error) {
-	defer func() {
-		var e *RuntimeError
-		if errors.As(err, &e) && e.Position.Line == 0 {
-			copy := *e
-			copy.Position = expr.Position
-			err = &copy
-		}
-	}()
+func (i *Interpreter) eval(expr Expr, env *environment) (Value, error) {
+	return i.run(i.evalTail(expr, env))
+}
+
+func (i *Interpreter) evalTail(expr Expr, env *environment) (result Value, err error) {
+	defer func() { err = atPosition(err, expr.Position) }()
 	switch expr.Kind {
 	case Nil, Boolean, Integer, Float, String:
 		return expr.Value, nil
@@ -117,12 +113,12 @@ func (i *Interpreter) eval(expr Expr, env *environment) (result Value, err error
 			}
 			values[index] = v
 		}
-		return i.apply(callee, values)
+		return &invocation{callee: callee, args: values, position: expr.Position}, nil
 	}
 	return nil, failure(TypeError, "unknown expression kind %s", expr.Kind)
 }
 
-func (i *Interpreter) apply(callee Value, args []Value) (Value, error) {
+func (i *Interpreter) callStep(callee Value, args []Value) (Value, error) {
 	if key, ok := callee.(KeywordValue); ok {
 		if err := arity("Keyword", len(args), 1, 2); err != nil {
 			return nil, err
@@ -133,8 +129,17 @@ func (i *Interpreter) apply(callee Value, args []Value) (Value, error) {
 		}
 		return mapGet(values)
 	}
-	if f, ok := callee.(*FunctionValue); ok && f.call != nil {
-		return f.call(args)
+	if f, ok := callee.(*FunctionValue); ok && f != nil {
+		if f.closure != nil {
+			local, err := f.closure.bind(args)
+			if err != nil {
+				return nil, err
+			}
+			return i.bodyTail(f.closure.body, local)
+		}
+		if f.call != nil {
+			return f.call(args)
+		}
 	}
 	return nil, failure(TypeError, "%T is not callable", callee)
 }
@@ -144,7 +149,7 @@ func callable(value Value) bool {
 	case KeywordValue:
 		return true
 	case *FunctionValue:
-		return v != nil && v.call != nil
+		return v != nil && (v.call != nil || v.closure != nil)
 	}
 	return false
 }
@@ -169,7 +174,7 @@ func (i *Interpreter) special(name string, args []Expr, env *environment) (Value
 			value, err = quoted(args[0])
 		}
 	case "do":
-		value, err = i.body(args, env)
+		value, err = i.bodyTail(args, env)
 	case "while":
 		value, err = i.while(args, env)
 	case "cond":
@@ -181,9 +186,9 @@ func (i *Interpreter) special(name string, args []Expr, env *environment) (Value
 			condition, err = i.eval(args[0], env)
 			if err == nil {
 				if Truthy(condition) {
-					value, err = i.eval(args[1], env)
+					value, err = i.evalTail(args[1], env)
 				} else if len(args) == 3 {
-					value, err = i.eval(args[2], env)
+					value, err = i.evalTail(args[2], env)
 				}
 			}
 		}
@@ -191,7 +196,11 @@ func (i *Interpreter) special(name string, args []Expr, env *environment) (Value
 		if name == "and" {
 			value = true
 		}
-		for _, arg := range args {
+		for index, arg := range args {
+			if index == len(args)-1 {
+				value, err = i.evalTail(arg, env)
+				break
+			}
 			value, err = i.eval(arg, env)
 			if err != nil {
 				break
@@ -250,7 +259,7 @@ func (i *Interpreter) cond(args []Expr, env *environment) (Value, error) {
 			return nil, err
 		}
 		if Truthy(condition) {
-			return i.eval(args[index+1], env)
+			return i.evalTail(args[index+1], env)
 		}
 	}
 	return nil, nil
@@ -314,7 +323,7 @@ func (i *Interpreter) let(args []Expr, env *environment) (Value, error) {
 			return nil, err
 		}
 	}
-	return i.body(args[1:], local)
+	return i.bodyTail(args[1:], local)
 }
 
 func (i *Interpreter) function(args []Expr, env *environment) (Value, error) {
@@ -349,25 +358,7 @@ func (i *Interpreter) function(args []Expr, env *environment) (Value, error) {
 		seen[name] = true
 		names = append(names, name)
 	}
-	return &FunctionValue{call: func(values []Value) (Value, error) {
-		max := len(names)
-		if rest != "" {
-			max = -1
-		}
-		if err := arity("fn", len(values), len(names), max); err != nil {
-			return nil, err
-		}
-		local := newEnvironment(env)
-		for index, name := range names {
-			local.bindings[name] = &cell{values[index]}
-		}
-		if rest != "" {
-			v := make(VectorValue, len(values)-len(names))
-			copy(v, values[len(names):])
-			local.bindings[rest] = &cell{v}
-		}
-		return i.body(args[1:], local)
-	}}, nil
+	return &FunctionValue{closure: &closure{names: names, rest: rest, body: args[1:], env: env}}, nil
 }
 
 func quoted(expr Expr) (Value, error) {

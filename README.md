@@ -136,7 +136,18 @@ Go APIではerrorが返り、ホストプロセスは終了しません。
 (println (positive 3)) ; 3
 ```
 
-末尾呼び出し最適化、apply、return、break、exitはv0.0.2の計画です。
+## 末尾呼び出し
+
+v0.0.2向けに末尾呼び出しを実装しています。
+自己再帰、相互再帰とクロージャの末尾呼び出しを、回数に比例してGoのスタックを増やさず実行します。
+
+```clojure
+(defn sum [n acc]
+  (if (= n 0) acc (sum (- n 1) (+ acc n))))
+(println (sum 100000 0)) ; 5000050000
+```
+
+apply、return、break、exitは引き続きv0.0.2の計画です。
 詳細は [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap) を参照してください。
 
 ## Goからの利用
