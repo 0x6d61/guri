@@ -45,6 +45,13 @@ const (
 	syntaxError
 	auxiliary
 	macroCall
+	derived
+	quasiquote
+	unquote
+	splice
+	include
+	includeCI
+	condExpand
 )
 
 type binding struct {
@@ -74,9 +81,13 @@ func (s *scope) add(id scheme.Identifier) (*binding, error) {
 }
 
 type Engine struct {
-	symbols *scheme.SymbolTable
-	globals []*binding
-	machine *vm.Machine
+	symbols    *scheme.SymbolTable
+	globals    []*binding
+	primitives []*binding
+	loader     SourceLoader
+	features   map[string]bool
+	libraries  func([]scheme.Value) bool
+	machine    *vm.Machine
 }
 
 func NewCore() *Engine {
@@ -99,9 +110,14 @@ func NewCore() *Engine {
 		"syntax-error":  syntaxError,
 		"_":             auxiliary,
 		"...":           auxiliary,
+		"else":          auxiliary, "=>": auxiliary,
+		"cond": derived, "case": derived, "and": derived, "or": derived, "when": derived, "unless": derived, "do": derived, "case-lambda": derived,
+		"quasiquote": quasiquote, "unquote": unquote, "unquote-splicing": splice,
+		"include": include, "include-ci": includeCI, "cond-expand": condExpand,
 	} {
 		e.globals = append(e.globals, &binding{id: scheme.NewIdentifier(e.symbols.Intern(name)), form: f, declared: true})
 	}
+	e.primitives = append([]*binding(nil), e.globals...)
 	return e
 }
 func (e *Engine) global(id scheme.Identifier) *binding {
@@ -273,6 +289,23 @@ func (b *builder) expr(n *reader.Node, tail, top bool) error {
 		return nil
 	}
 	switch b.headForm(n) {
+	case derived:
+		expanded, err := b.lowerDerived(n, args)
+		if err != nil {
+			return err
+		}
+		return b.expr(expanded, tail, top)
+	case quasiquote:
+		if err := arity(1, 1); err != nil {
+			return err
+		}
+		expanded, _, err := b.lowerQuasiquote(args[0], 1, false)
+		if err != nil {
+			return err
+		}
+		return b.expr(expanded, tail, false)
+	case unquote, splice:
+		return syntax(n, "unquote outside quasiquote")
 	case quote:
 		if err := arity(1, 1); err != nil {
 			return err

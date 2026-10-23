@@ -92,6 +92,9 @@ func ReadAll(filename, source string, symbols *scheme.SymbolTable) ([]*Node, err
 		nodes = append(nodes, n)
 	}
 }
+
+// SetFoldCase sets the initial/current directive state without shifting source positions.
+func (r *Reader) SetFoldCase(fold bool) { r.foldCase = fold }
 func (r *Reader) Read() (*Node, error) {
 	if err := r.space(); err != nil {
 		return nil, err
