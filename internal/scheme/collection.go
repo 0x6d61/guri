@@ -185,3 +185,45 @@ func (s *String) Fill(start, end int, c Character) error {
 	}
 	return nil
 }
+
+// CopyFrom preserves the vector's length and implements overlapping copies as
+// if through a temporary vector. Element references are copied shallowly.
+func (v *Vector) CopyFrom(at int, source *Vector, start, end int) error {
+	if v.frozen {
+		return ErrImmutable
+	}
+	if source == nil {
+		return ErrInvalidValue
+	}
+	if start < 0 || start > end || end > source.Len() || at < 0 || at > v.Len() || end-start > v.Len()-at {
+		return ErrIndex
+	}
+	copy(v.values[at:], source.values[start:end])
+	return nil
+}
+func (v *Vector) Fill(start, end int, value Value) error {
+	requireValue(value)
+	if v.frozen {
+		return ErrImmutable
+	}
+	if start < 0 || start > end || end > v.Len() {
+		return ErrIndex
+	}
+	for i := start; i < end; i++ {
+		v.values[i] = value
+	}
+	return nil
+}
+func (v *Bytevector) CopyFrom(at int, source *Bytevector, start, end int) error {
+	if v.frozen {
+		return ErrImmutable
+	}
+	if source == nil {
+		return ErrInvalidValue
+	}
+	if start < 0 || start > end || end > source.Len() || at < 0 || at > v.Len() || end-start > v.Len()-at {
+		return ErrIndex
+	}
+	copy(v.values[at:], source.values[start:end])
+	return nil
+}

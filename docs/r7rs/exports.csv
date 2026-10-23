@@ -22,14 +22,14 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),binary-port?,6.13.1,59,必須,未実装,,
 (scheme base),boolean=?,6.3,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),boolean?,6.3,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
-(scheme base),bytevector,6.9,57,必須,未実装,,
-(scheme base),bytevector-append,6.9,57,必須,未実装,,
-(scheme base),bytevector-copy,6.9,57,必須,未実装,,
-(scheme base),bytevector-copy!,6.9,57,必須,未実装,,
-(scheme base),bytevector-length,6.9,57,必須,未実装,,
-(scheme base),bytevector-u8-ref,6.9,57,必須,未実装,,
-(scheme base),bytevector-u8-set!,6.9,57,必須,未実装,,
-(scheme base),bytevector?,6.9,57,必須,未実装,,
+(scheme base),bytevector,6.9,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),bytevector-append,6.9,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),bytevector-copy,6.9,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),bytevector-copy!,6.9,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),bytevector-length,6.9,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),bytevector-u8-ref,6.9,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),bytevector-u8-set!,6.9,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),bytevector?,6.9,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
 (scheme base),caar,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),cadr,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),call-with-current-continuation,6.10,51,必須,未実装,,
@@ -117,17 +117,17 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),letrec-syntax,4.3,49,必須,未実装,,
 (scheme base),list,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),list->string,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
-(scheme base),list->vector,6.8,57,必須,未実装,,
+(scheme base),list->vector,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
 (scheme base),list-copy,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),list-ref,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),list-set!,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),list-tail,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),list?,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
-(scheme base),make-bytevector,6.9,57,必須,未実装,,
+(scheme base),make-bytevector,6.9,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
 (scheme base),make-list,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),make-parameter,4.2.6,53,必須,未実装,,
 (scheme base),make-string,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
-(scheme base),make-vector,6.8,57,必須,未実装,,
+(scheme base),make-vector,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
 (scheme base),map,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),max,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),member,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
@@ -183,8 +183,8 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),string->list,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),string->number,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),string->symbol,6.5,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
-(scheme base),string->utf8,6.9,57,必須,未実装,,
-(scheme base),string->vector,6.8,57,必須,未実装,,
+(scheme base),string->utf8,6.9,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),string->vector,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
 (scheme base),string-append,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),string-copy,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),string-copy!,6.7,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
@@ -215,21 +215,21 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),unless,4.2,50,必須,未実装,,
 (scheme base),unquote,4.2,50,必須,未実装,,
 (scheme base),unquote-splicing,4.2,50,必須,未実装,,
-(scheme base),utf8->string,6.9,57,必須,未実装,,
+(scheme base),utf8->string,6.9,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
 (scheme base),values,6.10,51,必須,未実装,,
-(scheme base),vector,6.8,57,必須,未実装,,
-(scheme base),vector->list,6.8,57,必須,未実装,,
-(scheme base),vector->string,6.8,57,必須,未実装,,
-(scheme base),vector-append,6.8,57,必須,未実装,,
-(scheme base),vector-copy,6.8,57,必須,未実装,,
-(scheme base),vector-copy!,6.8,57,必須,未実装,,
-(scheme base),vector-fill!,6.8,57,必須,未実装,,
-(scheme base),vector-for-each,6.8,57,必須,未実装,,
-(scheme base),vector-length,6.8,57,必須,未実装,,
-(scheme base),vector-map,6.8,57,必須,未実装,,
-(scheme base),vector-ref,6.8,57,必須,未実装,,
-(scheme base),vector-set!,6.8,57,必須,未実装,,
-(scheme base),vector?,6.8,57,必須,未実装,,
+(scheme base),vector,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),vector->list,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),vector->string,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),vector-append,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),vector-copy,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),vector-copy!,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),vector-fill!,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),vector-for-each,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),vector-length,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),vector-map,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),vector-ref,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),vector-set!,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme base),vector?,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
 (scheme base),when,4.2,50,必須,未実装,,
 (scheme base),with-exception-handler,6.11,53,必須,未実装,,
 (scheme base),write-bytevector,6.13,60,必須,未実装,,
@@ -463,7 +463,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),letrec-syntax,4.3,49,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),list,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),list->string,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
-(scheme r5rs),list->vector,6.8,57,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),list->vector,6.8,57,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
 (scheme r5rs),list-ref,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),list-tail,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),list?,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
@@ -473,7 +473,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),make-polar,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),make-rectangular,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),make-string,6.7,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
-(scheme r5rs),make-vector,6.8,57,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),make-vector,6.8,57,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
 (scheme r5rs),map,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),max,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),member,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
@@ -544,13 +544,13 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),tan,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),truncate,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),values,6.10,51,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),vector,6.8,57,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),vector->list,6.8,57,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),vector-fill!,6.8,57,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),vector-length,6.8,57,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),vector-ref,6.8,57,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),vector-set!,6.8,57,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),vector?,6.8,57,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),vector,6.8,57,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme r5rs),vector->list,6.8,57,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme r5rs),vector-fill!,6.8,57,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme r5rs),vector-length,6.8,57,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme r5rs),vector-ref,6.8,57,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme r5rs),vector-set!,6.8,57,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
+(scheme r5rs),vector?,6.8,57,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
 (scheme r5rs),with-input-from-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),with-output-to-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),write,6.13,60,任意ライブラリ採用時に必要,未実装,,

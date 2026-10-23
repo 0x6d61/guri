@@ -215,3 +215,6 @@ caseの同値判定は標準のeqv?と同じ実装を使います。
 
 #56で[CharacterとString](https://github.com/0x6d61/guri/wiki/Characters-Strings)の50手続きを内部環境へ登録しました。
 文字列のmap/for-eachは複数回再開できるVMのコールバックを使います。
+
+#57で[VectorとBytevector](https://github.com/0x6d61/guri/wiki/Vectors-Bytevectors)の27手続きを内部環境へ登録しました。
+vector-map/for-eachも複数回再開できるVMのコールバックを使います。

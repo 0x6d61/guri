@@ -64,3 +64,6 @@ CSVはUTF-8で保存し、カンマや引用符を含む欄はCSVの規則でエ
 
 #56でCharacter/String/Unicodeとコールバック継続の6下位要求を追加しました。
 50手続きの内部登録とimportの未接続を区別し、Unicode版の固定とReaderのfoldingも検証します。
+
+#57でVector/Bytevector/UTF-8とコールバック継続の5下位要求を追加しました。
+27手続きの内部登録とimport未接続を区別し、固定長、共有と独立コピーを検証します。

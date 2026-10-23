@@ -147,3 +147,7 @@ Go GCでオブジェクト、束縛、コードや資源の参照を管理しま
 #56でCharacter/Stringの標準手続きを内部VMへ接続しました。
 Stringの重複copyとfillは空範囲でも不変性を検査し、不正な範囲を変更前に診断します。
 [CharacterとString](https://github.com/0x6d61/guri/wiki/Characters-Strings)に型、範囲、共有とUnicodeの契約を記載します。
+
+#57で固定長VectorとBytevectorの標準操作を内部VMへ接続しました。
+bulk copy/fillは格納領域を伸ばさず、不変性と全範囲を変更前に検証します。
+[VectorとBytevector](https://github.com/0x6d61/guri/wiki/Vectors-Bytevectors)に浅いコピー、共有、UTF-8と継続の契約を記載します。
