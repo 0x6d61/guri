@@ -68,6 +68,8 @@ defとfnと同じ制限を持ち、再帰、クロージャ、可変長引数に
 可変長引数は最後に `& rest` と記述します。
 引数リストが不正な場合は `DefinitionError`、呼び出し時の引数数が合わなければ `ArityError` です。
 本体は順に評価して最後の値を返し、空ならnilを返します。
+本体の最後の式からの末尾呼び出しは、再帰回数に比例してGoのスタックを増やしません。
+末尾位置のif、cond、do、let、and、orにもこの性質を引き継ぎます。
 
 ```clojure
 (def collect (fn [first & rest] rest))

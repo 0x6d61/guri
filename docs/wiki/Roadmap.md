@@ -1,7 +1,8 @@
 # バージョン計画
 
 v0.0.1の現在の実装と、v0.0.2で追加する機能を区別します。
-このページのv0.0.2の項目は未実装であり、現在の関数リファレンスには含めません。
+v0.0.2の実装済み機能と未実装の計画を区別します。
+未実装の関数は現在の関数リファレンスには含めません。
 
 ## v0.0.1
 
@@ -15,16 +16,17 @@ errorはGo APIでエラーを返す操作で、ホストプロセスを終了し
 
 ## v0.0.2
 
-末尾呼び出し最適化とapplyを共通の呼び出し機構で実装します。
+末尾呼び出しを評価ループで処理する機構を実装しました。
+applyもこの機構へ接続する計画です。
 return、break、exitもこのバージョンの計画に含め、実装前に詳細な仕様を決めます。
 
-| 機能 | 役割 | Issue |
-|---|---|---|
-| 末尾呼び出し最適化 | 自己再帰と相互再帰でスタックの増加を抑える | [#34](https://github.com/0x6d61/guri/issues/34) |
-| apply | VectorまたはListを関数の引数へ展開する | [#35](https://github.com/0x6d61/guri/issues/35) |
-| return | 現在の関数から値を返す | [#36](https://github.com/0x6d61/guri/issues/36) |
-| break | 最も近いループを終了する | [#37](https://github.com/0x6d61/guri/issues/37) |
-| exit | 指定終了コードでプログラムの実行を終了する | [#38](https://github.com/0x6d61/guri/issues/38) |
+| 機能 | 役割 | Issue | 状態 |
+|---|---|---|---|
+| 末尾呼び出し最適化 | 自己再帰と相互再帰でスタックの増加を抑える | [#34](https://github.com/0x6d61/guri/issues/34) | 実装済み |
+| apply | VectorまたはListを関数の引数へ展開する | [#35](https://github.com/0x6d61/guri/issues/35) | 未実装 |
+| return | 現在の関数から値を返す | [#36](https://github.com/0x6d61/guri/issues/36) | 未実装 |
+| break | 最も近いループを終了する | [#37](https://github.com/0x6d61/guri/issues/37) | 未実装 |
+| exit | 指定終了コードでプログラムの実行を終了する | [#38](https://github.com/0x6d61/guri/issues/38) | 未実装 |
 
 [v0.0.2マイルストーン](https://github.com/0x6d61/guri/milestone/2) で進捗を管理します。
 
