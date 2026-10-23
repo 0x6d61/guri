@@ -12,3 +12,5 @@
 - [syntax-rulesマクロ](https://github.com/0x6d61/guri/wiki/Syntax-Rules)
 
 - [派生構文と準引用](https://github.com/0x6d61/guri/wiki/Derived-Syntax)
+
+- [継続と複数値の制御機能](https://github.com/0x6d61/guri/wiki/Control-Features)
