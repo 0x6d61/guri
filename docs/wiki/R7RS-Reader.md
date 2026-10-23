@@ -79,7 +79,9 @@ Reader自体で値を凍結し、標準のreadが返すデータまで変更不�
 無限大やNaNを正確な数として読むこともできません。
 これらは[R7RS §6.2.3](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.2.3)の実装制限として区別します。
 
-数値の読み取りに対応したことは、算術や標準の数値述語が言語から使えることを意味しません。
+#54で[標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers)を内部VMへ接続しました。
+string->numberとReaderは同じ変換を使い、省略引数の基数より文字列内の明示prefixを優先します。
+公開CLIとimportは未接続です。
 それらは#54で接続します。
 
 ## 内部APIの使用例

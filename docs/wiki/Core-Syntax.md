@@ -8,12 +8,14 @@
 ## 初期環境と使用例
 
 `core.NewCore()`は以下のコア10形式に、[マクロの5形式と補助構文2個](https://github.com/0x6d61/guri/wiki/Syntax-Rules)を加えた内部環境を作ります。
-標準ライブラリをimportした環境ではなく、算術やprintlnは自動で入りません。
+標準ライブラリをimportした環境ではありません。
+#54で標準の数値手続きを内部環境へ登録しました。
+printlnは登録しません。
 #51の[継続と複数値](https://github.com/0x6d61/guri/wiki/Control-Features)の制御手続きと構文は内部環境で利用できます。
 衛生的なsyntax-rulesは#49で接続しました。
 標準のimportとライブラリ環境は#61で接続します。
 テストや将来のライブラリ実装では、Engine.Bindで手続き値を明示的に与えられます。
-テストで注入する単純な整数用の演算を、標準の数値手続きの実装とは扱いません。
+テストの整数演算の注入を除去し、[標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers)を通して継続や末尾反復も検証します。
 
 ```go
 e := core.NewCore()

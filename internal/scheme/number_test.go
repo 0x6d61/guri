@@ -119,3 +119,13 @@ func TestIEEEFloatValuesAndKinds(t *testing.T) {
 		}
 	}
 }
+
+func TestInexactRealWithExactImaginaryZeroIsReal(t *testing.T) {
+	n, err := scheme.NewComplex(scheme.NewFloat(-2.5), scheme.NewInteger(0))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, ok := n.(scheme.Real); !ok {
+		t.Fatal("exact imaginary zero did not produce a real")
+	}
+}

@@ -15,10 +15,15 @@ var decimalNumber = regexp.MustCompile(`^(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:e[+-
 
 // ParseNumber consumes an entire R7RS numeric token. The same conversion is
 // intended for the reader and string->number; it never falls back to Symbol.
-func ParseNumber(text string) (Number, error) {
+func ParseNumber(text string) (Number, error) { return ParseNumberRadix(text, 10) }
+
+// ParseNumberRadix applies a default radix; an explicit prefix overrides it.
+func ParseNumberRadix(text string, radix int) (Number, error) {
+	if radix != 2 && radix != 8 && radix != 10 && radix != 16 {
+		return nil, ErrNumber
+	}
 	original := text
 	text = strings.ToLower(text)
-	radix := 10
 	exactness := byte(0)
 	hasRadix := false
 	bad := func() (Number, error) { return nil, fmt.Errorf("%w: %q", ErrNumber, original) }

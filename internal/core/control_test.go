@@ -86,7 +86,7 @@ func TestControlMultiShotAndProperTailCalls(t *testing.T) {
 
 func TestMultiShotProducerContinuationAndCyclicApply(t *testing.T) {
 	e := engine()
-	s := `(define saved #f) (define result (call-with-values (lambda () (call/cc (lambda (k) (set! saved k) (values 1 2)))) +)) result`
+	s := `(define saved #f) (define result (call-with-values (lambda () (call/cc (lambda (k) (set! saved k) (values 1 2)))) (lambda (x y) (+ x y)))) result`
 	if number(eval(t, e, s)) != 3 || number(eval(t, e, `(saved 20 22)`)) != 42 || number(eval(t, e, `(saved 3 4)`)) != 7 {
 		t.Fatal("producer continuation lost native resume")
 	}

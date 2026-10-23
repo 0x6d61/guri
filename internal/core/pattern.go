@@ -2,8 +2,7 @@ package core
 
 import (
 	"bytes"
-	"math"
-	"math/big"
+	numeric "github.com/0x6d61/guri/internal/number"
 
 	"github.com/0x6d61/guri/internal/reader"
 	"github.com/0x6d61/guri/internal/scheme"
@@ -347,22 +346,7 @@ func datumEqual(a, b scheme.Value) bool {
 	}
 	switch x := a.(type) {
 	case scheme.Number:
-		y := b.(scheme.Number)
-		if x.Exact() != y.Exact() {
-			return false
-		}
-		parts := func(n scheme.Number) (scheme.Real, scheme.Real) {
-			if c, ok := n.(*scheme.Complex); ok {
-				return c.Parts()
-			}
-			if n.Exact() {
-				return n.(scheme.Real), scheme.NewInteger(0)
-			}
-			return n.(scheme.Real), scheme.NewFloat(0)
-		}
-		ar, ai := parts(x)
-		br, bi := parts(y)
-		return realEqual(ar, br) && realEqual(ai, bi)
+		return numeric.Equivalent(x, b.(scheme.Number))
 	case *scheme.String:
 		return x.Text() == b.(*scheme.String).Text()
 	case *scheme.Bytevector:
@@ -372,17 +356,4 @@ func datumEqual(a, b scheme.Value) bool {
 	default:
 		return a == b
 	}
-}
-func realEqual(a, b scheme.Real) bool {
-	if f, ok := a.(scheme.Float); ok {
-		g, ok := b.(scheme.Float)
-		return ok && f.Float64() == g.Float64() && math.Signbit(f.Float64()) == math.Signbit(g.Float64())
-	}
-	rat := func(n scheme.Real) *big.Rat {
-		if i, ok := n.(*scheme.Integer); ok {
-			return new(big.Rat).SetInt(i.BigInt())
-		}
-		return n.(*scheme.Rational).BigRat()
-	}
-	return rat(a).Cmp(rat(b)) == 0
 }
