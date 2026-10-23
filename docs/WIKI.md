@@ -16,6 +16,7 @@ GitHub Wikiは公開先として使用します。
 | [R7RS-Reader.md](wiki/R7RS-Reader.md) | [標準Reader](https://github.com/0x6d61/guri/wiki/R7RS-Reader) |
 | [Bytecode-VM.md](wiki/Bytecode-VM.md) | [バイトコードVMの設計](https://github.com/0x6d61/guri/wiki/Bytecode-VM) |
 | [Core-Syntax.md](wiki/Core-Syntax.md) | [Schemeのコア構文](https://github.com/0x6d61/guri/wiki/Core-Syntax) |
+| [Syntax-Rules.md](wiki/Syntax-Rules.md) | [syntax-rulesマクロ](https://github.com/0x6d61/guri/wiki/Syntax-Rules) |
 | [_Sidebar.md](wiki/_Sidebar.md) | サイドバー |
 
 ## 変更時の手順
@@ -40,7 +41,7 @@ Wikiへのpush権限を持つ認証が必要です。
 wiki_dir=$(mktemp -d)
 git clone https://github.com/0x6d61/guri.wiki.git "$wiki_dir"
 cp docs/wiki/*.md "$wiki_dir/"
-git -C "$wiki_dir" add Home.md Language-Specification.md Special-Forms.md Functions.md Roadmap.md R7RS-Conformance.md R7RS-Testing.md Runtime-Data-Model.md R7RS-Reader.md Bytecode-VM.md Core-Syntax.md _Sidebar.md
+git -C "$wiki_dir" add Home.md Language-Specification.md Special-Forms.md Functions.md Roadmap.md R7RS-Conformance.md R7RS-Testing.md Runtime-Data-Model.md R7RS-Reader.md Bytecode-VM.md Core-Syntax.md Syntax-Rules.md _Sidebar.md
 git -C "$wiki_dir" diff --cached --check
 git -C "$wiki_dir" diff --cached
 ```

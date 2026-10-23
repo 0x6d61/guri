@@ -24,9 +24,16 @@ func (t *SymbolTable) Intern(name string) *Symbol {
 
 // Nonzero-sized tokens provide distinct identities without global counters.
 // Scope sets preserve lexical context; resolving them is the expander's job.
-type Scope struct{ identity byte }
+type Scope struct {
+	identity byte
+	context  any
+}
 
 func NewScope() *Scope { return &Scope{} }
+
+// NewScopeWithContext attaches immutable expander-owned provenance.
+func NewScopeWithContext(context any) *Scope { return &Scope{context: context} }
+func (s *Scope) Context() any                { return s.context }
 
 type Identifier struct {
 	symbol *Symbol

@@ -38,13 +38,22 @@ const (
 	letStar
 	letRec
 	letRecStar
+	defineSyntax
+	letSyntax
+	letRecSyntax
+	syntaxRules
+	syntaxError
+	auxiliary
+	macroCall
 )
 
 type binding struct {
-	id   scheme.Identifier
-	form form
-	cell *scheme.Cell
-	slot int
+	transformer *transformer
+	declared    bool
+	id          scheme.Identifier
+	form        form
+	cell        *scheme.Cell
+	slot        int
 }
 type scope struct {
 	parent   *scope
@@ -58,7 +67,7 @@ func (s *scope) add(id scheme.Identifier) (*binding, error) {
 			return nil, ErrSyntax
 		}
 	}
-	b := &binding{id: id, slot: s.slots}
+	b := &binding{id: id, slot: s.slots, declared: true}
 	s.slots++
 	s.bindings = append(s.bindings, b)
 	return b, nil
@@ -72,8 +81,26 @@ type Engine struct {
 
 func NewCore() *Engine {
 	e := &Engine{symbols: scheme.NewSymbolTable(), machine: vm.New()}
-	for name, f := range map[string]form{"quote": quote, "lambda": lambda, "if": conditional, "set!": assignment, "define": definition, "begin": begin, "let": let, "let*": letStar, "letrec": letRec, "letrec*": letRecStar} {
-		e.globals = append(e.globals, &binding{id: scheme.NewIdentifier(e.symbols.Intern(name)), form: f})
+	for name, f := range map[string]form{
+		"quote":         quote,
+		"lambda":        lambda,
+		"if":            conditional,
+		"set!":          assignment,
+		"define":        definition,
+		"begin":         begin,
+		"let":           let,
+		"let*":          letStar,
+		"letrec":        letRec,
+		"letrec*":       letRecStar,
+		"define-syntax": defineSyntax,
+		"let-syntax":    letSyntax,
+		"letrec-syntax": letRecSyntax,
+		"syntax-rules":  syntaxRules,
+		"syntax-error":  syntaxError,
+		"_":             auxiliary,
+		"...":           auxiliary,
+	} {
+		e.globals = append(e.globals, &binding{id: scheme.NewIdentifier(e.symbols.Intern(name)), form: f, declared: true})
 	}
 	return e
 }
@@ -91,11 +118,7 @@ func (e *Engine) global(id scheme.Identifier) *binding {
 // Bind supplies a value from the embedding/library layer. No test procedures or
 // standard procedure aliases are silently installed in the bootstrap environment.
 func (e *Engine) Bind(name string, v scheme.Value) {
-	b := e.global(scheme.NewIdentifier(e.symbols.Intern(name)))
-	if b.cell == nil {
-		b.cell = scheme.NewUninitializedCell()
-	}
-	b.form = variable
+	b := e.variableBinding(scheme.NewIdentifier(e.symbols.Intern(name)))
 	b.cell.Set(v)
 }
 func (e *Engine) Stats() vm.Stats { return e.machine.Stats() }
@@ -105,7 +128,7 @@ func (e *Engine) Eval(ctx context.Context, filename, source string) (scheme.Resu
 		return scheme.Results{}, err
 	}
 
-	b := &builder{engine: e, env: &scope{}}
+	b := &builder{engine: e, env: &scope{}, ctx: ctx}
 	pos := scheme.Source{Filename: filename, Line: 1, Column: 1}
 	if err := b.sequence(nodes, true, true, pos); err != nil {
 		return scheme.Results{}, err
@@ -118,10 +141,10 @@ func (e *Engine) Eval(ctx context.Context, filename, source string) (scheme.Resu
 	return e.machine.Run(ctx, vm.Closure(code))
 }
 
-// Compile consumes a position-bearing datum after expansion. #49 will extend
-// binding resolution/expansion; the VM's Code contract does not depend on Nodes.
+// Compile expands and compiles a position-bearing datum. The VM Code
+// contract remains independent of reader Nodes and macro syntax.
 func (e *Engine) Compile(n *reader.Node) (*vm.Code, error) {
-	b := &builder{engine: e, env: &scope{}}
+	b := &builder{engine: e, env: &scope{}, ctx: context.Background()}
 	if err := b.expr(n, true, true); err != nil {
 		return nil, err
 	}
@@ -130,6 +153,7 @@ func (e *Engine) Compile(n *reader.Node) (*vm.Code, error) {
 }
 
 type builder struct {
+	ctx    context.Context
 	engine *Engine
 	env    *scope
 	spec   vm.Spec
@@ -147,17 +171,22 @@ func (b *builder) constant(v scheme.Value, pos scheme.Source) {
 }
 func (b *builder) finish() (*vm.Code, error) { b.spec.Slots = b.env.slots; return vm.NewCode(b.spec) }
 func (b *builder) resolve(id scheme.Identifier) (*binding, int) {
+	target := b.engine.find(b.env, b.engine.globals, id)
+	if target == nil {
+		target = b.engine.global(id)
+	}
 	depth := 0
 	for s := b.env; s != nil; s = s.parent {
 		for _, bind := range s.bindings {
-			if bind.id.SameContext(id) {
-				return bind, depth
+			if bind == target {
+				return target, depth
 			}
 		}
 		depth++
 	}
-	return b.engine.global(id), -1
+	return target, -1
 }
+
 func (b *builder) globalIndex(cell *scheme.Cell) int {
 	for i, c := range b.spec.Globals {
 		if c == cell {
@@ -210,6 +239,11 @@ func (b *builder) headForm(n *reader.Node) form {
 	return bind.form
 }
 func (b *builder) expr(n *reader.Node, tail, top bool) error {
+	var err error
+	n, err = b.expandHead(n)
+	if err != nil {
+		return err
+	}
 	pos := n.Source()
 	if ident, ok := n.Syntax.Identifier(); ok {
 		bind, depth := b.resolve(ident)
@@ -299,15 +333,32 @@ func (b *builder) expr(n *reader.Node, tail, top bool) error {
 		if err != nil {
 			return err
 		}
-		bind := b.engine.global(ident)
-		if bind.cell == nil {
-			bind.cell = scheme.NewUninitializedCell()
-		}
-		bind.form = variable
+		bind := b.engine.variableBinding(ident)
 		if err := b.definitionValue(d); err != nil {
 			return err
 		}
 		b.access(bind, -1, vm.InitLocal, vm.InitGlobal, pos)
+	case defineSyntax:
+		if !top {
+			return syntax(n, "syntax definition outside a definition region")
+		}
+		if err := b.defineTransformer(n, nil); err != nil {
+			return err
+		}
+		b.constant(scheme.Unspecified, pos)
+	case letSyntax, letRecSyntax:
+		return b.localTransformers(n, args, b.headForm(n) == letRecSyntax, tail)
+	case syntaxRules, auxiliary:
+		return syntax(n, "transformer/auxiliary syntax used as an expression")
+	case syntaxError:
+		if len(args) < 1 {
+			return syntax(n, "syntax-error requires a message")
+		}
+		message, ok := args[0].Datum().(*scheme.String)
+		if !ok {
+			return syntax(args[0], "syntax-error message must be a string literal")
+		}
+		return syntaxFailure(n, args, message.Text())
 	case begin:
 		if len(args) == 0 && !top {
 			return syntax(n, "expression begin requires an expression")
@@ -343,7 +394,7 @@ func (b *builder) sequence(xs []*reader.Node, tail, top bool, pos scheme.Source)
 	return nil
 }
 func (b *builder) child(env *scope, required int, rest bool) *builder {
-	return &builder{engine: b.engine, env: env, spec: vm.Spec{Required: required, Rest: rest}}
+	return &builder{engine: b.engine, env: env, ctx: b.ctx, spec: vm.Spec{Required: required, Rest: rest}}
 }
 func (b *builder) closure(child *builder, pos scheme.Source) error {
 	child.emit(vm.ReturnOp, 0, 0, pos)
@@ -436,8 +487,13 @@ func (b *builder) body(body []*reader.Node, pos scheme.Source) error {
 	var defs []def
 	var binds []*binding
 	var consumed []scheme.Identifier
+	hasSyntax := false
 	for len(pending) > 0 {
-		n := pending[0]
+		n, err := inner.expandHead(pending[0])
+		if err != nil {
+			return err
+		}
+		pending[0] = n
 		switch inner.headForm(n) {
 		case begin:
 			key, _ := id(n.Car)
@@ -447,6 +503,12 @@ func (b *builder) body(body []*reader.Node, pos scheme.Source) error {
 				return err
 			}
 			pending = append(append([]*reader.Node(nil), xs[1:]...), pending[1:]...)
+		case defineSyntax:
+			if err := inner.defineTransformer(n, inner.env); err != nil {
+				return err
+			}
+			hasSyntax = true
+			pending = pending[1:]
 		case definition:
 			key, _ := id(n.Car)
 			consumed = append(consumed, key)
@@ -468,7 +530,7 @@ func (b *builder) body(body []*reader.Node, pos scheme.Source) error {
 			binds = append(binds, bind)
 			pending = pending[1:]
 		default:
-			if len(defs) == 0 {
+			if len(defs) == 0 && !hasSyntax {
 				return b.sequence(pending, true, false, pos)
 			}
 			for i, d := range defs {

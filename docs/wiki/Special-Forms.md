@@ -1,7 +1,7 @@
 # 特殊形式
 
 このページは公開CLIの従来の独自構文です。
-移行中の内部環境の全10構文は[Schemeのコア構文](https://github.com/0x6d61/guri/wiki/Core-Syntax)に記載します。
+移行中の内部環境のコア10形式は[Schemeのコア構文](https://github.com/0x6d61/guri/wiki/Core-Syntax)、マクロの5形式と補助構文は[syntax-rulesマクロ](https://github.com/0x6d61/guri/wiki/Syntax-Rules)に記載します。
 
 特殊形式は、引数を評価するかどうかや評価する環境を制御します。
 通常の関数のようにすべての引数を先に評価するわけではありません。
