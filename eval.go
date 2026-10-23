@@ -19,6 +19,7 @@ func NewInterpreter() *Interpreter {
 	i.installMaps()
 	i.installPrinting()
 	i.installErrors()
+	i.installApply()
 	return i
 }
 

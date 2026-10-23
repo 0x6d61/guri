@@ -1,6 +1,6 @@
 # 関数リファレンス
 
-このページは現在の全29組み込み関数を説明します。
+このページは現在の全30組み込み関数を説明します。
 各関数の引数は、呼び出し前に左から右へ評価します。
 `...` は0個以上の繰り返し、`?` は省略可能な引数を示し、実際のソースには書きません。
 特殊形式の `defn` や `if` は [特殊形式](https://github.com/0x6d61/guri/wiki/Special-Forms) を参照してください。
@@ -38,6 +38,7 @@
 | `reduce` | `(reduce f initial vector)` | 呼び出し可能な値、Vector | 畳み込み結果。関数の副作用は発生する |
 | `println` | `(println value...)` | すべての値 | 標準出力に表示し、nilを返す |
 | `error` | `(error message)` | String | UserErrorで評価を中断。正常な返り値なし |
+| `apply` | `(apply f fixed-args... collection)` | 呼び出し可能な値、末尾にVectorまたはList | 展開した引数でfを呼び、その返り値を返す |
 
 引数数が表の形式に合わない場合は、どの関数も `ArityError` を返します。
 関数自体が変更を行わない場合でも、引数の評価や渡した関数に副作用があれば実行されます。
@@ -296,4 +297,39 @@ error自体は出力やプロセス終了を行いません。
 
 ```clojure
 (println (if true "safe" (error "not evaluated"))) ; => safe
+```
+
+## apply
+
+`(apply f collection)` または `(apply f fixed-args... collection)` と書きます。
+fはFunctionまたはKeywordで、最後の引数はVectorまたはListです。
+先行する固定引数の後ろへ最後のコレクションの要素を並べ、通常の関数と同じ機構で呼び出します。
+最低2引数が必要で、不足するとArityErrorです。
+fが呼び出せない場合や最後の引数がVector／List以外ならTypeErrorになります。
+最後のnilは空Listとして扱わず、空の引数列には `[]` または `'()` を使います。
+
+```clojure
+(println (apply + [1 2 3])) ; => 6
+(println (apply + 10 '(1 2 3))) ; => 16
+(println (apply + [])) ; => 0
+(println (apply :name [{:name "Alice"}])) ; => Alice
+(println (apply (fn [first & rest] rest) 1 [2 3])) ; => [2 3]
+(println (apply (fn [x] x) '(unknown))) ; => unknown
+```
+
+applyの引数自体は通常どおり左から右に評価します。
+展開した値を再び式として評価することはありません。
+コレクションの要素を引数列へ浅くコピーし、元の引数列は変更しません。
+内部のMapやVectorの共有は、通常の関数呼び出しと同じです。
+呼び出し先の引数数、型、実行時エラーはそのまま伝播します。
+関数本体のエラーは定義元の位置を保持し、転送先の引数エラーなどはapplyの呼び出し位置を付けます。
+
+末尾位置のapplyは呼び出し先へ末尾呼び出しとして転送します。
+別名や高階関数経由で呼び出した場合にも、同じ呼び出し機構を使用します。
+apply自身をapplyで呼び出す場合も、転送のためのスタックを積み続けません。
+
+```clojure
+(defn sum [n acc]
+  (if (= n 0) acc (apply sum (- n 1) [(+ acc n)])))
+(println (sum 100000 0)) ; => 5000050000
 ```
