@@ -104,18 +104,18 @@ func (e *Engine) Eval(ctx context.Context, filename, source string) (scheme.Resu
 	if err != nil {
 		return scheme.Results{}, err
 	}
-	result := scheme.NewResults(scheme.Unspecified)
-	for _, n := range nodes {
-		code, err := e.Compile(n)
-		if err != nil {
-			return scheme.Results{}, err
-		}
-		result, err = e.machine.Run(ctx, vm.Closure(code))
-		if err != nil {
-			return scheme.Results{}, err
-		}
+
+	b := &builder{engine: e, env: &scope{}}
+	pos := scheme.Source{Filename: filename, Line: 1, Column: 1}
+	if err := b.sequence(nodes, true, true, pos); err != nil {
+		return scheme.Results{}, err
 	}
-	return result, nil
+	b.emit(vm.ReturnOp, 0, 0, pos)
+	code, err := b.finish()
+	if err != nil {
+		return scheme.Results{}, err
+	}
+	return e.machine.Run(ctx, vm.Closure(code))
 }
 
 // Compile consumes a position-bearing datum after expansion. #49 will extend

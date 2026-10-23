@@ -129,10 +129,16 @@ func TestCompiledContinuationAndMultipleResults(t *testing.T) {
 		t.Fatal("initial")
 	}
 	e.Bind("saved", saved)
-	if eval(t, e, `(saved 10)`) != scheme.Unspecified {
-		t.Fatal("resumed definition return")
+	if number(eval(t, e, `(saved 10)`)) != 12 {
+		t.Fatal("resumed program return")
 	}
-	if schemeInt(t, e, `result`) != 12 {
+	if schemeInt(t, e, `n`) != 2 {
+		t.Fatal("top-level continuation omitted subsequent expressions")
+	}
+	if number(eval(t, e, `(saved 20)`)) != 22 || schemeInt(t, e, `n`) != 3 {
+		t.Fatal("multi-shot top-level continuation")
+	}
+	if schemeInt(t, e, `result`) != 22 {
 		t.Fatal("pending argument")
 	}
 	e.Bind("many", vm.Native("many", 0, 0, func(_ *vm.Context, _ []scheme.Value) (vm.Action, error) {
