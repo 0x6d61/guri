@@ -16,3 +16,5 @@
 - [継続と複数値の制御機能](https://github.com/0x6d61/guri/wiki/Control-Features)
 
 - [dynamic-windと動的な実行範囲](https://github.com/0x6d61/guri/wiki/Dynamic-Wind)
+
+- [例外と動的パラメータ](https://github.com/0x6d61/guri/wiki/Exceptions-Parameters)

@@ -92,8 +92,11 @@ func (b *builder) lowerDerived(n *reader.Node, args []*reader.Node) (*reader.Nod
 	return nil, syntax(n, "unknown derived syntax")
 }
 func (b *builder) condClauses(l *lowerer, clauses []*reader.Node) (*reader.Node, error) {
+	return b.condClausesDefault(l, clauses, atom(scheme.Unspecified, l.pos))
+}
+func (b *builder) condClausesDefault(l *lowerer, clauses []*reader.Node, fallback *reader.Node) (*reader.Node, error) {
 	if len(clauses) == 0 {
-		return atom(scheme.Unspecified, l.pos), nil
+		return fallback, nil
 	}
 	c, err := nodes(clauses[0])
 	if err != nil {
@@ -108,7 +111,7 @@ func (b *builder) condClauses(l *lowerer, clauses []*reader.Node) (*reader.Node,
 		}
 		return l.seq(c[1:]), nil
 	}
-	rest, err := b.condClauses(l, clauses[1:])
+	rest, err := b.condClausesDefault(l, clauses[1:], fallback)
 	if err != nil {
 		return nil, err
 	}

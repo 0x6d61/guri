@@ -2,6 +2,7 @@
 
 このページは公開CLIの従来の関数一覧です。
 内部VMで利用できる標準の制御手続き6束縛は[継続と複数値](https://github.com/0x6d61/guri/wiki/Control-Features)に記載します。
+例外とパラメータの10手続きは[例外と動的パラメータ](https://github.com/0x6d61/guri/wiki/Exceptions-Parameters)に記載します。
 
 このページは現在の全30組み込み関数を説明します。
 各関数の引数は、呼び出し前に左から右へ評価します。
