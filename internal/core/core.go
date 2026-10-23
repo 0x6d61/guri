@@ -129,6 +129,7 @@ func NewCore() *Engine {
 	e.installNumbers()
 	e.installPairs()
 	e.installText()
+	e.installVectors()
 	e.primitives = append([]*binding(nil), e.globals...)
 	return e
 }
