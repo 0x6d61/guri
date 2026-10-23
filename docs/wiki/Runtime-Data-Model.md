@@ -40,8 +40,9 @@ StringとBytevectorのコピーは、新しい領域に文字またはバイト�
 空のコレクションも各生成で独立したオブジェクトを持ちます。
 
 これらの位置と型の要件は[R7RS §3.2と§3.4](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-5.html)に対応します。
-Schemeのeq?、eqv?、equal?自体は#55で実装します。
-今回のオブジェクト参照のテストを、これらの標準手続きの実装完了とは扱いません。
+Schemeのeq?、eqv?、equal?は#55で内部VMへ接続しました。
+[Pair、List、Symbolと等価性](https://github.com/0x6d61/guri/wiki/Pairs-Lists-Symbols)に共有、浅いコピー、循環比較の契約を記載します。
+公開CLIとimportは未接続です。
 
 ## リテラルの変更禁止
 

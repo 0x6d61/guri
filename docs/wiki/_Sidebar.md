@@ -20,3 +20,5 @@
 - [例外と動的パラメータ](https://github.com/0x6d61/guri/wiki/Exceptions-Parameters)
 
 - [標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers): 内部VMの数値塔、比較、整数演算、数学関数、数値と文字列の変換。公開CLIとimportは未接続。
+
+- [Pair、List、Symbolと等価性](https://github.com/0x6d61/guri/wiki/Pairs-Lists-Symbols): 内部VMの63手続きと、循環の比較、共有とコピー、mapと探索の継続。
