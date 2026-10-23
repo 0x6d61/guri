@@ -212,3 +212,9 @@ Appendix Aの公開束縛とAppendix Bのfeaturesを照合し、規格外の実�
 quote/lambda/if/set!/define/begin、各let形式、内部定義、レキシカルな構文束縛を検証します。
 初期環境は構文用の内部bootstrapで、標準importやマクロは未接続です。
 公開CLIの結合測定の成功とは区別します。
+
+## 衛生的なマクロの接続
+
+#49で[syntax-rules](https://github.com/0x6d61/guri/wiki/Syntax-Rules)と構文の束縛形式を内部コンパイラへ接続しました。
+導入スコープと定義元文脈で名前の捕捉を防ぎ、パターンのliteral、入れ子の繰り返し、Vectorと非正規List、syntax-errorを検証します。
+標準importと公開CLIへの移行は後続作業です。

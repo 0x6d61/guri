@@ -21,7 +21,7 @@ flowchart LR
 
 #47時点では、テストで直接組み立てた命令列をVMで実行します。
 #48でコア構文の[コンパイラ](https://github.com/0x6d61/guri/wiki/Core-Syntax)を接続しました。
-マクロの展開は#49で追加します。
+#49で[syntax-rulesの展開](https://github.com/0x6d61/guri/wiki/Syntax-Rules)をコンパイラへ接続しました。
 バイトコードはプロセス内部の表現であり、保存ファイルの形式、ABI、JIT、最適化パスは定義しません。
 コードの実行中にReaderのNodeを参照する必要はありません。
 

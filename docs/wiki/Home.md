@@ -15,7 +15,8 @@ R7RS-smallへの移行を計画しています。
 | [関数リファレンス](https://github.com/0x6d61/guri/wiki/Functions) | 全30関数の引数、型、返り値、変更の有無、使用例、エラー |
 | [準拠計画と要求追跡](https://github.com/0x6d61/guri/wiki/R7RS-Conformance) | R7RS-smallの要求台帳、差分、設計相談と受入条件 |
 | [バイトコードVMの設計](https://github.com/0x6d61/guri/wiki/Bytecode-VM) | 命令、フレーム、末尾呼び出し、継続とネイティブの契約 |
-| [Schemeのコア構文](https://github.com/0x6d61/guri/wiki/Core-Syntax) | 内部環境の全10構文と、束縛解決・バイトコード生成 |
+| [Schemeのコア構文](https://github.com/0x6d61/guri/wiki/Core-Syntax) | 内部環境のコア10形式と、束縛解決・バイトコード生成 |
+| [syntax-rulesマクロ](https://github.com/0x6d61/guri/wiki/Syntax-Rules) | マクロの5形式、補助構文、衛生性、パターンと繰り返し |
 | [標準Reader](https://github.com/0x6d61/guri/wiki/R7RS-Reader) | R7RS datumの読み取りと、実行への未接続範囲 |
 | [内部データモデル](https://github.com/0x6d61/guri/wiki/Runtime-Data-Model) | R7RS値層の契約、unitテストと未接続の機能 |
 | [適合性テスト](https://github.com/0x6d61/guri/wiki/R7RS-Testing) | ケースの実行方法、結果の分類と未対応の測定 |
