@@ -108,6 +108,7 @@ Mapは参照を共有し、`assoc`、`dissoc`、`update` は浅いコピーを�
 | `reduce` | 関数、初期値、Vector |
 | `println` | 0個以上。表示後にnilを返す |
 | `error` | Stringのメッセージ1個。UserErrorで評価を中断 |
+| `apply` | 関数、固定引数0個以上、最後にVectorまたはList |
 
 `=` はIntegerとFloatを数値として比較します。
 Mapのキーの型はGoのMapと同様に区別するため、キーの `1` と `1.0` は別のキーになります。
@@ -147,7 +148,17 @@ v0.0.2向けに末尾呼び出しを実装しています。
 (println (sum 100000 0)) ; 5000050000
 ```
 
-apply、return、break、exitは引き続きv0.0.2の計画です。
+## apply
+
+applyは最後のVectorまたはListを引数列に展開して呼び出します。
+固定引数を先行させることもでき、末尾位置のapply経由でも末尾呼び出しを維持します。
+
+```clojure
+(println (apply + [1 2 3])) ; 6
+(println (apply + 10 '(1 2 3))) ; 16
+```
+
+return、break、exitは引き続きv0.0.2の計画です。
 詳細は [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap) を参照してください。
 
 ## Goからの利用
