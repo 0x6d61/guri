@@ -13,6 +13,7 @@ type Op uint8
 const (
 	Const Op = iota
 	Push
+	Pop
 	Local
 	Global
 	InitLocal

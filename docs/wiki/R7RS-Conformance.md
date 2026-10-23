@@ -205,3 +205,10 @@ Appendix Aの公開束縛とAppendix Bのfeaturesを照合し、規格外の実�
 #47で[バイトコードVM](https://github.com/0x6d61/guri/wiki/Bytecode-VM)を追加しました。
 命令列、末尾呼び出し、複数回再開できる継続とネイティブ呼び出しの契約をunitテストで検証します。
 構文からのコンパイルは#48、標準call/ccの公開は#51で進めます。
+
+## コア構文のコンパイラ
+
+#48で[コア構文のコンパイラ](https://github.com/0x6d61/guri/wiki/Core-Syntax)を内部VMへ接続しました。
+quote/lambda/if/set!/define/begin、各let形式、内部定義、レキシカルな構文束縛を検証します。
+初期環境は構文用の内部bootstrapで、標準importやマクロは未接続です。
+公開CLIの結合測定の成功とは区別します。

@@ -183,6 +183,14 @@ func (m *Machine) Run(ctx context.Context, p *scheme.Procedure, args ...scheme.V
 				return result, e
 			}
 			f.stack = append(f.stack, v)
+		case Pop:
+			if len(f.stack) == 0 {
+				return result, ErrBytecode
+			}
+			last := len(f.stack) - 1
+			m.result = scheme.NewResults(f.stack[last])
+			f.stack[last] = nil
+			f.stack = f.stack[:last]
 		case Local, Global:
 			var cell *scheme.Cell
 			var e error
