@@ -12,23 +12,9 @@ import (
 
 func number(v scheme.Value) int64 { return v.(*scheme.Integer).BigInt().Int64() }
 func engine() *core.Engine {
-	e := core.NewCore()
-	for _, name := range []string{"+", "-", "="} {
-		op := name
-		e.Bind(name, vm.Native(name, 2, 2, func(_ *vm.Context, a []scheme.Value) (vm.Action, error) {
-			x, y := number(a[0]), number(a[1])
-			switch op {
-			case "+":
-				return vm.Return(scheme.NewInteger(x + y)), nil
-			case "-":
-				return vm.Return(scheme.NewInteger(x - y)), nil
-			default:
-				return vm.Return(scheme.Boolean(x == y)), nil
-			}
-		}))
-	}
-	return e
+	return core.NewCore()
 }
+
 func eval(t *testing.T, e *core.Engine, source string) scheme.Value {
 	t.Helper()
 	r, err := e.Eval(context.Background(), "test.scm", source)

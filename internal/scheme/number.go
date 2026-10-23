@@ -80,10 +80,10 @@ func NewComplex(real, imag Real) (Number, error) {
 	if real == nil || imag == nil || !real.schemeValue() || !imag.schemeValue() {
 		return nil, ErrInvalidValue
 	}
+	if imag.Exact() && exactZero(imag) {
+		return real, nil
+	}
 	if real.Exact() && imag.Exact() {
-		if exactZero(imag) {
-			return real, nil
-		}
 		return &Complex{real: real, imag: imag}, nil
 	}
 	return &Complex{real: NewFloat(inexact(real)), imag: NewFloat(inexact(imag))}, nil

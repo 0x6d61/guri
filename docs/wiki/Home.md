@@ -63,3 +63,5 @@ CLIは各式を評価します。
 - [dynamic-windと動的な実行範囲](https://github.com/0x6d61/guri/wiki/Dynamic-Wind)
 
 - [例外と動的パラメータ](https://github.com/0x6d61/guri/wiki/Exceptions-Parameters)
+
+- [標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers): 内部VMの数値塔、比較、整数演算、数学関数、数値と文字列の変換。公開CLIとimportは未接続。

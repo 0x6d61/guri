@@ -218,3 +218,5 @@ quote/lambda/if/set!/define/begin、各let形式、内部定義、レキシカ�
 #49で[syntax-rules](https://github.com/0x6d61/guri/wiki/Syntax-Rules)と構文の束縛形式を内部コンパイラへ接続しました。
 導入スコープと定義元文脈で名前の捕捉を防ぎ、パターンのliteral、入れ子の繰り返し、Vectorと非正規List、syntax-errorを検証します。
 標準importと公開CLIへの移行は後続作業です。
+
+- [標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers): 内部VMの数値塔、比較、整数演算、数学関数、数値と文字列の変換。公開CLIとimportは未接続。

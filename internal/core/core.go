@@ -126,6 +126,7 @@ func NewCore() *Engine {
 		e.globals = append(e.globals, &binding{id: scheme.NewIdentifier(e.symbols.Intern(name)), form: f, declared: true})
 	}
 	e.installControl()
+	e.installNumbers()
 	e.primitives = append([]*binding(nil), e.globals...)
 	return e
 }
@@ -140,8 +141,7 @@ func (e *Engine) global(id scheme.Identifier) *binding {
 	return b
 }
 
-// Bind supplies a value from the embedding/library layer. No test procedures or
-// standard procedure aliases are silently installed in the bootstrap environment.
+// Bind supplies or replaces a value from the embedding/library layer.
 func (e *Engine) Bind(name string, v scheme.Value) {
 	b := e.variableBinding(scheme.NewIdentifier(e.symbols.Intern(name)))
 	b.cell.Set(v)

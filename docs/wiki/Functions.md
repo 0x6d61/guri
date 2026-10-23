@@ -337,3 +337,5 @@ apply自身をapplyで呼び出す場合も、転送のためのスタックを�
   (if (= n 0) acc (apply sum (- n 1) [(+ acc n)])))
 (println (sum 100000 0)) ; => 5000050000
 ```
+
+- [標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers): 内部VMの数値塔、比較、整数演算、数学関数、数値と文字列の変換。公開CLIとimportは未接続。
