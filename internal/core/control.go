@@ -28,6 +28,18 @@ func (e *Engine) installControl() {
 		args := append(append([]scheme.Value(nil), a[1:len(a)-1]...), last...)
 		return vm.Invoke(a[0], args, nil), nil
 	})
+	e.controls["dynamic-wind"] = vm.Native("dynamic-wind", 3, 3, func(c *vm.Context, a []scheme.Value) (vm.Action, error) {
+		for _, v := range a {
+			if _, ok := v.(*scheme.Procedure); !ok {
+				return vm.Action{}, scheme.ErrType
+			}
+		}
+		old := c.Dynamic()
+		extent := vm.NewWind(old, a[0].(*scheme.Procedure), a[2].(*scheme.Procedure))
+		return vm.Invoke(a[1], nil, func(_ *vm.Context, r scheme.Results) (vm.Action, error) {
+			return vm.Return(r.Values()...).WithDynamic(old), nil
+		}).WithDynamic(extent), nil
+	})
 	for name, p := range e.controls {
 		e.Bind(name, p)
 	}

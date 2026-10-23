@@ -88,10 +88,24 @@ func (m *Machine) Run(ctx context.Context, p *scheme.Procedure, args ...scheme.V
 		m.stats.Steps++
 		if pending {
 			pending = false
-			if a.switchDynamic {
+			if a.kind == enteredAction {
 				m.dynamic = a.dynamic
+				a = *a.next
+				pending = true
+				continue
+			}
+			if a.switchDynamic && m.dynamic != a.dynamic {
+				a = m.advanceDynamic(a)
+				pending = true
+				continue
 			}
 			switch a.kind {
+			case jumpAction:
+				m.frames = copyFrames(a.continuation.frames)
+				m.result = a.results
+				if len(m.frames) > m.stats.PeakFrames {
+					m.stats.PeakFrames = len(m.frames)
+				}
 			case returnAction:
 				m.result = a.results
 			case invokeAction:
@@ -136,12 +150,9 @@ func (m *Machine) Run(ctx context.Context, p *scheme.Procedure, args ...scheme.V
 					if impl.owner != m {
 						return result, ErrContinuationOwner
 					}
-					m.frames = copyFrames(impl.frames)
-					m.dynamic = impl.dynamic
-					m.result = scheme.NewResults(a.args...)
-					if len(m.frames) > m.stats.PeakFrames {
-						m.stats.PeakFrames = len(m.frames)
-					}
+					a = Action{kind: jumpAction, continuation: impl, results: scheme.NewResults(a.args...), dynamic: impl.dynamic, switchDynamic: true}
+					pending = true
+					continue
 				default:
 					return result, scheme.ErrType
 				}
