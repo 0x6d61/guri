@@ -6,3 +6,4 @@
 - [R7RS-small準拠計画](https://github.com/0x6d61/guri/wiki/R7RS-Conformance)
 - [適合性テスト](https://github.com/0x6d61/guri/wiki/R7RS-Testing)
 - [内部データモデル](https://github.com/0x6d61/guri/wiki/Runtime-Data-Model)
+- [標準Reader](https://github.com/0x6d61/guri/wiki/R7RS-Reader)

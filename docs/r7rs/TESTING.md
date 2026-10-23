@@ -181,3 +181,13 @@ CIとunitテストにChibi本体を追加しません。
 現行Guriはimportなどが未対応のため、62ケースすべてが失敗します。
 この測定だけで各ケース内部の動作を検証できたとは扱いません。
 派生した実行用コードをChibiなどの外部処理系で実行する検証は、今回の変更には含めません。
+
+## 標準Readerの検査
+
+#46で、全79件のソースを新しいinternal/readerで読み切るunitテストを追加しました。
+この検査は、言語の実行結果を測定する既存のJSONとは別です。
+Readerのテストが成功しても、現行CLIの79件をpassへ変更しません。
+
+Unicode case foldingにGo公式のx/text/cases v0.43.0を使用します。
+初回は`go mod download`で依存を取得し、その後は`GOPROXY=off GOSUMDB=off go test ./...`でネットワークなしの検証ができます。
+CIでも依存の取得とunitテストを別ステップにします。

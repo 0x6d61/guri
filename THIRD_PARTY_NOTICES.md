@@ -16,3 +16,15 @@ Guri本体のライセンスは[MIT](LICENSE)です。
 ソースの再配布では元の著作権表示、条件と免責文を保持してください。
 対象のコードをバイナリ形式で再配布する場合は、元のCOPYINGの条件に従って付属資料にも表示を保持してください。
 著者の名前を、許可なくGuriの推奨や公認を示す宣伝に使用しません。
+
+## golang.org/x/text
+
+ReaderのUnicode case foldingに`golang.org/x/text/cases` v0.43.0を使用します。
+標準ライブラリの小文字化では不足する完全なcase foldingを提供する依存です。
+
+- 著作権表示：Copyright 2009 The Go Authors.
+- ライセンス：BSD 3-Clause。[LICENSE全文](docs/licenses/golang.org-x-text/LICENSE)
+- 追加の特許権許諾：[PATENTS](docs/licenses/golang.org-x-text/PATENTS)
+- 出典：https://go.googlesource.com/text/+/refs/tags/v0.43.0/
+
+ソースやバイナリを配布する際は、元のライセンス条件に従い著作権表示、条件と免責文を保持してください。
