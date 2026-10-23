@@ -1,0 +1,625 @@
+{
+  "name": "chibi-r7rs-selected-base",
+  "cases": [
+    {
+      "id": "chibi-l0049",
+      "requirement_id": "R7RS-4.1.2/chibi-l0049",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L49-L49",
+      "file": "chibi-l0049.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0050",
+      "requirement_id": "R7RS-4.1.2/chibi-l0050",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L50-L50",
+      "file": "chibi-l0050.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0051",
+      "requirement_id": "R7RS-4.1.2/chibi-l0051",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L51-L51",
+      "file": "chibi-l0051.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0053",
+      "requirement_id": "R7RS-4.1.2/chibi-l0053",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L53-L53",
+      "file": "chibi-l0053.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0054",
+      "requirement_id": "R7RS-4.1.2/chibi-l0054",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L54-L54",
+      "file": "chibi-l0054.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0055",
+      "requirement_id": "R7RS-4.1.2/chibi-l0055",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L55-L55",
+      "file": "chibi-l0055.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0056",
+      "requirement_id": "R7RS-4.1.2/chibi-l0056",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L56-L56",
+      "file": "chibi-l0056.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0057",
+      "requirement_id": "R7RS-4.1.2/chibi-l0057",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L57-L57",
+      "file": "chibi-l0057.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0058",
+      "requirement_id": "R7RS-4.1.2/chibi-l0058",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L58-L58",
+      "file": "chibi-l0058.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0060",
+      "requirement_id": "R7RS-4.1.2/chibi-l0060",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L60-L60",
+      "file": "chibi-l0060.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0061",
+      "requirement_id": "R7RS-4.1.2/chibi-l0061",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L61-L61",
+      "file": "chibi-l0061.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0062",
+      "requirement_id": "R7RS-4.1.2/chibi-l0062",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L62-L62",
+      "file": "chibi-l0062.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0063",
+      "requirement_id": "R7RS-4.1.2/chibi-l0063",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L63-L63",
+      "file": "chibi-l0063.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0064",
+      "requirement_id": "R7RS-4.1.2/chibi-l0064",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L64-L64",
+      "file": "chibi-l0064.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0065",
+      "requirement_id": "R7RS-4.1.2/chibi-l0065",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L65-L65",
+      "file": "chibi-l0065.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0067",
+      "requirement_id": "R7RS-4.1.3/chibi-l0067",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L67-L67",
+      "file": "chibi-l0067.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0068",
+      "requirement_id": "R7RS-4.1.3/chibi-l0068",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L68-L68",
+      "file": "chibi-l0068.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0070",
+      "requirement_id": "R7RS-4.1.4/chibi-l0070",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L70-L70",
+      "file": "chibi-l0070.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0071",
+      "requirement_id": "R7RS-4.1.4/chibi-l0071",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L71-L73",
+      "file": "chibi-l0071.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0074",
+      "requirement_id": "R7RS-4.1.4/chibi-l0074",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L74-L77",
+      "file": "chibi-l0074.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0079",
+      "requirement_id": "R7RS-4.1.4/chibi-l0079",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L79-L79",
+      "file": "chibi-l0079.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0080",
+      "requirement_id": "R7RS-4.1.4/chibi-l0080",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L80-L81",
+      "file": "chibi-l0080.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0083",
+      "requirement_id": "R7RS-4.1.5/chibi-l0083",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L83-L83",
+      "file": "chibi-l0083.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0084",
+      "requirement_id": "R7RS-4.1.5/chibi-l0084",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L84-L84",
+      "file": "chibi-l0084.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0085",
+      "requirement_id": "R7RS-4.1.5/chibi-l0085",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L85-L87",
+      "file": "chibi-l0085.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0096",
+      "requirement_id": "R7RS-4.2.1/chibi-l0096",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L96-L98",
+      "file": "chibi-l0096.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0100",
+      "requirement_id": "R7RS-4.2.1/chibi-l0100",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L100-L103",
+      "file": "chibi-l0100.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0105",
+      "requirement_id": "R7RS-4.2.1/chibi-l0105",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L105-L107",
+      "file": "chibi-l0105.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0109",
+      "requirement_id": "R7RS-4.2.1/chibi-l0109",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L109-L112",
+      "file": "chibi-l0109.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0114",
+      "requirement_id": "R7RS-4.2.1/chibi-l0114",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L114-L118",
+      "file": "chibi-l0114.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0129",
+      "requirement_id": "R7RS-4.2.1/chibi-l0129",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L129-L129",
+      "file": "chibi-l0129.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0130",
+      "requirement_id": "R7RS-4.2.1/chibi-l0130",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L130-L130",
+      "file": "chibi-l0130.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0131",
+      "requirement_id": "R7RS-4.2.1/chibi-l0131",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L131-L131",
+      "file": "chibi-l0131.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0132",
+      "requirement_id": "R7RS-4.2.1/chibi-l0132",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L132-L132",
+      "file": "chibi-l0132.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0134",
+      "requirement_id": "R7RS-4.2.1/chibi-l0134",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L134-L134",
+      "file": "chibi-l0134.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0135",
+      "requirement_id": "R7RS-4.2.1/chibi-l0135",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L135-L135",
+      "file": "chibi-l0135.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0136",
+      "requirement_id": "R7RS-4.2.1/chibi-l0136",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L136-L136",
+      "file": "chibi-l0136.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0137",
+      "requirement_id": "R7RS-4.2.1/chibi-l0137",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L137-L138",
+      "file": "chibi-l0137.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0140",
+      "requirement_id": "R7RS-4.2.2/chibi-l0140",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L140-L141",
+      "file": "chibi-l0140.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0143",
+      "requirement_id": "R7RS-4.2.2/chibi-l0143",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L143-L146",
+      "file": "chibi-l0143.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l0148",
+      "requirement_id": "R7RS-4.2.2/chibi-l0148",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L148-L151",
+      "file": "chibi-l0148.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1084",
+      "requirement_id": "R7RS-6.3/chibi-l1084",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1084-L1084",
+      "file": "chibi-l1084.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1086",
+      "requirement_id": "R7RS-6.3/chibi-l1086",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1086-L1086",
+      "file": "chibi-l1086.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1105",
+      "requirement_id": "R7RS-6.4/chibi-l1105",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1105-L1105",
+      "file": "chibi-l1105.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1113",
+      "requirement_id": "R7RS-6.4/chibi-l1113",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1113-L1113",
+      "file": "chibi-l1113.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1127",
+      "requirement_id": "R7RS-6.4/chibi-l1127",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1127-L1127",
+      "file": "chibi-l1127.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1142",
+      "requirement_id": "R7RS-6.4/chibi-l1142",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1142-L1142",
+      "file": "chibi-l1142.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1198",
+      "requirement_id": "R7RS-6.5/chibi-l1198",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1198-L1198",
+      "file": "chibi-l1198.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1203",
+      "requirement_id": "R7RS-6.5/chibi-l1203",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1203-L1203",
+      "file": "chibi-l1203.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1222",
+      "requirement_id": "R7RS-6.6/chibi-l1222",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1222-L1222",
+      "file": "chibi-l1222.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1223",
+      "requirement_id": "R7RS-6.6/chibi-l1223",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1223-L1223",
+      "file": "chibi-l1223.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1441",
+      "requirement_id": "R7RS-6.7/chibi-l1441",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1441-L1441",
+      "file": "chibi-l1441.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1467",
+      "requirement_id": "R7RS-6.7/chibi-l1467",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1467-L1467",
+      "file": "chibi-l1467.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1498",
+      "requirement_id": "R7RS-6.8/chibi-l1498",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1498-L1498",
+      "file": "chibi-l1498.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1507",
+      "requirement_id": "R7RS-6.8/chibi-l1507",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1507-L1507",
+      "file": "chibi-l1507.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1516",
+      "requirement_id": "R7RS-6.8/chibi-l1516",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1516-L1518",
+      "file": "chibi-l1516.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1568",
+      "requirement_id": "R7RS-6.8/chibi-l1568",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1568-L1569",
+      "file": "chibi-l1568.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1577",
+      "requirement_id": "R7RS-6.9/chibi-l1577",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1577-L1577",
+      "file": "chibi-l1577.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1594",
+      "requirement_id": "R7RS-6.9/chibi-l1594",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1594-L1595",
+      "file": "chibi-l1594.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1637",
+      "requirement_id": "R7RS-6.9/chibi-l1637",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1637-L1637",
+      "file": "chibi-l1637.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1659",
+      "requirement_id": "R7RS-6.10/chibi-l1659",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1659-L1659",
+      "file": "chibi-l1659.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    },
+    {
+      "id": "chibi-l1660",
+      "requirement_id": "R7RS-6.10/chibi-l1660",
+      "class": "required",
+      "origin": "https://github.com/ashinn/chibi-scheme/blob/b2087f3a320a56f79ede5c546fd45fdde582c4ed/tests/r7rs-tests.scm#L1660-L1660",
+      "file": "chibi-l1660.scm",
+      "match": "exact",
+      "stdout": "ok",
+      "exit_code": 0
+    }
+  ]
+}

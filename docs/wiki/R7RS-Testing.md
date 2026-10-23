@@ -52,3 +52,25 @@ CIが成功しても、測定結果に残るfailを準拠済みと扱いませ�
 
 外部スイートの候補比較、ライセンス、マニフェストの形式と詳細な実行方法は[原稿の手順書](https://github.com/0x6d61/guri/blob/master/docs/r7rs/TESTING.md)に記載します。
 現在の言語機能は[言語仕様](https://github.com/0x6d61/guri/wiki/Language-Specification)、移行方針は[準拠計画](https://github.com/0x6d61/guri/wiki/R7RS-Conformance)で確認できます。
+
+## Chibiのテスト取り込み
+
+[Issue #70](https://github.com/0x6d61/guri/issues/70)で、固定版Chibiのテスト原本とCOPYINGを保存し、62件を独立実行できる形にしました。
+既存の17件は独自作成、追加した62件はChibi由来です。
+原本全体を保存したことと、原本の全ケースを実行できることは区別します。
+
+各派生ファイルでは元のアサーションを残し、baseのimportと比較用のtestマクロを追加します。
+出典の固定リビジョンと行番号、変更内容、BSDのライセンス表示を保持しています。
+[外部ライセンス表示](https://github.com/0x6d61/guri/blob/master/THIRD_PARTY_NOTICES.md)と[出典の対応表](https://github.com/0x6d61/guri/blob/master/testdata/r7rs/chibi/provenance.json)から確認できます。
+
+前述のビルド後に、Chibi由来のケースを測定できます。
+
+```sh
+"$r7rs_work/r7rscheck" -program "$r7rs_work/guri" -suite testdata/r7rs/chibi/suite.json -report-only > "$r7rs_work/chibi-report.json"
+```
+
+現行Guriの測定結果は62件のfailです。
+CIのArtifactには、独自作成ケースとChibi由来ケースのJSONを別々に保存します。
+Chibi本体は取り込まず、CIにも追加しません。
+元のアサーションと出典の対応はunitテストで確認し、Guriでの動作は測定結果として残します。
+現時点では各ケース内部の動作や外部処理系での成功まで確認したとは扱いません。

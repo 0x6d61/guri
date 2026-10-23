@@ -149,7 +149,9 @@ feature identifierの一覧は[Appendix B](https://standards.scheme.org/correcte
 #44で、独立したプロセスで規格ケースを測定する`r7rscheck`を追加しました。
 基盤のunitテストの成功と、Guriの規格ケースの成功は別の結果です。
 [テストの実行と結果の読み方](https://github.com/0x6d61/guri/wiki/R7RS-Testing)を参照してください。
-初期ケースは規格全体を網羅せず、現行の未対応をJSONへ失敗として記録します。
+ケースは規格全体を網羅せず、現行の未対応をJSONへ失敗として記録します。
+#70でChibiの固定版原本とCOPYINGを保存し、独自作成17件とは別に派生62件を測定します。
+外部スイート採用C44-01は承認済みです。数値やUnicodeなどD01〜D08の未決事項とは区別します。
 
 ## 実装順序と共有契約
 

@@ -185,3 +185,8 @@ go vet ./...
 ```
 
 開発手順は [AGENTS.md](AGENTS.md) に従います。
+
+## 外部テストのライセンス
+
+Chibi由来のR7RSテストを含みます。
+出典と適用範囲は[外部ライセンス表示](THIRD_PARTY_NOTICES.md)に記載します。

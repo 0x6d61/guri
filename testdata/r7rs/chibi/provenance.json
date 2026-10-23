@@ -1,0 +1,439 @@
+{
+  "revision": "b2087f3a320a56f79ede5c546fd45fdde582c4ed",
+  "cases": [
+    {
+      "id": "chibi-l0049",
+      "start_line": 49,
+      "end_line": 49,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0050",
+      "start_line": 50,
+      "end_line": 50,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0051",
+      "start_line": 51,
+      "end_line": 51,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0053",
+      "start_line": 53,
+      "end_line": 53,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0054",
+      "start_line": 54,
+      "end_line": 54,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0055",
+      "start_line": 55,
+      "end_line": 55,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0056",
+      "start_line": 56,
+      "end_line": 56,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0057",
+      "start_line": 57,
+      "end_line": 57,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0058",
+      "start_line": 58,
+      "end_line": 58,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0060",
+      "start_line": 60,
+      "end_line": 60,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0061",
+      "start_line": 61,
+      "end_line": 61,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0062",
+      "start_line": 62,
+      "end_line": 62,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0063",
+      "start_line": 63,
+      "end_line": 63,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0064",
+      "start_line": 64,
+      "end_line": 64,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0065",
+      "start_line": 65,
+      "end_line": 65,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0067",
+      "start_line": 67,
+      "end_line": 67,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.3",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0068",
+      "start_line": 68,
+      "end_line": 68,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.3",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0070",
+      "start_line": 70,
+      "end_line": 70,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.4",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0071",
+      "start_line": 71,
+      "end_line": 73,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.4",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0074",
+      "start_line": 74,
+      "end_line": 77,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.4",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0079",
+      "start_line": 79,
+      "end_line": 79,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.4",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0080",
+      "start_line": 80,
+      "end_line": 81,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.4",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0083",
+      "start_line": 83,
+      "end_line": 83,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.5",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0084",
+      "start_line": 84,
+      "end_line": 84,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.5",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0085",
+      "start_line": 85,
+      "end_line": 87,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.1.5",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0096",
+      "start_line": 96,
+      "end_line": 98,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.1",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0100",
+      "start_line": 100,
+      "end_line": 103,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.1",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0105",
+      "start_line": 105,
+      "end_line": 107,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.1",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0109",
+      "start_line": 109,
+      "end_line": 112,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.1",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0114",
+      "start_line": 114,
+      "end_line": 118,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.1",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0129",
+      "start_line": 129,
+      "end_line": 129,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.1",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0130",
+      "start_line": 130,
+      "end_line": 130,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.1",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0131",
+      "start_line": 131,
+      "end_line": 131,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.1",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0132",
+      "start_line": 132,
+      "end_line": 132,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.1",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0134",
+      "start_line": 134,
+      "end_line": 134,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.1",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0135",
+      "start_line": 135,
+      "end_line": 135,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.1",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0136",
+      "start_line": 136,
+      "end_line": 136,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.1",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0137",
+      "start_line": 137,
+      "end_line": 138,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.1",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0140",
+      "start_line": 140,
+      "end_line": 141,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0143",
+      "start_line": 143,
+      "end_line": 146,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l0148",
+      "start_line": 148,
+      "end_line": 151,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.2",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1084",
+      "start_line": 1084,
+      "end_line": 1084,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.3",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1086",
+      "start_line": 1086,
+      "end_line": 1086,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.3",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1105",
+      "start_line": 1105,
+      "end_line": 1105,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.4",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1113",
+      "start_line": 1113,
+      "end_line": 1113,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.4",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1127",
+      "start_line": 1127,
+      "end_line": 1127,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.4",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1142",
+      "start_line": 1142,
+      "end_line": 1142,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.4",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1198",
+      "start_line": 1198,
+      "end_line": 1198,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.5",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1203",
+      "start_line": 1203,
+      "end_line": 1203,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.5",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1222",
+      "start_line": 1222,
+      "end_line": 1222,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.6",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1223",
+      "start_line": 1223,
+      "end_line": 1223,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.6",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1441",
+      "start_line": 1441,
+      "end_line": 1441,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.7",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1467",
+      "start_line": 1467,
+      "end_line": 1467,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.7",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1498",
+      "start_line": 1498,
+      "end_line": 1498,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.8",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1507",
+      "start_line": 1507,
+      "end_line": 1507,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.8",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1516",
+      "start_line": 1516,
+      "end_line": 1518,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.8",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1568",
+      "start_line": 1568,
+      "end_line": 1569,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.8",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1577",
+      "start_line": 1577,
+      "end_line": 1577,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.9",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1594",
+      "start_line": 1594,
+      "end_line": 1595,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.9",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1637",
+      "start_line": 1637,
+      "end_line": 1637,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.9",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1659",
+      "start_line": 1659,
+      "end_line": 1659,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.10",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    },
+    {
+      "id": "chibi-l1660",
+      "start_line": 1660,
+      "end_line": 1660,
+      "specification": "https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.10",
+      "adaptation": "Retain assertion and any adjacent setup verbatim; add base import and a local test macro that compares exact values once and writes ok/fail."
+    }
+  ]
+}
