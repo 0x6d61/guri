@@ -179,9 +179,13 @@ type actionKind uint8
 const (
 	returnAction actionKind = iota
 	invokeAction
+	jumpAction
+	enteredAction
 )
 
 type Action struct {
+	continuation  *continuation
+	next          *Action
 	kind          actionKind
 	results       scheme.Results
 	target        scheme.Value
@@ -197,13 +201,20 @@ func Invoke(target scheme.Value, args []scheme.Value, resume Resume) Action {
 }
 func (a Action) WithDynamic(d *Dynamic) Action { a.dynamic = d; a.switchDynamic = true; return a }
 
-// Dynamic is an immutable chain for future parameter/handler/wind state. No
-// dynamic-wind hooks are implemented here; #52 must route transitions via Actions.
+// Dynamic is an immutable identity chain for wind, handler and parameter state.
 type Dynamic struct {
-	parent  *Dynamic
-	payload any
+	before, after *scheme.Procedure
+	parent        *Dynamic
+	payload       any
 }
 
-func NewDynamic(parent *Dynamic, payload any) *Dynamic { return &Dynamic{parent, payload} }
-func (d *Dynamic) Parent() *Dynamic                    { return d.parent }
-func (d *Dynamic) Payload() any                        { return d.payload }
+func NewDynamic(parent *Dynamic, payload any) *Dynamic {
+	return &Dynamic{parent: parent, payload: payload}
+}
+func (d *Dynamic) Parent() *Dynamic { return d.parent }
+func (d *Dynamic) Payload() any     { return d.payload }
+
+// NewWind creates a distinct dynamic extent; callbacks run outside that extent.
+func NewWind(parent *Dynamic, before, after *scheme.Procedure) *Dynamic {
+	return &Dynamic{parent: parent, before: before, after: after}
+}

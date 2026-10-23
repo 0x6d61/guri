@@ -2,7 +2,7 @@
 
 #51でVMの継続とResultsを、標準の制御手続きと複数値の構文へ接続しました。
 内部のNewCore環境で利用でき、公開CLIへの切替と標準importは後続作業です。
-dynamic-windのbefore/afterによる動的範囲の移動は#52で追加します。
+#52で[dynamic-wind](https://github.com/0x6d61/guri/wiki/Dynamic-Wind)の動的範囲の移動を接続しました。
 
 ## 手続きと構文の一覧
 
@@ -12,6 +12,7 @@ dynamic-windのbefore/afterによる動的範囲の移動は#52で追加しま�
 | values | `(values value...)`。0引数以上、すべての型 | 全引数を複数値として返す。ListやVectorへ変換しない |
 | call-with-values | `(call-with-values producer consumer)`。2引数 | producerを0引数で呼び、返った全値をconsumerの引数へ渡す。consumerの全結果を末尾転送する |
 | apply | `(apply proc fixed... list)`。2引数以上 | 最後の正規Listの要素を固定引数の後へ連結し、procへ末尾転送する。Listを変更せず、要素は共有する |
+| dynamic-wind | `(dynamic-wind before thunk after)`。3引数 | 通常の入退場と継続の脱出・再入でフックを呼び、thunkの全結果を返す。詳細は専用ページ |
 | define-values | `(define-values formals expr)`。2引数 | exprの複数値を定義する。トップレベルでは再定義可能、内部では本体全体の束縛を作る。結果は未規定値 |
 | let-values | `(let-values ((formals expr) ...) body...)` | 全exprを外側の環境で評価してから束縛し、本体の全結果を返す |
 | let*-values | `(let*-values ((formals expr) ...) body...)` | 各exprを先行する束縛の環境で評価してから次の範囲を作り、本体の全結果を返す |
