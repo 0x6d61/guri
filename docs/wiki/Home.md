@@ -14,6 +14,7 @@ R7RS-smallへの移行を計画しています。
 | [特殊形式](https://github.com/0x6d61/guri/wiki/Special-Forms) | `def`、`defn`、`fn`、条件分岐、束縛など全12形式 |
 | [関数リファレンス](https://github.com/0x6d61/guri/wiki/Functions) | 全30関数の引数、型、返り値、変更の有無、使用例、エラー |
 | [準拠計画と要求追跡](https://github.com/0x6d61/guri/wiki/R7RS-Conformance) | R7RS-smallの要求台帳、差分、設計相談と受入条件 |
+| [適合性テスト](https://github.com/0x6d61/guri/wiki/R7RS-Testing) | ケースの実行方法、結果の分類と未対応の測定 |
 | [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap) | R7RS-smallへの移行順序と既存バージョンの実装記録 |
 
 ## 実行方法
