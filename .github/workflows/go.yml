@@ -30,3 +30,14 @@ jobs:
         run: go test ./...
       - name: Vet
         run: go vet ./...
+      - name: Build interpreter for isolated R7RS measurements
+        run: go build -o "$RUNNER_TEMP/guri-r7rs" ./cmd/guri
+      - name: Measure R7RS gaps (not a conformance gate)
+        run: go run ./cmd/r7rscheck -program "$RUNNER_TEMP/guri-r7rs" -report-only > "$RUNNER_TEMP/r7rs-report.json"
+      - name: Upload R7RS measurements
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: r7rs-measurements
+          path: ${{ runner.temp }}/r7rs-report.json
+          if-no-files-found: error

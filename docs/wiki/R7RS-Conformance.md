@@ -144,6 +144,13 @@ feature identifierの一覧は[Appendix B](https://standards.scheme.org/correcte
 回答は後続PRから参照し、確定済みの方針を繰り返し質問しません。
 この台帳をマージすることは、D01〜D08の推奨案への承認を意味しません。
 
+## 適合性テスト基盤
+
+#44で、独立したプロセスで規格ケースを測定する`r7rscheck`を追加しました。
+基盤のunitテストの成功と、Guriの規格ケースの成功は別の結果です。
+[テストの実行と結果の読み方](https://github.com/0x6d61/guri/wiki/R7RS-Testing)を参照してください。
+初期ケースは規格全体を網羅せず、現行の未対応をJSONへ失敗として記録します。
+
 ## 実装順序と共有契約
 
 [親Issue #42](https://github.com/0x6d61/guri/issues/42)の依存関係を使います。

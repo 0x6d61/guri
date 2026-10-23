@@ -4,3 +4,4 @@
 - [関数リファレンス](https://github.com/0x6d61/guri/wiki/Functions)
 - [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap)
 - [R7RS-small準拠計画](https://github.com/0x6d61/guri/wiki/R7RS-Conformance)
+- [適合性テスト](https://github.com/0x6d61/guri/wiki/R7RS-Testing)
