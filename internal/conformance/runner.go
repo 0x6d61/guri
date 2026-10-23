@@ -168,7 +168,7 @@ func (s *Suite) LinkRequirements(path string) error {
 	sections := make(map[string]bool)
 	for _, row := range rows[1:] {
 		id, sec := row[idCol], row[sectionCol]
-		if !requirementID.MatchString(id) || id != "R7RS-"+sec || ids[id] {
+		if !requirementID.MatchString(id) || section(id) != sec || ids[id] {
 			return fmt.Errorf("invalid or duplicate requirement %q", id)
 		}
 		ids[id] = true

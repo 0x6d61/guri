@@ -209,3 +209,24 @@ func TestRequirementCoverage(t *testing.T) {
 		t.Fatal("unknown requirement accepted")
 	}
 }
+
+func TestRequirementTableAcceptsSubrequirements(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "requirements.csv")
+	if err := os.WriteFile(path, []byte("id,section\nR7RS-4.1,4.1\nR7RS-4.1/literal,4.1\nR7RS-6.2,6.2\n"), 0600); err != nil {
+		t.Fatal(err)
+	}
+	suite := fixture(t, Case{Source: "pass", Stdout: "ok\n"})
+	if err := suite.LinkRequirements(path); err != nil {
+		t.Fatal(err)
+	}
+	report := Run(context.Background(), suite, helper(t), time.Second)
+	if len(report.UncoveredSections) != 1 || report.UncoveredSections[0] != "6.2" {
+		t.Fatalf("subrequirements duplicated section coverage: %+v", report)
+	}
+	if err := os.WriteFile(path, []byte("id,section\nR7RS-4.1,4.1\nR7RS-4.1/literal,6.2\n"), 0600); err != nil {
+		t.Fatal(err)
+	}
+	if err := suite.LinkRequirements(path); err == nil {
+		t.Fatal("subrequirement attached to the wrong section")
+	}
+}

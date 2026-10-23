@@ -5,3 +5,4 @@
 - [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap)
 - [R7RS-small準拠計画](https://github.com/0x6d61/guri/wiki/R7RS-Conformance)
 - [適合性テスト](https://github.com/0x6d61/guri/wiki/R7RS-Testing)
+- [内部データモデル](https://github.com/0x6d61/guri/wiki/Runtime-Data-Model)
