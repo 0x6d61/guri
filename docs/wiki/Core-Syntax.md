@@ -198,7 +198,8 @@ Go側で式ごとにRunを分け、残りのプログラムを継続から落と
 公開CLI向けのエラー表示の移行は後続作業です。
 
 syntax-rules、define-syntax、let-syntax、letrec-syntax、syntax-errorは内部環境で実装済みです。
-標準のimport、define-values、残りの派生構文、標準手続きは未実装です。
+派生構文と準引用は#50の[派生構文と準引用](https://github.com/0x6d61/guri/wiki/Derived-Syntax)へ接続しました。
+標準のimport、define-values、標準手続きは後続作業です。
 既存の17件とChibi由来62件はimportと標準ライブラリを含む結合テストで、内部コンパイラのunitテストとは別に未対応を記録します。
 R7RS全体の準拠済みとは扱いません。
 

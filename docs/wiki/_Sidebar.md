@@ -10,3 +10,5 @@
 - [バイトコードVMの設計](https://github.com/0x6d61/guri/wiki/Bytecode-VM)
 - [Schemeのコア構文](https://github.com/0x6d61/guri/wiki/Core-Syntax)
 - [syntax-rulesマクロ](https://github.com/0x6d61/guri/wiki/Syntax-Rules)
+
+- [派生構文と準引用](https://github.com/0x6d61/guri/wiki/Derived-Syntax)

@@ -151,7 +151,16 @@ func (b *builder) expandHead(n *reader.Node) (*reader.Node, error) {
 		if err := b.ctx.Err(); err != nil {
 			return nil, err
 		}
-		if b.headForm(n) != macroCall {
+		kind := b.headForm(n)
+		if kind == include || kind == includeCI || kind == condExpand {
+			var err error
+			n, err = b.sourceExpansion(n)
+			if err != nil {
+				return nil, err
+			}
+			continue
+		}
+		if kind != macroCall {
 			return n, nil
 		}
 		ident, _ := id(n.Car)
