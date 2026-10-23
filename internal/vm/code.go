@@ -157,6 +157,12 @@ func Closure(code *Code) *scheme.Procedure {
 
 // NativeFunc must return an Action rather than recursively invoking Machine.Run.
 type NativeFunc func(*Context, []scheme.Value) (Action, error)
+
+// Callable is an internal resumable native code object (including parameters).
+type Callable interface {
+	scheme.ProcedureCode
+	Call(*Context, []scheme.Value) (Action, error)
+}
 type native struct {
 	name     string
 	min, max int
@@ -164,6 +170,12 @@ type native struct {
 }
 
 func (*native) ProcedureCode() {}
+func (n *native) Call(c *Context, args []scheme.Value) (Action, error) {
+	if len(args) < n.min || n.max >= 0 && len(args) > n.max {
+		return Action{}, fmt.Errorf("%w: %s", ErrArity, n.name)
+	}
+	return n.fn(c, args)
+}
 func Native(name string, min, max int, fn NativeFunc) *scheme.Procedure {
 	if min < 0 || max >= 0 && max < min || fn == nil {
 		panic("vm: invalid native procedure")
@@ -181,9 +193,11 @@ const (
 	invokeAction
 	jumpAction
 	enteredAction
+	failAction
 )
 
 type Action struct {
+	cause         error
 	continuation  *continuation
 	next          *Action
 	kind          actionKind
@@ -217,4 +231,12 @@ func (d *Dynamic) Payload() any     { return d.payload }
 // NewWind creates a distinct dynamic extent; callbacks run outside that extent.
 func NewWind(parent *Dynamic, before, after *scheme.Procedure) *Dynamic {
 	return &Dynamic{parent: parent, before: before, after: after}
+}
+
+// Fail delivers a host error after any requested dynamic transfer has finished.
+func Fail(err error) Action {
+	if err == nil {
+		panic("vm: nil failure")
+	}
+	return Action{kind: failAction, cause: err}
 }

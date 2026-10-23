@@ -55,6 +55,8 @@ const (
 	defineValues
 	letValues
 	letStarValues
+	parameterize
+	guard
 )
 
 type binding struct {
@@ -97,6 +99,7 @@ type Engine struct {
 func NewCore() *Engine {
 	e := &Engine{symbols: scheme.NewSymbolTable(), machine: vm.New()}
 	for name, f := range map[string]form{
+		"parameterize": parameterize, "guard": guard,
 		"define-values": defineValues, "let-values": letValues, "let*-values": letStarValues,
 		"quote":         quote,
 		"lambda":        lambda,
@@ -295,6 +298,18 @@ func (b *builder) expr(n *reader.Node, tail, top bool) error {
 		return nil
 	}
 	switch b.headForm(n) {
+	case parameterize:
+		node, err := b.lowerParameterize(n, args)
+		if err != nil {
+			return err
+		}
+		return b.expr(node, tail, top)
+	case guard:
+		node, err := b.lowerGuard(n, args)
+		if err != nil {
+			return err
+		}
+		return b.expr(node, tail, top)
 	case letValues, letStarValues:
 		node, err := b.lowerValueBindings(n, args, b.headForm(n) == letStarValues)
 		if err != nil {

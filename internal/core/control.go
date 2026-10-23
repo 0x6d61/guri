@@ -40,6 +40,7 @@ func (e *Engine) installControl() {
 			return vm.Return(r.Values()...).WithDynamic(old), nil
 		}).WithDynamic(extent), nil
 	})
+	e.installExceptions()
 	for name, p := range e.controls {
 		e.Bind(name, p)
 	}

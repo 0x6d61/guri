@@ -2,7 +2,7 @@ package vm
 
 import (
 	"context"
-	"fmt"
+	"errors"
 
 	"github.com/0x6d61/guri/internal/scheme"
 )
@@ -48,7 +48,8 @@ type Context struct{ m *Machine }
 func (c *Context) Capture() *scheme.Procedure {
 	return scheme.NewProcedure(&continuation{owner: c.m, frames: copyFrames(c.m.frames), dynamic: c.m.dynamic})
 }
-func (c *Context) Dynamic() *Dynamic { return c.m.dynamic }
+func (c *Context) Source() scheme.Source { return c.m.source }
+func (c *Context) Dynamic() *Dynamic     { return c.m.dynamic }
 func (m *Machine) push(f frame) {
 	m.frames = append(m.frames, f)
 	if len(m.frames) > m.stats.PeakFrames {
@@ -100,6 +101,12 @@ func (m *Machine) Run(ctx context.Context, p *scheme.Procedure, args ...scheme.V
 				continue
 			}
 			switch a.kind {
+			case failAction:
+				var raised *scheme.Raised
+				if errors.As(a.cause, &raised) {
+					m.source = raised.Source()
+				}
+				return result, a.cause
 			case jumpAction:
 				m.frames = copyFrames(a.continuation.frames)
 				m.result = a.results
@@ -135,12 +142,9 @@ func (m *Machine) Run(ctx context.Context, p *scheme.Procedure, args ...scheme.V
 					}
 					m.push(frame{code: impl.code, env: env})
 					m.result = scheme.NewResults()
-				case *native:
-					if len(a.args) < impl.min || impl.max >= 0 && len(a.args) > impl.max {
-						return result, fmt.Errorf("%w: %s", ErrArity, impl.name)
-					}
+				case Callable:
 					var e error
-					a, e = impl.fn(c, append([]scheme.Value(nil), a.args...))
+					a, e = impl.Call(c, append([]scheme.Value(nil), a.args...))
 					if e != nil {
 						return result, e
 					}
