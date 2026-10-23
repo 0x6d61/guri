@@ -2,7 +2,7 @@
 
 #44で追加する基盤は、Guriの評価器と独立したGoの実行器です。
 各ケースのSchemeソースを別プロセスで実行し、期待する標準出力と終了コードに照合します。
-初期コーパスは規格を参照して独立に作成した17ケースです。
+規格を参照して独立に作成した17ケースと、Chibi由来の62ケースを別のマニフェストで管理します。
 規格全体を網羅するスイートではありません。
 
 ## unitテストと規格ケースの分離
@@ -120,6 +120,7 @@ observeは必須結果の代用には使えず、成功件数にも入りませ�
 GoのCIは従来のunitテストとvetに加え、`-report-only`で測定します。
 測定ステップの名前にも、準拠判定のゲートではないことを記載します。
 実行結果のJSONを`r7rs-measurements`というArtifactへ保存します。
+独自作成ケースは`r7rs-report.json`、Chibi由来ケースは`r7rs-chibi-report.json`です。
 CIが緑でも、JSONのfailや未測定の節は未対応として残ります。
 将来、必須ケースが揃った段階でstrict実行をゲートに加えます。
 
@@ -127,19 +128,20 @@ CIが緑でも、JSONのfailや未測定の節は未対応として残ります�
 
 | 候補 | 確認した固定版 | 特徴と判断 |
 |---|---|---|
-| [Chibi Scheme](https://github.com/ashinn/chibi-scheme/tree/b2087f3a320a56f79ede5c546fd45fdde582c4ed) | `b2087f3a320a56f79ede5c546fd45fdde582c4ed` | tests/r7rs-tests.scmはUnicode全体、数値塔と任意ライブラリを前提にする。原本の期待値を規格と照合して独立ケースへ取り込む案を提示中 |
+| [Chibi Scheme](https://github.com/ashinn/chibi-scheme/tree/b2087f3a320a56f79ede5c546fd45fdde582c4ed) | `b2087f3a320a56f79ede5c546fd45fdde582c4ed` | tests/r7rs-tests.scmはUnicode全体、数値塔と任意ライブラリを前提にする。採用済み。原本を保存し、規格と照合したbaseの62ケースを独立実行する |
 | [Gauche](https://github.com/shirok/Gauche/blob/0d709aafd44354593817ecc085adb82697b102d5/tests/r7rs-tests.scm) | `0d709aafd44354593817ecc085adb82697b102d5` | Chibiのテストをgauche.testへのアダプタで使い、追加の回帰テストも持つ。Gauche固有の環境を今回の基盤へ追加する予定はない |
 
 ChibiのCOPYINGはBSD 3-Clauseです。
 ソースを取り込む場合は元の著作権表示、ライセンス条件、免責文とファイル内の寄稿者表示を保持します。
 GaucheにもBSDのCOPYINGがありますが、取り込むファイルが決まった時点で個別の条件を確認します。
 Guri本体のMITライセンスと外部由来の条件を混同しません。
-外部テストの採用はユーザーへ相談中で、この段階では外部の原本や派生ケースをリポジトリに追加していません。
+ユーザーの取り込み指示により、C44-01を承認済みとして[Issue #70](https://github.com/0x6d61/guri/issues/70)で実装します。
+[原本とCOPYING](../../testdata/r7rs/upstream/chibi/README.md)、[派生ケース](../../testdata/r7rs/chibi/README.md)、[外部ライセンス表示](../../THIRD_PARTY_NOTICES.md)を管理します。
 
-### Chibiを採用する場合の具体案
+### Chibiの取り込み範囲
 
-採用候補は`tests/r7rs-tests.scm`とルートの`COPYING`です。
-リビジョンは上表の`b2087f3a320a56f79ede5c546fd45fdde582c4ed`に固定し、原本を改変せず`testdata/r7rs/upstream/chibi/`へ保存する案です。
+取り込む原本は`tests/r7rs-tests.scm`とルートの`COPYING`です。
+リビジョンは上表の`b2087f3a320a56f79ede5c546fd45fdde582c4ed`に固定し、原本を改変せず`testdata/r7rs/upstream/chibi/`へ保存します。
 追加依存のある`lib/chibi/test.scm`とそのライブラリ群は、この段階では取り込みません。
 
 | ファイル | SHA-256 |
@@ -149,5 +151,33 @@ Guri本体のMITライセンスと外部由来の条件を混同しません。
 
 出典とライセンスの範囲を同じディレクトリの説明に記録し、元の寄稿者表示も保持します。
 独立ケースへ移すときは原本の行、規格の節と変更内容を記録し、派生したファイルもBSDの表示対象として扱います。
-Guriの実行コードをChibiから移植する提案ではありません。
+この変更はテストの取り込みであり、Guriの実行コードは変更しません。
 原本全体は`(chibi test)`への依存があるため、この取り込みだけで全件を実行できるとは記載しません。
+
+### 派生ケースの測定
+
+既存の17ケースと同じ実行器へ、Chibi用のマニフェストを指定します。
+
+```sh
+"$r7rs_work/r7rscheck" -program "$r7rs_work/guri" -suite testdata/r7rs/chibi/suite.json -report-only > "$r7rs_work/chibi-report.json"
+```
+
+初回のGuri測定では62件がfailになります。
+元のアサーションは変更せず、baseのimportとローカルなtestマクロを追加しています。
+マクロは選択した正確な値をequal?で比較し、期待値と式を一度ずつ評価します。
+近似Float比較や任意ライブラリを必要とするケースは、この初回の独立実行対象へ含めません。
+これは数値やUnicodeの実装プロファイルの決定を意味しません。
+
+`provenance.json`から元の行範囲、規格の節と追加した実行用コードを追跡できます。
+原本全体の保存と、この62ケースの実行範囲を区別します。
+今後ケースを追加するときも、未規定の結果、任意機能、数値の近似比較を個別に確認します。
+
+### 検証の範囲
+
+CIとunitテストにChibi本体を追加しません。
+取り込んだ62ケースを、既存のGo実行器からGuriへ渡して測定します。
+原本の固定、ライセンスと元のアサーションの保持、要求IDの対応はunitテストで確認します。
+
+現行Guriはimportなどが未対応のため、62ケースすべてが失敗します。
+この測定だけで各ケース内部の動作を検証できたとは扱いません。
+派生した実行用コードをChibiなどの外部処理系で実行する検証は、今回の変更には含めません。
