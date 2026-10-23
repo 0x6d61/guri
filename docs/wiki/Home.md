@@ -57,3 +57,5 @@ CLIは各式を評価します。
 原稿は [docs/wiki](https://github.com/0x6d61/guri/tree/master/docs/wiki) で管理します。
 
 - [派生構文と準引用](https://github.com/0x6d61/guri/wiki/Derived-Syntax)
+
+- [継続と複数値の制御機能](https://github.com/0x6d61/guri/wiki/Control-Features)

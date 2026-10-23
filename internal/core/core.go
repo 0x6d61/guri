@@ -52,6 +52,9 @@ const (
 	include
 	includeCI
 	condExpand
+	defineValues
+	letValues
+	letStarValues
 )
 
 type binding struct {
@@ -83,6 +86,7 @@ func (s *scope) add(id scheme.Identifier) (*binding, error) {
 type Engine struct {
 	symbols    *scheme.SymbolTable
 	globals    []*binding
+	controls   map[string]*scheme.Procedure
 	primitives []*binding
 	loader     SourceLoader
 	features   map[string]bool
@@ -93,6 +97,7 @@ type Engine struct {
 func NewCore() *Engine {
 	e := &Engine{symbols: scheme.NewSymbolTable(), machine: vm.New()}
 	for name, f := range map[string]form{
+		"define-values": defineValues, "let-values": letValues, "let*-values": letStarValues,
 		"quote":         quote,
 		"lambda":        lambda,
 		"if":            conditional,
@@ -117,6 +122,7 @@ func NewCore() *Engine {
 	} {
 		e.globals = append(e.globals, &binding{id: scheme.NewIdentifier(e.symbols.Intern(name)), form: f, declared: true})
 	}
+	e.installControl()
 	e.primitives = append([]*binding(nil), e.globals...)
 	return e
 }
@@ -289,6 +295,12 @@ func (b *builder) expr(n *reader.Node, tail, top bool) error {
 		return nil
 	}
 	switch b.headForm(n) {
+	case letValues, letStarValues:
+		node, err := b.lowerValueBindings(n, args, b.headForm(n) == letStarValues)
+		if err != nil {
+			return err
+		}
+		return b.expr(node, tail, top)
 	case derived:
 		expanded, err := b.lowerDerived(n, args)
 		if err != nil {
