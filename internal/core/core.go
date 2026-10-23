@@ -127,6 +127,7 @@ func NewCore() *Engine {
 	}
 	e.installControl()
 	e.installNumbers()
+	e.installPairs()
 	e.primitives = append([]*binding(nil), e.globals...)
 	return e
 }

@@ -1,6 +1,7 @@
 package core
 
 import (
+	"github.com/0x6d61/guri/internal/equality"
 	"github.com/0x6d61/guri/internal/reader"
 	"github.com/0x6d61/guri/internal/scheme"
 	"github.com/0x6d61/guri/internal/vm"
@@ -128,12 +129,8 @@ func (b *builder) condClausesDefault(l *lowerer, clauses []*reader.Node, fallbac
 	}
 	return l.form("if", c[0], l.seq(c[1:]), rest), nil
 }
-func eqvDatum(a, b scheme.Value) bool {
-	if a.Kind() == scheme.KindNumber && b.Kind() == scheme.KindNumber {
-		return datumEqual(a, b)
-	}
-	return a == b
-}
+func eqvDatum(a, b scheme.Value) bool { return equality.Eqv(a, b) }
+
 func (b *builder) caseClauses(l *lowerer, key *reader.Node, clauses []*reader.Node, seen map[scheme.Value]bool) (*reader.Node, error) {
 	if len(clauses) == 0 {
 		return atom(scheme.Unspecified, l.pos), nil

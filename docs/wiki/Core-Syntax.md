@@ -208,3 +208,7 @@ define-values、let-values、let*-valuesと標準の制御手続きは#51で接�
 R7RS全体の準拠済みとは扱いません。
 
 参照は[R7RS §3.1、§3.4、§3.5](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-5.html)、[§4.1、§4.2.2〜4.2.4](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html)、[§5.3](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-7.html)です。
+
+#55で[Pair、List、Symbolと等価性](https://github.com/0x6d61/guri/wiki/Pairs-Lists-Symbols)の63手続きを内部環境へ追加しました。
+caseの同値判定は標準のeqv?と同じ実装を使います。
+公開CLIとimportは引き続き未接続です。
