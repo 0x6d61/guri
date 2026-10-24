@@ -82,6 +82,8 @@ CLIは各式を評価します。
 
 - [datumとファイルの入出力](https://github.com/0x6d61/guri/wiki/Datum-File-IO): 内部VMの13手続き、ストリームReader、write/display、ファイルの所有と継続。公開CLIは後続。importは内部Runtimeへ接続済み。
 
-- [ライブラリとプログラムの環境](https://github.com/0x6d61/guri/wiki/Libraries): define-library/import、インストール先と追加検索パスの規則、10標準ライブラリと未提供の6ライブラリ、初期化と継続。
+- [ライブラリとプログラムの環境](https://github.com/0x6d61/guri/wiki/Libraries): define-library/import、インストール先と追加検索パスの規則、14標準ライブラリと未提供の2ライブラリ、初期化と継続。
 
 - [Promiseと遅延評価](https://github.com/0x6d61/guri/wiki/Lazy-Evaluation): scheme lazyの5束縛、メモ化と再入、force時の動的環境、delay-forceの空間要件。
+
+- [環境、eval、loadとREPL](https://github.com/0x6d61/guri/wiki/Evaluation-REPL): datumの評価、変更禁止と対話用の環境、loadの規則と継続、内部REPLの入出力。

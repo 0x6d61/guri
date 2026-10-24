@@ -97,6 +97,7 @@ type globalUse struct {
 
 type Engine struct {
 	strict     bool
+	immutable  bool
 	uses       []globalUse
 	symbols    *scheme.SymbolTable
 	globals    []*binding
@@ -425,6 +426,9 @@ func (b *builder) expr(n *reader.Node, tail, top bool) error {
 		if bind.form != variable {
 			return syntax(args[0], "cannot assign a syntax binding")
 		}
+		if depth < 0 && b.engine.immutable {
+			return syntax(n, "cannot assign in an immutable environment")
+		}
 		if b.engine.strict && bind.imported {
 			return syntax(args[0], "cannot mutate an imported binding")
 		}
@@ -436,6 +440,9 @@ func (b *builder) expr(n *reader.Node, tail, top bool) error {
 		}
 		b.access(bind, depth, vm.SetLocal, vm.SetGlobal, pos)
 	case definition:
+		if top && b.engine.immutable {
+			return syntax(n, "cannot define in an immutable environment")
+		}
 		if !top {
 			return syntax(n, "definition outside a definition region")
 		}
@@ -459,6 +466,9 @@ func (b *builder) expr(n *reader.Node, tail, top bool) error {
 		}
 		b.access(bind, -1, vm.InitLocal, vm.InitGlobal, pos)
 	case defineSyntax:
+		if top && b.engine.immutable {
+			return syntax(n, "cannot define syntax in an immutable environment")
+		}
 		if !top {
 			return syntax(n, "syntax definition outside a definition region")
 		}

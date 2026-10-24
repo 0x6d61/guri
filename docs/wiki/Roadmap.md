@@ -118,3 +118,10 @@ scheme lazyの5束縛を内部Runtimeへ追加し、提供する標準ライブ�
 delay-forceの10万段の連鎖でVMフレーム数とGC後の保持メモリを検証しました。
 [Promiseの仕様](https://github.com/0x6d61/guri/wiki/Lazy-Evaluation)に構文と使用例を記載します。
 残る6ライブラリと公開CLIへの接続は#64/#65/#67です。
+
+## #64 環境を指定する評価と内部REPL
+
+scheme eval、load、repl、r5rsを内部Runtimeへ追加し、14ライブラリの549公開束縛を提供します。
+環境の不変性、対話環境の束縛の分離、evalの末尾位置と複数値、loadの逐次実行と継続再開、REPLのエラー回復を検証しています。
+[環境と評価の仕様](https://github.com/0x6d61/guri/wiki/Evaluation-REPL)にD07-Eの合意と使用例を記載します。
+公開CLIの切り替えは#67、残るprocess-contextとtimeは#65で行います。

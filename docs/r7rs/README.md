@@ -82,3 +82,7 @@ importとライブラリ初期化の要求、79ケースの内部実行と公開
 
 #63でPromiseの要求とscheme lazyの5束縛を追加しました。
 内部Runtimeの提供範囲は10ライブラリ・323公開束縛で、公開CLIの測定と未提供の6ライブラリを区別します。
+
+#64で環境指定子とdatumのeval、load、内部REPLを接続しました。
+内部Runtimeは14標準ライブラリの549公開束縛を提供し、残るprocess-contextとtimeは#65です。
+公開CLIの測定は従来の17 fail／62 failを維持し、内部Runtimeの成功と区別します。
