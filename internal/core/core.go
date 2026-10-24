@@ -132,6 +132,7 @@ func NewCore() *Engine {
 	e.installPairs()
 	e.installText()
 	e.installVectors()
+	e.installPorts()
 	e.primitives = append([]*binding(nil), e.globals...)
 	return e
 }

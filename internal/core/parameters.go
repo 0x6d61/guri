@@ -19,14 +19,17 @@ func (p *parameter) Call(c *vm.Context, args []scheme.Value) (vm.Action, error) 
 	if len(args) != 0 {
 		return vm.Action{}, vm.ErrArity
 	}
+	return vm.Return(p.value(c)), nil
+}
+func (p *parameter) value(c *vm.Context) scheme.Value {
 	for d := c.Dynamic(); d != nil; d = d.Parent() {
 		if values, ok := d.Payload().(parameterBindings); ok {
 			if v, found := values[p]; found {
-				return vm.Return(v), nil
+				return v
 			}
 		}
 	}
-	return vm.Return(p.initial), nil
+	return p.initial
 }
 func addParameter(old parameterBindings, p *parameter, value scheme.Value) parameterBindings {
 	values := parameterBindings{}
