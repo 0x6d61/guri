@@ -346,8 +346,10 @@ apply自身をapplyで呼び出す場合も、転送のためのスタックを�
 
 - [VectorとBytevector](https://github.com/0x6d61/guri/wiki/Vectors-Bytevectors): 内部VMの27手続き、固定長と浅いコピー、重複copy、UTF-8とコールバック継続。
 
-- [datum labelとグラフの読み書き](https://github.com/0x6d61/guri/wiki/Graph-IO): 内部Reader/Writerの共有・循環と3出力方式。標準read/writeのポート束縛は未接続。
+- [datum labelとグラフの読み書き](https://github.com/0x6d61/guri/wiki/Graph-IO): 内部Reader/Writerの共有・循環と3出力方式。標準read/writeのポート束縛も内部VMへ接続済み。
 
 - [Record型定義](https://github.com/0x6d61/guri/wiki/Records): 内部VMのdefine-record-typeと、生成するコンストラクタ・述語・取得／変更手続き。
 
 - [テキスト・バイナリポート](https://github.com/0x6d61/guri/wiki/Ports): 内部VMの38束縛、開閉と借用、文字／バイトの入出力、current portsと継続。datumのread/write、ファイルと公開CLIは後続。
+
+- [datumとファイルの入出力](https://github.com/0x6d61/guri/wiki/Datum-File-IO): 内部VMの13手続き、ストリームReader、write/display、ファイルの所有と継続。公開CLIとimportは後続。

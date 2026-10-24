@@ -123,3 +123,12 @@ datum labelの`#n=`と`#n#`による共有と循環は#58で接続しました�
 Unicode 15.0.0でCherokeeが大文字へfoldされる規則を、回帰テストで保持します。
 x/textの該当版の大文字86文字の誤変換を補正し、全スカラー値を公式CaseFolding.txtと照合しました。
 詳細と照合した版は[CharacterとString](https://github.com/0x6d61/guri/wiki/Characters-Strings)に記載します。
+
+## ポートからのストリーム入力
+
+#60で同じ字句・datum解析を位置付きのストリームへ接続しました。
+PeekRuneはポートの論理位置を進めず、ReadRuneはポートとReaderの位置を揃えて進めます。
+読取済みの文字履歴は1回のdatum解析ごとに破棄し、read-charなどと交互に使用できます。
+解析に失敗した場合も、既に消費した文字を巻き戻しません。
+規格ケース79件でソースReaderとストリームReaderの値と先頭位置を照合しています。
+Schemeのreadとエラーの契約は[datumとファイルの入出力](https://github.com/0x6d61/guri/wiki/Datum-File-IO)を参照してください。

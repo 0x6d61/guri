@@ -2,7 +2,7 @@
 
 このページは内部Reader、Writerとコンパイラへ接続したグラフの契約を説明します。
 公開CLIと公開Go APIは従来のGuriのままです。
-ポートを取るread、write、write-sharedとwrite-simpleの標準束縛は#60で接続する予定で、まだ内部NewCoreにも登録していません。
+ポートを取るread、write、write-sharedとwrite-simpleの標準束縛は#60で内部NewCoreへ接続済みです。
 本ページのScheme例は内部NewCoreで、Go例は内部パッケージのunitテストで検証します。
 参照先は[R7RS-small §2.4](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-4.html#TAG:__tex2page_sec_2.4)と[§6.13.3](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.13.3)です。
 
@@ -130,4 +130,6 @@ Stringは引用とエスケープを付け、非ASCIIのSymbolは縦線で囲み
 
 Reader、Writerとコンパイラで、共有、循環、スコープと診断、マクロのellipsisを検証します。
 Writerでは10万要素のリストと50通りの有限グラフを往復し、Sharedの内容と同一性を確認します。
-既存の公開CLIの適合測定と内部のunitテストは区別し、read/writeの標準束縛とポート連携は#59/#60に残します。
+既存の公開CLIの適合測定と内部のunitテストは区別し、read/writeの標準束縛とポート連携は#59/#60で内部VMへ接続しました。
+
+ストリーム入力、displayとファイル操作は[datumとファイルの入出力](https://github.com/0x6d61/guri/wiki/Datum-File-IO)を参照してください。

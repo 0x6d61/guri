@@ -90,5 +90,14 @@ apply経由でも同じ最適化を適用します。
 テキスト／バイナリのメモリポート、文字／バイトの入出力とcurrent portsの38束縛を内部VMへ接続しました。
 Go資源の借用と所有、closeとflush、EOF、継続による脱出と再入をunitテストで検証しています。
 詳細は[ポートの仕様と関数一覧](https://github.com/0x6d61/guri/wiki/Ports)を参照してください。
-datumのread/writeとファイルを開く操作は#60、importと公開CLIの切替は#61/#67です。
+datumのread/writeとファイルを開く操作は#60で接続しました。
+importと公開CLIの切替は#61/#67です。
 公開CLIの適合性測定は従来の17 fail／62 failのままで、全体の準拠完了を示しません。
+
+## #60 datumとファイル入出力
+
+read/write/displayとファイル操作の13手続きを内部VMへ追加しました。
+ストリームと文字入力の混在、ラベル、EOF、例外と継続、ファイルの正常closeを検証しています。
+D07-FのOSパス・UTF-8・既存出力の切り詰めはユーザー承認済みです。
+詳細は[datumとファイルの入出力](https://github.com/0x6d61/guri/wiki/Datum-File-IO)に記載します。
+標準ライブラリのimportと公開CLIへの接続は#61/#67へ残します。

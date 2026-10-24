@@ -197,3 +197,15 @@ func TestFiniteGraphRoundTrips(t *testing.T) {
 		}
 	}
 }
+
+func TestDisplayGraphsAndAtoms(t *testing.T) {
+	for src, want := range map[string]string{
+		`("猫\n" #\space |a b|)`: "(猫\n   a b)",
+		`#0=("x" . #0#)`:        `#0=(x . #0#)`,
+		`#0=#("x" #0#)`:         `#0=#(x #0#)`,
+	} {
+		if got := encode(t, datum(t, src), writer.Display); got != want {
+			t.Error(src, got, want)
+		}
+	}
+}

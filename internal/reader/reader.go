@@ -36,7 +36,17 @@ func (e *Error) Error() string {
 }
 func (e *Error) Unwrap() error { return e.Cause }
 
+// Stream provides position-preserving lookahead. PeekRune never consumes a
+// character, so clients can alternate datum reads with character reads.
+type Stream interface {
+	PeekRune(int) (rune, error)
+	ReadRune() (rune, int, error)
+	Position() scheme.Source
+}
+
 type Reader struct {
+	stream    Stream
+	streamErr error
 	input     []rune
 	offset    int
 	position  scheme.Source
@@ -64,6 +74,13 @@ func New(filename, source string, symbols *scheme.SymbolTable) (*Reader, error) 
 	r.input = []rune(source)
 	return r, nil
 }
+func NewStream(stream Stream, symbols *scheme.SymbolTable) *Reader {
+	if symbols == nil {
+		symbols = scheme.NewSymbolTable()
+	}
+	return &Reader{stream: stream, symbols: symbols, position: stream.Position()}
+}
+func (r *Reader) FoldCase() bool { return r.foldCase }
 func invalidUTF8Offset(source string) int {
 	for i := 0; i < len(source); {
 		c, size := utf8.DecodeRuneInString(source[i:])
@@ -95,7 +112,19 @@ func ReadAll(filename, source string, symbols *scheme.SymbolTable) ([]*Node, err
 
 // SetFoldCase sets the initial/current directive state without shifting source positions.
 func (r *Reader) SetFoldCase(fold bool) { r.foldCase = fold }
-func (r *Reader) Read() (*Node, error) {
+func (r *Reader) Read() (result *Node, err error) {
+	if r.stream != nil {
+		r.input = nil
+		r.offset = 0
+		r.streamErr = nil
+		r.position = r.stream.Position()
+		defer func() {
+			if r.streamErr != nil {
+				result = nil
+				err = &Error{Position: r.position, Message: r.streamErr.Error(), Cause: r.streamErr}
+			}
+		}()
+	}
 	r.labels = map[string]*Node{}
 	r.discarded = nil
 	if err := r.space(); err != nil {
@@ -117,17 +146,32 @@ func (r *Reader) Read() (*Node, error) {
 	return n, nil
 }
 
-func (r *Reader) done() bool { return r.offset == len(r.input) }
-func (r *Reader) peek() rune {
-	if r.done() {
-		return 0
+func (r *Reader) peekAt(offset int) (rune, bool) {
+	if r.stream == nil {
+		if offset >= len(r.input) {
+			return 0, false
+		}
+		return r.input[offset], true
 	}
-	return r.input[r.offset]
+	if r.streamErr != nil {
+		return 0, false
+	}
+	c, err := r.stream.PeekRune(offset - r.offset)
+	if err != nil {
+		if !errors.Is(err, io.EOF) {
+			r.streamErr = err
+		}
+		return 0, false
+	}
+	return c, true
 }
+func (r *Reader) done() bool { _, ok := r.peekAt(r.offset); return !ok }
+func (r *Reader) peek() rune { c, _ := r.peekAt(r.offset); return c }
 func (r *Reader) has(prefix string) bool {
 	offset := r.offset
 	for _, c := range prefix {
-		if offset >= len(r.input) || r.input[offset] != c {
+		actual, ok := r.peekAt(offset)
+		if !ok || actual != c {
 			return false
 		}
 		offset++
@@ -135,6 +179,17 @@ func (r *Reader) has(prefix string) bool {
 	return true
 }
 func (r *Reader) advance() rune {
+	if r.stream != nil {
+		c, _, err := r.stream.ReadRune()
+		if err != nil {
+			r.streamErr = err
+			return 0
+		}
+		r.input = append(r.input, c)
+		r.offset++
+		r.position = r.stream.Position()
+		return c
+	}
 	c := r.input[r.offset]
 	r.offset++
 	switch c {
@@ -279,7 +334,7 @@ func (r *Reader) datum() (*Node, error) {
 		}
 		return r.atom(value, pos), nil
 	case '#':
-		if r.offset+1 < len(r.input) && r.input[r.offset+1] >= '0' && r.input[r.offset+1] <= '9' {
+		if next, ok := r.peekAt(r.offset + 1); ok && next >= '0' && next <= '9' {
 			return r.label(pos)
 		}
 		switch {
@@ -320,6 +375,14 @@ func (r *Reader) datum() (*Node, error) {
 	return r.atom(r.symbols.Intern(text), pos), nil
 }
 
+func (r *Reader) dottedTail() bool {
+	if r.peek() != '.' {
+		return false
+	}
+	next, exists := r.peekAt(r.offset + 1)
+	return !exists || delimiter(next)
+}
+
 func (r *Reader) sequence(pos scheme.Source, kind string) (*Node, error) {
 	var elements []*Node
 	var tail *Node
@@ -338,7 +401,7 @@ func (r *Reader) sequence(pos scheme.Source, kind string) (*Node, error) {
 			}
 			break
 		}
-		if r.peek() == '.' && (r.offset+1 == len(r.input) || delimiter(r.input[r.offset+1])) {
+		if r.dottedTail() {
 			if kind != "list" || len(elements) == 0 || tail != nil {
 				return r.fail(r.position, "invalid dotted tail")
 			}

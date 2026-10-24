@@ -43,13 +43,17 @@ type Machine struct {
 func New() *Machine             { return &Machine{} }
 func (m *Machine) Stats() Stats { return m.stats }
 
-type Context struct{ m *Machine }
+type Context struct {
+	m       *Machine
+	context context.Context
+}
 
 func (c *Context) Capture() *scheme.Procedure {
 	return scheme.NewProcedure(&continuation{owner: c.m, frames: copyFrames(c.m.frames), dynamic: c.m.dynamic})
 }
-func (c *Context) Source() scheme.Source { return c.m.source }
-func (c *Context) Dynamic() *Dynamic     { return c.m.dynamic }
+func (c *Context) Context() context.Context { return c.context }
+func (c *Context) Source() scheme.Source    { return c.m.source }
+func (c *Context) Dynamic() *Dynamic        { return c.m.dynamic }
 func (m *Machine) push(f frame) {
 	m.frames = append(m.frames, f)
 	if len(m.frames) > m.stats.PeakFrames {
@@ -79,7 +83,7 @@ func (m *Machine) Run(ctx context.Context, p *scheme.Procedure, args ...scheme.V
 			}
 		}
 	}()
-	c := &Context{m: m}
+	c := &Context{m: m, context: ctx}
 	a := Invoke(p, args, nil)
 	pending := true
 	for {

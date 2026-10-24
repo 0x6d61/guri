@@ -172,7 +172,7 @@ Reader、評価器と標準手続きへは後続Issueで接続するため、現
 標準のリテラル、識別子、コメント、数値変換と各位置のメタデータをunitテストで確認します。
 独自作成17件とChibi由来62件を構文として読み切れますが、現行CLIの評価器には未接続です。
 datum labelの共有と循環は#58で内部ReaderとWriterへ接続しました。
-標準read/writeのポート束縛は#60に残します。
+標準read/writeのポート束縛は#60で内部VMへ接続済みです。
 
 ## 実装順序と共有契約
 
@@ -254,3 +254,12 @@ Schemeのclose-portはポートを閉じ、必要なflushを行いますが、�
 実装済みの内部機構と公開CLIの適合結果を引き続き区別します。
 
 - [テキスト・バイナリポート](https://github.com/0x6d61/guri/wiki/Ports): 内部VMの38束縛、開閉と借用、文字／バイトの入出力、current portsと継続。datumのread/write、ファイルと公開CLIは後続。
+
+- [datumとファイルの入出力](https://github.com/0x6d61/guri/wiki/Datum-File-IO): 内部VMの13手続き、ストリームReader、write/display、ファイルの所有と継続。公開CLIとimportは後続。
+
+## D07-F ファイル入出力の規則
+
+2026-10-24に、OSパス、相対パスは実行時cwd基準、テキストUTF-8、既存出力ファイルの切り詰めをユーザーが承認しました。
+#60で内部VMへ実装し、read-error?とfile-error?、所有ファイルの正常close、継続による脱出と再入を検証しています。
+この合意はloadやライブラリ探索の規則を確定するものではありません。
+公開CLIの適合性測定は従来どおり17 fail／62 failで、内部実装と区別します。

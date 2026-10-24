@@ -27,8 +27,9 @@ var (
 // Memory and file adapters supply it; other stream adapters must supply a probe
 // to support ready? without starting background reads on borrowed resources.
 type Options struct {
-	Owned io.Closer
-	Ready func() (bool, error)
+	Owned    io.Closer
+	Ready    func() (bool, error)
+	Filename string
 }
 
 type Resource struct {
@@ -39,6 +40,9 @@ type Resource struct {
 	buffer         []byte
 	pending        error
 	memory         *bytes.Buffer
+	position       scheme.Source
+	afterCR        bool
+	foldCase       bool
 }
 
 func (*Resource) PortResource() {}
@@ -46,7 +50,11 @@ func Input(r io.Reader, binary bool, options Options) *Resource {
 	if r == nil {
 		panic("ports: nil reader")
 	}
-	return &Resource{reader: r, binary: binary, options: options}
+	filename := options.Filename
+	if filename == "" {
+		filename = "<input-port>"
+	}
+	return &Resource{reader: r, binary: binary, options: options, position: scheme.Source{Filename: filename, Line: 1, Column: 1}}
 }
 func Output(w io.Writer, binary bool, options Options) *Resource {
 	if w == nil {
@@ -55,7 +63,7 @@ func Output(w io.Writer, binary bool, options Options) *Resource {
 	return &Resource{writer: w, binary: binary, options: options}
 }
 func InputString(s string) *Resource {
-	return Input(strings.NewReader(s), false, Options{Ready: func() (bool, error) { return true, nil }})
+	return Input(strings.NewReader(s), false, Options{Filename: "<string-port>", Ready: func() (bool, error) { return true, nil }})
 }
 func InputBytes(b []byte) *Resource {
 	return Input(bytes.NewReader(bytes.Clone(b)), true, Options{Ready: func() (bool, error) { return true, nil }})
@@ -157,28 +165,73 @@ func (p *Resource) ReadU8(peek bool) (byte, error) {
 	}
 	return b, nil
 }
-func (p *Resource) ReadChar(peek bool) (rune, error) {
+
+// PeekRune supports bounded lexical lookahead without advancing the logical
+// stream position. Shared read-char and datum readers use the same buffer.
+func (p *Resource) PeekRune(index int) (rune, error) {
 	if err := p.check(true, false); err != nil {
 		return 0, err
 	}
-	for !utf8.FullRune(p.buffer) {
-		err := p.fill()
-		if err != nil {
-			if errors.Is(err, io.EOF) && len(p.buffer) > 0 {
-				return 0, ErrEncoding
-			}
-			return 0, err
-		}
+	if index < 0 {
+		return 0, scheme.ErrIndex
 	}
-	r, n := utf8.DecodeRune(p.buffer)
-	if r == utf8.RuneError && n == 1 {
-		return 0, ErrEncoding
+	at := 0
+	for i := 0; i <= index; i++ {
+		for !utf8.FullRune(p.buffer[at:]) {
+			err := p.fill()
+			if err != nil {
+				if errors.Is(err, io.EOF) && len(p.buffer) > at {
+					return 0, ErrEncoding
+				}
+				return 0, err
+			}
+		}
+		r, n := utf8.DecodeRune(p.buffer[at:])
+		if r == utf8.RuneError && n == 1 {
+			return 0, ErrEncoding
+		}
+		if i == index {
+			return r, nil
+		}
+		at += n
+	}
+	panic("ports: unreachable rune offset")
+}
+func (p *Resource) ReadChar(peek bool) (rune, error) {
+	r, err := p.PeekRune(0)
+	if err != nil {
+		return 0, err
 	}
 	if !peek {
-		p.buffer = p.buffer[n:]
+		p.buffer = p.buffer[utf8.RuneLen(r):]
+		switch r {
+		case '\r':
+			p.position.Line++
+			p.position.Column = 1
+			p.afterCR = true
+		case '\n':
+			if !p.afterCR {
+				p.position.Line++
+			}
+			p.position.Column = 1
+			p.afterCR = false
+		default:
+			p.position.Column++
+			p.afterCR = false
+		}
 	}
 	return r, nil
 }
+func (p *Resource) ReadRune() (rune, int, error) {
+	r, err := p.ReadChar(false)
+	if err != nil {
+		return 0, 0, err
+	}
+	return r, utf8.RuneLen(r), nil
+}
+func (p *Resource) Position() scheme.Source { return p.position }
+func (p *Resource) FoldCase() bool          { return p.foldCase }
+func (p *Resource) SetFoldCase(fold bool)   { p.foldCase = fold }
 func (p *Resource) Ready() (bool, error) {
 	if p.closed {
 		return false, ErrClosed

@@ -18,6 +18,7 @@ const (
 	Normal Mode = iota
 	Shared
 	Simple
+	Display
 )
 
 type task struct {
@@ -27,7 +28,7 @@ type task struct {
 }
 
 func Write(ctx context.Context, out io.Writer, value scheme.Value, mode Mode) error {
-	if mode > Simple {
+	if mode > Display {
 		return scheme.ErrRange
 	}
 	graph, err := analyze(ctx, value)
@@ -38,7 +39,7 @@ func Write(ctx context.Context, out io.Writer, value scheme.Value, mode Mode) er
 	next := 0
 	labelled := func(v scheme.Value) bool {
 		info := graph[v]
-		return info != nil && (mode == Shared && info.refs > 1 || mode == Normal && info.cyclic)
+		return info != nil && (mode == Shared && info.refs > 1 || (mode == Normal || mode == Display) && info.cyclic)
 	}
 	emit := func(text string) error {
 		n, err := io.WriteString(out, text)
@@ -107,6 +108,16 @@ func Write(ctx context.Context, out io.Writer, value scheme.Value, mode Mode) er
 			}
 		default:
 			text, err := atomic(v)
+			if mode == Display {
+				switch atom := v.(type) {
+				case *scheme.String:
+					text = atom.Text()
+				case scheme.Character:
+					text = string(atom.Rune())
+				case *scheme.Symbol:
+					text = atom.Name()
+				}
+			}
 			if err != nil {
 				return err
 			}
