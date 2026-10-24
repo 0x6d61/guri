@@ -292,9 +292,6 @@ func TestDatumIOWikiExamplesAndBindings(t *testing.T) {
 			if row[1] == name {
 				found = true
 				expectedStatus := "内部Runtimeのimport実装済み・公開CLI未接続"
-				if row[0] == "(scheme r5rs)" {
-					expectedStatus = "内部束縛実装済み・ライブラリ未提供"
-				}
 				if row[3] != "60" || row[5] != expectedStatus {
 					t.Error("stale export", row)
 				}

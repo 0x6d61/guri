@@ -24,16 +24,19 @@ type library struct {
 // library cells, primitive parameters and the continuation-owning VM are shared.
 // The root Go API and command-line interpreter are migrated separately.
 type Runtime struct {
-	bootstrap *Engine
-	modules   map[string]*library
-	standard  map[string]bool
-	paths     []string
-	context   context.Context
-	running   bool
+	bootstrap        *Engine
+	interaction      *evaluationEnvironment
+	interactionValue *scheme.Record
+	modules          map[string]*library
+	standard         map[string]bool
+	paths            []string
+	context          context.Context
+	running          bool
 }
 
 func NewRuntime(paths ...string) *Runtime {
 	r := &Runtime{bootstrap: NewCore(), modules: map[string]*library{}, standard: map[string]bool{}, paths: configuredLibraryPaths(paths)}
+	r.installEvaluation()
 	for name, names := range standardLibraryNames {
 		ns, err := reader.ReadAll("<standard-libraries>", name, r.bootstrap.symbols)
 		if err != nil {
@@ -138,6 +141,9 @@ func (r *Runtime) imported(ctx context.Context, n *reader.Node) (libraryExports,
 	return l.exports, l, nil
 }
 func (r *Runtime) applyImports(ctx context.Context, e *Engine, n *reader.Node) ([]*library, error) {
+	if err := (&builder{engine: e, ctx: ctx}).checkGraph(n, false); err != nil {
+		return nil, err
+	}
 	xs, err := nodes(n)
 	if err != nil {
 		return nil, err
@@ -261,15 +267,7 @@ func (r *Runtime) Run(ctx context.Context, filename, source string) (result sche
 	defer func() {
 		r.running = false
 		r.context = nil
-		for _, l := range r.modules {
-			if l.initializing {
-				l.initializing = false
-				l.err = err
-				if l.err == nil {
-					l.err = fmt.Errorf("library initializer escaped before returning")
-				}
-			}
-		}
+		r.finishInitializers(err)
 	}()
 	ns, err := reader.ReadAll(filename, source, r.bootstrap.symbols)
 	if err != nil {
@@ -293,22 +291,7 @@ func (r *Runtime) Run(ctx context.Context, filename, source string) (result sche
 	if err != nil {
 		return result, err
 	}
-	var order []*library
-	visited := map[*library]bool{}
-	var visit func(*library)
-	visit = func(l *library) {
-		if visited[l] {
-			return
-		}
-		visited[l] = true
-		for _, d := range l.dependencies {
-			visit(d)
-		}
-		order = append(order, l)
-	}
-	for _, l := range dependencies {
-		visit(l)
-	}
+	order := dependencyOrder(dependencies)
 	main := vm.Closure(code)
 	entry := vm.Native("initialize-libraries", 0, 0, func(c *vm.Context, _ []scheme.Value) (vm.Action, error) {
 		return initializeLibraries(c, order, 0, main)
@@ -324,6 +307,9 @@ func initializeLibraries(c *vm.Context, order []*library, index int, main *schem
 		if l.initialized {
 			index++
 			continue
+		}
+		if l.initializing {
+			return pairFailure(c, "library initialization", nil, fmt.Errorf("recursive library initialization"))
 		}
 		l.initializing = true
 		next := index + 1
