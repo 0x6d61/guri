@@ -19,7 +19,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),assq,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),assv,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),begin,4.1,48,必須,未実装,,
-(scheme base),binary-port?,6.13.1,59,必須,未実装,,
+(scheme base),binary-port?,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),boolean=?,6.3,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),boolean?,6.3,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),bytevector,6.9,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
@@ -33,7 +33,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),caar,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),cadr,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),call-with-current-continuation,6.10,51,必須,未実装,,
-(scheme base),call-with-port,6.13,60,必須,未実装,,
+(scheme base),call-with-port,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),call-with-values,6.10,51,必須,未実装,,
 (scheme base),call/cc,6.10,51,必須,未実装,,
 (scheme base),car,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
@@ -43,23 +43,23 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),cdr,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),ceiling,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),char->integer,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
-(scheme base),char-ready?,6.13,60,必須,未実装,,
+(scheme base),char-ready?,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),char<=?,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),char<?,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),char=?,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),char>=?,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),char>?,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),char?,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
-(scheme base),close-input-port,6.13.1,59,必須,未実装,,
-(scheme base),close-output-port,6.13.1,59,必須,未実装,,
-(scheme base),close-port,6.13.1,59,必須,未実装,,
+(scheme base),close-input-port,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),close-output-port,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),close-port,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),complex?,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),cond,4.2,50,必須,差分あり,eval.go,
 (scheme base),cond-expand,5.6,61,必須,未実装,,
 (scheme base),cons,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
-(scheme base),current-error-port,6.13.1,59,必須,未実装,,
-(scheme base),current-input-port,6.13.1,59,必須,未実装,,
-(scheme base),current-output-port,6.13.1,59,必須,未実装,,
+(scheme base),current-error-port,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),current-input-port,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),current-output-port,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),define,4.1,48,必須,未実装,,
 (scheme base),define-record-type,5.5,62,必須,内部VM実装済み・import未接続,,internal/core: TestRecordDefinitionsAndFields;TestRecordTypeIdentityAndHygiene;TestRecordSyntaxErrors;TestRecordWikiExamples
 (scheme base),define-syntax,4.3,49,必須,未実装,,
@@ -68,8 +68,8 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),do,4.2,50,必須,差分あり,eval.go,
 (scheme base),dynamic-wind,6.10,52,必須,未実装,,
 (scheme base),else,4.2,50,必須,未実装,,
-(scheme base),eof-object,6.13.1,59,必須,未実装,,
-(scheme base),eof-object?,6.13.1,59,必須,未実装,,
+(scheme base),eof-object,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),eof-object?,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),eq?,6.1,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),equal?,6.1,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),eqv?,6.1,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
@@ -89,19 +89,19 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),floor-quotient,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),floor-remainder,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),floor/,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme base),flush-output-port,6.13,60,必須,未実装,,
+(scheme base),flush-output-port,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),for-each,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),gcd,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme base),get-output-bytevector,6.13.1,59,必須,未実装,,
-(scheme base),get-output-string,6.13.1,59,必須,未実装,,
+(scheme base),get-output-bytevector,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),get-output-string,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),guard,6.11,53,必須,未実装,,
 (scheme base),if,4.1,48,必須,差分あり,eval.go,
 (scheme base),include,5.6,61,必須,未実装,,
 (scheme base),include-ci,5.6,61,必須,未実装,,
 (scheme base),inexact,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),inexact?,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme base),input-port-open?,6.13.1,59,必須,未実装,,
-(scheme base),input-port?,6.13.1,59,必須,未実装,,
+(scheme base),input-port-open?,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),input-port?,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),integer->char,6.6,56,必須,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme base),integer?,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),lambda,4.1,48,必須,未実装,,
@@ -136,25 +136,25 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),min,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),modulo,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),negative?,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme base),newline,6.13,60,必須,未実装,,
+(scheme base),newline,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),not,6.3,55,必須,内部VM実装済み・import未接続,numeric.go,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),null?,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),number->string,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),number?,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),numerator,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),odd?,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme base),open-input-bytevector,6.13.1,59,必須,未実装,,
-(scheme base),open-input-string,6.13.1,59,必須,未実装,,
-(scheme base),open-output-bytevector,6.13.1,59,必須,未実装,,
-(scheme base),open-output-string,6.13.1,59,必須,未実装,,
+(scheme base),open-input-bytevector,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),open-input-string,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),open-output-bytevector,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),open-output-string,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),or,4.2,50,必須,差分あり,eval.go,
-(scheme base),output-port-open?,6.13.1,59,必須,未実装,,
-(scheme base),output-port?,6.13.1,59,必須,未実装,,
+(scheme base),output-port-open?,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),output-port?,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),pair?,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),parameterize,4.2.6,53,必須,未実装,,
-(scheme base),peek-char,6.13,60,必須,未実装,,
-(scheme base),peek-u8,6.13,60,必須,未実装,,
-(scheme base),port?,6.13.1,59,必須,未実装,,
+(scheme base),peek-char,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),peek-u8,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),port?,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),positive?,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),procedure?,6.10,51,必須,未実装,,
 (scheme base),quasiquote,4.2,50,必須,未実装,,
@@ -164,13 +164,13 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),raise-continuable,6.11,53,必須,未実装,,
 (scheme base),rational?,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),rationalize,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme base),read-bytevector,6.13,60,必須,未実装,,
-(scheme base),read-bytevector!,6.13,60,必須,未実装,,
-(scheme base),read-char,6.13,60,必須,未実装,,
+(scheme base),read-bytevector,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),read-bytevector!,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),read-char,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),read-error?,6.11,53,必須,未実装,,
-(scheme base),read-line,6.13,60,必須,未実装,,
-(scheme base),read-string,6.13,60,必須,未実装,,
-(scheme base),read-u8,6.13,60,必須,未実装,,
+(scheme base),read-line,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),read-string,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),read-u8,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),real?,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),remainder,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),reverse,6.4,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
@@ -206,12 +206,12 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),symbol?,6.5,55,必須,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme base),syntax-error,4.3,49,必須,未実装,,
 (scheme base),syntax-rules,4.3,49,必須,未実装,,
-(scheme base),textual-port?,6.13.1,59,必須,未実装,,
+(scheme base),textual-port?,6.13.1,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),truncate,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),truncate-quotient,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),truncate-remainder,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme base),truncate/,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme base),u8-ready?,6.13,60,必須,未実装,,
+(scheme base),u8-ready?,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),unless,4.2,50,必須,未実装,,
 (scheme base),unquote,4.2,50,必須,未実装,,
 (scheme base),unquote-splicing,4.2,50,必須,未実装,,
@@ -232,10 +232,10 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),vector?,6.8,57,必須,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
 (scheme base),when,4.2,50,必須,未実装,,
 (scheme base),with-exception-handler,6.11,53,必須,未実装,,
-(scheme base),write-bytevector,6.13,60,必須,未実装,,
-(scheme base),write-char,6.13,60,必須,未実装,,
-(scheme base),write-string,6.13,60,必須,未実装,,
-(scheme base),write-u8,6.13,60,必須,未実装,,
+(scheme base),write-bytevector,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),write-char,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),write-string,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme base),write-u8,6.13,59,必須,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme base),zero?,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme case-lambda),case-lambda,4.2.9,50,任意ライブラリ採用時に必要,未実装,,
 (scheme char),char-alphabetic?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
@@ -405,7 +405,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),char-downcase,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme r5rs),char-lower-case?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme r5rs),char-numeric?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
-(scheme r5rs),char-ready?,6.13,60,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),char-ready?,6.13,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme r5rs),char-upcase,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme r5rs),char-upper-case?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme r5rs),char-whitespace?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
@@ -415,14 +415,14 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),char>=?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme r5rs),char>?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme r5rs),char?,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
-(scheme r5rs),close-input-port,6.13.1,59,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),close-output-port,6.13.1,59,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),close-input-port,6.13.1,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme r5rs),close-output-port,6.13.1,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme r5rs),complex?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),cond,4.2,50,任意ライブラリ採用時に必要,差分あり,eval.go,
 (scheme r5rs),cons,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),cos,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme r5rs),current-input-port,6.13.1,59,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),current-output-port,6.13.1,59,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),current-input-port,6.13.1,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
+(scheme r5rs),current-output-port,6.13.1,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme r5rs),define,4.1,48,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),define-syntax,4.3,49,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),delay,4.2.5,63,任意ライブラリ採用時に必要,未実装,,
@@ -431,7 +431,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),do,4.2,50,任意ライブラリ採用時に必要,差分あり,eval.go,
 (scheme r5rs),dynamic-wind,6.10,52,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),else,4.2,50,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),eof-object?,6.13.1,59,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),eof-object?,6.13.1,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme r5rs),eq?,6.1,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),equal?,6.1,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),eqv?,6.1,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
@@ -449,7 +449,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),imag-part,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),inexact->exact,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),inexact?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme r5rs),input-port?,6.13.1,59,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),input-port?,6.13.1,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme r5rs),integer->char,6.6,56,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestCharactersAndUnicodeCasing;TestStringsMutationRangesAndCopies;TestStringCallbackContinuationsAndDynamicScope;TestTextWikiExamplesAndBindings
 (scheme r5rs),integer?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),interaction-environment,6.12,64,任意ライブラリ採用時に必要,未実装,,
@@ -482,7 +482,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),min,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),modulo,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),negative?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme r5rs),newline,6.13,60,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),newline,6.13,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme r5rs),not,6.3,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,numeric.go,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),null-environment,6.12,64,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),null?,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
@@ -493,9 +493,9 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),open-input-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),open-output-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),or,4.2,50,任意ライブラリ採用時に必要,差分あり,eval.go,
-(scheme r5rs),output-port?,6.13.1,59,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),output-port?,6.13.1,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme r5rs),pair?,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
-(scheme r5rs),peek-char,6.13,60,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),peek-char,6.13,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme r5rs),positive?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),procedure?,6.10,51,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),quasiquote,4.2,50,任意ライブラリ採用時に必要,未実装,,
@@ -504,7 +504,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),rational?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),rationalize,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),read,6.13,60,任意ライブラリ採用時に必要,内部機構実装・標準ポート束縛未接続,,internal/reader: TestDatumLabelsShareAndCycle; internal/writer: TestGraphWritingModesAndRoundTrips;ExampleWrite。標準手続きの接続は#60
-(scheme r5rs),read-char,6.13,60,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),read-char,6.13,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme r5rs),real-part,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),real?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),remainder,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
@@ -554,5 +554,5 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),with-input-from-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),with-output-to-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),write,6.13,60,任意ライブラリ採用時に必要,内部機構実装・標準ポート束縛未接続,,internal/reader: TestDatumLabelsShareAndCycle; internal/writer: TestGraphWritingModesAndRoundTrips;ExampleWrite。標準手続きの接続は#60
-(scheme r5rs),write-char,6.13,60,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),write-char,6.13,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme r5rs),zero?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
