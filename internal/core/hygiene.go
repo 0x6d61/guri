@@ -145,6 +145,9 @@ func (b *builder) localTransformers(n *reader.Node, args []*reader.Node, recursi
 }
 func (b *builder) expandHead(n *reader.Node) (*reader.Node, error) {
 	for {
+		if err := b.checkGraph(n, true); err != nil {
+			return nil, err
+		}
 		if b.ctx == nil {
 			b.ctx = context.Background()
 		}
@@ -200,7 +203,12 @@ func list(xs []*reader.Node, tail *reader.Node, pos scheme.Source) *reader.Node 
 // source structure, including all remaining elements, without rebuilding it.
 func split(n *reader.Node) (xs, tails []*reader.Node) {
 	tails = append(tails, n)
+	seen := map[scheme.Value]bool{}
 	for n.Datum().Kind() == scheme.KindPair && n.Car != nil && n.Cdr != nil {
+		if seen[n.Datum()] {
+			break
+		}
+		seen[n.Datum()] = true
 		xs = append(xs, n.Car)
 		n = n.Cdr
 		tails = append(tails, n)

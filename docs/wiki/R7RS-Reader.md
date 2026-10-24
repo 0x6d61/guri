@@ -111,9 +111,10 @@ fmt.Println(nodes[1].Datum().(*scheme.Rational).String())
 この検査は構文の読み取りであり、プログラムの実行成功とは別です。
 現行CLIによる79件の結合測定は、引き続き未対応のfailとして保持します。
 
-datum labelの`#n=`と`#n#`による共有と循環は#58の作業です。
-現在はErrDatumLabelsを原因として返し、Symbolや別の値に置き換えません。
-datum comment内のlabelも、同じ未対応範囲に含みます。
+datum labelの`#n=`と`#n#`による共有と循環は#58で接続しました。
+未定義と前方参照、対象のない自己参照を診断し、Readごとの範囲とコメントからの定義の分離を検証します。
+参照先を決めてから既存の可変オブジェクトへ辺を接続し、参照位置も保持します。
+詳細は[datum labelとグラフの読み書き](https://github.com/0x6d61/guri/wiki/Graph-IO)を参照してください。
 このReaderをR7RS全体の準拠完了として扱いません。
 
 ## 文字手続きとのfoldingの共有

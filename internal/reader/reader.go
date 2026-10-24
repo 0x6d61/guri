@@ -19,12 +19,11 @@ type Node struct {
 	Syntax   scheme.Syntax
 	Car, Cdr *Node
 	Elements []*Node
+	alias    *Node
 }
 
 func (n *Node) Datum() scheme.Value   { return n.Syntax.Datum() }
 func (n *Node) Source() scheme.Source { return n.Syntax.Source() }
-
-var ErrDatumLabels = errors.New("datum labels require the graph reader (#58)")
 
 type Error struct {
 	Position scheme.Source
@@ -38,12 +37,14 @@ func (e *Error) Error() string {
 func (e *Error) Unwrap() error { return e.Cause }
 
 type Reader struct {
-	input    []rune
-	offset   int
-	position scheme.Source
-	afterCR  bool
-	symbols  *scheme.SymbolTable
-	foldCase bool
+	input     []rune
+	offset    int
+	position  scheme.Source
+	afterCR   bool
+	symbols   *scheme.SymbolTable
+	foldCase  bool
+	labels    map[string]*Node
+	discarded []*Node
 }
 
 func New(filename, source string, symbols *scheme.SymbolTable) (*Reader, error) {
@@ -95,14 +96,27 @@ func ReadAll(filename, source string, symbols *scheme.SymbolTable) ([]*Node, err
 // SetFoldCase sets the initial/current directive state without shifting source positions.
 func (r *Reader) SetFoldCase(fold bool) { r.foldCase = fold }
 func (r *Reader) Read() (*Node, error) {
+	r.labels = map[string]*Node{}
+	r.discarded = nil
 	if err := r.space(); err != nil {
 		return nil, err
 	}
 	if r.done() {
+		if err := r.resolveGraphs(r.discarded); err != nil {
+			return nil, err
+		}
 		return nil, io.EOF
 	}
-	return r.datum()
+	n, err := r.datum()
+	if err != nil {
+		return nil, err
+	}
+	if err := r.resolveGraphs(append(r.discarded, n)); err != nil {
+		return nil, err
+	}
+	return n, nil
 }
+
 func (r *Reader) done() bool { return r.offset == len(r.input) }
 func (r *Reader) peek() rune {
 	if r.done() {
@@ -191,9 +205,17 @@ func (r *Reader) space() error {
 		case r.has("#;"):
 			r.advance()
 			r.advance()
-			if _, err := r.datum(); err != nil {
+			outer := r.labels
+			r.labels = make(map[string]*Node, len(outer))
+			for key, value := range outer {
+				r.labels[key] = value
+			}
+			ignored, err := r.datum()
+			r.labels = outer
+			if err != nil {
 				return err
 			}
+			r.discarded = append(r.discarded, ignored)
 		case r.has("#!"):
 			pos := r.position
 			directive := strings.ToLower(r.token())
@@ -257,6 +279,9 @@ func (r *Reader) datum() (*Node, error) {
 		}
 		return r.atom(value, pos), nil
 	case '#':
+		if r.offset+1 < len(r.input) && r.input[r.offset+1] >= '0' && r.input[r.offset+1] <= '9' {
+			return r.label(pos)
+		}
 		switch {
 		case r.has("#("):
 			r.advance()
@@ -281,9 +306,7 @@ func (r *Reader) datum() (*Node, error) {
 	case "#f", "#false":
 		return r.atom(scheme.False, pos), nil
 	}
-	if strings.HasPrefix(text, "#") && len(text) > 1 && text[1] >= '0' && text[1] <= '9' {
-		return nil, &Error{Position: pos, Message: ErrDatumLabels.Error(), Cause: ErrDatumLabels}
-	}
+
 	number, numberErr := scheme.ParseNumber(text)
 	if numberErr == nil {
 		return r.atom(number, pos), nil
@@ -363,17 +386,6 @@ func (r *Reader) sequence(pos scheme.Source, kind string) (*Node, error) {
 		return node, nil
 	case "bytevector":
 		bytes := make([]byte, len(elements))
-		for i, e := range elements {
-			integer, ok := e.Datum().(*scheme.Integer)
-			if !ok {
-				return r.fail(e.Source(), "bytevector needs exact u8 integers")
-			}
-			n := integer.BigInt()
-			if !n.IsInt64() || n.Sign() < 0 || n.Int64() > 255 {
-				return r.fail(e.Source(), "bytevector value outside 0..255")
-			}
-			bytes[i] = byte(n.Int64())
-		}
 		node := r.atom(scheme.NewBytevector(bytes), pos)
 		node.Elements = elements
 		return node, nil

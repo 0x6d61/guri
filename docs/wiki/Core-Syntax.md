@@ -218,3 +218,7 @@ caseの同値判定は標準のeqv?と同じ実装を使います。
 
 #57で[VectorとBytevector](https://github.com/0x6d61/guri/wiki/Vectors-Bytevectors)の27手続きを内部環境へ登録しました。
 vector-map/for-eachも複数回再開できるVMのコールバックを使います。
+
+#58でquoteと自己評価リテラルの循環を保持し、実行コードと準引用の循環をSyntaxErrorにします。
+quoteの判定は束縛を使い、構文検査のために未定義のグローバル束縛を作りません。
+[グラフの読み書き](https://github.com/0x6d61/guri/wiki/Graph-IO)で引用、マクロ、Writerとの関係を説明します。

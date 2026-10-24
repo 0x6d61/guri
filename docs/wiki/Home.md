@@ -71,3 +71,5 @@ CLIは各式を評価します。
 - [CharacterとString](https://github.com/0x6d61/guri/wiki/Characters-Strings): 内部VMの50手続き、Unicodeの分類と大小変換、可変Stringと継続。
 
 - [VectorとBytevector](https://github.com/0x6d61/guri/wiki/Vectors-Bytevectors): 内部VMの27手続き、固定長と浅いコピー、重複copy、UTF-8とコールバック継続。
+
+- [datum labelとグラフの読み書き](https://github.com/0x6d61/guri/wiki/Graph-IO): 内部Reader/Writerの共有・循環と3出力方式。標準read/writeのポート束縛は未接続。

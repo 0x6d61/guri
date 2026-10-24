@@ -135,6 +135,9 @@ func (b *builder) parseTransformer(n *reader.Node) (*transformer, error) {
 		if _, err := id(pat.Car); err != nil {
 			return nil, err
 		}
+		if err := b.checkGraph(pat, false); err != nil {
+			return nil, err
+		}
 		r := rule{template: parts[1]}
 		r.pattern, err = t.compilePattern(pat.Cdr, 0, &r.variables)
 		if err != nil {
@@ -272,6 +275,14 @@ func (m *matcher) match(p *pattern, n *reader.Node) (captures, bool) {
 			return nil, false
 		}
 		xs, tails := split(n)
+		for len(xs) < len(p.elements) {
+			tail := tails[len(tails)-1]
+			if tail.Car == nil || tail.Cdr == nil {
+				break
+			}
+			xs = append(xs, tail.Car)
+			tails = append(tails, tail.Cdr)
+		}
 		return m.sequence(p, xs, tails, 0, 0)
 	case pVector:
 		if n.Datum().Kind() != scheme.KindVector {
