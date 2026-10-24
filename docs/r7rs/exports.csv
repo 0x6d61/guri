@@ -292,16 +292,16 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme cxr),cdddr,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme eval),environment,6.12,64,任意ライブラリ採用時に必要,未実装,,
 (scheme eval),eval,6.12,64,任意ライブラリ採用時に必要,未実装,,
-(scheme file),call-with-input-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme file),call-with-output-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
+(scheme file),call-with-input-file,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
+(scheme file),call-with-output-file,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
 (scheme file),delete-file,6.13,65,任意ライブラリ採用時に必要,未実装,,
 (scheme file),file-exists?,6.13,65,任意ライブラリ採用時に必要,未実装,,
-(scheme file),open-binary-input-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme file),open-binary-output-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme file),open-input-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme file),open-output-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme file),with-input-from-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme file),with-output-to-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
+(scheme file),open-binary-input-file,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
+(scheme file),open-binary-output-file,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
+(scheme file),open-input-file,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
+(scheme file),open-output-file,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
+(scheme file),with-input-from-file,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
+(scheme file),with-output-to-file,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
 (scheme inexact),acos,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme inexact),asin,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme inexact),atan,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
@@ -325,15 +325,15 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme process-context),exit,6.14,65,任意ライブラリ採用時に必要,未実装,,
 (scheme process-context),get-environment-variable,6.14,65,任意ライブラリ採用時に必要,未実装,,
 (scheme process-context),get-environment-variables,6.14,65,任意ライブラリ採用時に必要,未実装,,
-(scheme read),read,6.13,60,任意ライブラリ採用時に必要,内部機構実装・標準ポート束縛未接続,,internal/reader: TestDatumLabelsShareAndCycle; internal/writer: TestGraphWritingModesAndRoundTrips;ExampleWrite。標準手続きの接続は#60
+(scheme read),read,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
 (scheme repl),interaction-environment,6.12,64,任意ライブラリ採用時に必要,未実装,,
 (scheme time),current-jiffy,6.14,65,任意ライブラリ採用時に必要,未実装,,
 (scheme time),current-second,6.14,65,任意ライブラリ採用時に必要,未実装,,
 (scheme time),jiffies-per-second,6.14,65,任意ライブラリ採用時に必要,未実装,,
-(scheme write),display,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme write),write,6.13,60,任意ライブラリ採用時に必要,内部機構実装・標準ポート束縛未接続,,internal/reader: TestDatumLabelsShareAndCycle; internal/writer: TestGraphWritingModesAndRoundTrips;ExampleWrite。標準手続きの接続は#60
-(scheme write),write-shared,6.13,60,任意ライブラリ採用時に必要,内部機構実装・標準ポート束縛未接続,,internal/reader: TestDatumLabelsShareAndCycle; internal/writer: TestGraphWritingModesAndRoundTrips;ExampleWrite。標準手続きの接続は#60
-(scheme write),write-simple,6.13,60,任意ライブラリ採用時に必要,内部機構実装・標準ポート束縛未接続,,internal/reader: TestDatumLabelsShareAndCycle; internal/writer: TestGraphWritingModesAndRoundTrips;ExampleWrite。標準手続きの接続は#60
+(scheme write),display,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
+(scheme write),write,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
+(scheme write),write-shared,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
+(scheme write),write-simple,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
 (scheme r5rs),*,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,numeric.go,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),+,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,numeric.go,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),-,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,numeric.go,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
@@ -374,8 +374,8 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),caddr,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),cadr,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),call-with-current-continuation,6.10,51,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),call-with-input-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),call-with-output-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),call-with-input-file,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
+(scheme r5rs),call-with-output-file,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
 (scheme r5rs),call-with-values,6.10,51,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),car,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
 (scheme r5rs),case,4.2,50,任意ライブラリ採用時に必要,未実装,,
@@ -427,7 +427,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),define-syntax,4.3,49,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),delay,4.2.5,63,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),denominator,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme r5rs),display,6.13,60,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),display,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
 (scheme r5rs),do,4.2,50,任意ライブラリ採用時に必要,差分あり,eval.go,
 (scheme r5rs),dynamic-wind,6.10,52,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),else,4.2,50,任意ライブラリ採用時に必要,未実装,,
@@ -490,8 +490,8 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),number?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),numerator,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),odd?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme r5rs),open-input-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),open-output-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),open-input-file,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
+(scheme r5rs),open-output-file,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
 (scheme r5rs),or,4.2,50,任意ライブラリ採用時に必要,差分あり,eval.go,
 (scheme r5rs),output-port?,6.13.1,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme r5rs),pair?,6.4,55,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
@@ -503,7 +503,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),quotient,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),rational?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),rationalize,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme r5rs),read,6.13,60,任意ライブラリ採用時に必要,内部機構実装・標準ポート束縛未接続,,internal/reader: TestDatumLabelsShareAndCycle; internal/writer: TestGraphWritingModesAndRoundTrips;ExampleWrite。標準手続きの接続は#60
+(scheme r5rs),read,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
 (scheme r5rs),read-char,6.13,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme r5rs),real-part,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),real?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
@@ -551,8 +551,8 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),vector-ref,6.8,57,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
 (scheme r5rs),vector-set!,6.8,57,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
 (scheme r5rs),vector?,6.8,57,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
-(scheme r5rs),with-input-from-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),with-output-to-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),write,6.13,60,任意ライブラリ採用時に必要,内部機構実装・標準ポート束縛未接続,,internal/reader: TestDatumLabelsShareAndCycle; internal/writer: TestGraphWritingModesAndRoundTrips;ExampleWrite。標準手続きの接続は#60
+(scheme r5rs),with-input-from-file,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
+(scheme r5rs),with-output-to-file,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
+(scheme r5rs),write,6.13,60,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
 (scheme r5rs),write-char,6.13,59,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme r5rs),zero?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM

@@ -2,7 +2,8 @@
 
 このページの38束縛は内部の`core.NewCore`環境で利用できます。
 公開CLIと公開Go APIの切替、標準ライブラリのimportは未接続です。
-datumを扱うread、write、write-shared、write-simple、displayと、ファイルを開く手続きは#60で接続します。
+datumを扱うread、write、write-shared、write-simple、displayと、ファイル操作の13手続きも内部VMへ接続済みです。
+構文・共有・エラーと使用例は[datumとファイルの入出力](https://github.com/0x6d61/guri/wiki/Datum-File-IO)を参照してください。
 基準は[R7RS-small §6.13](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html)です。
 
 ## 型、共有と資源管理
@@ -28,7 +29,7 @@ Go側で開いて渡した資源は借用します。
 startの既定値は0、endの既定値は対象の長さです。
 不正な型・方向・範囲、閉じたポートへのI/O、符号化、ストリームのエラーはerror-objectを非継続例外として送出し、guardで捕捉できます。
 引数数の不一致はVMの引数数エラーであり、自動送出にはまだ接続していません。
-read-error?とfile-error?が識別するdatumの解析失敗とファイルを開く失敗は、#60の接続範囲です。
+read-error?とfile-error?は、接続済みのreadによる解析失敗とファイルを開く失敗を識別します。
 
 ## 述語とEOF
 

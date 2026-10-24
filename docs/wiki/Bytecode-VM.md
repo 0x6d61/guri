@@ -106,6 +106,8 @@ Resumeが保持する制御状態は不変にします。
 SchemeのCellへの副作用は共有したままにします。
 これにより、Resumeの途中を含む継続も複数回再開できます。
 NativeFuncとResumeからMachine.Runを再帰呼び出ししてはいけません。
+Context.Context()は現在のRunのGo contextを返し、Writerなどの長いネイティブ処理へキャンセルを伝えます。
+保存した継続の再開でも、その実行のRunから渡されたContextを使用します。
 同時・再入実行はサポートせず、同じMachineへの再入はErrReentrantで診断します。
 
 ## 動的状態と後続Issueへの契約

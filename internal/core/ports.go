@@ -59,6 +59,7 @@ func (e *Engine) installPorts() {
 		current[item.name] = p
 		e.Bind(item.name, scheme.NewProcedure(p))
 	}
+	e.installDatumIO(current)
 	for name, arity := range portArities {
 		e.Bind(name, vm.Native(name, arity.min, arity.max, func(c *vm.Context, a []scheme.Value) (vm.Action, error) {
 			if name == "call-with-port" {
