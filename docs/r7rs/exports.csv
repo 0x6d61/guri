@@ -61,7 +61,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme base),current-input-port,6.13.1,59,必須,未実装,,
 (scheme base),current-output-port,6.13.1,59,必須,未実装,,
 (scheme base),define,4.1,48,必須,未実装,,
-(scheme base),define-record-type,5.5,62,必須,未実装,,
+(scheme base),define-record-type,5.5,62,必須,内部VM実装済み・import未接続,,internal/core: TestRecordDefinitionsAndFields;TestRecordTypeIdentityAndHygiene;TestRecordSyntaxErrors;TestRecordWikiExamples
 (scheme base),define-syntax,4.3,49,必須,未実装,,
 (scheme base),define-values,6.10,51,必須,未実装,,
 (scheme base),denominator,6.2,54,必須,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM

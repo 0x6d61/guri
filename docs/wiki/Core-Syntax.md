@@ -222,3 +222,7 @@ vector-map/for-eachも複数回再開できるVMのコールバックを使い�
 #58でquoteと自己評価リテラルの循環を保持し、実行コードと準引用の循環をSyntaxErrorにします。
 quoteの判定は束縛を使い、構文検査のために未定義のグローバル束縛を作りません。
 [グラフの読み書き](https://github.com/0x6d61/guri/wiki/Graph-IO)で引用、マクロ、Writerとの関係を説明します。
+
+#62で[Record型定義](https://github.com/0x6d61/guri/wiki/Records)を定義領域へ展開します。
+型名は構文表現を使い、手続き群の初期化時に実行ごとの新しいRecordTypeを作ります。
+実行時にはコンパイルしたメタデータを使い、ASTの評価を追加しません。

@@ -155,6 +155,14 @@ func (b *builder) expandHead(n *reader.Node) (*reader.Node, error) {
 			return nil, err
 		}
 		kind := b.headForm(n)
+		if kind == defineRecordType {
+			var err error
+			n, err = b.lowerRecord(n)
+			if err != nil {
+				return nil, err
+			}
+			continue
+		}
 		if kind == defineValues {
 			var err error
 			n, err = b.lowerValueDefinition(n)

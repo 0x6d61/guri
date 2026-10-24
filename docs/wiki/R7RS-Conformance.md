@@ -229,3 +229,5 @@ quote/lambda/if/set!/define/begin、各let形式、内部定義、レキシカ�
 - [VectorとBytevector](https://github.com/0x6d61/guri/wiki/Vectors-Bytevectors): 内部VMの27手続き、固定長と浅いコピー、重複copy、UTF-8とコールバック継続。
 
 [datum labelとグラフの読み書き](https://github.com/0x6d61/guri/wiki/Graph-IO)に、ラベル解決、出力の3方式、リテラルとマクロの共有の契約を記載します。
+
+- [Record型定義](https://github.com/0x6d61/guri/wiki/Records): 内部VMのdefine-record-typeと、生成するコンストラクタ・述語・取得／変更手続き。
