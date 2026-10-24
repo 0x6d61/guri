@@ -81,7 +81,7 @@ Reader自体で値を凍結し、標準のreadが返すデータまで変更不�
 
 #54で[標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers)を内部VMへ接続しました。
 string->numberとReaderは同じ変換を使い、省略引数の基数より文字列内の明示prefixを優先します。
-公開CLIとimportは未接続です。
+公開CLIは未接続で、importは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
 それらは#54で接続します。
 
 ## 内部APIの使用例

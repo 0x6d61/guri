@@ -61,6 +61,8 @@ const (
 )
 
 type binding struct {
+	origin      *binding
+	imported    bool
 	transformer *transformer
 	declared    bool
 	id          scheme.Identifier
@@ -86,7 +88,14 @@ func (s *scope) add(id scheme.Identifier) (*binding, error) {
 	return b, nil
 }
 
+type globalUse struct {
+	binding *binding
+	source  scheme.Source
+}
+
 type Engine struct {
+	strict     bool
+	uses       []globalUse
 	symbols    *scheme.SymbolTable
 	globals    []*binding
 	controls   map[string]*scheme.Procedure
@@ -133,6 +142,7 @@ func NewCore() *Engine {
 	e.installText()
 	e.installVectors()
 	e.installPorts()
+	e.installLibraryPrimitives()
 	e.primitives = append([]*binding(nil), e.globals...)
 	return e
 }
@@ -159,17 +169,28 @@ func (e *Engine) Eval(ctx context.Context, filename, source string) (scheme.Resu
 		return scheme.Results{}, err
 	}
 
-	b := &builder{engine: e, env: &scope{}, ctx: ctx}
-	pos := scheme.Source{Filename: filename, Line: 1, Column: 1}
-	if err := b.sequence(nodes, true, true, pos); err != nil {
-		return scheme.Results{}, err
-	}
-	b.emit(vm.ReturnOp, 0, 0, pos)
-	code, err := b.finish()
+	code, err := e.compileNodes(ctx, filename, nodes)
 	if err != nil {
 		return scheme.Results{}, err
 	}
 	return e.machine.Run(ctx, vm.Closure(code))
+}
+func (e *Engine) compileNodes(ctx context.Context, filename string, nodes []*reader.Node) (*vm.Code, error) {
+	e.uses = nil
+	b := &builder{engine: e, env: &scope{}, ctx: ctx}
+	pos := scheme.Source{Filename: filename, Line: 1, Column: 1}
+	if err := b.sequence(nodes, true, true, pos); err != nil {
+		return nil, err
+	}
+	if e.strict {
+		for _, use := range e.uses {
+			if !use.binding.declared {
+				return nil, &Error{Source: use.source, Cause: fmt.Errorf("%w: unbound identifier %s", ErrSyntax, use.binding.id.Symbol().Name())}
+			}
+		}
+	}
+	b.emit(vm.ReturnOp, 0, 0, pos)
+	return b.finish()
 }
 
 // Compile expands and compiles a position-bearing datum. The VM Code
@@ -286,6 +307,9 @@ func (b *builder) expr(n *reader.Node, tail, top bool) error {
 		if bind.form != variable {
 			return syntax(n, "syntax keyword used as a value")
 		}
+		if b.engine.strict && depth < 0 && !bind.declared {
+			b.engine.uses = append(b.engine.uses, globalUse{bind, pos})
+		}
 		b.access(bind, depth, vm.Local, vm.Global, pos)
 		return nil
 	}
@@ -391,6 +415,12 @@ func (b *builder) expr(n *reader.Node, tail, top bool) error {
 		if bind.form != variable {
 			return syntax(args[0], "cannot assign a syntax binding")
 		}
+		if b.engine.strict && bind.imported {
+			return syntax(args[0], "cannot mutate an imported binding")
+		}
+		if b.engine.strict && depth < 0 && !bind.declared {
+			b.engine.uses = append(b.engine.uses, globalUse{bind, args[0].Source()})
+		}
 		if err := b.expr(args[1], false, false); err != nil {
 			return err
 		}
@@ -406,6 +436,12 @@ func (b *builder) expr(n *reader.Node, tail, top bool) error {
 		ident, err := id(d.name)
 		if err != nil {
 			return err
+		}
+		if b.engine.strict {
+			old := b.engine.find(nil, b.engine.globals, ident)
+			if old != nil && old.imported {
+				return syntax(d.name, "cannot redefine an imported binding")
+			}
 		}
 		bind := b.engine.variableBinding(ident)
 		if err := b.definitionValue(d); err != nil {

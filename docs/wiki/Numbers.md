@@ -157,4 +157,4 @@ number->stringは明示的な基数prefixを付けず、同じ基数のstring->n
 `internal/number`は全登録名の実行と引数数、正確演算、丸め、比較、複素数、非有限値と書式往復を外部から検証します。
 `internal/core`は実際の数値手続きを使い、継続・末尾反復・複数値・例外との組み合わせを検証します。
 このページのscheme例は`TestNumericWikiExamples`で独立した内部環境を使って実行します。
-公開CLIの適合性結果はこの単体検証と別であり、import、標準ライブラリ公開、評価器切替と結合監査は後続Issueです。
+公開CLIの適合性結果はこの単体検証と別であり、importと9標準ライブラリは内部Runtimeへ接続済みで、公開CLI切替と結合監査は後続Issueです。

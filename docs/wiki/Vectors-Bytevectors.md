@@ -1,7 +1,8 @@
 # SchemeのVectorとBytevector
 
 このページの27手続きは内部の`core.NewCore`環境に登録しています。
-公開CLIと公開Go APIの切替、標準ライブラリのimportは未接続です。
+公開CLIと公開Go APIの切替は後続作業です。
+標準ライブラリのimportは内部Runtimeで利用でき、[提供範囲](https://github.com/0x6d61/guri/wiki/Libraries)を区別します。
 従来のGo Slice型Vectorや不変Bytesの仕様とは区別します。
 baseとr5rsへの公開束縛の割り当ては`docs/r7rs/exports.csv`で追跡します。
 参照先は[R7RS-small §6.8、§6.9、§6.10](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html)です。

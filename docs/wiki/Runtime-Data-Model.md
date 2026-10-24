@@ -42,7 +42,7 @@ StringとBytevectorのコピーは、新しい領域に文字またはバイト�
 これらの位置と型の要件は[R7RS §3.2と§3.4](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-5.html)に対応します。
 Schemeのeq?、eqv?、equal?は#55で内部VMへ接続しました。
 [Pair、List、Symbolと等価性](https://github.com/0x6d61/guri/wiki/Pairs-Lists-Symbols)に共有、浅いコピー、循環比較の契約を記載します。
-公開CLIとimportは未接続です。
+公開CLIは未接続で、importは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
 
 ## リテラルの変更禁止
 
@@ -69,7 +69,8 @@ Schemeの例外への変換、エラー述語とハンドラの処理は#53以�
 これらは値を保持する処理です。
 Readerは#46、算術演算、比較、書式と数値述語は#54で内部環境へ接続しました。
 詳細は[標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers)を参照してください。
-公開CLIと標準ライブラリのimportは未接続です。
+公開CLIの切替は後続作業です。
+標準ライブラリのimportは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
 正確な型の値が保持できることと、言語の`(/ 1 3)`が動くことを区別します。
 
 次は言語のコードではなく、値層のGo使用例です。

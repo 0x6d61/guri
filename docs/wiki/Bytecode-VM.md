@@ -151,3 +151,12 @@ if err != nil { panic(err) }
 fmt.Println(value.(*scheme.Integer).String())
 // 42
 ```
+
+## ライブラリの実行
+
+#61のRuntimeはライブラリと各プログラムで1つのMachineを共有します。
+importを展開して別々のグローバル環境へコンパイルし、依存順の初期化はNativeのInvoke/Resumeで進めます。
+プログラムもコンパイル済みClosureとして同じVMで呼び出します。
+初期化中の継続は、その後のRunからも再開でき、ASTの再評価や別VMへの再帰Runは行いません。
+importの別名は同じCellまたはtransformerを参照し、originで同一の束縛を追跡します。
+strictなプログラム／ライブラリ環境ではimportした束縛の変更を禁止し、内部NewCoreの検証環境と区別します。

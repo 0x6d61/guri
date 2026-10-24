@@ -13,7 +13,7 @@
 printlnは登録しません。
 #51の[継続と複数値](https://github.com/0x6d61/guri/wiki/Control-Features)の制御手続きと構文は内部環境で利用できます。
 衛生的なsyntax-rulesは#49で接続しました。
-標準のimportとライブラリ環境は#61で接続します。
+標準のimportとライブラリ環境は[#61の内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
 テストや将来のライブラリ実装では、Engine.Bindで手続き値を明示的に与えられます。
 テストの整数演算の注入を除去し、[標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers)を通して継続や末尾反復も検証します。
 
@@ -203,7 +203,7 @@ Go側で式ごとにRunを分け、残りのプログラムを継続から落と
 syntax-rules、define-syntax、let-syntax、letrec-syntax、syntax-errorは内部環境で実装済みです。
 派生構文と準引用は#50の[派生構文と準引用](https://github.com/0x6d61/guri/wiki/Derived-Syntax)へ接続しました。
 define-values、let-values、let*-valuesと標準の制御手続きは#51で接続しました。
-標準のimportと残りの標準手続きは後続作業です。
+標準のimportは内部Runtimeへ接続済みで、残りの標準手続きは後続作業です。
 既存の17件とChibi由来62件はimportと標準ライブラリを含む結合テストで、内部コンパイラのunitテストとは別に未対応を記録します。
 R7RS全体の準拠済みとは扱いません。
 
@@ -211,7 +211,7 @@ R7RS全体の準拠済みとは扱いません。
 
 #55で[Pair、List、Symbolと等価性](https://github.com/0x6d61/guri/wiki/Pairs-Lists-Symbols)の63手続きを内部環境へ追加しました。
 caseの同値判定は標準のeqv?と同じ実装を使います。
-公開CLIとimportは引き続き未接続です。
+公開CLIは引き続き未接続で、importは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
 
 #56で[CharacterとString](https://github.com/0x6d61/guri/wiki/Characters-Strings)の50手続きを内部環境へ登録しました。
 文字列のmap/for-eachは複数回再開できるVMのコールバックを使います。

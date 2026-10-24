@@ -90,6 +90,9 @@ func (b *builder) defineTransformer(n *reader.Node, env *scope) error {
 		}
 	} else {
 		bind = b.engine.global(ident)
+		if b.engine.strict && bind.imported {
+			return syntax(xs[1], "cannot redefine an imported syntax binding")
+		}
 		if bind.declared {
 			bind = &binding{id: ident}
 			b.engine.replaceGlobal(bind)

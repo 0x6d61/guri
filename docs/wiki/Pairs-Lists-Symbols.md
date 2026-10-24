@@ -1,7 +1,8 @@
 # Pair、List、Symbolと等価性
 
 このページの63手続きは内部の`core.NewCore`環境に登録しています。
-公開CLI、標準ライブラリのimportと公開Go APIの切替は後続作業です。
+公開CLIと公開Go APIの切替は後続作業です。
+標準ライブラリのimportは内部Runtimeで利用でき、[提供範囲](https://github.com/0x6d61/guri/wiki/Libraries)を区別します。
 公開CLIの従来のVector用appendやMap用assocを、ここに記載する標準の手続きと混同しないでください。
 参照先は[R7RS-small §6.1、§6.3、§6.4、§6.5、§6.10](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html)です。
 base、cxrとr5rsの公開束縛への割り当ては`docs/r7rs/exports.csv`で追跡します。
@@ -185,4 +186,4 @@ string->symbolは入力Stringの可変領域を共有しません。
 `internal/core/pairs_test.go`で上記の操作、使用例、共有、リテラル変更、循環、コールバック継続と長いListを検証します。
 `internal/equality`ではcar方向の循環、共有形状の違いと10万段の深い構造を検証します。
 Vectorの循環比較は内部VM側で検証します。
-公開CLIの適合ケース、importと標準ライブラリの公開は別の後続作業です。
+importと9標準ライブラリは内部Runtimeへ接続済みで、公開CLIの適合性測定とは区別します。

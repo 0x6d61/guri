@@ -64,7 +64,7 @@ func (t *transformer) sameIdentifier(a, b scheme.Identifier) bool {
 	if y != nil && !y.declared {
 		y = nil
 	}
-	return x == y
+	return bindingIdentity(x) == bindingIdentity(y)
 }
 func (t *transformer) literal(id scheme.Identifier) bool {
 	for _, l := range t.literals {
@@ -267,7 +267,7 @@ func (m *matcher) match(p *pattern, n *reader.Node) (captures, bool) {
 		if c != nil && !c.declared {
 			c = nil
 		}
-		return captures{}, a == c && (a != nil || ident.Symbol().Name() == p.literal.Symbol().Name())
+		return captures{}, bindingIdentity(a) == bindingIdentity(c) && (a != nil || ident.Symbol().Name() == p.literal.Symbol().Name())
 	case pConstant:
 		return captures{}, datumEqual(p.datum, n.Datum())
 	case pList:
