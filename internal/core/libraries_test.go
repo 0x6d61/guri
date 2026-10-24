@@ -320,3 +320,22 @@ func TestLibraryRequirementDoesNotInitializeBody(t *testing.T) {
 		t.Fatal(got)
 	}
 }
+
+func TestExplicitLibraryPathsAreIndependentOfScriptLocation(t *testing.T) {
+	// Three unrelated directories: working directory, script, and library root.
+	t.Chdir(t.TempDir())
+	scriptDir := t.TempDir()
+	libraryDir := t.TempDir()
+	if err := os.Mkdir(filepath.Join(libraryDir, "myapp"), 0755); err != nil {
+		t.Fatal(err)
+	}
+	source := `(define-library (myapp util) (export answer) (import (scheme base)) (begin (define answer 42)))`
+	if err := os.WriteFile(filepath.Join(libraryDir, "myapp/util.sld"), []byte(source), 0600); err != nil {
+		t.Fatal(err)
+	}
+	r := core.NewRuntime(libraryDir)
+	result, err := r.Run(context.Background(), filepath.Join(scriptDir, "arbitrary-name.scm"), `(import (myapp util)) answer`)
+	if err != nil || result.Len() != 1 || number(result.Values()[0]) != 42 {
+		t.Fatal(result, err)
+	}
+}
