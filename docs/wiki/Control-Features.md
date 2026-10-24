@@ -1,7 +1,8 @@
 # 継続と複数値の制御機能
 
 #51でVMの継続とResultsを、標準の制御手続きと複数値の構文へ接続しました。
-内部のNewCore環境で利用でき、公開CLIへの切替と標準importは後続作業です。
+内部のNewCore環境で利用でき、公開CLIへの切替は後続作業です。
+標準importは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
 #52で[dynamic-wind](https://github.com/0x6d61/guri/wiki/Dynamic-Wind)の動的範囲の移動を接続しました。
 
 ## 手続きと構文の一覧

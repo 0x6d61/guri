@@ -101,3 +101,11 @@ read/write/displayとファイル操作の13手続きを内部VMへ追加しま�
 D07-FのOSパス・UTF-8・既存出力の切り詰めはユーザー承認済みです。
 詳細は[datumとファイルの入出力](https://github.com/0x6d61/guri/wiki/Datum-File-IO)に記載します。
 標準ライブラリのimportと公開CLIへの接続は#61/#67へ残します。
+
+## #61 ライブラリとプログラム環境
+
+define-libraryとimportの変換、名前の衝突、非公開名、衛生的なマクロ、共有する初期化と継続を内部Runtimeへ接続しました。
+D03/D07-Lの承認に従い、既定検索先はlib/とし、9標準ライブラリを提供します。
+内部Runtimeで独自17件とChibi由来62件の期待出力が成功しています。
+公開CLIは旧処理系のため17 fail／62 failを維持し、残る7ライブラリとCLI切替は後続です。
+[ライブラリ仕様](https://github.com/0x6d61/guri/wiki/Libraries)に配置、構文、手続きと未提供の範囲を記載します。

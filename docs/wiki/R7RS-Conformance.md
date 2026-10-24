@@ -76,8 +76,8 @@ errata内の未解決事項まで解決済みと扱いません。
 
 baseの238束縛は必須です。
 残りのライブラリは規格上は任意であり、下表の全体を追跡することと、すべての提供を確定することを区別します。
-「全16ライブラリを提供する」案はD03としてユーザー確認待ちです。
-現在はどの標準ライブラリもimportできません。
+D03は承認済みで、全16ライブラリを目標に段階提供します。
+内部Runtimeでは9ライブラリをimportでき、未提供の7ライブラリと公開CLIの未接続を区別します。
 
 | ライブラリ | 束縛数 | 実装の担当Issue |
 |---|---:|---|
@@ -136,8 +136,8 @@ D01の数値プロファイルは承認済みで、D04の通常の内部表現�
 | ID | 判断事項と推奨案 | 影響と別案 | 確認時期 |
 |---|---|---|---|
 | D01 | 任意精度整数、正確な有理数、binary64と正確/不正確な複素数を採用。任意精度浮動小数点は対象外 | #45で保持と正確性を検証。構文と算術は#54で接続 | 承認済み |
-| D02 | 値層はUnicode scalar valueを保持。Readerの分類と完全なcase foldingはGo 1.26に合わせUnicode 15.0.0を使う | Readerと文字手続きはinternal/textcaseを共有。x/text v0.43.0のCherokeeのfoldingを補正 | #56で内部VMの50手続きを接続。CLI/import未接続 |
-| D03 | baseと15の任意ライブラリをすべて提供する | baseを先に完成させ、任意ライブラリを段階的に追加する案も可能。採用範囲はfeaturesとr5rsの再公開へ影響する | #43の後続相談、#61の公開契約前 |
+| D02 | 値層はUnicode scalar valueを保持。Readerの分類と完全なcase foldingはGo 1.26に合わせUnicode 15.0.0を使う | Readerと文字手続きはinternal/textcaseを共有。x/text v0.43.0のCherokeeのfoldingを補正 | #56で内部VMの50手続きを接続。CLI未接続・importは#61で接続済み |
+| D03 | baseと15の任意ライブラリを最終対象とし、完成したものから段階提供する | 未提供のライブラリはimportとlibrary requirementへ広告しない。公開束縛はAppendix Aと照合する | 承認済み。#61で9ライブラリを接続し、残る7は#63/#64/#65 |
 | D04 | 通常の内部表現は実装側へ委任。Goの構造体とポインタを使い、標準の意味をunitテストで確認する | #45で同一性、コピー、定数、共有と循環を検証 | 委任済み |
 | D05 | ユーザー指定のVM化に従い、スタック型バイトコードVMとコピー可能な継続フレームを採用 | 方式の選択は委任済み。ネイティブ呼び出しはAction/Resume。dynamic-windと例外の転送は#52/#53 | #47で基盤実装。設計書はBytecode-VM |
 | D06 | 規格が要求する例外とGoへの返し方、CLIの終了契約を分けて設計する | 現在のGoエラー型をそのままSchemeの例外仕様にしない。exit、emergency-exit、ホストプロセス終了、クリーンアップを比較する | #53、#59、#65の実装前 |
@@ -215,16 +215,17 @@ Appendix Aの公開束縛とAppendix Bのfeaturesを照合し、規格外の実�
 
 #48で[コア構文のコンパイラ](https://github.com/0x6d61/guri/wiki/Core-Syntax)を内部VMへ接続しました。
 quote/lambda/if/set!/define/begin、各let形式、内部定義、レキシカルな構文束縛を検証します。
-初期環境は構文用の内部bootstrapで、標準importやマクロは未接続です。
+#48当初の初期環境は内部bootstrapでした。
+マクロは#49、空のプログラム環境と標準importは#61で内部VMへ接続済みです。
 公開CLIの結合測定の成功とは区別します。
 
 ## 衛生的なマクロの接続
 
 #49で[syntax-rules](https://github.com/0x6d61/guri/wiki/Syntax-Rules)と構文の束縛形式を内部コンパイラへ接続しました。
 導入スコープと定義元文脈で名前の捕捉を防ぎ、パターンのliteral、入れ子の繰り返し、Vectorと非正規List、syntax-errorを検証します。
-標準importと公開CLIへの移行は後続作業です。
+標準importは内部Runtimeへ接続済みで、公開CLIへの移行は後続作業です。
 
-- [標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers): 内部VMの数値塔、比較、整数演算、数学関数、数値と文字列の変換。公開CLIとimportは未接続。
+- [標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers): 内部VMの数値塔、比較、整数演算、数学関数、数値と文字列の変換。公開CLIは未接続で、importは内部Runtimeへ接続済み。
 
 - [Pair、List、Symbolと等価性](https://github.com/0x6d61/guri/wiki/Pairs-Lists-Symbols): 内部VMの63手続きと、循環の比較、共有とコピー、mapと探索の継続。
 
@@ -255,7 +256,7 @@ Schemeのclose-portはポートを閉じ、必要なflushを行いますが、�
 
 - [テキスト・バイナリポート](https://github.com/0x6d61/guri/wiki/Ports): 内部VMの38束縛、開閉と借用、文字／バイトの入出力、current portsと継続。datumのread/write、ファイルと公開CLIは後続。
 
-- [datumとファイルの入出力](https://github.com/0x6d61/guri/wiki/Datum-File-IO): 内部VMの13手続き、ストリームReader、write/display、ファイルの所有と継続。公開CLIとimportは後続。
+- [datumとファイルの入出力](https://github.com/0x6d61/guri/wiki/Datum-File-IO): 内部VMの13手続き、ストリームReader、write/display、ファイルの所有と継続。公開CLIは後続。importは内部Runtimeへ接続済み。
 
 ## D07-F ファイル入出力の規則
 
@@ -263,3 +264,14 @@ Schemeのclose-portはポートを閉じ、必要なflushを行いますが、�
 #60で内部VMへ実装し、read-error?とfile-error?、所有ファイルの正常close、継続による脱出と再入を検証しています。
 この合意はloadやライブラリ探索の規則を確定するものではありません。
 公開CLIの適合性測定は従来どおり17 fail／62 failで、内部実装と区別します。
+
+- [ライブラリとプログラムの環境](https://github.com/0x6d61/guri/wiki/Libraries): define-library/import、lib/の検索規則、9標準ライブラリと未提供の7ライブラリ、初期化と継続。
+
+## D07-L ライブラリの配置と初期化
+
+2026-10-24にユーザーが推薦案を承認し、既存examples/とライブラリの配置を分けるよう指定しました。
+既定検索先はcwdのlib/で、明示検索先は指定順です。
+(myapp util)をmyapp/util.sldへ対応させ、includeは記述元ファイルを基準にします。
+セッション内の初期化と束縛を共有し、循環依存はエラー、失敗は自動で再試行しません。
+詳細な名前のエスケープと継続の契約はLibrariesに記載します。
+内部Runtimeで79ケースの期待出力を検証済みですが、公開CLIの17 fail／62 failは別の測定として維持します。

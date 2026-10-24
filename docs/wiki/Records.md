@@ -1,7 +1,8 @@
 # SchemeのRecord型定義
 
 `define-record-type`を内部の`core.NewCore`環境へ接続しています。
-公開CLIと標準ライブラリのimportは未接続です。
+公開CLIの切替は後続作業です。
+標準ライブラリのimportは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
 この形式は[R7RS-small §5.5](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-7.html#TAG:__tex2page_sec_5.5)に対応します。
 旧Mapや独自のフィールド操作を代用せず、既存のRecordとRecordTypeを使います。
 

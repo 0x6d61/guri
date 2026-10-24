@@ -1,7 +1,8 @@
 # SchemeのCharacterとString
 
 このページの50手続きは内部の`core.NewCore`環境に登録しています。
-公開CLI、公開Go APIと標準ライブラリのimportは未接続です。
+公開CLIと公開Go APIの切替は後続作業です。
+標準ライブラリのimportは内部Runtimeで利用でき、[提供範囲](https://github.com/0x6d61/guri/wiki/Libraries)を区別します。
 従来のnth、sliceとlenを標準の名前として追加しません。
 base、charとr5rsへの公開束縛の割り当ては`docs/r7rs/exports.csv`で追跡します。
 参照先は[R7RS-small §6.6、§6.7、§6.10](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html)です。

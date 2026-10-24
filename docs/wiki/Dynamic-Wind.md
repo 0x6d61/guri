@@ -2,7 +2,8 @@
 
 #52で、VMの動的状態の連鎖に入退場の処理を接続しました。
 内部NewCore環境でdynamic-windを利用できます。
-公開CLIと標準importの切替は後続作業です。
+公開CLIの切替は後続作業です。
+標準importは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
 
 ## 手続きの仕様
 

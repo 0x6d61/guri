@@ -187,7 +187,7 @@ TestMacroHygieneAndDefinitionBindings、TestLiteralIdentifiersUseBindingIdentity
 使用例はTestMacroReferenceExamplesとExampleEngine_Eval_macrosで検証します。
 従来の公開CLIによる独自17件とChibi由来62件の結合測定は、内部展開器の成功と分けて記録します。
 
-標準ライブラリのimport、残りの派生構文、標準手続きと公開CLIの切替は後続Issueです。
+標準ライブラリのimportは内部Runtimeへ接続済みで、残る未実装ライブラリと公開CLIの切替は後続Issueです。
 参照は[R7RS §4.3](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.3)、[§5.4](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-7.html#TAG:__tex2page_sec_5.4)です。
 
 ## 共有と循環を含む引用テンプレート
