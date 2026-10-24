@@ -33,10 +33,7 @@ type Runtime struct {
 }
 
 func NewRuntime(paths ...string) *Runtime {
-	if len(paths) == 0 {
-		paths = []string{"lib"}
-	}
-	r := &Runtime{bootstrap: NewCore(), modules: map[string]*library{}, standard: map[string]bool{}, paths: append([]string(nil), paths...)}
+	r := &Runtime{bootstrap: NewCore(), modules: map[string]*library{}, standard: map[string]bool{}, paths: configuredLibraryPaths(paths)}
 	for name, names := range standardLibraryNames {
 		ns, err := reader.ReadAll("<standard-libraries>", name, r.bootstrap.symbols)
 		if err != nil {

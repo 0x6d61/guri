@@ -82,4 +82,4 @@ CLIは各式を評価します。
 
 - [datumとファイルの入出力](https://github.com/0x6d61/guri/wiki/Datum-File-IO): 内部VMの13手続き、ストリームReader、write/display、ファイルの所有と継続。公開CLIは後続。importは内部Runtimeへ接続済み。
 
-- [ライブラリとプログラムの環境](https://github.com/0x6d61/guri/wiki/Libraries): define-library/import、lib/の検索規則、9標準ライブラリと未提供の7ライブラリ、初期化と継続。
+- [ライブラリとプログラムの環境](https://github.com/0x6d61/guri/wiki/Libraries): define-library/import、インストール先と追加検索パスの規則、9標準ライブラリと未提供の7ライブラリ、初期化と継続。

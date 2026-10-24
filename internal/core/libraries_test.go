@@ -175,7 +175,8 @@ func TestLibrarySearchIncludesAndFeatures(t *testing.T) {
 		t.Fatal("include cycle")
 	}
 }
-func TestDefaultLibraryRootIsLibAndSearchOrder(t *testing.T) {
+func TestLibrarySearchDoesNotAssumeWorkingDirectoryLayout(t *testing.T) {
+	t.Setenv("GURI_LOAD_PATH", "")
 	root := t.TempDir()
 	t.Chdir(root)
 	for _, dir := range []string{"lib", "examples", "other"} {
@@ -193,7 +194,10 @@ func TestDefaultLibraryRootIsLibAndSearchOrder(t *testing.T) {
 	put("lib", "test", 42)
 	put("other", "test", 99)
 	put("examples", "legacy", 7)
-	if n := number(runProgram(t, core.NewRuntime(), `(import (test)) n`)); n != 42 {
+	if _, err := core.NewRuntime().Run(context.Background(), "main.scm", `(import (test)) n`); err == nil {
+		t.Fatal("implicitly searched cwd/lib")
+	}
+	if n := number(runProgram(t, core.NewRuntime("lib"), `(import (test)) n`)); n != 42 {
 		t.Fatal(n)
 	}
 	if n := number(runProgram(t, core.NewRuntime("other", "lib"), `(import (test)) n`)); n != 99 {
@@ -337,5 +341,23 @@ func TestExplicitLibraryPathsAreIndependentOfScriptLocation(t *testing.T) {
 	result, err := r.Run(context.Background(), filepath.Join(scriptDir, "arbitrary-name.scm"), `(import (myapp util)) answer`)
 	if err != nil || result.Len() != 1 || number(result.Values()[0]) != 42 {
 		t.Fatal(result, err)
+	}
+}
+
+func TestLibraryEnvironmentSearchPaths(t *testing.T) {
+	environmentRoot := t.TempDir()
+	explicitRoot := t.TempDir()
+	for root, value := range map[string]int{environmentRoot: 42, explicitRoot: 99} {
+		source := fmt.Sprintf(`(define-library (env-example) (export value) (import (scheme base)) (begin (define value %d)))`, value)
+		if err := os.WriteFile(filepath.Join(root, "env-example.sld"), []byte(source), 0600); err != nil {
+			t.Fatal(err)
+		}
+	}
+	t.Setenv("GURI_LOAD_PATH", environmentRoot)
+	if n := number(runProgram(t, core.NewRuntime(), `(import (env-example)) value`)); n != 42 {
+		t.Fatal(n)
+	}
+	if n := number(runProgram(t, core.NewRuntime(explicitRoot), `(import (env-example)) value`)); n != 99 {
+		t.Fatal(n)
 	}
 }

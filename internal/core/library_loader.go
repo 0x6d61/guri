@@ -11,6 +11,31 @@ import (
 	"github.com/0x6d61/guri/internal/scheme"
 )
 
+// The installer can set these absolute directories with Go linker -X flags.
+// Empty defaults keep development binaries independent of an installation tree;
+// all currently implemented standard libraries are compiled into the binary.
+var standardLibraryDirectory string
+var siteLibraryDirectory string
+
+func configuredLibraryPaths(explicit []string) []string {
+	paths := append([]string(nil), explicit...)
+	paths = append(paths, filepath.SplitList(os.Getenv("GURI_LOAD_PATH"))...)
+	paths = append(paths, siteLibraryDirectory, standardLibraryDirectory)
+	result := make([]string, 0, len(paths))
+	seen := map[string]bool{}
+	for _, path := range paths {
+		if path == "" {
+			continue
+		}
+		path = filepath.Clean(path)
+		if !seen[path] {
+			result = append(result, path)
+			seen[path] = true
+		}
+	}
+	return result
+}
+
 func encodedLibraryPart(p libraryPart) string {
 	if p.integer {
 		return p.text
