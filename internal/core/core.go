@@ -57,6 +57,7 @@ const (
 	letStarValues
 	parameterize
 	guard
+	defineRecordType
 )
 
 type binding struct {
@@ -122,6 +123,7 @@ func NewCore() *Engine {
 		"cond": derived, "case": derived, "and": derived, "or": derived, "when": derived, "unless": derived, "do": derived, "case-lambda": derived,
 		"quasiquote": quasiquote, "unquote": unquote, "unquote-splicing": splice,
 		"include": include, "include-ci": includeCI, "cond-expand": condExpand,
+		"define-record-type": defineRecordType,
 	} {
 		e.globals = append(e.globals, &binding{id: scheme.NewIdentifier(e.symbols.Intern(name)), form: f, declared: true})
 	}

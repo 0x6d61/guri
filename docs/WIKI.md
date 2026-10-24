@@ -26,6 +26,7 @@ GitHub Wikiは公開先として使用します。
 | [Characters-Strings.md](wiki/Characters-Strings.md) | [CharacterとString](https://github.com/0x6d61/guri/wiki/Characters-Strings) |
 | [Vectors-Bytevectors.md](wiki/Vectors-Bytevectors.md) | [VectorとBytevector](https://github.com/0x6d61/guri/wiki/Vectors-Bytevectors) |
 | [Graph-IO.md](wiki/Graph-IO.md) | [datum labelとグラフの読み書き](https://github.com/0x6d61/guri/wiki/Graph-IO) |
+| [Records.md](wiki/Records.md) | [Record型定義](https://github.com/0x6d61/guri/wiki/Records) |
 | [_Sidebar.md](wiki/_Sidebar.md) | サイドバー |
 
 ## 変更時の手順
@@ -50,7 +51,7 @@ Wikiへのpush権限を持つ認証が必要です。
 wiki_dir=$(mktemp -d)
 git clone https://github.com/0x6d61/guri.wiki.git "$wiki_dir"
 cp docs/wiki/*.md "$wiki_dir/"
-git -C "$wiki_dir" add Home.md Language-Specification.md Special-Forms.md Functions.md Roadmap.md R7RS-Conformance.md R7RS-Testing.md Runtime-Data-Model.md R7RS-Reader.md Bytecode-VM.md Core-Syntax.md Syntax-Rules.md Derived-Syntax.md Control-Features.md Dynamic-Wind.md Exceptions-Parameters.md Numbers.md Pairs-Lists-Symbols.md Characters-Strings.md Vectors-Bytevectors.md Graph-IO.md _Sidebar.md
+git -C "$wiki_dir" add Home.md Language-Specification.md Special-Forms.md Functions.md Roadmap.md R7RS-Conformance.md R7RS-Testing.md Runtime-Data-Model.md R7RS-Reader.md Bytecode-VM.md Core-Syntax.md Syntax-Rules.md Derived-Syntax.md Control-Features.md Dynamic-Wind.md Exceptions-Parameters.md Numbers.md Pairs-Lists-Symbols.md Characters-Strings.md Vectors-Bytevectors.md Graph-IO.md Records.md _Sidebar.md
 git -C "$wiki_dir" diff --cached --check
 git -C "$wiki_dir" diff --cached
 ```
