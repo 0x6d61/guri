@@ -4,6 +4,8 @@
 v0.0.1の基本機能である`defn`、String／Bytes、while、cond、errorを含みます。
 v0.0.2向けの末尾呼び出し対応とapplyを追加しています。
 R7RS-smallへの移行を計画しています。
+目標はGuri自体でアプリケーションを開発・実行する単体処理系です。
+標準入出力と資源管理の設計方針は[準拠計画](https://github.com/0x6d61/guri/wiki/R7RS-Conformance)に記録します。
 現在の処理系はR7RS-small準拠ではありません。
 [準拠計画と要求追跡](https://github.com/0x6d61/guri/wiki/R7RS-Conformance)では、目標仕様と設計の未決事項を現在の仕様から区別します。
 実装済みの機能と残りの計画は [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap) で区別します。
