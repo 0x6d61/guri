@@ -314,11 +314,11 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme inexact),sin,6.2,54,任意ライブラリ採用時に必要,内部Runtimeのimport実装済み・公開CLI未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM; internal/core: TestStandardLibraryCatalog;TestImportedProgramsFromConformanceSuites
 (scheme inexact),sqrt,6.2,54,任意ライブラリ採用時に必要,内部Runtimeのimport実装済み・公開CLI未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM; internal/core: TestStandardLibraryCatalog;TestImportedProgramsFromConformanceSuites
 (scheme inexact),tan,6.2,54,任意ライブラリ採用時に必要,内部Runtimeのimport実装済み・公開CLI未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM; internal/core: TestStandardLibraryCatalog;TestImportedProgramsFromConformanceSuites
-(scheme lazy),delay,4.2.5,63,任意ライブラリ採用時に必要,未実装,,
-(scheme lazy),delay-force,4.2.5,63,任意ライブラリ採用時に必要,未実装,,
-(scheme lazy),force,4.2.5,63,任意ライブラリ採用時に必要,未実装,,
-(scheme lazy),make-promise,4.2.5,63,任意ライブラリ採用時に必要,未実装,,
-(scheme lazy),promise?,4.2.5,63,任意ライブラリ採用時に必要,未実装,,
+(scheme lazy),delay,4.2.5,63,任意ライブラリ採用時に必要,内部Runtimeのimport実装済み・公開CLI未接続,,internal/core: TestPromiseValuesMemoizationAndLexicalScope;TestPromiseReentrancyFirstCompletedValueWins;TestPromiseForceDynamicContextAndExceptions;TestPromiseContinuationsAfterEscapeAndCompletion;TestDelayForceTailSpace;TestLazyWikiExamplesAndBindings
+(scheme lazy),delay-force,4.2.5,63,任意ライブラリ採用時に必要,内部Runtimeのimport実装済み・公開CLI未接続,,internal/core: TestPromiseValuesMemoizationAndLexicalScope;TestPromiseReentrancyFirstCompletedValueWins;TestPromiseForceDynamicContextAndExceptions;TestPromiseContinuationsAfterEscapeAndCompletion;TestDelayForceTailSpace;TestLazyWikiExamplesAndBindings
+(scheme lazy),force,4.2.5,63,任意ライブラリ採用時に必要,内部Runtimeのimport実装済み・公開CLI未接続,,internal/core: TestPromiseValuesMemoizationAndLexicalScope;TestPromiseReentrancyFirstCompletedValueWins;TestPromiseForceDynamicContextAndExceptions;TestPromiseContinuationsAfterEscapeAndCompletion;TestDelayForceTailSpace;TestLazyWikiExamplesAndBindings
+(scheme lazy),make-promise,4.2.5,63,任意ライブラリ採用時に必要,内部Runtimeのimport実装済み・公開CLI未接続,,internal/core: TestPromiseValuesMemoizationAndLexicalScope;TestPromiseReentrancyFirstCompletedValueWins;TestPromiseForceDynamicContextAndExceptions;TestPromiseContinuationsAfterEscapeAndCompletion;TestDelayForceTailSpace;TestLazyWikiExamplesAndBindings
+(scheme lazy),promise?,4.2.5,63,任意ライブラリ採用時に必要,内部Runtimeのimport実装済み・公開CLI未接続,,internal/core: TestPromiseValuesMemoizationAndLexicalScope;TestPromiseReentrancyFirstCompletedValueWins;TestPromiseForceDynamicContextAndExceptions;TestPromiseContinuationsAfterEscapeAndCompletion;TestDelayForceTailSpace;TestLazyWikiExamplesAndBindings
 (scheme load),load,6.13,64,任意ライブラリ採用時に必要,未実装,,
 (scheme process-context),command-line,6.14,65,任意ライブラリ採用時に必要,未実装,,
 (scheme process-context),emergency-exit,6.14,65,任意ライブラリ採用時に必要,未実装,,
@@ -425,7 +425,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),current-output-port,6.13.1,59,任意ライブラリ採用時に必要,内部束縛実装済み・ライブラリ未提供,,internal/core: TestStandardMemoryPorts;TestPortParametersAndContinuations;TestCallWithPortLifecycleAndValues;TestPortAdapterFailuresAndAliases;TestPortWikiExamplesAndBindings
 (scheme r5rs),define,4.1,48,任意ライブラリ採用時に必要,内部束縛実装済み・ライブラリ未提供,,
 (scheme r5rs),define-syntax,4.3,49,任意ライブラリ採用時に必要,内部束縛実装済み・ライブラリ未提供,,
-(scheme r5rs),delay,4.2.5,63,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),delay,4.2.5,63,任意ライブラリ採用時に必要,内部束縛実装済み・ライブラリ未提供,,internal/core: TestPromiseValuesMemoizationAndLexicalScope;TestPromiseReentrancyFirstCompletedValueWins;TestPromiseForceDynamicContextAndExceptions;TestPromiseContinuationsAfterEscapeAndCompletion;TestDelayForceTailSpace;TestLazyWikiExamplesAndBindings
 (scheme r5rs),denominator,6.2,54,任意ライブラリ採用時に必要,内部束縛実装済み・ライブラリ未提供,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),display,6.13,60,任意ライブラリ採用時に必要,内部束縛実装済み・ライブラリ未提供,,internal/core: TestDatumPortReadingAndMixedInput;TestDatumPortWriting;TestSchemeFilePorts;TestFileProceduresDynamicPortsAndContinuations;TestDatumIOWikiExamplesAndBindings
 (scheme r5rs),do,4.2,50,任意ライブラリ採用時に必要,内部束縛実装済み・ライブラリ未提供,eval.go,
@@ -443,7 +443,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),expt,6.2,54,任意ライブラリ採用時に必要,内部束縛実装済み・ライブラリ未提供,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),floor,6.2,54,任意ライブラリ採用時に必要,内部束縛実装済み・ライブラリ未提供,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),for-each,6.4,55,任意ライブラリ採用時に必要,内部束縛実装済み・ライブラリ未提供,,internal/core: TestStandardPairsListsAndSymbols;TestListCallbackContinuations;TestListWikiExamples; internal/equality: TestGraphUnfoldingsAndDeepStructures
-(scheme r5rs),force,4.2.5,63,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),force,4.2.5,63,任意ライブラリ採用時に必要,内部束縛実装済み・ライブラリ未提供,,internal/core: TestPromiseValuesMemoizationAndLexicalScope;TestPromiseReentrancyFirstCompletedValueWins;TestPromiseForceDynamicContextAndExceptions;TestPromiseContinuationsAfterEscapeAndCompletion;TestDelayForceTailSpace;TestLazyWikiExamplesAndBindings
 (scheme r5rs),gcd,6.2,54,任意ライブラリ採用時に必要,内部束縛実装済み・ライブラリ未提供,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),if,4.1,48,任意ライブラリ採用時に必要,内部束縛実装済み・ライブラリ未提供,eval.go,
 (scheme r5rs),imag-part,6.2,54,任意ライブラリ採用時に必要,内部束縛実装済み・ライブラリ未提供,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM

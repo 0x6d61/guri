@@ -33,7 +33,7 @@ func TestStandardLibraryCatalog(t *testing.T) {
 	if len(ledger) != 16 || len(standardLibraryNames) != 16 {
 		t.Fatal("standard library count")
 	}
-	complete := map[string]bool{"(scheme base)": true, "(scheme case-lambda)": true, "(scheme char)": true, "(scheme complex)": true, "(scheme cxr)": true, "(scheme file)": true, "(scheme inexact)": true, "(scheme read)": true, "(scheme write)": true}
+	complete := map[string]bool{"(scheme base)": true, "(scheme case-lambda)": true, "(scheme char)": true, "(scheme complex)": true, "(scheme cxr)": true, "(scheme file)": true, "(scheme inexact)": true, "(scheme lazy)": true, "(scheme read)": true, "(scheme write)": true}
 	r := NewRuntime()
 	for library, names := range standardLibraryNames {
 		seen := map[string]bool{}

@@ -197,3 +197,5 @@ VectorとMapの内部も評価しません。
 (println (quote [name])) ; => [name]
 (println '{:name Alice}) ; => {:name Alice}
 ```
+
+- [Promiseと遅延評価](https://github.com/0x6d61/guri/wiki/Lazy-Evaluation): scheme lazyの5束縛、メモ化と再入、force時の動的環境、delay-forceの空間要件。

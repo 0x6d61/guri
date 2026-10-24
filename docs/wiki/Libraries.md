@@ -9,7 +9,7 @@
 ## 対応範囲（D03）
 
 2026-10-24に、全16標準ライブラリを目標にして完成したものから段階提供する方針を承認しました。
-現在は以下の9ライブラリを内部Runtimeのimportで利用できます。
+現在は以下の10ライブラリを内部Runtimeのimportで利用できます。
 
 | ライブラリ | 公開束縛数 | 内容 |
 |---|---:|---|
@@ -20,14 +20,16 @@
 | `(scheme cxr)` | 24 | 深さ3と4のPairの取得 |
 | `(scheme file)` | 10 | ファイル入出力、存在確認と削除 |
 | `(scheme inexact)` | 12 | 不正確数の数学関数と分類 |
+| `(scheme lazy)` | 5 | Promiseと遅延評価 |
 | `(scheme read)` | 1 | datumのread |
 | `(scheme write)` | 4 | write、write-shared、write-simple、display |
 
 公開識別子はdocs/r7rs/exports.csvと内部の束縛表をテストで照合します。
-scheme lazyは#63、scheme eval／load／replは#64、scheme process-context／timeは#65で接続します。
+scheme lazyは#63で接続済みです。
+scheme eval／load／replは#64、scheme process-context／timeは#65で接続します。
 scheme r5rsはこれらの未実装束縛を含むため、まだ提供しません。
-未提供の7ライブラリを空のライブラリとしてimportできるようにはせず、library requirementでも利用可能と広告しません。
-9ライブラリの接続を、言語全体の準拠完了として扱いません。
+未提供の6ライブラリを空のライブラリとしてimportできるようにはせず、library requirementでも利用可能と広告しません。
+10ライブラリの接続を、言語全体の準拠完了として扱いません。
 
 ## define-libraryと宣言
 
@@ -110,7 +112,7 @@ importしていない構文や手続きは暗黙に利用できません。
 ## 配置と検索（D07-L）
 
 Gaucheのインストール時に設定したライブラリディレクトリと、利用者が追加する検索パスの方式に合わせます。
-内部Runtimeの標準9ライブラリはGo実装と公開束縛表としてバイナリへ組み込まれ、作業ディレクトリやスクリプトの置き場所に依存しません。
+内部Runtimeの標準10ライブラリはGo実装と公開束縛表としてバイナリへ組み込まれ、作業ディレクトリやスクリプトの置き場所に依存しません。
 Gaucheにもコアを事前コンパイルする仕組みと、Schemeファイルをインストール先へ置く仕組みがあります。
 [ビルドと配置の定義](https://github.com/shirok/Gauche/blob/master/src/Makefile.in)と[検索パスの初期化](https://github.com/shirok/Gauche/blob/master/src/load.c)を参照しています。
 
@@ -192,7 +194,7 @@ filenameの型が違う場合は通常のerror-objectを送出します。
 ```scheme
 (import (scheme base))
 (cond-expand
-  ((and (library (scheme char)) (not (library (scheme lazy)))) 42)
+  ((and (library (scheme char)) (not (library (scheme eval)))) 42)
   (else 0)) ; => 42
 ```
 
