@@ -189,3 +189,10 @@ TestMacroHygieneAndDefinitionBindings、TestLiteralIdentifiersUseBindingIdentity
 
 標準ライブラリのimport、残りの派生構文、標準手続きと公開CLIの切替は後続Issueです。
 参照は[R7RS §4.3](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.3)、[§5.4](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-7.html#TAG:__tex2page_sec_5.4)です。
+
+## 共有と循環を含む引用テンプレート
+
+#58でテンプレートの構築をdatumの同一性、繰り返し位置とellipsisの有効状態ごとに保持します。
+長さが変わる展開の後に参照を解決するため、共有tailと循環を引用データへ残せます。
+入力から捕捉したNodeを変更せず、パターン変数の置換と文脈を保ちます。
+例と検証範囲は[グラフの読み書き](https://github.com/0x6d61/guri/wiki/Graph-IO)に記載します。

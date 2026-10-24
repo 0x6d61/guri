@@ -167,7 +167,8 @@ Reader、評価器と標準手続きへは後続Issueで接続するため、現
 #46で[標準Reader](https://github.com/0x6d61/guri/wiki/R7RS-Reader)を共通値層へ接続しました。
 標準のリテラル、識別子、コメント、数値変換と各位置のメタデータをunitテストで確認します。
 独自作成17件とChibi由来62件を構文として読み切れますが、現行CLIの評価器には未接続です。
-datum labelの共有と循環は#58に残し、未対応を診断します。
+datum labelの共有と循環は#58で内部ReaderとWriterへ接続しました。
+標準read/writeのポート束縛は#60に残します。
 
 ## 実装順序と共有契約
 
@@ -226,3 +227,5 @@ quote/lambda/if/set!/define/begin、各let形式、内部定義、レキシカ�
 - [CharacterとString](https://github.com/0x6d61/guri/wiki/Characters-Strings): 内部VMの50手続き、Unicodeの分類と大小変換、可変Stringと継続。
 
 - [VectorとBytevector](https://github.com/0x6d61/guri/wiki/Vectors-Bytevectors): 内部VMの27手続き、固定長と浅いコピー、重複copy、UTF-8とコールバック継続。
+
+[datum labelとグラフの読み書き](https://github.com/0x6d61/guri/wiki/Graph-IO)に、ラベル解決、出力の3方式、リテラルとマクロの共有の契約を記載します。

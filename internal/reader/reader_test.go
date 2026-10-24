@@ -145,7 +145,7 @@ func TestIncrementalReadingSourcesAndMutableData(t *testing.T) {
 	}
 }
 
-func TestReaderDiagnosticsAndDeferredLabels(t *testing.T) {
+func TestReaderDiagnostics(t *testing.T) {
 	for _, source := range []string{"[1]", "{}", "(", "(a .)", "(. a)", "(a . b c)", "#(a . b)", "#u8(256)", "#u8(-1)", "#u8(1.0)", "#truex", "12foo", "1/0", "#e#e1", "\"unterminated", "\"\\xD800;\"", "|unterminated", "#;", "#|unterminated", ".", "#\\Space", "abc'foo", "#!fold-caseX a"} {
 		t.Run(source, func(t *testing.T) {
 			_, err := reader.ReadAll("bad.scm", source, nil)
@@ -159,10 +159,6 @@ func TestReaderDiagnosticsAndDeferredLabels(t *testing.T) {
 	var diagnostic *reader.Error
 	if !errors.As(err, &diagnostic) || diagnostic.Position.Line != 2 || diagnostic.Position.Column != 1 {
 		t.Fatalf("invalid UTF-8 location: %v", err)
-	}
-	_, err = reader.ReadAll("labels.scm", "#1=(a . #1#)", nil)
-	if !errors.Is(err, reader.ErrDatumLabels) {
-		t.Fatalf("datum labels treated as ordinary data: %v", err)
 	}
 	if nodes, err := reader.ReadAll("empty.scm", "; empty", nil); err != nil || len(nodes) != 0 {
 		t.Fatal("empty source")

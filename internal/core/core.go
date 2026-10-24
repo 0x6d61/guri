@@ -246,7 +246,12 @@ func id(n *reader.Node) (scheme.Identifier, error) {
 }
 func nodes(n *reader.Node) ([]*reader.Node, error) {
 	var result []*reader.Node
+	seen := map[scheme.Value]bool{}
 	for n.Datum() != scheme.Null {
+		if seen[n.Datum()] {
+			return nil, syntax(n, "circular syntax list")
+		}
+		seen[n.Datum()] = true
 		if _, ok := n.Datum().(*scheme.Pair); !ok || n.Car == nil || n.Cdr == nil {
 			return nil, syntax(n, "expected proper list")
 		}
@@ -327,6 +332,9 @@ func (b *builder) expr(n *reader.Node, tail, top bool) error {
 		return b.expr(expanded, tail, top)
 	case quasiquote:
 		if err := arity(1, 1); err != nil {
+			return err
+		}
+		if err := b.checkGraph(args[0], false); err != nil {
 			return err
 		}
 		expanded, _, err := b.lowerQuasiquote(args[0], 1, false)

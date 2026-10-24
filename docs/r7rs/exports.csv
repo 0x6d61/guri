@@ -325,15 +325,15 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme process-context),exit,6.14,65,任意ライブラリ採用時に必要,未実装,,
 (scheme process-context),get-environment-variable,6.14,65,任意ライブラリ採用時に必要,未実装,,
 (scheme process-context),get-environment-variables,6.14,65,任意ライブラリ採用時に必要,未実装,,
-(scheme read),read,6.13,60,任意ライブラリ採用時に必要,未実装,,
+(scheme read),read,6.13,60,任意ライブラリ採用時に必要,内部機構実装・標準ポート束縛未接続,,internal/reader: TestDatumLabelsShareAndCycle; internal/writer: TestGraphWritingModesAndRoundTrips;ExampleWrite。標準手続きの接続は#60
 (scheme repl),interaction-environment,6.12,64,任意ライブラリ採用時に必要,未実装,,
 (scheme time),current-jiffy,6.14,65,任意ライブラリ採用時に必要,未実装,,
 (scheme time),current-second,6.14,65,任意ライブラリ採用時に必要,未実装,,
 (scheme time),jiffies-per-second,6.14,65,任意ライブラリ採用時に必要,未実装,,
 (scheme write),display,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme write),write,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme write),write-shared,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme write),write-simple,6.13,60,任意ライブラリ採用時に必要,未実装,,
+(scheme write),write,6.13,60,任意ライブラリ採用時に必要,内部機構実装・標準ポート束縛未接続,,internal/reader: TestDatumLabelsShareAndCycle; internal/writer: TestGraphWritingModesAndRoundTrips;ExampleWrite。標準手続きの接続は#60
+(scheme write),write-shared,6.13,60,任意ライブラリ採用時に必要,内部機構実装・標準ポート束縛未接続,,internal/reader: TestDatumLabelsShareAndCycle; internal/writer: TestGraphWritingModesAndRoundTrips;ExampleWrite。標準手続きの接続は#60
+(scheme write),write-simple,6.13,60,任意ライブラリ採用時に必要,内部機構実装・標準ポート束縛未接続,,internal/reader: TestDatumLabelsShareAndCycle; internal/writer: TestGraphWritingModesAndRoundTrips;ExampleWrite。標準手続きの接続は#60
 (scheme r5rs),*,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,numeric.go,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),+,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,numeric.go,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),-,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,numeric.go,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
@@ -503,7 +503,7 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),quotient,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),rational?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),rationalize,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
-(scheme r5rs),read,6.13,60,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),read,6.13,60,任意ライブラリ採用時に必要,内部機構実装・標準ポート束縛未接続,,internal/reader: TestDatumLabelsShareAndCycle; internal/writer: TestGraphWritingModesAndRoundTrips;ExampleWrite。標準手続きの接続は#60
 (scheme r5rs),read-char,6.13,60,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),real-part,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
 (scheme r5rs),real?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
@@ -553,6 +553,6 @@ library,identifier,section,issue,requirement,status,baseline_evidence,test_evide
 (scheme r5rs),vector?,6.8,57,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/core: TestStandardVectorsAndBytevectors;TestVectorErrorsAndAtomicMutation;TestVectorCallbackContinuationsAndSharing;TestVectorWikiExamplesAndBindings
 (scheme r5rs),with-input-from-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),with-output-to-file,6.13,60,任意ライブラリ採用時に必要,未実装,,
-(scheme r5rs),write,6.13,60,任意ライブラリ採用時に必要,未実装,,
+(scheme r5rs),write,6.13,60,任意ライブラリ採用時に必要,内部機構実装・標準ポート束縛未接続,,internal/reader: TestDatumLabelsShareAndCycle; internal/writer: TestGraphWritingModesAndRoundTrips;ExampleWrite。標準手続きの接続は#60
 (scheme r5rs),write-char,6.13,60,任意ライブラリ採用時に必要,未実装,,
 (scheme r5rs),zero?,6.2,54,任意ライブラリ採用時に必要,内部VM実装済み・import未接続,,internal/number: TestCatalogProceduresAndArity; internal/core: TestStandardNumbersInVM
