@@ -58,6 +58,8 @@ const (
 	parameterize
 	guard
 	defineRecordType
+	delayForm
+	delayForceForm
 )
 
 type binding struct {
@@ -110,6 +112,7 @@ func NewCore() *Engine {
 	e := &Engine{symbols: scheme.NewSymbolTable(), machine: vm.New()}
 	for name, f := range map[string]form{
 		"parameterize": parameterize, "guard": guard,
+		"delay": delayForm, "delay-force": delayForceForm,
 		"define-values": defineValues, "let-values": letValues, "let*-values": letStarValues,
 		"quote":         quote,
 		"lambda":        lambda,
@@ -143,6 +146,7 @@ func NewCore() *Engine {
 	e.installVectors()
 	e.installPorts()
 	e.installLibraryPrimitives()
+	e.installLazy()
 	e.primitives = append([]*binding(nil), e.globals...)
 	return e
 }
@@ -333,6 +337,12 @@ func (b *builder) expr(n *reader.Node, tail, top bool) error {
 		return nil
 	}
 	switch b.headForm(n) {
+	case delayForm, delayForceForm:
+		expanded, err := b.lowerDelay(n, args, b.headForm(n) == delayForceForm)
+		if err != nil {
+			return err
+		}
+		return b.expr(expanded, tail, top)
 	case parameterize:
 		node, err := b.lowerParameterize(n, args)
 		if err != nil {

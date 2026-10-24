@@ -156,3 +156,12 @@ bulk copy/fillは格納領域を伸ばさず、不変性と全範囲を変更前
 #62でdefine-record-typeを既存Record/RecordTypeへ接続しました。
 フィールドの識別子はコンパイラで文脈を判定し、内部のタグと宣言順の位置へ対応付けます。
 [Record型定義](https://github.com/0x6d61/guri/wiki/Records)に型の生成、フィールドの初期化と可変性を記載します。
+
+## 遅延評価の内部表現
+
+#63のPromiseは非公開のRecordで、転送先・計算済みかどうか・値またはクロージャ・評価モードを保持します。
+Schemeへ独自のValue型やアクセス手続きを追加しません。
+forceは共有する根を探し、delay-forceの次のPromiseと状態を共有して古いクロージャを解放します。
+転送先は経路短縮し、例外で中断した既存の別名も同じメモ化結果を参照します。
+Promiseを手続きとして呼ぶことや暗黙のforceは提供しません。
+[Promiseと遅延評価](https://github.com/0x6d61/guri/wiki/Lazy-Evaluation)に使用例とエラーを記載します。
