@@ -133,3 +133,12 @@ scheme process-contextとscheme timeの8手続きを追加し、内部Runtimeの
 D07-C/D07-Tのコマンドライン、環境変数のUTF-8と変更禁止、TAIの近似と単調時計を実装しました。
 [システムインターフェース](https://github.com/0x6d61/guri/wiki/System-Interface)に規則と使用例を記載します。
 全体の準拠監査と公開CLIへの切り替えは#66/#67で行い、r7rsはまだ広告しません。
+
+## #66 内部Runtimeの結合監査
+
+固定したChibi原本の1,188フォームを試行し、1,214件の判定を実行しました。
+成功1,213件、r7rs featureの広告保留1件、任意指数表記の10フォームで未到達20判定を記録し、原本のsuite_passedはfalseを保持します。
+マクロの導入した前方セルと、入れ子のliteral分類を修正し、値、Record、公開名の分離を回帰テストで検証しました。
+全96見出しを証拠へ対応付け、Guile 3.0.9では独立17件とChibi由来62件、修正した2種類の期待結果を確認しました。
+[監査報告](https://github.com/0x6d61/guri/wiki/R7RS-Audit)に方法と制限を記載します。
+公開CLIは旧処理系であり、他OSの対話Readyも未対応なので、準拠宣言は行いません。

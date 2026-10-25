@@ -82,3 +82,5 @@ TestImportedProgramsFromConformanceSuitesは各ケースに独立したRuntime�
 現在のケースはいずれも終了コード0であり、OSプロセスの終了状態を測るテストとは区別します。
 公開CLIのJSON測定は旧処理系を対象とするため17 fail／62 failのままです。
 内部のunitテスト結果で公開CLIのレポートを置き換えたり、準拠完了を宣言したりしません。
+
+- [R7RS-smallの結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit): 原本の測定結果、修正した衛生性、96見出しの証拠索引と残る制限。

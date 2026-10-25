@@ -513,6 +513,11 @@ func (b *builder) expr(n *reader.Node, tail, top bool) error {
 	return nil
 }
 func (b *builder) sequence(xs []*reader.Node, tail, top bool, pos scheme.Source) error {
+	if top {
+		if err := b.predeclareTop(xs); err != nil {
+			return err
+		}
+	}
 	if len(xs) == 0 {
 		b.constant(scheme.Unspecified, pos)
 		return nil
@@ -682,4 +687,107 @@ func (b *builder) body(body []*reader.Node, pos scheme.Source) error {
 		}
 	}
 	return &Error{pos, fmt.Errorf("%w: body requires an expression", ErrSyntax)}
+}
+
+// Reserve cells in a top-level begin before compiling its procedure bodies.
+// Introduced bindings must be found before falling back to their macro's
+// definition context; otherwise forward calls can retain an unrelated cell.
+func (b *builder) predeclareTop(xs []*reader.Node) error {
+	return b.predeclareRegion(xs, map[scheme.Value]bool{})
+}
+func (b *builder) predeclareRegion(xs []*reader.Node, active map[scheme.Value]bool) error {
+	for _, n := range xs {
+		if err := b.ctx.Err(); err != nil {
+			return err
+		}
+		switch b.headForm(n) {
+		case begin:
+			if active[n.Datum()] {
+				return syntax(n, "circular top-level begin")
+			}
+			active[n.Datum()] = true
+			parts, err := nodes(n)
+			if err != nil {
+				return err
+			}
+			if err := b.predeclareRegion(parts[1:], active); err != nil {
+				return err
+			}
+			delete(active, n.Datum())
+		case definition:
+			d, err := parseDefinition(n)
+			if err != nil {
+				return err
+			}
+			ident, err := id(d.name)
+			if err != nil {
+				return err
+			}
+			b.reserveTop(ident)
+		case defineRecordType:
+			parts, err := nodes(n)
+			if err != nil {
+				return err
+			}
+			if len(parts) < 4 {
+				return syntax(n, "record definition requires name, constructor and predicate")
+			}
+			constructor, err := nodes(parts[2])
+			if err != nil {
+				return err
+			}
+			if len(constructor) == 0 {
+				return syntax(parts[2], "constructor requires a name")
+			}
+			names := []*reader.Node{constructor[0], parts[3]}
+			for _, field := range parts[4:] {
+				fs, err := nodes(field)
+				if err != nil {
+					return err
+				}
+				if len(fs) < 2 || len(fs) > 3 {
+					return syntax(field, "field requires accessor and optional mutator")
+				}
+				names = append(names, fs[1:]...)
+			}
+			for _, name := range names {
+				ident, err := id(name)
+				if err != nil {
+					return err
+				}
+				b.reserveTop(ident)
+			}
+
+		case defineValues:
+			parts, err := nodes(n)
+			if err != nil {
+				return err
+			}
+			if len(parts) != 3 {
+				return syntax(n, "define-values requires formals and initializer")
+			}
+			f, err := parseValueFormals(parts[1])
+			if err != nil {
+				return err
+			}
+			for _, name := range f.names {
+				ident, err := id(name)
+				if err != nil {
+					return err
+				}
+				b.reserveTop(ident)
+			}
+
+		}
+	}
+	return nil
+}
+
+func (b *builder) reserveTop(ident scheme.Identifier) {
+	for _, existing := range b.engine.globals {
+		if existing.id.SameContext(ident) && (existing.form != variable || existing.imported) {
+			return
+		}
+	}
+	b.engine.global(ident).declared = true
 }

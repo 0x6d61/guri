@@ -307,3 +307,5 @@ exitは未退出のafterを実行し、emergency-exitは実行しません。
 返す文字列と環境変数一覧は変更禁止です。
 current-secondはUTCに既知のTAI−UTCを足した近似、jiffyはRuntime初期化時からの単調時計で1秒を10億とします。
 詳細な精度と更新の契約はSystem-Interfaceに記載します。
+
+- [R7RS-smallの結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit): 原本の測定結果、修正した衛生性、96見出しの証拠索引と残る制限。

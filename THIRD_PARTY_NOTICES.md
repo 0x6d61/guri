@@ -10,7 +10,7 @@ Guri本体のライセンスは[MIT](LICENSE)です。
 - 原本：`tests/r7rs-tests.scm`
 - 著作権表示：Copyright (c) 2009-2021 Alex Shinn。原本内の寄稿者の記載も保持。
 - ライセンス：BSD 3-Clause。[元のCOPYING全文](testdata/r7rs/upstream/chibi/COPYING)
-- 対象：[保存した原本](testdata/r7rs/upstream/chibi/r7rs-tests.scm)と[testdata/r7rs/chibi/](testdata/r7rs/chibi/)の派生テスト。
+- 対象：[保存した原本](testdata/r7rs/upstream/chibi/r7rs-tests.scm)と[testdata/r7rs/chibi/](testdata/r7rs/chibi/)の派生テスト、および[マクロ監査の回帰テスト](internal/core/audit_macro_test.go)。
 
 原本は改変せず保存し、派生ケースには出典と変更内容、ライセンス全文を記載しています。
 ソースの再配布では元の著作権表示、条件と免責文を保持してください。

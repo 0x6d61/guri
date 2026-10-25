@@ -68,7 +68,7 @@ func (t *transformer) sameIdentifier(a, b scheme.Identifier) bool {
 }
 func (t *transformer) literal(id scheme.Identifier) bool {
 	for _, l := range t.literals {
-		if t.sameIdentifier(id, l) {
+		if id.SameContext(l) {
 			return true
 		}
 	}
