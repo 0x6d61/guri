@@ -1,7 +1,7 @@
 # Schemeの数値手続き
 
 このページは内部の`core.NewCore`環境に登録した70の数値手続きを説明します。
-公開CLIと公開Go APIは従来のGuriであり、標準ライブラリの`import`にはまだ接続していません。
+#67で公開CLIと標準ライブラリの`import`へ接続しました。旧Go APIは削除しました。
 `(scheme base)`、`(scheme inexact)`、`(scheme complex)`と`(scheme r5rs)`の数値束縛への割り当ては`docs/r7rs/exports.csv`で追跡します。
 規格の参照先は[R7RS-small §6.2](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.2)です。
 
@@ -157,4 +157,4 @@ number->stringは明示的な基数prefixを付けず、同じ基数のstring->n
 `internal/number`は全登録名の実行と引数数、正確演算、丸め、比較、複素数、非有限値と書式往復を外部から検証します。
 `internal/core`は実際の数値手続きを使い、継続・末尾反復・複数値・例外との組み合わせを検証します。
 このページのscheme例は`TestNumericWikiExamples`で独立した内部環境を使って実行します。
-公開CLIの適合性結果はこの単体検証と別であり、importと9標準ライブラリは内部Runtimeへ接続済みで、公開CLI切替と結合監査は後続Issueです。
+この単体検証とは別に、#67で公開CLIへ接続して17件と62件を実測し、成功しました。16標準ライブラリをimportできます。

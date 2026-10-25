@@ -1,7 +1,7 @@
 # SchemeのRecord型定義
 
 `define-record-type`を内部の`core.NewCore`環境へ接続しています。
-公開CLIの切替は後続作業です。
+#67で公開CLIへ接続しました。
 標準ライブラリのimportは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
 この形式は[R7RS-small §5.5](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-7.html#TAG:__tex2page_sec_5.5)に対応します。
 旧Mapや独自のフィールド操作を代用せず、既存のRecordとRecordTypeを使います。
@@ -104,4 +104,4 @@ guardで捕捉できます。
 `internal/core/records_test.go`で生成ごとの型、順序、省略フィールド、可変性、型検査、内部定義とマクロを検証します。
 このページの10使用例を内部環境で実行します。
 Recordの読み戻し可能な独自表記やリフレクション手続きは追加しません。
-標準ライブラリと公開CLIへの接続は後続Issueであり、内部の成功と公開CLIの適合測定を区別します。
+#67で標準ライブラリと公開CLIへ接続しました。内部テストと公開CLIの測定は別々に記録します。

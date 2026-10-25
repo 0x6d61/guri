@@ -2,7 +2,7 @@
 
 GuriのR7RS実装はスタック型のバイトコードVMを使用します。
 #47で内部VMを実装し、#48でReaderの構文を命令列へコンパイルします。
-現在の公開CLIとInterpreter.Evalの切替は移行作業に含まれ、内部VMの実装だけでは切り替わりません。
+#67で公開CLIをこのVMへ切り替え、旧Interpreter.Evalは削除しました。
 
 ## 採用方式と処理の流れ
 
@@ -132,7 +132,7 @@ payload内に置くハンドラやパラメータの制御構造も不変とし�
 - 未初期化束縛、引数数、単一値の要求、位置付きエラー、キャンセルを確認。
 
 R7RSの参照箇所は[§3.1、§3.5](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-5.html)、[§4.1](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html)、[§6.10](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html)です。
-VMの単体検証を、未接続のCLIや標準手続き全体の準拠完了として扱いません。
+VMの単体検証と公開CLIの測定、標準手続き全体の準拠判断は区別します。
 
 ## 内部APIの使用例
 
@@ -183,4 +183,4 @@ emergency-exitは動的範囲を移動せずに終了要求を返します。
 Schemeのraiseを経由しないため、guardへ条件を渡さず、通常の呼び出しの継続へも復帰しません。
 afterで捕捉した継続もVMの再開アクションに終了要求を保持します。
 内部REPLはこの要求を通常の診断として表示せずに終了します。
-単体処理系のCLIで実際の終了コードへ接続する作業は#67です。
+#67で単体CLIの終了コードへ接続しました。[CLI](CLI)を参照してください。

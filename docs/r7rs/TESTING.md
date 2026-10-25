@@ -32,8 +32,8 @@ go build -o "$r7rs_work/r7rscheck" ./cmd/r7rscheck
 JSONの失敗件数と`suite_passed`は書き換えません。
 起動失敗、設定不備、キャンセル、出力上限超過など、実行基盤に関わるエラーは終了コード2です。
 
-現行Guriはimportと標準ライブラリを持たないため、初期の17ケースは失敗します。
-それをskipやxfailに変えずに測定します。
+初回の旧Guriでは17ケースが失敗しました。#67で公開CLIを移行し、現在は17件とChibi由来62件が成功します。
+失敗をskipやxfailに変えて成功させたものではありません。
 ソースは標準のプログラムとして実行するため、importを独自構文へ書き換えて成功率を上げることはしません。
 Readerや評価器など個々の機能のTDDは、それぞれのunitテストでも行います。
 
@@ -117,12 +117,12 @@ observeは必須結果の代用には使えず、成功件数にも入りませ�
 
 ## CI
 
-GoのCIは従来のunitテストとvetに加え、`-report-only`で測定します。
-測定ステップの名前にも、準拠判定のゲートではないことを記載します。
+GoのCIはunitテストとvetに加え、公開CLIの17件と62件をstrict実行します。
+この回帰ゲートは選択したケースの成功を要求し、規格全体の準拠宣言とは区別します。
 実行結果のJSONを`r7rs-measurements`というArtifactへ保存します。
 独自作成ケースは`r7rs-report.json`、Chibi由来ケースは`r7rs-chibi-report.json`です。
 CIが緑でも、JSONのfailや未測定の節は未対応として残ります。
-将来、必須ケースが揃った段階でstrict実行をゲートに加えます。
+原本監査の保留や未採用もJSONへ保存し、公開CLIの回帰ケースと混同しません。
 
 ## 外部スイートの比較
 
@@ -162,7 +162,7 @@ Guri本体のMITライセンスと外部由来の条件を混同しません。
 "$r7rs_work/r7rscheck" -program "$r7rs_work/guri" -suite testdata/r7rs/chibi/suite.json -report-only > "$r7rs_work/chibi-report.json"
 ```
 
-初回のGuri測定では62件がfailになります。
+初回の旧Guriでは62件がfailでした。#67の公開CLIでは62件がpassです。
 元のアサーションは変更せず、baseのimportとローカルなtestマクロを追加しています。
 マクロは選択した正確な値をequal?で比較し、期待値と式を一度ずつ評価します。
 近似Float比較や任意ライブラリを必要とするケースは、この初回の独立実行対象へ含めません。

@@ -2,7 +2,7 @@
 
 #46で、標準の記法を`internal/scheme`の値へ読み取る`internal/reader`を実装しました。
 このページは新しい内部Readerの対応範囲です。
-現在のCLIと`Interpreter.Eval`はまだ旧Readerと評価器を使い、新Readerは#48の内部コンパイラへ接続済みですが、公開CLIの切替は後続の移行作業です。
+#67で公開CLIをこのReaderとコンパイラ・VMへ切り替え、旧`Interpreter.Eval`は削除しました。
 現在使える言語の仕様は[言語仕様](https://github.com/0x6d61/guri/wiki/Language-Specification)を参照してください。
 
 ## 読み取れる記法
@@ -81,14 +81,14 @@ Reader自体で値を凍結し、標準のreadが返すデータまで変更不�
 
 #54で[標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers)を内部VMへ接続しました。
 string->numberとReaderは同じ変換を使い、省略引数の基数より文字列内の明示prefixを優先します。
-公開CLIは未接続で、importは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
+公開CLIとimportは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
 それらは#54で接続します。
 
 ## 内部APIの使用例
 
 `ReadAll`はソース全体を読み、`New`と`Read`は同じソースを1つずつ読みます。
 `Read`は入力終了時にGoのio.EOFを返し、GoのnilをScheme値にはしません。
-内部APIであり、現在の公開Go APIは変更していません。
+内部APIです。#67で旧公開Go APIを削除し、新しい組み込みAPIは提供しません。
 
 次の例は`internal/reader/example_test.go`で出力を検証します。
 

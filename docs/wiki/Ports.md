@@ -1,7 +1,7 @@
 # テキスト・バイナリポート
 
 このページの38束縛は内部の`core.NewCore`環境で利用できます。
-公開CLIと公開Go APIの切替は後続作業です。
+#67で公開CLIへ接続しました。旧ルートGo APIは削除し、新しい公開Go APIは提供しません。
 標準ライブラリのimportは内部Runtimeで利用でき、[提供範囲](https://github.com/0x6d61/guri/wiki/Libraries)を区別します。
 datumを扱うread、write、write-shared、write-simple、displayと、ファイル操作の13手続きも内部VMへ接続済みです。
 構文・共有・エラーと使用例は[datumとファイルの入出力](https://github.com/0x6d61/guri/wiki/Datum-File-IO)を参照してください。

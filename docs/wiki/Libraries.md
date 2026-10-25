@@ -2,7 +2,7 @@
 
 内部Runtimeにdefine-libraryとimportを接続しました。
 プログラムは空の環境から始め、importした束縛と自分で定義した名前を使用します。
-公開CLIと公開Go APIの切替は#67で行います。
+#67で公開CLIへ接続しました。旧Go APIは削除し、新しい公開Go APIは提供しません。
 REPLとevalの環境は#64で内部Runtimeへ接続済みです。
 テスト用のcore.NewCoreは従来どおり内部機能をまとめた環境であり、標準プログラムの初期環境とは区別します。
 基準は[R7RS-small 第5章](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-7.html)です。
@@ -139,7 +139,7 @@ Gaucheにもコアを事前コンパイルする仕組みと、Schemeファイ�
 インストール用の配置はGaucheにならい、`<prefix>/share/guri/<version>/lib`と`<prefix>/share/guri/site/lib`を使う設計です。
 ビルド時のGoリンカ-X設定で内部coreのstandardLibraryDirectoryとsiteLibraryDirectoryへ絶対パスを保持できます。
 未設定の開発バイナリではこれらの外部ディレクトリは追加しませんが、バイナリ内の標準ライブラリは利用できます。
-インストール手順とCLIの検索パス指定は#67で接続します。
+インストールとCLIの検索パス指定は[CLI](CLI)を参照してください。
 配布バージョン番号はリリース時に確定し、この配置の設計で新たなバージョン番号を決定しません。
 
 `(myapp util)`は各検索先のmyapp/util.sldに対応します。
@@ -216,7 +216,7 @@ filenameの型が違う場合は通常のerror-objectを送出します。
 
 最後の例は独立した一時ディレクトリで検証します。
 独自17件とChibi由来62件は内部Runtimeで期待出力まで成功しています。
-公開CLIは旧処理系のままなので、その適合性測定の17 fail／62 failをこの結果で置き換えません。
+#61当時の公開CLIは17 fail／62 failでした。#67で公開CLIを実測し、17 pass／62 passを確認しました。
 
 - [環境、eval、loadとREPL](https://github.com/0x6d61/guri/wiki/Evaluation-REPL): datumの評価、変更禁止と対話用の環境、loadの規則と継続、内部REPLの入出力。
 

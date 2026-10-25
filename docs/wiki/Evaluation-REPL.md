@@ -1,7 +1,7 @@
 # 環境、eval、loadとREPL
 
 #64で環境を指定する評価と対話環境を内部Runtimeへ接続しました。
-公開CLIと公開Go APIの切り替えは#67で行います。
+#67で公開CLIへ接続しました。旧Go APIは削除し、新しい公開Go APIは提供しません。
 基準は[R7RS §6.12](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.12)、[loadの定義](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.14)、[REPLの定義](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-7.html#TAG:__tex2page_sec_5.7)です。
 
 ## 構文と手続き
@@ -186,6 +186,6 @@ loadのファイル読取失敗はfile-error?、ソースのReader失敗はread-
 
 既存VMの引数数不一致や未初期化セルの実行時参照など、Go診断からSchemeの自動raiseへ未接続の経路は継続して監査対象とします。
 REPLはこれらの診断も表示して次の入力へ進みます。
-この内部実装の成功を、公開CLIの準拠測定の成功や公開Go APIの移行完了とは扱いません。
+#64の内部実装の検証と別に、#67で公開CLIの17件と62件を実測して成功しました。旧Go APIは削除済みです。
 exitとemergency-exitは#65で接続済みです。
-CLIの入力モード、表示とプロセス終了は#67で接続します。
+CLIの入力モード、貼り付け、表示と終了規則は[CLI](CLI)を参照してください。

@@ -158,4 +158,4 @@ file-exists?とdelete-fileは#61の実装を再利用します。
 featuresは引き続きguri、exact-closed、exact-complex、ieee-float、full-unicode、ratiosを提供します。
 これらは既存の数値プロファイルとUnicodeの対応を表し、r7rsはまだ広告しません。
 全16ライブラリの公開識別子を台帳と照合することと、言語全体の準拠完了は区別します。
-公開CLIの測定は17 fail／62 failを維持し、#66/#67で監査と移行後の測定を行います。
+#65当時の公開CLIは17 fail／62 failでした。#67で移行後に測定し、17 pass／62 passを確認しました。

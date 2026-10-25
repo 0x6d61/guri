@@ -15,8 +15,7 @@ import (
 )
 
 // REPL is an internal driver over the persistent interaction environment. Its
-// streams are borrowed; the public CLI/API migration is a separate change.
-// Prompts belong to the terminal frontend, not this datum/evaluation loop.
+// streams are borrowed. Terminal editing and prompts belong to the frontend.
 func (r *Runtime) REPL(ctx context.Context, filename string, input io.Reader, output, diagnostic io.Writer) (err error) {
 	if r.running {
 		return vm.ErrReentrant

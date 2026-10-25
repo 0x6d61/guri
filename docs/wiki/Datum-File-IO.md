@@ -2,7 +2,7 @@
 
 このページの13手続きは内部の`core.NewCore`環境で利用できます。
 [ポート基盤の38束縛](https://github.com/0x6d61/guri/wiki/Ports)と合わせて使用します。
-公開CLIと公開Go APIの切替は後続作業です。
+#67で公開CLIへ接続しました。旧ルートGo APIは削除し、新しい公開Go APIは提供しません。
 標準ライブラリのimportは内部Runtimeで利用でき、[提供範囲](https://github.com/0x6d61/guri/wiki/Libraries)を区別します。
 基準は[R7RS-small §6.13](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html)です。
 readはscheme read、write系とdisplayはscheme write、ファイル操作はscheme fileへの割り当てとして台帳で追跡しています。

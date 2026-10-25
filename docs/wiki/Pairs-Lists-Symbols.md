@@ -1,7 +1,7 @@
 # Pair、List、Symbolと等価性
 
 このページの63手続きは内部の`core.NewCore`環境に登録しています。
-公開CLIと公開Go APIの切替は後続作業です。
+#67で公開CLIへ接続しました。旧ルートGo APIは削除し、新しい公開Go APIは提供しません。
 標準ライブラリのimportは内部Runtimeで利用でき、[提供範囲](https://github.com/0x6d61/guri/wiki/Libraries)を区別します。
 公開CLIの従来のVector用appendやMap用assocを、ここに記載する標準の手続きと混同しないでください。
 参照先は[R7RS-small §6.1、§6.3、§6.4、§6.5、§6.10](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html)です。

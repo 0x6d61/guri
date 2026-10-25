@@ -1,7 +1,7 @@
 # SchemeのVectorとBytevector
 
 このページの27手続きは内部の`core.NewCore`環境に登録しています。
-公開CLIと公開Go APIの切替は後続作業です。
+#67で公開CLIへ接続しました。旧ルートGo APIは削除し、新しい公開Go APIは提供しません。
 標準ライブラリのimportは内部Runtimeで利用でき、[提供範囲](https://github.com/0x6d61/guri/wiki/Libraries)を区別します。
 従来のGo Slice型Vectorや不変Bytesの仕様とは区別します。
 baseとr5rsへの公開束縛の割り当ては`docs/r7rs/exports.csv`で追跡します。
@@ -171,4 +171,4 @@ total                                        ; => 12
 
 `internal/core/vectors_test.go`で使用例、全27名の登録、共有と独立コピー、境界、UTF-8、継続と2万要素の反復を検証します。
 `internal/scheme`でbulk操作の重複、変更前の範囲検証、空の不変オブジェクトへの変更を確認します。
-公開CLIの適合測定は内部実装と別に記録し、旧Guri機能の除去と標準ライブラリへの公開は後続作業です。
+#67で旧Guri機能を除去して公開CLIへ接続し、公開側の17件と62件も成功しました。内部実装の単体検証と別に測定しています。

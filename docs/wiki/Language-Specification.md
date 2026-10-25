@@ -1,232 +1,83 @@
-# 言語仕様
+# Guri 0.0.3の言語仕様
 
-このページは現行CLIの独自Guri仕様です。
-R7RSへの移行で追加した[標準Reader](https://github.com/0x6d61/guri/wiki/R7RS-Reader)は、まだ現在の評価器へ接続していません。
+R7RS-smallを目標仕様とするScheme処理系です。
+GoのバイトコードVMでシングルスレッド実行し、動的・強い型付けとレキシカルスコープを持ちます。
+公開CLIは標準Reader、コンパイラ、VMと16標準ライブラリに接続済みです。
+準拠宣言と未確認範囲は[監査結果](https://github.com/0x6d61/guri/wiki/R7RS-Audit)を参照してください。
 
-GuriはGoで実装した、シングルスレッドのASTインタプリタです。
-動的かつ強い型付けを採用し、LispのS式を使います。
-このページはv0.0.1の基本機能と、v0.0.2向けに追加した現在の実装を説明します。
-`defn`、String／Bytesの区別、while、cond、errorを含みます。
+## 値と記法
 
-## データ型
-
-| 型 | 記法 | 性質 |
+| 型 | 例・規則 | リファレンス |
 |---|---|---|
-| Nil | `nil` | 単一値 |
-| Boolean | `true`、`false` | 真偽値 |
-| Integer | `42`、`-3` | 符号付き64ビット整数 |
-| Float | `3.14`、`1e3` | 有限の64ビット浮動小数点数 |
-| String | `"hello"` | Unicode文字列、不変 |
-| Bytes | `b"hello"` | 任意のバイト列、不変 |
-| Symbol | `name` | 変数名や識別子 |
-| Keyword | `:name` | 自己評価する識別子。Mapを引数に呼び出せる |
-| List | `'(1 2 3)` | 連結構造は不変 |
-| Vector | `[1 2 3]` | 可変。GoのSliceに準拠 |
-| Map | `{:name "Alice"}` | 可変。GoのMapに準拠 |
-| Function | `(fn [x] x)` | 第一級関数。レキシカルクロージャ |
+| Boolean | `#t`、`#f`。偽値は`#f`だけ | [値層](https://github.com/0x6d61/guri/wiki/Runtime-Data-Model) |
+| 空List・Pair | `'()`、`'(1 2)`、`'(1 . 2)`。空ListとBooleanは別の値 | [Pair/List](https://github.com/0x6d61/guri/wiki/Pairs-Lists-Symbols) |
+| 数値 | 任意精度整数、正確な有理数、binary64、正確・不正確な複素数 | [数値](https://github.com/0x6d61/guri/wiki/Numbers) |
+| Character | `#\a`、`#\space`、`#\x672c` | [Character/String](https://github.com/0x6d61/guri/wiki/Characters-Strings) |
+| String | `"日本語"`。Unicodeコードポイント単位。可変な生成値と変更不可のリテラルを区別 | [Character/String](https://github.com/0x6d61/guri/wiki/Characters-Strings) |
+| Symbol | `'name`、`'|two words|` | [Symbol](https://github.com/0x6d61/guri/wiki/Pairs-Lists-Symbols) |
+| Vector | `#(1 2)`。固定長。`vector`で作った値は可変 | [Vector](https://github.com/0x6d61/guri/wiki/Vectors-Bytevectors) |
+| Bytevector | `#u8(0 255)`。固定長のバイト列 | [Bytevector](https://github.com/0x6d61/guri/wiki/Vectors-Bytevectors) |
+| Procedure | `(lambda (x) x)`。クロージャ、継続、組み込み手続き | [制御](https://github.com/0x6d61/guri/wiki/Control-Features) |
+| Record | `define-record-type`で定義する生成的な型 | [Record](https://github.com/0x6d61/guri/wiki/Records) |
+| Port | テキスト・バイナリ、入力・出力。資源の所有と借用を区別 | [Port](https://github.com/0x6d61/guri/wiki/Ports) |
+| Promise | `delay`、`delay-force`で作る遅延値 | [Promise](https://github.com/0x6d61/guri/wiki/Lazy-Evaluation) |
 
-Listの連結構造は変更できません。
-内部に格納したMapやVectorは可変のまま保持します。
-Stringは暗黙に数値へ変換されず、たとえば `(+ "1" 2)` は `TypeError` です。
+Map、Keyword、特別なnil、Go Slice互換のVector、不変Bytesは提供しません。
+`nil`、`true`、`false`、`:name`など、正当なScheme識別子は利用者が定義できます。
 
-## Reader
+## Readerと評価
 
-UTF-8のソースを読み取ります。
-空白で要素を区切り、`;` から行末まではコメントになります。
-`(...)` はList、`[...]` はVector、`{key value ...}` はMapです。
-`'expr` は `(quote expr)` と同じ意味です。
+UTF-8ソースとR7RSのdatumを読み取ります。
+`;`コメント、`#| ... |#`、`#;`、引用と準引用、datum label、fold-case directiveを扱います。
+通常のList記法は`(...)`、Vectorは`#(...)`、Bytevectorは`#u8(...)`です。
+詳細とReaderエラーは[標準Reader](https://github.com/0x6d61/guri/wiki/R7RS-Reader)、循環・共有データは[グラフ入出力](https://github.com/0x6d61/guri/wiki/Graph-IO)を参照してください。
 
-文字列で使用できるエスケープは `\"`、`\\`、`\n`、`\r`、`\t` です。
-閉じられていない文字列、不明なエスケープ、括弧の不一致、奇数個のMap要素、不正なUTF-8は `ReaderError` になります。
-Integerの範囲外リテラルと、Floatの範囲を超えるリテラルも `ReaderError` になります。
-実行時の算術演算によるオーバーフローは `ArithmeticError` です。
+名前はレキシカルな束縛を検索し、クロージャは外側の束縛セルを共有します。
+手続き呼び出しは引数を評価してから呼び出します。
+オペランドの評価順序など規格が未規定とする結果に、利用者のコードが依存しないようにします。
+末尾呼び出しはVMの継続を増やさず実行し、`apply`や継続の再開にも対応します。
+`call/cc`、複数値、`dynamic-wind`、例外と動的パラメータを利用できます。
 
-Bytesリテラルは `b"..."` と書き、Stringと同じエスケープに加えて `\xHH` を使用できます。
-HHは正確に2桁の16進数で、たとえば `b"\x00\xff"` は2バイトです。
-ソース内に直接書いたUnicode文字はUTF-8のバイト列として格納します。
-Bytesのエスケープが不正な場合も `ReaderError` になります。
-
-## 評価順と真偽
-
-トップレベルの式を上から順に評価し、最後の値を返します。
-空入力はnilです。
-CLIでは返り値を自動表示せず、`println` を呼び出したときに出力します。
-
-| 式 | 評価 |
-|---|---|
-| 数値、String、Bytes、Boolean、nil、Keyword | その値を返す |
-| Symbol | 環境から名前を検索する |
-| `()` | 空Listを返す |
-| `(f a b)` | f、a、bの順に評価して呼び出す |
-| `[a b]` | 左から要素を評価してVectorを作る |
-| `{key value ...}` | 記述順にキー、値を評価してMapを作る |
-| `'expr` | 内部を評価せずデータとして返す |
-
-偽値はnilとfalseだけです。
-`0`、`""`、`[]`、`{}`、`'()` は真値です。
-`if`、`and`、`or` は必要な式だけを評価します。
-`cond` は条件と式を交互に取り、最初の真値に対応する式だけを評価します。
-条件が一致しない場合や空の場合はnilを返し、奇数引数は評価前にArityErrorになります。
-`while` は各反復前に条件を評価し、真値の間、本体を順に実行します。
-条件が偽値になったらnilを返し、反復ごとのスコープは作りません。
-反復回数に比例してスタックを増やしません。
-
-## 束縛と関数
-
-`def` と `defn` はトップレベルの環境で名前を定義します。
-同一スコープの再定義は `DefinitionError` になります。
-既存の束縛の更新には `set!` を使います。
-`let` はローカルな束縛を順に作成します。
-
-関数は定義時の環境を保持し、外側の束縛セルを共有します。
-呼び出した場所の同名変数に置き換わることはありません。
-本体は順に評価して最後の値を返し、空の本体はnilを返します。
-`[a & rest]` の残りの引数はVectorになります。
-引数の型は宣言しません。
-
-```clojure
-(defn make-counter []
-  (let [n 0]
-    (fn [] (set! n (inc n)))))
-(def next (make-counter))
-(println (next)) ; => 1
-(println (next)) ; => 2
+```scheme
+(import (scheme base) (scheme write))
+(define (make-counter)
+  (let ((n 0))
+    (lambda () (set! n (+ n 1)) n)))
+(define next (make-counter))
+(write (list (next) (if '() 'true 'false)))
+(newline) ; (1 true)
 ```
 
-## 末尾呼び出し
+## 可変性とコピー
 
-関数本体の最後の式は末尾位置です。
-末尾位置にある式では、次の場所へ末尾位置を引き継ぎます。
+Pair、String、Vector、Bytevectorは、変数への代入で同じオブジェクトを共有します。
+リテラル定数の変更はエラーです。
+`list-copy`、`string-copy`、`vector-copy`、`bytevector-copy`などのコピー手続きを使用します。
+Vectorの長さ・容量の区別や基底配列を共有するsliceはありません。
+`vector-copy`は独立した要素領域への浅いコピーです。
+等価性は`eq?`、`eqv?`、`equal?`を目的に応じて使い分けます。
 
-| 形式 | 末尾位置を引き継ぐ場所 |
-|---|---|
-| if | 選択したyesまたはno |
-| cond | 最初の真値に対応する式 |
-| do、let | 本体の最後の式 |
-| and、or | 最後の式 |
-
-末尾呼び出しは現在の呼び出しの後に処理を残さないため、評価ループで次の呼び出しへ移ります。
-自己再帰、相互再帰、クロージャを含め、末尾呼び出しの回数に比例してGoのスタックや復帰用の継続を増やしません。
-呼び出しごとに引数の束縛を作り、クロージャが捕捉した束縛は必要な間保持します。
-既存の評価順、共有束縛セル、引数数の検証、エラー位置は変わりません。
-applyは最後のVectorまたはListを引数へ展開して同じ呼び出し機構へ転送し、末尾位置での呼び出しを維持します。
-
-```clojure
-(defn sum [n acc]
-  (if (= n 0) acc (sum (- n 1) (+ acc n))))
-(println (sum 100000 0)) ; => 5000050000
+```scheme
+(import (scheme base) (scheme write))
+(define a (vector 1 2 3))
+(define b a)
+(vector-set! b 0 9)
+(define c (vector-copy a))
+(vector-set! c 0 100)
+(write (list a c))
+(newline) ; (#(9 2 3) #(100 2 3))
 ```
 
-引数の評価、defやset!の右辺、whileの条件や本体では、その式の後に処理が残ります。
-これらを囲む評価の末尾位置として扱いません。
-ただし、そこで呼び出した関数自身の末尾再帰は最適化されます。
-たとえば `(+ 1 (f))` のfから戻った後には加算が必要です。
-このような非末尾呼び出しでは、必要な継続を保持します。
+## エラーと実行環境
 
-この保証は現在のGuriの関数と特殊形式を対象とします。
-call/ccなどの第一級継続は未実装です。
+Schemeの例外は`raise`、`raise-continuable`、`error`、`guard`などで扱います。
+Reader、束縛解決、型、引数数、範囲、入出力のエラーでは可能な範囲でファイル名・行・列と原因を示します。
+旧GuriのGoエラー型は公開契約として残しません。
+[例外](https://github.com/0x6d61/guri/wiki/Exceptions-Parameters)、[プログラムとライブラリ](https://github.com/0x6d61/guri/wiki/Libraries)、[CLI](https://github.com/0x6d61/guri/wiki/CLI)に詳細を記載します。
 
-## 等価性とMapキー
+## 実装範囲と制限
 
-`=` はIntegerとFloatを数値として比較します。
-異種数値の比較では、IntegerをFloatへ変換する丸めで誤判定しません。
-List、Vector、Mapは型と内容で比較し、Mapのキーの並び順は問いません。
-Functionは参照同一性で比較します。
-
-```clojure
-(println (= 1 1.0)) ; => true
-(println (= 9007199254740993 9007199254740992.0)) ; => false
-(println (= [1] '(1))) ; => false
-(println (= {:a 1 :b 2} {:b 2 :a 1.0})) ; => true
-```
-
-Mapのキーに使える型はNil、Boolean、Integer、Float、String、Bytes、Symbol、Keywordです。
-StringとBytesは暗黙に変換せず、等価性とMapのキー検索でも区別します。
-キー検索はGoのMapと同じく型を区別するため、`1` と `1.0` は別のキーになります。
-Mapの等価性でも、キーはこの検索規則で対応付けます。
-`=` による数値比較と、Mapのキー検索は規則が異なります。
-
-```clojure
-(def m {1 "integer" 1.0 "float"})
-(println (get m 1)) ; => integer
-(println (get m 1.0)) ; => float
-```
-
-## StringとBytes
-
-Stringの `len`、`nth`、`slice` はUnicodeコードポイント単位です。
-`nth` は1コードポイントのString、`slice` は部分Stringを返します。
-StringをUTF-8の途中で分割しません。
-コードポイントは表示上の1文字と異なる場合があり、結合文字のまとめやUnicode正規化は行いません。
-
-Bytesの `len`、`nth`、`slice` はバイト単位です。
-`nth` は0〜255のInteger、`slice` はBytesを返します。
-どちらの型も不変で、負の添字を許しません。
-`nth` の境界は `0 <= index < len`、`slice` の境界は `0 <= low <= high <= len` です。
-
-初期仕様v0.0.1ではStringのlenをバイト長としていましたが、この仕様ではコードポイント数へ変更しています。
-
-```clojure
-(println (len "日本語") (len b"日本語")) ; => 3 9
-(println (nth "日本語" 1)) ; => 本
-(println (slice "A😀B" 1 2)) ; => 😀
-(println (nth b"Alice" 0)) ; => 65
-(println (slice b"Alice" 0 3)) ; => b"Ali"
-(println (= "A" b"A")) ; => false
-```
-
-## Vectorの共有
-
-Vectorは基底配列、長さ、容量を持ちます。
-代入や関数への受け渡しではヘッダをコピーし、基底配列を共有します。
-リテラルの初期容量は要素数と同じです。
-
-`assoc!` は共有する配列の要素を変更します。
-`append` は新しいヘッダを返し、容量が足りれば基底配列を再利用します。
-元の変数の長さは変わらないため、長さを更新するには返り値を代入します。
-
-```clojure
-(def a [1 2 3])
-(def b a)
-(assoc! b 0 9)
-(println a) ; => [9 2 3]
-(set! b (append b 4))
-(println (len a) (len b)) ; => 3 4
-```
-
-`slice` は配列を共有し、範囲は `0 <= low <= high <= cap` です。
-長さを超えていても容量以内の領域を参照できます。
-`nth` と `assoc`、`assoc!` の添字は長さ以内に制限されます。
-`assoc` と `clone` は独立した配列へ要素を浅くコピーします。
-
-## Mapの共有
-
-Mapの代入では本体を共有します。
-`assoc!`、`dissoc!`、`update!` は元のMapを変更します。
-`assoc`、`dissoc`、`update`、`clone` は浅いコピーを返します。
-コピーしたMap内のVectorやMapは引き続き共有します。
-列挙順序は保証しません。
-
-## エラー
-
-| エラー | 条件 |
-|---|---|
-| ReaderError | 不正なソース |
-| NameError | 未定義の名前の参照 |
-| DefinitionError | 不正な定義、再定義、未定義名へのset! |
-| ArityError | 引数数の不一致 |
-| TypeError | 型が一致しない操作、無効なMapキー |
-| IndexError | Vector、String、Bytesの添字やsliceの範囲外アクセス |
-| ArithmeticError | 整数オーバーフロー、ゼロ除算、非有限Float値を生む演算 |
-| UserError | error関数による明示的な評価中断 |
-
-エラーには可能な範囲でファイル名、1始まりの行と列、原因を含めます。
-列はUnicodeコードポイント単位です。
-関数本体で発生したエラーには、本体の定義元の位置を使用します。
-
-`(error message)` はStringを1引数取り、指定メッセージのUserErrorを返します。
-空のメッセージも許可し、`%` を含む文字列を書式として解釈しません。
-error自体は出力やプロセス終了を行いません。
-エラー後の式は評価せず、エラー前の副作用は保持します。
-Go APIではEvalがerrorを返し、同じInterpreterを引き続き使用できます。
-CLIは診断を標準エラーへ出力し、終了コード1で終了します。
+binary64以外の任意の浮動小数点精度指定は未採用です。
+数値の非有限値や除算は旧GuriのArithmeticError規則を継承せず、標準の数値塔の仕様に従います。
+非Linuxでの端末Readyと実機検証は#95に残っています。
+全16標準ライブラリの557公開束縛の一覧と個別契約は[関数一覧](https://github.com/0x6d61/guri/wiki/Functions)を参照してください。

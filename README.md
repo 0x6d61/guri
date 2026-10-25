@@ -1,192 +1,88 @@
 # Guri
 
-GuriはLispのS式を使う、動的かつ強い型付けの言語です。
-Goで実装したASTインタプリタが、シングルスレッドでプログラムを評価します。
+GuriはGoで実装したScheme処理系です。
+バイトコードVMで実行し、単体のCLIでアプリケーションを作ることを主用途とします。
+現在のバージョンは **0.0.3** です。
+R7RS-smallへの移行中であり、準拠宣言はまだ行っていません。
 
-R7RS-smallへの移行を計画しています。
-現在の実装は独自仕様のGuriであり、R7RS-small準拠ではありません。
-移行方針と未決事項は [準拠計画の原稿](docs/wiki/R7RS-Conformance.md) で管理します。
-
-## 言語仕様と関数リファレンス
-
-- [言語仕様](https://github.com/0x6d61/guri/wiki/Language-Specification)
-- [特殊形式](https://github.com/0x6d61/guri/wiki/Special-Forms)
-- [全組み込み関数のリファレンス](https://github.com/0x6d61/guri/wiki/Functions)
-
-原稿は [docs/wiki](docs/wiki) で管理します。
-仕様や関数を変更するときは同じPRで原稿を更新し、マージ後に [Wiki公開手順](docs/WIKI.md) に従って同期します。
-
-## ファイルの実行
+## ビルドと実行
 
 Go 1.26以降を使用します。
-リポジトリのルートで次のコマンドを実行すると、カウンターが `1`、`2` の順に出力されます。
 
 ```sh
-go run ./cmd/guri examples/counter.guri
+go build -o build/guri ./cmd/guri
+./build/guri examples/counter.scm
+./build/guri                 # REPL
+./build/guri --version
 ```
 
-実行ファイルを作る場合は、次のコマンドを使います。
+[counter.scm](examples/counter.scm)は `1`、`2` の順に出力します。
+ファイルのプログラムは最初に必要なライブラリをimportします。
+ファイル実行では最終式の値を自動表示しません。
+
+```scheme
+(import (scheme base) (scheme write))
+(define (make-adder n) (lambda (x) (+ n x)))
+(define add10 (make-adder 10))
+(display (add10 5))
+(newline) ; 15
+```
+
+REPLは16標準ライブラリの束縛を初期状態で利用でき、式の値を表示します。
+端末では `guri> ` を表示します。
+bracketed paste対応端末では、複数行を貼り付けた後にEnterを押すとまとめて実行します。
+貼り付けの途中にプロンプトを挿入しません。
+パイプからのREPL入力にはプロンプトを出しません。
 
 ```sh
-go build -o guri ./cmd/guri
-./guri examples/counter.guri
+printf '(+ 1 2)\n' | ./build/guri
+printf '(import (scheme base) (scheme write)) (display 42)\n' | ./build/guri -
+./build/guri -I /path/to/libraries /anywhere/program.scm arg1 arg2
 ```
 
-CLIはファイルを1つ受け取り、トップレベルの式を上から順に評価します。
-出力には `println` を使います。
-評価エラーは標準エラー出力にファイル名、行、列と原因を表示し、終了コード1で終了します。
-引数の使い方が不正な場合の終了コードは2です。
+`-` は標準入力全体をプログラムとして読み込みます。
+`command-line`はスクリプト名と残りの引数を返し、REPLでは起動コマンド名を返します。
+CLIの使用方法の誤りは終了コード2、通常の実行エラーは1、成功は0です。
+REPLの通常エラーは表示後に次の入力を受け付けます。
+詳細は[CLIとインストール](docs/wiki/CLI.md)を参照してください。
 
-## 関数とデータ
+## インストールとライブラリ
 
-```clojure
-(defn make-adder [n] (fn [x] (+ n x)))
-(def add10 (make-adder 10))
-(println (add10 5)) ; 15
-
-(def user {:name "Alice" :age 25})
-(assoc! user :age 26)
-(println (:age user)) ; 26
-
-(def a [1 2 3])
-(def b a)
-(assoc! b 0 9)
-(println a) ; [9 2 3]
+```sh
+make build
+make install PREFIX="$HOME/.local"
 ```
 
-`(defn name [args...] body...)` は `(def name (fn [args...] body...))` の糖衣構文です。
-`defn` はトップレベルで関数を定義し、定義した関数を返します。
-同じ名前の再定義はエラーになるため、値の再代入には `set!` を使います。
+`make install`はバイナリとライブラリ配置用ディレクトリを作ります。
+16標準ライブラリはGoの実装としてバイナリへ組み込まれており、別ファイルのコピーは不要です。
+外部ライブラリの検索順は `-I`、`GURI_LOAD_PATH`、`<prefix>/share/guri/site/lib`、`<prefix>/share/guri/0.0.3/lib` です。
+開発用の直接ビルドではインストール先を仮定しません。
+cwd、スクリプトの隣、`examples/`、リポジトリの `lib/` は暗黙に探索しません。
+詳細は[ライブラリ仕様](docs/wiki/Libraries.md)を参照してください。
 
-偽値は `nil` と `false` だけです。
-`and` と `or` は短絡評価します。
-`fn` はレキシカルスコープを持ち、外側の束縛セルを共有します。
-可変長引数は `[x & rest]` と書き、残りの引数をVectorとして受け取ります。
+## 仕様と対応状況
 
-反復処理は `(while condition body...)` と書き、終了時にnilを返します。
-条件を反復ごとに評価し、本体は現在の環境で実行します。
+- [言語仕様](docs/wiki/Language-Specification.md)と[構文](docs/wiki/Special-Forms.md)
+- [全16標準ライブラリの557公開束縛](docs/wiki/Functions.md)（構文・補助キーワードを含む）
+- [VM設計](docs/wiki/Bytecode-VM.md)、[要求台帳と未決事項](docs/wiki/R7RS-Conformance.md)
+- [テストの実行方法](docs/r7rs/TESTING.md)と[監査結果](docs/wiki/R7RS-Audit.md)
+- [GitHub Wiki](https://github.com/0x6d61/guri/wiki)、[Wiki公開手順](docs/WIKI.md)
 
-```clojure
-(let [n 0]
-  (while (< n 3)
-    (println n)
-    (set! n (inc n))))
-```
+旧Guriの独自構文、Map/Keyword、Go Slice型Vector、Bytes、およびルートのGo APIは削除しました。
+SchemeのPair、固定長Vector、Bytevector、可変Unicode Stringへ移行しています。
+旧テスト56件の移行・廃止理由は[対応表](docs/r7rs/legacy-tests.csv)で追跡します。
+新しい組み込み用Go APIは今回提供しません。
 
-複数条件の分岐は `(cond condition expression ...)` と書きます。
-最初の真値に対応する式だけを評価し、一致しなければnilを返します。
+公開CLIの回帰ケースは17件とChibi由来62件が成功しています。
+Chibi原本の監査は1,213成功、`r7rs`広告に関する1判定を保留しています。
+任意精度指数表記の未採用、非LinuxでのポートReadyと実機検証（#95）、準拠宣言とリリース判断は残っています。
+これらを全体の準拠完了として扱いません。
 
-```clojure
-(defn direction [command]
-  (cond
-    (= command ">") 1
-    (= command "<") -1
-    true 0))
-(println (direction ">")) ; 1
-```
-
-[括弧対応表を作るサンプル](examples/search-brackets.guri) では、Stringのnth、while、condを組み合わせています。
-
-Listの連結構造は不変です。
-VectorはGoのSliceと同じく、代入時にヘッダをコピーして基底配列を共有します。
-`append` の返り値を変数に保持するには、`(set! b (append b 4))` と書きます。
-Mapは参照を共有し、`assoc`、`dissoc`、`update` は浅いコピーを、末尾に `!` がある操作は元のMapを変更します。
-
-## 組み込み関数の引数
-
-| 関数 | 引数 |
-|---|---|
-| `+`、`*` | 0個以上。空ならそれぞれ0、1 |
-| `-` | 1個以上。1個なら符号反転 |
-| `/` | 2個以上。常にFloatを返す |
-| `=`、`<`、`<=`、`>`、`>=` | 2個以上 |
-| `!=` | 2個 |
-| `inc`、`not`、`len`、`cap`、`clone` | 1個 |
-| `get` | Map、キー、省略可能なデフォルト値 |
-| `assoc`、`assoc!` | MapまたはVector、キーまたは添字、値 |
-| `dissoc`、`dissoc!` | Map、1個以上のキー |
-| `update`、`update!` | Map、キー、関数、その関数への追加引数 |
-| `append`、`conj` | Vector、0個以上の追加要素 |
-| `nth` | Vector、StringまたはBytes、0始まりの添字 |
-| `slice` | Vector、StringまたはBytes、開始位置、終了位置 |
-| `reduce` | 関数、初期値、Vector |
-| `println` | 0個以上。表示後にnilを返す |
-| `error` | Stringのメッセージ1個。UserErrorで評価を中断 |
-| `apply` | 関数、固定引数0個以上、最後にVectorまたはList |
-
-`=` はIntegerとFloatを数値として比較します。
-Mapのキーの型はGoのMapと同様に区別するため、キーの `1` と `1.0` は別のキーになります。
-Mapの列挙順序と表示順序は保証しません。
-Stringの `len`、`nth`、`slice` はUnicodeコードポイント単位です。
-不変のバイト列は `b"..."` と書き、バイト単位で扱います。
-Bytesの `nth` は0〜255のIntegerを返し、`slice` はBytesを返します。
-従来のStringの `len` がバイト長だった仕様から変更しています。
-
-```clojure
-(println (len "日本語") (len b"日本語")) ; 3 9
-(println (nth "日本語" 1)) ; 本
-(println (slice "Alice" 0 3)) ; Ali
-(println (nth b"Alice" 0)) ; 65
-```
-
-## エラーによる中断
-
-v0.0.1では `(error message)` で、指定したStringをメッセージとするUserErrorを発生させます。
-関数やループからも評価を中断でき、CLIは診断を表示して終了コード1で終了します。
-Go APIではerrorが返り、ホストプロセスは終了しません。
-
-```clojure
-(defn positive [n]
-  (if (<= n 0) (error "n must be positive") n))
-(println (positive 3)) ; 3
-```
-
-## 末尾呼び出し
-
-v0.0.2向けに末尾呼び出しを実装しています。
-自己再帰、相互再帰とクロージャの末尾呼び出しを、回数に比例してGoのスタックを増やさず実行します。
-
-```clojure
-(defn sum [n acc]
-  (if (= n 0) acc (sum (- n 1) (+ acc n))))
-(println (sum 100000 0)) ; 5000050000
-```
-
-## apply
-
-applyは最後のVectorまたはListを引数列に展開して呼び出します。
-固定引数を先行させることもでき、末尾位置のapply経由でも末尾呼び出しを維持します。
-
-```clojure
-(println (apply + [1 2 3])) ; 6
-(println (apply + 10 '(1 2 3))) ; 16
-```
-
-return、break、exitは引き続きv0.0.2の計画です。
-詳細は [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap) を参照してください。
-
-## Goからの利用
-
-```go
-interpreter := guri.NewInterpreter()
-value, err := interpreter.Eval("example.guri", "(+ 1 2)")
-```
-
-`Eval` は最後の式の値を返し、空入力ではnilを返します。
-同じInterpreterに対する呼び出しはトップレベルの定義を保持します。
-`interpreter.Output` に `io.Writer` を設定すると、`println` の出力先を変更できます。
-Interpreterは複数のgoroutineから同時に使用できません。
-
-## 開発時の検証
+## 開発
 
 ```sh
 go test ./...
 go vet ./...
 ```
 
-開発手順は [AGENTS.md](AGENTS.md) に従います。
-
-## 外部テストのライセンス
-
-Chibi由来のR7RSテストを含みます。
-出典と適用範囲は[外部ライセンス表示](THIRD_PARTY_NOTICES.md)に記載します。
+開発フローは[AGENTS.md](AGENTS.md)、外部コードの条件は[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)を参照してください。

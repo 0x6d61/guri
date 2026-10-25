@@ -312,7 +312,7 @@ func TestEvaluationWikiExamplesAndBindings(t *testing.T) {
 			continue
 		}
 		count++
-		if row[5] != "内部Runtimeのimport実装済み・公開CLI未接続" {
+		if row[5] != "公開CLIのimport実装済み" {
 			t.Fatal(row)
 		}
 		if row[3] == "64" && !strings.Contains(string(doc), "("+row[1]+" ") && !strings.Contains(string(doc), "("+row[1]+")") {

@@ -1,93 +1,29 @@
 # Guriの言語仕様と関数リファレンス
 
-このWikiは、Guriで使用できる構文と関数を説明します。
-v0.0.1の基本機能である`defn`、String／Bytes、while、cond、errorを含みます。
-v0.0.2向けの末尾呼び出し対応とapplyを追加しています。
-R7RS-smallへの移行を計画しています。
-目標はGuri自体でアプリケーションを開発・実行する単体処理系です。
-標準入出力と資源管理の設計方針は[準拠計画](https://github.com/0x6d61/guri/wiki/R7RS-Conformance)に記録します。
-現在の処理系はR7RS-small準拠ではありません。
-[準拠計画と要求追跡](https://github.com/0x6d61/guri/wiki/R7RS-Conformance)では、目標仕様と設計の未決事項を現在の仕様から区別します。
-実装済みの機能と残りの計画は [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap) で区別します。
+Guri 0.0.3は、Goで実装したバイトコードVMのScheme処理系です。
+単体CLIでのアプリケーション開発・実行を主用途とします。
+16標準ライブラリを公開CLIからimportできます。
+R7RS-smallの準拠宣言は保留しており、未確認事項を[準拠計画](https://github.com/0x6d61/guri/wiki/R7RS-Conformance)と[監査結果](https://github.com/0x6d61/guri/wiki/R7RS-Audit)で追跡します。
 
 | ページ | 内容 |
 |---|---|
-| [言語仕様](https://github.com/0x6d61/guri/wiki/Language-Specification) | 型、Reader、評価規則、共有、エラー |
-| [特殊形式](https://github.com/0x6d61/guri/wiki/Special-Forms) | `def`、`defn`、`fn`、条件分岐、束縛など全12形式 |
-| [関数リファレンス](https://github.com/0x6d61/guri/wiki/Functions) | 全30関数の引数、型、返り値、変更の有無、使用例、エラー |
-| [準拠計画と要求追跡](https://github.com/0x6d61/guri/wiki/R7RS-Conformance) | R7RS-smallの要求台帳、差分、設計相談と受入条件 |
-| [バイトコードVMの設計](https://github.com/0x6d61/guri/wiki/Bytecode-VM) | 命令、フレーム、末尾呼び出し、継続とネイティブの契約 |
-| [Schemeのコア構文](https://github.com/0x6d61/guri/wiki/Core-Syntax) | 内部環境のコア10形式と、束縛解決・バイトコード生成 |
-| [syntax-rulesマクロ](https://github.com/0x6d61/guri/wiki/Syntax-Rules) | マクロの5形式、補助構文、衛生性、パターンと繰り返し |
-| [標準Reader](https://github.com/0x6d61/guri/wiki/R7RS-Reader) | R7RS datumの読み取りと、実行への未接続範囲 |
-| [内部データモデル](https://github.com/0x6d61/guri/wiki/Runtime-Data-Model) | R7RS値層の契約、unitテストと未接続の機能 |
-| [適合性テスト](https://github.com/0x6d61/guri/wiki/R7RS-Testing) | ケースの実行方法、結果の分類と未対応の測定 |
-| [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap) | R7RS-smallへの移行順序と既存バージョンの実装記録 |
+| [CLIとインストール](https://github.com/0x6d61/guri/wiki/CLI) | ビルド、REPL、貼り付け、ファイル実行、検索先、終了コード |
+| [言語仕様](https://github.com/0x6d61/guri/wiki/Language-Specification) | 型、Reader、評価、可変性とエラー |
+| [構文リファレンス](https://github.com/0x6d61/guri/wiki/Special-Forms) | コア構文、マクロ、派生構文と使用例 |
+| [関数・公開束縛一覧](https://github.com/0x6d61/guri/wiki/Functions) | 全16ライブラリ、557公開束縛と分野別リファレンス |
+| [ライブラリ](https://github.com/0x6d61/guri/wiki/Libraries) | import、define-library、配置と初期化 |
+| [環境、eval、loadとREPL](https://github.com/0x6d61/guri/wiki/Evaluation-REPL) | 評価環境と対話実行 |
+| [バイトコードVM](https://github.com/0x6d61/guri/wiki/Bytecode-VM) | 命令、継続とproper tail recursion |
+| [適合性テスト](https://github.com/0x6d61/guri/wiki/R7RS-Testing) | テストの実行方法と結果の分類 |
+| [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap) | 移行完了範囲と残る作業 |
 
-## 実行方法
+プログラムは必要なライブラリをimportしてから実行します。
 
-Go 1.26以降で、リポジトリのルートから次のコマンドを実行します。
-
-```sh
-go run ./cmd/guri examples/counter.guri
+```scheme
+(import (scheme base) (scheme write))
+(display (+ 20 22))
+(newline) ; 42
 ```
 
-CLIは各式を評価します。
-値を画面に表示するときは `println` を使用します。
-各ページのコード例では、`; =>` が出力を示します。
-コードブロックごとに独立した環境で実行します。
-
-```clojure
-(defn add [x y] (+ x y))
-(println (add 2 3)) ; => 5
-```
-
-## 現在の対応範囲
-
-- Stringの `len`、`nth`、`slice` はUnicodeコードポイント単位です。
-- `b"..."` は不変のBytesで、バイト単位の `len`、`nth`、`slice` に対応します。
-- 入出力の組み込み関数は `println` です。バイト入力と改行なしのバイト出力は未実装です。
-- `while` と末尾呼び出しの反復で、回数に比例してGoのスタックを増やさず実行できます。
-- `cond` で条件を順に調べ、最初に一致した分岐だけを実行できます。
-- `(error message)` でUserErrorを発生させ、現在の評価を中断できます。
-- `apply` でVectorまたはListを引数に展開できます。apply経由の末尾呼び出しも評価ループで処理します。
-
-[括弧対応表を作る例](https://github.com/0x6d61/guri/blob/master/examples/search-brackets.guri) は、Stringのnth、while、condを組み合わせて動作します。
-正常時は対応表のMapを返し、括弧不一致はerrorで中断します。
-
-未実装の機能を使用可能な関数として記載せず、追加した機能の仕様と使用例を実装と同じPRで更新します。
-原稿は [docs/wiki](https://github.com/0x6d61/guri/tree/master/docs/wiki) で管理します。
-
-- [派生構文と準引用](https://github.com/0x6d61/guri/wiki/Derived-Syntax)
-
-- [継続と複数値の制御機能](https://github.com/0x6d61/guri/wiki/Control-Features)
-
-- [dynamic-windと動的な実行範囲](https://github.com/0x6d61/guri/wiki/Dynamic-Wind)
-
-- [例外と動的パラメータ](https://github.com/0x6d61/guri/wiki/Exceptions-Parameters)
-
-- [標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers): 内部VMの数値塔、比較、整数演算、数学関数、数値と文字列の変換。公開CLIは未接続で、importは内部Runtimeへ接続済み。
-
-- [Pair、List、Symbolと等価性](https://github.com/0x6d61/guri/wiki/Pairs-Lists-Symbols): 内部VMの63手続きと、循環の比較、共有とコピー、mapと探索の継続。
-
-- [CharacterとString](https://github.com/0x6d61/guri/wiki/Characters-Strings): 内部VMの50手続き、Unicodeの分類と大小変換、可変Stringと継続。
-
-- [VectorとBytevector](https://github.com/0x6d61/guri/wiki/Vectors-Bytevectors): 内部VMの27手続き、固定長と浅いコピー、重複copy、UTF-8とコールバック継続。
-
-- [datum labelとグラフの読み書き](https://github.com/0x6d61/guri/wiki/Graph-IO): 内部Reader/Writerの共有・循環と3出力方式。標準read/writeのポート束縛も内部VMへ接続済み。
-
-- [Record型定義](https://github.com/0x6d61/guri/wiki/Records): 内部VMのdefine-record-typeと、生成するコンストラクタ・述語・取得／変更手続き。
-
-- [テキスト・バイナリポート](https://github.com/0x6d61/guri/wiki/Ports): 内部VMの38束縛、開閉と借用、文字／バイトの入出力、current portsと継続。datumのread/write、ファイルと公開CLIは後続。
-
-- [datumとファイルの入出力](https://github.com/0x6d61/guri/wiki/Datum-File-IO): 内部VMの13手続き、ストリームReader、write/display、ファイルの所有と継続。公開CLIは後続。importは内部Runtimeへ接続済み。
-
-- [ライブラリとプログラムの環境](https://github.com/0x6d61/guri/wiki/Libraries): define-library/import、インストール先と追加検索パスの規則、16標準ライブラリの提供範囲、初期化と継続。
-
-- [Promiseと遅延評価](https://github.com/0x6d61/guri/wiki/Lazy-Evaluation): scheme lazyの5束縛、メモ化と再入、force時の動的環境、delay-forceの空間要件。
-
-- [環境、eval、loadとREPL](https://github.com/0x6d61/guri/wiki/Evaluation-REPL): datumの評価、変更禁止と対話用の環境、loadの規則と継続、内部REPLの入出力。
-
-- [プロセス情報、終了と時計](https://github.com/0x6d61/guri/wiki/System-Interface): command-line、環境変数、exitとemergency-exit、TAIと単調時計。
-
-- [R7RS-smallの結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit): 原本の測定結果、修正した衛生性、96見出しの証拠索引と残る制限。
+旧Guriの独自構文・型とルートGo APIは0.0.3で削除しました。
+過去の仕様はGitの履歴に残し、現在のリファレンスと区別します。

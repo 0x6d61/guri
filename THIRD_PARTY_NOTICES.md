@@ -1,7 +1,7 @@
 # 外部由来のコードとライセンス
 
 Guri本体のライセンスは[MIT](LICENSE)です。
-次の外部テストと派生物には、元のライセンス条件も適用されます。
+次の外部コード、テストと派生物には、元のライセンス条件も適用されます。
 
 ## Chibi SchemeのR7RSテスト
 
@@ -28,3 +28,16 @@ ReaderのUnicode case foldingに`golang.org/x/text/cases` v0.43.0を使用しま
 - 出典：https://go.googlesource.com/text/+/refs/tags/v0.43.0/
 
 ソースやバイナリを配布する際は、元のライセンス条件に従い著作権表示、条件と免責文を保持してください。
+
+## golang.org/x/term、golang.org/x/sys
+
+端末REPLの行編集、bracketed paste、端末モードの復元に`golang.org/x/term` v0.47.0を使用します。
+標準ライブラリには行編集と貼り付け範囲の認識がないため採用しました。
+OSごとの端末操作で`golang.org/x/sys` v0.49.0を間接的に使用します。
+
+- 著作権表示：Copyright 2009 The Go Authors.
+- ライセンス：BSD 3-Clause。[termのLICENSE](docs/licenses/golang.org-x-term/LICENSE)、[sysのLICENSE](docs/licenses/golang.org-x-sys/LICENSE)
+- 追加の特許権許諾：[termのPATENTS](docs/licenses/golang.org-x-term/PATENTS)、[sysのPATENTS](docs/licenses/golang.org-x-sys/PATENTS)
+- 出典：[term v0.47.0](https://go.googlesource.com/term/+/refs/tags/v0.47.0/)、[sys v0.49.0](https://go.googlesource.com/sys/+/refs/tags/v0.49.0/)
+
+バイナリを配布する際も、元のライセンス条件に従って著作権表示、条件と免責文を付属資料に保持してください。

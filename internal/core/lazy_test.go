@@ -191,7 +191,7 @@ func TestLazyWikiExamplesAndBindings(t *testing.T) {
 	for _, row := range rows[1:] {
 		if row[0] == "(scheme lazy)" {
 			found[row[1]] = true
-			if row[3] != "63" || row[5] != "内部Runtimeのimport実装済み・公開CLI未接続" {
+			if row[3] != "63" || row[5] != "公開CLIのimport実装済み" {
 				t.Fatal(row)
 			}
 			if !strings.Contains(string(doc), "("+row[1]+" ") {
