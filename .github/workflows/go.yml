@@ -29,7 +29,7 @@ jobs:
             exit 1
           fi
       - name: Test
-        run: GOPROXY=off GOSUMDB=off go test ./...
+        run: GURI_AUDIT_REPORT="$RUNNER_TEMP/internal-r7rs-audit.json" GOPROXY=off GOSUMDB=off go test -count=1 ./...
       - name: Vet
         run: go vet ./...
       - name: Build interpreter for isolated R7RS measurements
@@ -46,4 +46,5 @@ jobs:
           path: |
             ${{ runner.temp }}/r7rs-report.json
             ${{ runner.temp }}/r7rs-chibi-report.json
+            ${{ runner.temp }}/internal-r7rs-audit.json
           if-no-files-found: error

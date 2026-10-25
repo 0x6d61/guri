@@ -196,3 +196,11 @@ TestMacroHygieneAndDefinitionBindings、TestLiteralIdentifiersUseBindingIdentity
 長さが変わる展開の後に参照を解決するため、共有tailと循環を引用データへ残せます。
 入力から捕捉したNodeを変更せず、パターン変数の置換と文脈を保ちます。
 例と検証範囲は[グラフの読み書き](https://github.com/0x6d61/guri/wiki/Graph-IO)に記載します。
+
+## 結合監査での修正
+
+#66で入れ子のsyntax-rulesのliteral分類を修正しました。
+パターンがliteral一覧に属するかは識別子の構文上の文脈で判定し、入力との照合に使う束縛比較と分けます。
+トップレベルのbeginへ導入する変数のセルも本体のコンパイル前に予約し、手続き、多値、Recordの前方参照を保持します。
+利用者の同名の公開束縛とは共有しません。
+[結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit)に再現例と検証結果を記載します。

@@ -191,3 +191,34 @@ Readerのテストが成功しても、現行CLIの79件をpassへ変更しま�
 Unicode case foldingにGo公式のx/text/cases v0.43.0を使用します。
 初回は`go mod download`で依存を取得し、その後は`GOPROXY=off GOSUMDB=off go test ./...`でネットワークなしの検証ができます。
 CIでも依存の取得とunitテストを別ステップにします。
+
+## 内部Runtimeでの原本監査（#66）
+
+Chibi本体を追加せず、保存した原本とGuri側のテストアダプタを使います。
+公開CLIの測定とは別に実行し、プロセスの測定結果を上書きしません。
+
+```sh
+GURI_AUDIT_REPORT=/tmp/internal-r7rs-audit.json \
+  GOPROXY=off GOSUMDB=off go test ./internal/core -run '^TestChibiSourceAudit$' -count=1 -v
+```
+
+原本の全トップレベルフォームを順に試行し、各判定、実際のエラー、未採用の理由と未到達件数をJSONへ記録します。
+任意の精度指定の指数表記は10フォームでread-errorとなり、各2判定は未到達です。
+r7rs featureは広告保留のため1判定が未成功で、原本のsuite_passedはfalseです。
+監査のunitテストは、この既知の分類と新しい不一致の不在を確認する契約です。
+成功件数と原本の合否を混同しないでください。
+
+### 別処理系での既存ケースの確認
+
+開発時にはGuile 3.0.9で既存の独立17件とChibi由来62件を実行し、両方の期待出力に一致しました。
+Guileは一時ディレクトリへ展開して使用し、GuriのソースやCI依存には追加していません。
+インストール済みのGuileで再確認する場合は、次のように実行できます。
+
+```sh
+go run ./cmd/r7rscheck -program guile -arg=--r7rs -arg=--no-auto-compile
+go run ./cmd/r7rscheck -program guile -arg=--r7rs -arg=--no-auto-compile \
+  -suite testdata/r7rs/chibi/suite.json
+```
+
+これは原本全体の差分比較ではありません。
+参照処理系の成功も、規格全体に対するGuriの準拠宣言には使いません。

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "engine": "internal/core.Runtime",
+  "platform": "linux/amd64",
+  "upstream_revision": "b2087f3a320a56f79ede5c546fd45fdde582c4ed",
+  "upstream_sha256": "004d215a38f990bbf2bfaa8b4a395aa59ef98d155096f8e31cc361b7812f7d6a",
+  "comparator": "equal?; root inexact numbers: relative/absolute tolerance 1e-6; exact numbers never rounded",
+  "top_level_forms": 1188,
+  "assertions_evaluated": 1214,
+  "suite_passed": false,
+  "no_unexpected_failures": true,
+  "counts": {
+    "deferred": 1,
+    "not-adopted": 10,
+    "pass": 1213
+  },
+  "assertions_not_reached": 20,
+  "optional_form_lines": [
+    2356,
+    2357,
+    2358,
+    2359,
+    2360,
+    2361,
+    2362,
+    2363,
+    2400,
+    2402
+  ],
+  "deferred_lines": [
+    2519
+  ],
+  "reference_checks": {
+    "implementation": "GNU Guile 3.0.9",
+    "ubuntu_packages": [
+      "guile-3.0 3.0.9-1build2",
+      "guile-3.0-libs 3.0.9-1build2",
+      "libgc1 1:8.2.6-1build1"
+    ],
+    "flags": [
+      "--r7rs",
+      "--no-auto-compile"
+    ],
+    "independent_suite": 17,
+    "chibi_selected_suite": 62,
+    "forward_regression_stdout": "100\n",
+    "nested_pattern_regression_stdout": "matched\n",
+    "full_upstream_suite_compared": false,
+    "ci_dependency": false
+  }
+}
