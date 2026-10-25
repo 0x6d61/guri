@@ -125,3 +125,11 @@ scheme eval、load、repl、r5rsを内部Runtimeへ追加し、14ライブラリ
 環境の不変性、対話環境の束縛の分離、evalの末尾位置と複数値、loadの逐次実行と継続再開、REPLのエラー回復を検証しています。
 [環境と評価の仕様](https://github.com/0x6d61/guri/wiki/Evaluation-REPL)にD07-Eの合意と使用例を記載します。
 公開CLIの切り替えは#67、残るprocess-contextとtimeは#65で行います。
+
+## #65 プロセス情報と時計
+
+scheme process-contextとscheme timeの8手続きを追加し、内部Runtimeの全16ライブラリ、557公開束縛を接続しました。
+承認済みD06に従い、exitのafterの実行、emergency-exitの省略と終了コードの変換を検証しています。
+D07-C/D07-Tのコマンドライン、環境変数のUTF-8と変更禁止、TAIの近似と単調時計を実装しました。
+[システムインターフェース](https://github.com/0x6d61/guri/wiki/System-Interface)に規則と使用例を記載します。
+全体の準拠監査と公開CLIへの切り替えは#66/#67で行い、r7rsはまだ広告しません。

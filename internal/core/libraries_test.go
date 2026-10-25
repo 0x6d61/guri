@@ -160,7 +160,7 @@ func TestLibrarySearchIncludesAndFeatures(t *testing.T) {
 	if n := number(runProgram(t, r, `(import (myapp util)) result`)); n != 42 {
 		t.Fatal(n)
 	}
-	if got := runProgram(t, r, `(import (scheme base)) (and (memq 'guri (features)) (not (memq 'r7rs (features))) (cond-expand ((and (library (myapp util)) (not (library (scheme process-context)))) #t) (else #f)))`); got != scheme.True {
+	if got := runProgram(t, r, `(import (scheme base)) (and (memq 'guri (features)) (not (memq 'r7rs (features))) (cond-expand ((and (library (myapp util)) (not (library (guri missing-library)))) #t) (else #f)))`); got != scheme.True {
 		t.Fatal(got)
 	}
 	// Program include uses the including source file, not the library search root.

@@ -10,7 +10,7 @@ REPLとevalの環境は#64で内部Runtimeへ接続済みです。
 ## 対応範囲（D03）
 
 2026-10-24に、全16標準ライブラリを目標にして完成したものから段階提供する方針を承認しました。
-現在は以下の14ライブラリを内部Runtimeのimportで利用できます。
+現在は以下の16ライブラリを内部Runtimeのimportで利用できます。
 
 | ライブラリ | 公開束縛数 | 内容 |
 |---|---:|---|
@@ -24,17 +24,19 @@ REPLとevalの環境は#64で内部Runtimeへ接続済みです。
 | `(scheme inexact)` | 12 | 不正確数の数学関数と分類 |
 | `(scheme lazy)` | 5 | Promiseと遅延評価 |
 | `(scheme load)` | 1 | ソースファイルの実行 |
+| `(scheme process-context)` | 5 | コマンドライン、環境変数と終了 |
 | `(scheme read)` | 1 | datumのread |
 | `(scheme repl)` | 1 | 対話環境 |
 | `(scheme r5rs)` | 222 | R5RSの互換ライブラリ |
+| `(scheme time)` | 3 | TAIの時刻と単調時計 |
 | `(scheme write)` | 4 | write、write-shared、write-simple、display |
 
 公開識別子はdocs/r7rs/exports.csvと内部の束縛表をテストで照合します。
 scheme lazyは#63で接続済みです。
 scheme eval／load／repl／r5rsは#64で接続済みです。
-scheme process-context／timeは#65で接続します。
-未提供の2ライブラリを空のライブラリとしてimportできるようにはせず、library requirementでも利用可能と広告しません。
-14ライブラリの接続を、言語全体の準拠完了として扱いません。
+scheme process-context／timeは#65で接続済みです。
+全16ライブラリの557公開束縛を台帳と照合します。
+公開識別子の接続を、言語全体の準拠完了として扱いません。
 
 ## define-libraryと宣言
 
@@ -117,7 +119,7 @@ importしていない構文や手続きは暗黙に利用できません。
 ## 配置と検索（D07-L）
 
 Gaucheのインストール時に設定したライブラリディレクトリと、利用者が追加する検索パスの方式に合わせます。
-内部Runtimeの標準14ライブラリはGo実装と公開束縛表としてバイナリへ組み込まれ、作業ディレクトリやスクリプトの置き場所に依存しません。
+内部Runtimeの標準16ライブラリはGo実装と公開束縛表としてバイナリへ組み込まれ、作業ディレクトリやスクリプトの置き場所に依存しません。
 Gaucheにもコアを事前コンパイルする仕組みと、Schemeファイルをインストール先へ置く仕組みがあります。
 [ビルドと配置の定義](https://github.com/shirok/Gauche/blob/master/src/Makefile.in)と[検索パスの初期化](https://github.com/shirok/Gauche/blob/master/src/load.c)を参照しています。
 
@@ -199,7 +201,7 @@ filenameの型が違う場合は通常のerror-objectを送出します。
 ```scheme
 (import (scheme base))
 (cond-expand
-  ((and (library (scheme char)) (not (library (scheme process-context)))) 42)
+  ((and (library (scheme char)) (not (library (guri missing-library)))) 42)
   (else 0)) ; => 42
 ```
 
@@ -217,3 +219,5 @@ filenameの型が違う場合は通常のerror-objectを送出します。
 公開CLIは旧処理系のままなので、その適合性測定の17 fail／62 failをこの結果で置き換えません。
 
 - [環境、eval、loadとREPL](https://github.com/0x6d61/guri/wiki/Evaluation-REPL): datumの評価、変更禁止と対話用の環境、loadの規則と継続、内部REPLの入出力。
+
+- [プロセス情報、終了と時計](https://github.com/0x6d61/guri/wiki/System-Interface): command-line、環境変数、exitとemergency-exit、TAIと単調時計。

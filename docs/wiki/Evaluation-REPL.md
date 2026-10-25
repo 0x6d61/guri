@@ -18,8 +18,7 @@
 
 scheme evalはenvironmentとeval、scheme replはinteraction-environment、scheme loadはloadを公開します。
 scheme-report-environmentとnull-environmentはscheme r5rsから公開します。
-これらを追加したことで、内部Runtimeではscheme r5rsを含む14標準ライブラリを提供します。
-残るscheme process-contextとscheme timeは#65で扱います。
+#65のscheme process-contextとscheme timeを含め、内部Runtimeでは全16標準ライブラリを提供します。
 
 ## datumとソースの違い
 
@@ -188,4 +187,5 @@ loadのファイル読取失敗はfile-error?、ソースのReader失敗はread-
 既存VMの引数数不一致や未初期化セルの実行時参照など、Go診断からSchemeの自動raiseへ未接続の経路は継続して監査対象とします。
 REPLはこれらの診断も表示して次の入力へ進みます。
 この内部実装の成功を、公開CLIの準拠測定の成功や公開Go APIの移行完了とは扱いません。
-EOF以外の終了操作は#65、CLIの入力モードと表示は#67で接続します。
+exitとemergency-exitは#65で接続済みです。
+CLIの入力モード、表示とプロセス終了は#67で接続します。

@@ -148,6 +148,7 @@ func NewCore() *Engine {
 	e.installPorts()
 	e.installLibraryPrimitives()
 	e.installLazy()
+	e.installProcessExit()
 	e.primitives = append([]*binding(nil), e.globals...)
 	return e
 }

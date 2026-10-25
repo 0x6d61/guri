@@ -86,3 +86,7 @@ importとライブラリ初期化の要求、79ケースの内部実行と公開
 #64で環境指定子とdatumのeval、load、内部REPLを接続しました。
 内部Runtimeは14標準ライブラリの549公開束縛を提供し、残るprocess-contextとtimeは#65です。
 公開CLIの測定は従来の17 fail／62 failを維持し、内部Runtimeの成功と区別します。
+
+#65でprocess-context/timeの8束縛を追加し、全16標準ライブラリの557公開行を内部Runtimeへ接続しました。
+終了要求、dynamic-wind、環境変数とコマンドライン、TAIの近似と単調時計の検証を下位要求へ追記しています。
+公開CLIの測定と準拠監査は引き続き別段階として追跡します。
