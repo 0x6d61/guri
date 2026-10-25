@@ -27,6 +27,7 @@ type Runtime struct {
 	bootstrap        *Engine
 	interaction      *evaluationEnvironment
 	interactionValue *scheme.Record
+	system           *systemContext
 	modules          map[string]*library
 	standard         map[string]bool
 	paths            []string
@@ -37,6 +38,7 @@ type Runtime struct {
 func NewRuntime(paths ...string) *Runtime {
 	r := &Runtime{bootstrap: NewCore(), modules: map[string]*library{}, standard: map[string]bool{}, paths: configuredLibraryPaths(paths)}
 	r.installEvaluation()
+	r.installSystem()
 	for name, names := range standardLibraryNames {
 		ns, err := reader.ReadAll("<standard-libraries>", name, r.bootstrap.symbols)
 		if err != nil {

@@ -88,7 +88,8 @@ func (r *Runtime) REPL(ctx context.Context, filename string, input io.Reader, ou
 		result, err := r.bootstrap.machine.Run(ctx, wrapped)
 		r.finishInitializers(err)
 		if err != nil {
-			if errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded) {
+			var exit *ExitRequest
+			if errors.As(err, &exit) || errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded) {
 				return err
 			}
 			if _, writeErr := fmt.Fprintln(diagnostic, err); writeErr != nil {
