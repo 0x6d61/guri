@@ -198,12 +198,12 @@ Go側で式ごとにRunを分け、残りのプログラムを継続から落と
 構文の形や引数数、識別子の重複、不正な定義位置は位置付きのcore.Errorとして返します。
 実行時の未初期化参照、手続きの引数数、型、単一値の要求は原因を保持するvm.Errorになります。
 未知の変数には将来のトップレベル定義と共有する未初期化Cellを作るため、その参照も未初期化束縛として診断します。
-公開CLI向けのエラー表示の移行は後続作業です。
+#67で公開CLIのソース位置付き診断へ接続しました。
 
 syntax-rules、define-syntax、let-syntax、letrec-syntax、syntax-errorは内部環境で実装済みです。
 派生構文と準引用は#50の[派生構文と準引用](https://github.com/0x6d61/guri/wiki/Derived-Syntax)へ接続しました。
 define-values、let-values、let*-valuesと標準の制御手続きは#51で接続しました。
-標準のimportは内部Runtimeへ接続済みで、残りの標準手続きは後続作業です。
+16標準ライブラリのimportと標準手続きを接続済みです。
 既存の17件とChibi由来62件はimportと標準ライブラリを含む結合テストで、内部コンパイラのunitテストとは別に未対応を記録します。
 R7RS全体の準拠済みとは扱いません。
 
@@ -211,7 +211,7 @@ R7RS全体の準拠済みとは扱いません。
 
 #55で[Pair、List、Symbolと等価性](https://github.com/0x6d61/guri/wiki/Pairs-Lists-Symbols)の63手続きを内部環境へ追加しました。
 caseの同値判定は標準のeqv?と同じ実装を使います。
-公開CLIは引き続き未接続で、importは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
+公開CLIとimportは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
 
 #56で[CharacterとString](https://github.com/0x6d61/guri/wiki/Characters-Strings)の50手続きを内部環境へ登録しました。
 文字列のmap/for-eachは複数回再開できるVMのコールバックを使います。

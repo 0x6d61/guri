@@ -26,6 +26,7 @@ var (
 // Ready must never wait for input. It reports bytes or EOF available for Read.
 // Memory and file adapters supply it; other stream adapters must supply a probe
 // to support ready? without starting background reads on borrowed resources.
+// Input also accepts a reader with Ready() (bool, error); explicit Options win.
 type Options struct {
 	Owned    io.Closer
 	Ready    func() (bool, error)
@@ -49,6 +50,11 @@ func (*Resource) PortResource() {}
 func Input(r io.Reader, binary bool, options Options) *Resource {
 	if r == nil {
 		panic("ports: nil reader")
+	}
+	if options.Ready == nil {
+		if probe, ok := r.(interface{ Ready() (bool, error) }); ok {
+			options.Ready = probe.Ready
+		}
 	}
 	filename := options.Filename
 	if filename == "" {

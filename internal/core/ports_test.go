@@ -232,7 +232,7 @@ func TestPortWikiExamplesAndBindings(t *testing.T) {
 		for _, row := range rows[1:] {
 			if row[0] == "(scheme base)" && row[1] == name {
 				found = true
-				if row[3] != "59" || row[5] != "内部Runtimeのimport実装済み・公開CLI未接続" {
+				if row[3] != "59" || row[5] != "公開CLIのimport実装済み" {
 					t.Error("stale export", row)
 				}
 			}

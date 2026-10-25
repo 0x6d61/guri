@@ -34,10 +34,10 @@ jobs:
         run: go vet ./...
       - name: Build interpreter for isolated R7RS measurements
         run: go build -o "$RUNNER_TEMP/guri-r7rs" ./cmd/guri
-      - name: Measure R7RS gaps (not a conformance gate)
-        run: go run ./cmd/r7rscheck -program "$RUNNER_TEMP/guri-r7rs" -report-only > "$RUNNER_TEMP/r7rs-report.json"
-      - name: Measure imported Chibi cases (not a conformance gate)
-        run: go run ./cmd/r7rscheck -program "$RUNNER_TEMP/guri-r7rs" -suite testdata/r7rs/chibi/suite.json -report-only > "$RUNNER_TEMP/r7rs-chibi-report.json"
+      - name: Check public CLI R7RS regression cases
+        run: go run ./cmd/r7rscheck -program "$RUNNER_TEMP/guri-r7rs" > "$RUNNER_TEMP/r7rs-report.json"
+      - name: Check public CLI imported Chibi cases
+        run: go run ./cmd/r7rscheck -program "$RUNNER_TEMP/guri-r7rs" -suite testdata/r7rs/chibi/suite.json > "$RUNNER_TEMP/r7rs-chibi-report.json"
       - name: Upload R7RS measurements
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

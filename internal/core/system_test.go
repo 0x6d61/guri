@@ -134,7 +134,7 @@ func TestSystemInterfaceWikiExamplesAndBindings(t *testing.T) {
 	systemCount := 0
 	for _, row := range rows[1:] {
 		libraries[row[0]] = true
-		if row[5] != "内部Runtimeのimport実装済み・公開CLI未接続" {
+		if row[5] != "公開CLIのimport実装済み" {
 			t.Fatal(row)
 		}
 		if row[0] != "(scheme process-context)" && row[0] != "(scheme time)" {

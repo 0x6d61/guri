@@ -5,6 +5,7 @@ GitHub Wikiは公開先として使用します。
 
 | 原稿 | 公開ページ |
 |---|---|
+| [CLI.md](wiki/CLI.md) | [CLIとインストール](https://github.com/0x6d61/guri/wiki/CLI) |
 | [Home.md](wiki/Home.md) | [ホーム](https://github.com/0x6d61/guri/wiki) |
 | [Language-Specification.md](wiki/Language-Specification.md) | [言語仕様](https://github.com/0x6d61/guri/wiki/Language-Specification) |
 | [Special-Forms.md](wiki/Special-Forms.md) | [特殊形式](https://github.com/0x6d61/guri/wiki/Special-Forms) |
@@ -41,7 +42,7 @@ GitHub Wikiは公開先として使用します。
 1. 対応するIssueと作業ブランチを作成します。
 2. 実装を変更する場合はTDDで進め、原稿と使用例も同じブランチで更新します。
 3. 各関数の引数、型、返り値、変更の有無、共有やコピー、エラーを実装と照合します。
-4. 使用例を独立したInterpreterで実行し、期待する結果になることを確認します。
+4. 使用例を独立したRuntimeまたはCLIで実行し、期待する結果になることを確認します。
 5. PRのCI成功を確認し、merge commitを作成してマージします。
 6. 最新のmasterの原稿をWikiへ公開します。
 
@@ -58,7 +59,7 @@ Wikiへのpush権限を持つ認証が必要です。
 wiki_dir=$(mktemp -d)
 git clone https://github.com/0x6d61/guri.wiki.git "$wiki_dir"
 cp docs/wiki/*.md "$wiki_dir/"
-git -C "$wiki_dir" add Home.md Language-Specification.md Special-Forms.md Functions.md Roadmap.md R7RS-Conformance.md R7RS-Testing.md Runtime-Data-Model.md R7RS-Reader.md Bytecode-VM.md Core-Syntax.md Syntax-Rules.md Derived-Syntax.md Control-Features.md Dynamic-Wind.md Exceptions-Parameters.md Numbers.md Pairs-Lists-Symbols.md Characters-Strings.md Vectors-Bytevectors.md Graph-IO.md Records.md Ports.md Datum-File-IO.md Libraries.md Lazy-Evaluation.md Evaluation-REPL.md System-Interface.md R7RS-Audit.md _Sidebar.md
+git -C "$wiki_dir" add CLI.md Home.md Language-Specification.md Special-Forms.md Functions.md Roadmap.md R7RS-Conformance.md R7RS-Testing.md Runtime-Data-Model.md R7RS-Reader.md Bytecode-VM.md Core-Syntax.md Syntax-Rules.md Derived-Syntax.md Control-Features.md Dynamic-Wind.md Exceptions-Parameters.md Numbers.md Pairs-Lists-Symbols.md Characters-Strings.md Vectors-Bytevectors.md Graph-IO.md Records.md Ports.md Datum-File-IO.md Libraries.md Lazy-Evaluation.md Evaluation-REPL.md System-Interface.md R7RS-Audit.md _Sidebar.md
 git -C "$wiki_dir" diff --cached --check
 git -C "$wiki_dir" diff --cached
 ```

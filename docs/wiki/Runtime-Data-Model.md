@@ -42,7 +42,7 @@ StringとBytevectorのコピーは、新しい領域に文字またはバイト�
 これらの位置と型の要件は[R7RS §3.2と§3.4](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-5.html)に対応します。
 Schemeのeq?、eqv?、equal?は#55で内部VMへ接続しました。
 [Pair、List、Symbolと等価性](https://github.com/0x6d61/guri/wiki/Pairs-Lists-Symbols)に共有、浅いコピー、循環比較の契約を記載します。
-公開CLIは未接続で、importは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
+公開CLIとimportは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
 
 ## リテラルの変更禁止
 
@@ -69,7 +69,7 @@ Schemeの例外への変換、エラー述語とハンドラの処理は#53以�
 これらは値を保持する処理です。
 Readerは#46、算術演算、比較、書式と数値述語は#54で内部環境へ接続しました。
 詳細は[標準数値手続き](https://github.com/0x6d61/guri/wiki/Numbers)を参照してください。
-公開CLIの切替は後続作業です。
+#67で公開CLIへ接続しました。
 標準ライブラリのimportは[内部Runtime](https://github.com/0x6d61/guri/wiki/Libraries)へ接続済みです。
 正確な型の値が保持できることと、言語の`(/ 1 3)`が動くことを区別します。
 
@@ -130,7 +130,7 @@ Raisedは任意のScheme値、継続可能かどうか、ソース位置を保�
 ProcedureCodeとPortResourceは、評価器やポート実装が保持する内容への参照です。
 ProcedureCodeに直接呼び出すGoコールバックを要求せず、#47で継続を扱える方式を妨げないようにします。
 この値層は継続の実装方式、Portの開閉、入出力やホストへの終了伝達を実装しません。
-現在の公開Go APIは変更せず、これらの契約はまずinternalパッケージ内で使います。
+これらはinternalパッケージの契約です。#67で旧Go APIを削除し、新しい公開Go APIは提供しません。
 
 Go GCでオブジェクト、束縛、コードや資源の参照を管理します。
 到達可能な循環や共有、Procedureが保持するCellがGC実行後も参照できることをunitテストで確認しています。

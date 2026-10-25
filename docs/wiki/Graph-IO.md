@@ -1,7 +1,7 @@
 # datum labelと共有・循環データの読み書き
 
 このページは内部Reader、Writerとコンパイラへ接続したグラフの契約を説明します。
-公開CLIと公開Go APIは従来のGuriのままです。
+#67で公開CLIへ接続しました。旧Go APIは削除しました。
 ポートを取るread、write、write-sharedとwrite-simpleの標準束縛は#60で内部NewCoreへ接続済みです。
 本ページのScheme例は内部NewCoreで、Go例は内部パッケージのunitテストで検証します。
 参照先は[R7RS-small §2.4](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-4.html#TAG:__tex2page_sec_2.4)と[§6.13.3](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-8.html#TAG:__tex2page_sec_6.13.3)です。

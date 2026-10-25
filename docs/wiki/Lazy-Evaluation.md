@@ -1,7 +1,7 @@
 # Promiseと遅延評価
 
 scheme lazyの5束縛を内部Runtimeのimportへ接続しました。
-公開CLIと公開Go APIの切替は#67で扱います。
+#67で公開CLIへ接続しました。旧Go APIは削除し、新しい公開Go APIは提供しません。
 基準は[R7RS-small §4.2.5](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-6.html#TAG:__tex2page_sec_4.2.5)です。
 
 ## 構文と手続き

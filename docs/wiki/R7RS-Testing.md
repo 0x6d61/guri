@@ -80,7 +80,7 @@ Chibi本体は取り込まず、CIにも追加しません。
 #61で、独自17件とChibi由来62件を内部Runtimeでも実行し、同じ期待出力に対して79件が成功しました。
 TestImportedProgramsFromConformanceSuitesは各ケースに独立したRuntimeと出力ポートを与え、exactとone-ofを照合します。
 現在のケースはいずれも終了コード0であり、OSプロセスの終了状態を測るテストとは区別します。
-公開CLIのJSON測定は旧処理系を対象とするため17 fail／62 failのままです。
+#67で公開CLIを移行して再測定し、JSONは17 pass／62 passとなりました。#66までの旧処理系の17 fail／62 failは過去の測定として残します。
 内部のunitテスト結果で公開CLIのレポートを置き換えたり、準拠完了を宣言したりしません。
 
 - [R7RS-smallの結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit): 原本の測定結果、修正した衛生性、96見出しの証拠索引と残る制限。
