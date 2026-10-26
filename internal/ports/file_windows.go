@@ -80,7 +80,9 @@ func (in *consoleFileInput) fill() {
 	}
 	in.linePending = mode&windows.ENABLE_LINE_INPUT != 0
 	for _, unit := range data[:n] {
-		if unit == '\r' || unit == '\n' {
+		// Processed Enter expands to CRLF. A read ending at CR still has LF
+		// pending in the console's cooked buffer, outside the event queue.
+		if unit == '\n' || unit == '\r' && mode&windows.ENABLE_PROCESSED_INPUT == 0 {
 			in.linePending = false
 		}
 		if unit == 0x1a { // Match os.File's Windows console Ctrl+Z convention.

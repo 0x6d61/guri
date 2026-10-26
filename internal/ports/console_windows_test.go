@@ -33,19 +33,27 @@ type testConsoleRecord struct {
 // or leave a borrowed standard handle/mode changed in the parent process.
 func TestWindowsConsoleReadiness(t *testing.T) {
 	if os.Getenv("GURI_TEST_OWN_CONSOLE") != "1" {
-		exe, err := os.Executable()
-		if err != nil {
-			t.Fatal(err)
+		cases := []string{"cooked-line-and-events", "raw-probe-and-unicode", "binary-console", "console-eof"}
+		for _, length := range []int{1022, 1023, 1024, 1500} {
+			cases = append(cases, fmt.Sprintf("cooked-line-%d", length))
 		}
-		ctx, cancel := context.WithTimeout(context.Background(), 45*time.Second)
-		defer cancel()
-		command := exec.CommandContext(ctx, exe, "-test.run=^TestWindowsConsoleReadiness$", "-test.v")
-		command.Env = append(os.Environ(), "GURI_TEST_OWN_CONSOLE=1")
-		output, err := command.CombinedOutput()
-		if err != nil {
-			t.Fatalf("console child: %v\n%s", err, output)
+		for _, name := range cases {
+			t.Run(name, func(t *testing.T) {
+				exe, err := os.Executable()
+				if err != nil {
+					t.Fatal(err)
+				}
+				ctx, cancel := context.WithTimeout(context.Background(), 45*time.Second)
+				defer cancel()
+				command := exec.CommandContext(ctx, exe, "-test.run=^TestWindowsConsoleReadiness$/^"+name+"$", "-test.v")
+				command.Env = append(os.Environ(), "GURI_TEST_OWN_CONSOLE=1")
+				output, err := command.CombinedOutput()
+				if err != nil {
+					t.Fatalf("console child: %v\n%s", err, output)
+				}
+				t.Logf("isolated native console:\n%s", output)
+			})
 		}
-		t.Logf("isolated native console:\n%s", output)
 		return
 	}
 	free := testConsoleDLL.NewProc("FreeConsole")
