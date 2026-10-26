@@ -316,5 +316,6 @@ current-secondはUTCに既知のTAI−UTCを足した近似、jiffyはRuntime初
 バージョンは0.0.3です。準拠宣言、タグとGitHub Release、リリース対象OSの判断は保留しています。
 公開CLIの独立測定は17 pass／62 passです。CIも同じケースをstrict実行します。
 原本監査の`r7rs`広告に関する保留1件と、任意精度指数表記の未採用はこの変更で消しません。
-非LinuxのポートReadyと実機検証は#95に残っています。
+#95でLinux、macOS、WindowsのポートReadyとOS別CIを検証しました。
+確認した環境と結果は[結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit)に記録します。
 [CLI](CLI)に貼り付け、配置とライブラリ検索の操作を記載しています。

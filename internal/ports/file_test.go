@@ -1,4 +1,4 @@
-//go:build linux
+//go:build linux || darwin || windows
 
 package ports_test
 
@@ -80,7 +80,41 @@ func TestFileOwnership(t *testing.T) {
 	if err = p.Close(); err != nil {
 		t.Fatal(err)
 	}
-	if _, err = f.Stat(); !errors.Is(err, os.ErrClosed) {
+	if _, err = f.Read(make([]byte, 1)); !errors.Is(err, os.ErrClosed) {
 		t.Fatal("owned file left open", err)
+	}
+}
+
+func TestFilePipeByteReadinessAndBufferedEOF(t *testing.T) {
+	r, w, err := os.Pipe()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer r.Close()
+	defer w.Close()
+	p := ports.FileInput(r, true, false)
+	if ready, err := p.Ready(); ready || err != nil {
+		t.Fatal("empty", ready, err)
+	}
+	if _, err := w.Write([]byte{0, 255}); err != nil {
+		t.Fatal(err)
+	}
+	if err := w.Close(); err != nil {
+		t.Fatal(err)
+	}
+	for _, want := range []byte{0, 255} {
+		if ready, err := p.Ready(); !ready || err != nil {
+			t.Fatal("data before EOF", ready, err)
+		}
+		b, err := p.ReadU8(false)
+		if err != nil || b != want {
+			t.Fatal(b, err)
+		}
+	}
+	if ready, err := p.Ready(); !ready || err != nil {
+		t.Fatal("EOF", ready, err)
+	}
+	if _, err := p.ReadU8(false); !errors.Is(err, io.EOF) {
+		t.Fatal(err)
 	}
 }

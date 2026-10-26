@@ -98,6 +98,7 @@ make install PREFIX=/usr/local DESTDIR=/tmp/guri-package
 
 公開CLIは17件とChibi由来62件の回帰ケースで成功しています。
 これをR7RS-small全体の準拠率として扱いません。
-非LinuxのポートReadyと実機検証は#95に残っています。
+#95でLinux、macOS、WindowsのポートReadyとOS別CIを検証しました。
+確認した環境と結果は[結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit)に記録します。
 `r7rs` featureの広告、リリース対象OSと準拠宣言の範囲は別の判断です。
 旧ルートGo APIは削除し、新しい公開Go APIは提供していません。

@@ -151,10 +151,29 @@ read-bytevector!で空範囲を指定した場合も入力を消費せず0を返
 ready?は完全な1文字または1バイトが取得できるかを調べます。
 UTF-8の先頭バイトだけが到着していてもchar-ready?は#tにしません。
 内部で先読みしたバイトは同じポートに保持し、続くpeek／readへ渡します。
-Linuxのファイル・パイプ・標準入力は待たないpollで確認し、メモリポートは常に待たずに取得できます。
-任意のGo Reader用アダプタは待たないReadyプローブを提供する契約です。
-Linux以外の既定ファイルアダプタでは通常ファイルを判定でき、対話ストリームのready?にはOS用のプローブの追加が必要です。
-これは内部アダプタの対応状況であり、全OSでの準拠完了を示しません。
+#95でLinux、macOS、Windowsのファイル用プローブを実装しました。
+通常ファイルはEOFを含めて待たずに読み取れます。
+パイプと端末の空入力は#f、完全な文字またはバイトとEOFは#tです。
+
+| OS | パイプと端末の判定 | 検証する条件 |
+|---|---|---|
+| Linux | 待ち時間0のpoll | パイプ、PTYの通常行入力とraw入力、UTF-8の途中、EOF |
+| macOS | 待ち時間0のkqueueのEVFILT_READ | パイプ、PTYの通常行入力とraw入力、UTF-8の途中、EOF |
+| Windows | パイプはPeekNamedPipe、コンソールはPeekConsoleInputW | 空のパイプ、UTF-8の途中、EOF、通常行入力、UTF-16のサロゲート対、長い行、バイナリ読み取り |
+
+OS用プローブは入力を消費せず、借用したハンドルや端末モードを変更しません。
+その後にポートが完全な文字を確認するために先読みしたデータは、同じポートのpeekやreadへ渡します。
+Windowsの通常行入力ではEnterまで#fです。
+マウスやフォーカスなどの非文字イベント、キーを離したイベントだけでは#tになりません。
+UTF-16からUTF-8への変換と読み残した改行もポート側で保持し、長い行の途中で文字を失わないようにしています。
+WindowsコンソールのCtrl+Zは、Goのコンソール入力と同じくEOFとして扱います。
+
+任意のGo Reader用アダプタは、待たないReadyプローブを提供する契約です。
+メモリポートでは常に待たずに取得できます。
+上表以外のOSや入力デバイスを検証済みとは扱いません。
+実行環境とCIの証拠は[結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit)に記載します。
+
+OS APIの仕様は[Appleのkqueue](https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/kevent.2.html)、[MicrosoftのPeekNamedPipe](https://learn.microsoft.com/en-us/windows/win32/api/namedpipeapi/nf-namedpipeapi-peeknamedpipe)、[PeekConsoleInput](https://learn.microsoft.com/en-us/windows/console/peekconsoleinput)、[ReadConsole](https://learn.microsoft.com/en-us/windows/console/readconsole)を参照してください。
 
 ```scheme
 (define p (open-input-string "ab\r\n猫"))

@@ -79,5 +79,6 @@ Reader、束縛解決、型、引数数、範囲、入出力のエラーでは�
 
 binary64以外の任意の浮動小数点精度指定は未採用です。
 数値の非有限値や除算は旧GuriのArithmeticError規則を継承せず、標準の数値塔の仕様に従います。
-非Linuxでの端末Readyと実機検証は#95に残っています。
+#95でLinux、macOS、WindowsのポートReadyとOS別CIを検証しました。
+確認した環境と結果は[結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit)に記録します。
 全16標準ライブラリの557公開束縛の一覧と個別契約は[関数一覧](https://github.com/0x6d61/guri/wiki/Functions)を参照してください。

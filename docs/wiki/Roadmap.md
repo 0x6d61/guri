@@ -13,9 +13,13 @@
 0.0.3はユーザー指定のバージョン番号です。
 タグやGitHub Releaseの公開、R7RS-small準拠宣言をこの実装だけで確定したものではありません。
 
+## OS別検証
+
+#95でLinux、macOS、WindowsのポートReadyとOS別CIを検証しました。
+確認した環境と結果は[結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit)に記録します。
+
 ## 残る確認
 
-- #95：非LinuxのポートReadyと実機検証。
 - `r7rs` featureの広告、初期リリースの対象OSと許容する制限、準拠宣言の範囲の判断。
 - Chibi原本の監査で保留した1判定と、任意精度指数表記の未採用を明示した受入確認。
 

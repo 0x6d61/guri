@@ -33,7 +33,7 @@ ReaderのUnicode case foldingに`golang.org/x/text/cases` v0.43.0を使用しま
 
 端末REPLの行編集、bracketed paste、端末モードの復元に`golang.org/x/term` v0.47.0を使用します。
 標準ライブラリには行編集と貼り付け範囲の認識がないため採用しました。
-OSごとの端末操作で`golang.org/x/sys` v0.49.0を間接的に使用します。
+OSごとの端末操作とファイルのreadinessに`golang.org/x/sys` v0.49.0を使用します。
 
 - 著作権表示：Copyright 2009 The Go Authors.
 - ライセンス：BSD 3-Clause。[termのLICENSE](docs/licenses/golang.org-x-term/LICENSE)、[sysのLICENSE](docs/licenses/golang.org-x-sys/LICENSE)
