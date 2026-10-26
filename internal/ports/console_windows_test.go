@@ -3,6 +3,7 @@ package ports
 import (
 	"context"
 	"errors"
+	"fmt"
 	"io"
 	"os"
 	"os/exec"
@@ -168,19 +169,21 @@ func TestWindowsConsoleReadiness(t *testing.T) {
 		}
 		unchanged(t, 0) // Closing the Scheme port must not close the console handle.
 	})
-	t.Run("long-cooked-line", func(t *testing.T) {
-		mode := uint32(windows.ENABLE_LINE_INPUT)
-		setMode(t, mode)
-		p := FileInput(f, false, false)
-		writeText(t, strings.Repeat("猫", 1500)+"\r")
-		for range 1500 {
-			read(t, p, '猫')
-		}
-		read(t, p, '\r')
-		read(t, p, '\n')
-		check(t, p, false)
-		unchanged(t, mode)
-	})
+	for _, length := range []int{1022, 1023, 1024, 1500} {
+		t.Run(fmt.Sprintf("cooked-line-%d", length), func(t *testing.T) {
+			mode := uint32(windows.ENABLE_LINE_INPUT | windows.ENABLE_PROCESSED_INPUT)
+			setMode(t, mode)
+			p := FileInput(f, false, false)
+			writeText(t, strings.Repeat("猫", length)+"\r")
+			for range length {
+				read(t, p, '猫')
+			}
+			read(t, p, '\r')
+			read(t, p, '\n')
+			check(t, p, false)
+			unchanged(t, mode)
+		})
+	}
 	t.Run("binary-console", func(t *testing.T) {
 		setMode(t, 0)
 		p := FileInput(f, true, false)

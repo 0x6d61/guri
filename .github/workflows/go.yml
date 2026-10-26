@@ -19,6 +19,8 @@ jobs:
     defaults:
       run:
         shell: bash
+    env:
+      GURI_CI_PROGRAM: ${{ runner.temp }}/guri-r7rs${{ matrix.os == 'windows-latest' && '.exe' || '' }}
     timeout-minutes: 10
     steps:
       - name: Preserve source line endings
@@ -38,23 +40,25 @@ jobs:
             exit 1
           fi
       - name: Test
-        run: GURI_AUDIT_REPORT="$RUNNER_TEMP/internal-r7rs-audit.json" GOPROXY=off GOSUMDB=off go test -timeout 5m -count=1 ./...
+        run: GURI_AUDIT_REPORT="$RUNNER_TEMP/internal-r7rs-audit.json" GOPROXY=off GOSUMDB=off go test -json -timeout 5m -count=1 ./... | tee "$RUNNER_TEMP/go-test.jsonl"
       - name: Vet
         run: go vet ./...
       - name: Record execution platform
-        run: go env GOOS GOARCH GOVERSION
+        run: go env -json GOOS GOARCH GOVERSION | tee "$RUNNER_TEMP/platform.json"
       - name: Build interpreter for isolated R7RS measurements
-        run: go build -o "$RUNNER_TEMP/guri-r7rs" ./cmd/guri
+        run: go build -o "$GURI_CI_PROGRAM" ./cmd/guri
       - name: Check public CLI R7RS regression cases
-        run: go run ./cmd/r7rscheck -program "$RUNNER_TEMP/guri-r7rs" > "$RUNNER_TEMP/r7rs-report.json"
+        run: go run ./cmd/r7rscheck -program "$GURI_CI_PROGRAM" > "$RUNNER_TEMP/r7rs-report.json"
       - name: Check public CLI imported Chibi cases
-        run: go run ./cmd/r7rscheck -program "$RUNNER_TEMP/guri-r7rs" -suite testdata/r7rs/chibi/suite.json > "$RUNNER_TEMP/r7rs-chibi-report.json"
+        run: go run ./cmd/r7rscheck -program "$GURI_CI_PROGRAM" -suite testdata/r7rs/chibi/suite.json > "$RUNNER_TEMP/r7rs-chibi-report.json"
       - name: Upload R7RS measurements
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: r7rs-measurements-${{ matrix.os }}
           path: |
+            ${{ runner.temp }}/go-test.jsonl
+            ${{ runner.temp }}/platform.json
             ${{ runner.temp }}/r7rs-report.json
             ${{ runner.temp }}/r7rs-chibi-report.json
             ${{ runner.temp }}/internal-r7rs-audit.json
