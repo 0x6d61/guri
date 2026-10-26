@@ -80,7 +80,7 @@ func TestFileOwnership(t *testing.T) {
 	if err = p.Close(); err != nil {
 		t.Fatal(err)
 	}
-	if _, err = f.Stat(); !errors.Is(err, os.ErrClosed) {
+	if _, err = f.Read(make([]byte, 1)); !errors.Is(err, os.ErrClosed) {
 		t.Fatal("owned file left open", err)
 	}
 }
