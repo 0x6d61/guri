@@ -84,3 +84,9 @@ TestImportedProgramsFromConformanceSuitesは各ケースに独立したRuntime�
 内部のunitテスト結果で公開CLIのレポートを置き換えたり、準拠完了を宣言したりしません。
 
 - [R7RS-smallの結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit): 原本の測定結果、修正した衛生性、96見出しの証拠索引と残る制限。
+
+## OS別のCI
+
+#95ではLinux、macOS、Windowsの標準ランナーで全Goテストとvet、公開CLIの17件と62件を実行します。
+OSごとのArtifactに実行環境とGoテストのJSON、2種類のCLI測定、原本監査を保存します。
+実行方法はリポジトリの`docs/r7rs/TESTING.md`、確認した環境は[結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit)を参照してください。

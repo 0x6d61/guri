@@ -222,3 +222,23 @@ go run ./cmd/r7rscheck -program guile -arg=--r7rs -arg=--no-auto-compile \
 
 これは原本全体の差分比較ではありません。
 参照処理系の成功も、規格全体に対するGuriの準拠宣言には使いません。
+
+## OS別の実行
+
+CIは標準ランナーのubuntu-latest、macos-latest、windows-latestで実行します。
+各OSで全Goテストとvetを通し、そのOS向けにビルドしたCLIで17件と62件をstrict実行します。
+Windowsの実行ファイルには`.exe`を付け、すべてのOSで同じ改行のソースを検証します。
+
+成果物は`r7rs-measurements-<runner名>`です。
+`platform.json`、`go-test.jsonl`、`r7rs-report.json`、`r7rs-chibi-report.json`、`internal-r7rs-audit.json`を保存します。
+テストが失敗した場合も、生成できた結果を保存します。
+Goの終了コードはパイプのteeによって隠さず、失敗をCIへ反映します。
+
+```sh
+go test -count=1 ./internal/ports
+```
+
+ポートのテストは、そのOSのパイプと通常ファイルを使います。
+LinuxとmacOSはPTY、Windowsは親プロセスから分離した専用コンソールを使います。
+外部のScheme処理系やネットワーク、利用者によるキー入力には依存しません。
+クロスコンパイルだけで、そのOSでのテスト成功とは扱いません。

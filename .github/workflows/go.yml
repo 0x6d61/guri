@@ -2,7 +2,7 @@ name: Go
 
 on:
   push:
-    branches: [master, fix/95-cross-platform-readiness]
+    branches: [master]
   pull_request:
     branches: [master]
 
