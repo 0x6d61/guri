@@ -4,9 +4,10 @@ import "os"
 
 // FileInput connects a file without transferring ownership unless requested.
 func FileInput(f *os.File, binary, owned bool) *Resource {
-	options := Options{Filename: f.Name(), Ready: func() (bool, error) { return fileReady(f) }}
+	stream, probe := fileInputStream(f)
+	options := Options{Filename: f.Name(), Ready: probe}
 	if owned {
 		options.Owned = f
 	}
-	return Input(f, binary, options)
+	return Input(stream, binary, options)
 }
