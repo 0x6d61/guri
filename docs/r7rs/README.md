@@ -95,9 +95,11 @@ importとライブラリ初期化の要求、79ケースの内部実行と公開
 ## #66の監査成果物
 
 [audit/sections.csv](audit/sections.csv)は全96見出しの証拠索引であり、全規格文の網羅率ではありません。
-[audit/chibi-summary.json](audit/chibi-summary.json)は固定した原本の監査スナップショットです。
+[audit/chibi-summary.json](audit/chibi-summary.json)は#66時点の原本監査スナップショットです。
 CIは全観測をinternal-r7rs-audit.jsonへ保存し、公開CLIの2測定と同じ成果物に含めます。
-原本のsuite_passed=false、未採用の任意機能、未到達と広告保留を保持します。
+#99以降はr7rsを広告し、保留処理を外して1,214判定の成功を検査します。
+未採用の任意機能10フォームと未到達20判定を保持し、生の原本suite_passedはfalseです。
+宣言後のスナップショットは[audit/declaration-summary.json](audit/declaration-summary.json)です。
 方法と残件は[監査報告](../wiki/R7RS-Audit.md)を参照してください。
 
 ## #67の公開CLI移行

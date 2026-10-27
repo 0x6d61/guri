@@ -155,7 +155,7 @@ current-jiffyはGoの単調時計を使い、Runtimeを初期化した時点を�
 file-exists?とdelete-fileは#61の実装を再利用します。
 使用方法とfile-error?は[ライブラリの仕様](https://github.com/0x6d61/guri/wiki/Libraries)を参照してください。
 
-featuresは引き続きguri、exact-closed、exact-complex、ieee-float、full-unicode、ratiosを提供します。
-これらは既存の数値プロファイルとUnicodeの対応を表し、r7rsはまだ広告しません。
+featuresはr7rs、guri、exact-closed、exact-complex、ieee-float、full-unicode、ratiosを提供します。
+r7rsは準拠宣言を、その他の識別子は数値プロファイルとUnicodeの対応を表します。
 全16ライブラリの公開識別子を台帳と照合することと、言語全体の準拠完了は区別します。
 #65当時の公開CLIは17 fail／62 failでした。#67で移行後に測定し、17 pass／62 passを確認しました。

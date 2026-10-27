@@ -45,7 +45,7 @@ func TestSystemLibraryTypesAndFeatures(t *testing.T) {
   (guard (e (else (error-object? e))) (string-set! (car args) 0 #\x) #f)
   (inexact? (current-second)) (real? (current-second))
   (exact-integer? start) (<= start end) (exact-integer? (jiffies-per-second)) (> (jiffies-per-second) 0)
-  (not (memq 'r7rs (features)))
+  (memq 'r7rs (features))
   (cond-expand ((and (library (scheme process-context)) (library (scheme time))) #t) (else #f)))`
 	if got := runProgram(t, r, source); got != scheme.True {
 		t.Fatal(got)

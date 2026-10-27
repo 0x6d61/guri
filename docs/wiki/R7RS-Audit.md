@@ -1,7 +1,8 @@
 # R7RS-smallの結合監査
 
 #66で内部Runtimeの結合テストを拡大し、マクロの不具合2種類を修正しました。
-この監査結果は準拠宣言やリリース判定ではありません。
+#99でユーザーの承認を受け、Guri 0.0.3のR7RS-small準拠を宣言しました。
+このページでは、宣言前の監査結果と宣言後の観測を区別します。
 公開CLIは#67で標準ReaderとVMへ切り替えました。
 
 ## 測定結果
@@ -11,14 +12,15 @@
 | 内部Runtimeの独立ケース | 17件成功 | 規格から作成した既存スイート |
 | 内部RuntimeのChibi由来ケース | 62件成功 | 出典を記録した既存スイート |
 | Chibi原本のフォーム | 1,188フォームを試行 | import以外の全トップレベルフォーム |
-| 原本で実行した判定 | 1,214件 | 成功1,213件、保留1件 |
+| 原本で実行した判定（#66時点） | 1,214件 | 成功1,213件、保留1件 |
+| 原本で実行した判定（#99） | 1,214件 | すべて成功、保留0件 |
 | 未採用の任意指数表記 | 10フォーム | readで停止し、内側の20判定は未到達 |
 | Guile 3.0.9との比較 | 17件と62件が成功 | 同じ独立ケースと期待出力。原本全体の比較ではない |
 | 公開CLI（#66時点） | 17件と62件が失敗 | 旧処理系の別測定。内部の成功で置き換えない |
 | 公開CLI（#67） | 17件と62件が成功 | 移行後のCLIを別プロセスで実測。CIでも回帰を検証 |
 
 原本のsuite_passedはfalseのまま保存します。
-no_unexpected_failuresは、既知の未採用と保留を除いた箇所に新しい失敗がなかったことだけを表します。
+no_unexpected_failuresは、実行した範囲で予期しない失敗がなかったことを表します。
 Goの監査テストはこの集計契約も検査するため成功しますが、その成功を原本スイートの全件成功とは呼びません。
 
 ## Chibi原本のアダプタ
@@ -48,10 +50,10 @@ Guri側で作成したテスト用ライブラリが、test、test-values、test
 各フォーム内の2判定に到達しなかったことも別に記録します。
 任意表記を通すためにReaderへ拡張を追加してはいません。
 
-原本のr7rs featureの判定はdeferredです。
-内部Runtimeの監査が進んでも、公開CLIの移行と準拠判定が済むまでは広告しません。
-この保留をpassに書き換えたり、期待値を#fへ変更したりはしません。
-分類する行と入力は原本の固定ハッシュに対応付け、別のエラーを無条件に既知の失敗へ分類しないよう検査します。
+#66から#95までは、準拠宣言前のr7rs featureを広告せず、その1判定をdeferredに分類していました。
+#99でr7rsを有効にし、この判定は原本の期待値どおりに成功しました。
+宣言後の監査ではこの特別な保留処理を削除し、1,214判定の成功を検査します。
+[audit/chibi-summary.json](https://github.com/0x6d61/guri/blob/master/docs/r7rs/audit/chibi-summary.json)は#66時点の記録として保持し、宣言後の結果は[audit/declaration-summary.json](https://github.com/0x6d61/guri/blob/master/docs/r7rs/audit/declaration-summary.json)へ記録します。
 
 applyの4件のtest-errorは、[§1.3.2](https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-3.html#TAG:__tex2page_sec_1.3.2)の検出義務と照合しています。
 規格が「エラーである」とする条件と、「エラーを通知する」としてraiseを要求する条件は異なります。
@@ -133,7 +135,8 @@ LinuxとmacOSではPTYを作り、Windowsでは子プロセス内に専用コン
 | Windows/amd64 | windows-latest | 1.26.0 | `6b7a4c7` | [成功したジョブ](https://github.com/0x6d61/guri/actions/runs/40341648255/job/121637643488) |
 
 通常のPRでは、3 OSで同じheadのテストとCLI測定を実行します。
-原本監査は各OSで1,213成功、保留1判定、未採用10フォームとなり、suite_passed=falseを維持しました。
+#95時点の原本監査は各OSで1,213成功、保留1判定、未採用10フォームでした。
+#99の監査では1,214成功、保留0判定となり、未採用10フォームを引き続き記録します。
 
 空入力、部分UTF-8、読み取り可能な文字とバイト、EOF、所有と借用を共通のテストで検証します。
 端末では通常行入力とraw入力、Windowsでは非文字イベント、サロゲート対、長い行とCRLFの読み残しも検証します。
@@ -145,9 +148,16 @@ CIはOSごとに`r7rs-measurements-<runner名>`を保存します。
 各OSのテスト実行はクロスコンパイルの成功と区別します。
 物理端末での目視操作や、別のOS、別アーキテクチャを検証済みとするものではありません。
 
-## 準拠宣言とリリース判断
+## 準拠宣言と実装依存事項
 
-#67で独自Guri機能を除去してCLIを切り替え、公開CLIで17 pass／62 passを確認しました。
-OS別の検証後も、原本監査の保留1判定と未採用の任意指数表記は残します。
-初期リリースの対象OS、許容する制限、`r7rs` featureの広告と準拠宣言、タグやGitHub Releaseの公開は別の判断です。
-0.0.3の番号指定を、これらの承認とは扱いません。
+Guri 0.0.3はR7RS-smallに準拠したScheme処理系です。
+全16標準ライブラリの557公開束縛を提供し、featuresとcond-expandでr7rsを公開します。
+READMEとWikiでの宣言は#99でユーザー承認を受けました。
+
+数値は任意精度整数、正確な有理数、binary64、正確および不正確な複素数を採用しています。
+精度指定s/f/d/lは規格上任意であり、採用していません。
+この10フォームを成功扱いしないため、生の原本suite_passedはfalseを保ちますが、実行した1,214判定はすべて成功し、保留はありません。
+
+数値の詳細は[Numbers](https://github.com/0x6d61/guri/wiki/Numbers)、Unicodeは[Characters-Strings](https://github.com/0x6d61/guri/wiki/Characters-Strings)、ポートは[Ports](https://github.com/0x6d61/guri/wiki/Ports)、プロセスと時計は[System-Interface](https://github.com/0x6d61/guri/wiki/System-Interface)に記載しています。
+確認したOSとアーキテクチャは上表のとおりで、別環境の実行確認とは区別します。
+タグとGitHub Releaseによる配布は別に判断します。

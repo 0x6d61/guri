@@ -1,9 +1,10 @@
 # Guriの言語仕様と関数リファレンス
 
-Guri 0.0.3は、Goで実装したバイトコードVMのScheme処理系です。
+Guri 0.0.3は、**R7RS-smallに準拠したScheme処理系**です。
+Goで実装したバイトコードVMで実行します。
 単体CLIでのアプリケーション開発・実行を主用途とします。
 16標準ライブラリを公開CLIからimportできます。
-R7RS-smallの準拠宣言は保留しており、未確認事項を[準拠計画](https://github.com/0x6d61/guri/wiki/R7RS-Conformance)と[監査結果](https://github.com/0x6d61/guri/wiki/R7RS-Audit)で追跡します。
+準拠宣言と実装依存事項を[準拠計画](https://github.com/0x6d61/guri/wiki/R7RS-Conformance)と[監査結果](https://github.com/0x6d61/guri/wiki/R7RS-Audit)に記録しています。
 
 | ページ | 内容 |
 |---|---|

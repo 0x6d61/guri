@@ -1,9 +1,9 @@
 # Guri
 
-GuriはGoで実装したScheme処理系です。
-バイトコードVMで実行し、単体のCLIでアプリケーションを作ることを主用途とします。
+Guriは**R7RS-smallに準拠したScheme処理系**です。
+Goで実装したバイトコードVMで実行し、単体のCLIでアプリケーションを作ることを主用途とします。
 現在のバージョンは **0.0.3** です。
-R7RS-smallへの移行中であり、準拠宣言はまだ行っていません。
+全16標準ライブラリを提供し、`features`と`cond-expand`で`r7rs`を公開します。
 
 ## ビルドと実行
 
@@ -74,10 +74,20 @@ SchemeのPair、固定長Vector、Bytevector、可変Unicode Stringへ移行し�
 新しい組み込み用Go APIは今回提供しません。
 
 公開CLIの回帰ケースは17件とChibi由来62件が成功しています。
-Chibi原本の監査は1,213成功、`r7rs`広告に関する1判定を保留しています。
+Chibi原本の監査では、実行した1,214判定がすべて成功し、保留は0件です。
 Linux、macOS、WindowsのポートReadyとOS別CIは#95で検証しました。
-任意精度指数表記の未採用、準拠宣言とリリース判断は残っています。
-これらを全体の準拠完了として扱いません。
+数値は任意精度整数、正確な有理数、binary64と正確／不正確な複素数を提供します。
+任意の精度指定 `s/f/d/l` は採用しておらず、原本の該当10フォームを成功に数えず記録しています。
+数値表現と実装依存事項は[仕様書](docs/wiki/Language-Specification.md)、動作確認環境と検証の範囲は[監査結果](docs/wiki/R7RS-Audit.md)に記載しています。
+
+準拠を表すfeatureはプログラムから確認できます。
+
+```scheme
+(import (scheme base) (scheme write))
+(write (and (pair? (memq 'r7rs (features)))
+            (cond-expand (r7rs #t) (else #f))))
+(newline) ; #t
+```
 
 ## 開発
 
