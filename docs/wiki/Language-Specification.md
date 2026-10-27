@@ -1,9 +1,9 @@
 # Guri 0.0.3の言語仕様
 
-R7RS-smallを目標仕様とするScheme処理系です。
+Guri 0.0.3はR7RS-smallに準拠したScheme処理系です。
 GoのバイトコードVMでシングルスレッド実行し、動的・強い型付けとレキシカルスコープを持ちます。
 公開CLIは標準Reader、コンパイラ、VMと16標準ライブラリに接続済みです。
-準拠宣言と未確認範囲は[監査結果](https://github.com/0x6d61/guri/wiki/R7RS-Audit)を参照してください。
+準拠宣言の根拠と動作確認環境は[監査結果](https://github.com/0x6d61/guri/wiki/R7RS-Audit)を参照してください。
 
 ## 値と記法
 

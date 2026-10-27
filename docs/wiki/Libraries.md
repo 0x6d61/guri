@@ -181,8 +181,9 @@ include、include-ciとinclude-library-declarationsの相対パスは、それ�
 | `(file-exists? filename)` | 1、String | ファイルが存在すれば#t、なければ#f。変更なし |
 | `(delete-file filename)` | 1、String | ファイルを削除し、結果は未規定。渡したStringは変更しない |
 
-featuresとcond-expandはguri、exact-closed、exact-complex、ieee-float、full-unicode、ratiosを公開します。
-言語全体の準拠監査が未完了なので、r7rs featureはまだ広告しません。
+featuresとcond-expandはr7rs、guri、exact-closed、exact-complex、ieee-float、full-unicode、ratiosを公開します。
+#99の準拠宣言に合わせてr7rsを提供します。
+featuresとcond-expandは同じfeature集合を使い、プログラム、ライブラリ、eval、REPLで対応を確認できます。
 `(library name)` requirementは登録済みまたは検索して定義を取得できるライブラリを調べ、本体を初期化しません。
 未提供の標準ライブラリや失敗をキャッシュしたライブラリは利用不可として扱います。
 featureの結果に応じた宣言や式を選び、未選択の節のファイルは読みません。

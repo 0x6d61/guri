@@ -100,5 +100,6 @@ make install PREFIX=/usr/local DESTDIR=/tmp/guri-package
 これをR7RS-small全体の準拠率として扱いません。
 #95でLinux、macOS、WindowsのポートReadyとOS別CIを検証しました。
 確認した環境と結果は[結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit)に記録します。
-`r7rs` featureの広告、リリース対象OSと準拠宣言の範囲は別の判断です。
+Guri 0.0.3はR7RS-smallへの準拠を宣言し、`r7rs` featureを公開します。
+数値表現と実装依存事項、確認したOSとアーキテクチャは[結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit)を参照してください。
 旧ルートGo APIは削除し、新しい公開Go APIは提供していません。

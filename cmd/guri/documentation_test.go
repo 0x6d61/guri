@@ -11,7 +11,7 @@ import (
 
 func TestCLIDocumentedExamples(t *testing.T) {
 	examples := map[string][]string{
-		"README.md":                           {"15\n"},
+		"README.md":                           {"15\n", "#t\n"},
 		"docs/wiki/Home.md":                   {"42\n"},
 		"docs/wiki/Language-Specification.md": {"(1 true)\n", "(#(9 2 3) #(100 2 3))\n"},
 		"docs/wiki/Special-Forms.md":          {"6\n", "positive\n012\n"},

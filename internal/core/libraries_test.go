@@ -160,7 +160,7 @@ func TestLibrarySearchIncludesAndFeatures(t *testing.T) {
 	if n := number(runProgram(t, r, `(import (myapp util)) result`)); n != 42 {
 		t.Fatal(n)
 	}
-	if got := runProgram(t, r, `(import (scheme base)) (and (memq 'guri (features)) (not (memq 'r7rs (features))) (cond-expand ((and (library (myapp util)) (not (library (guri missing-library)))) #t) (else #f)))`); got != scheme.True {
+	if got := runProgram(t, r, `(import (scheme base)) (and (memq 'guri (features)) (memq 'r7rs (features)) (cond-expand ((and (library (myapp util)) (not (library (guri missing-library)))) #t) (else #f)))`); got != scheme.True {
 		t.Fatal(got)
 	}
 	// Program include uses the including source file, not the library search root.
@@ -239,7 +239,7 @@ func TestLibrarySupportProcedures(t *testing.T) {
 	r := core.NewRuntime()
 	for _, src := range []string{
 		`(import (scheme base)) (and (procedure? +) (procedure? (lambda () 1)) (procedure? (make-parameter 1)) (not (procedure? #f)) (call/cc (lambda (k) (procedure? k))))`,
-		`(import (scheme base)) (and (memq 'guri (features)) (memq 'full-unicode (features)) (not (memq 'r7rs (features))) #t)`,
+		`(import (scheme base)) (and (memq 'guri (features)) (memq 'full-unicode (features)) (memq 'r7rs (features)) #t)`,
 	} {
 		if got := runProgram(t, r, src); got != scheme.True {
 			t.Fatal(src, got)

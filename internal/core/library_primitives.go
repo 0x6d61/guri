@@ -9,7 +9,7 @@ import (
 )
 
 func (e *Engine) installLibraryPrimitives() {
-	e.features = map[string]bool{"guri": true, "exact-closed": true, "exact-complex": true, "ieee-float": true, "full-unicode": true, "ratios": true}
+	e.features = map[string]bool{"r7rs": true, "guri": true, "exact-closed": true, "exact-complex": true, "ieee-float": true, "full-unicode": true, "ratios": true}
 	e.Bind("features", vm.Native("features", 0, 0, func(_ *vm.Context, _ []scheme.Value) (vm.Action, error) {
 		var names []string
 		for name, enabled := range e.features {

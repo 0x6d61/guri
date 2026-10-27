@@ -129,10 +129,6 @@ func TestChibiSourceAudit(t *testing.T) {
 		o := auditObservation{Line: c.Source().Line, Section: section, Status: "pass", Expression: auditDisplay(a[2]), Expected: auditDisplay(a[0]), Actual: auditDisplay(a[1])}
 		if !auditNear(a[0], a[1]) {
 			o.Status = "fail"
-			if topLine == 2519 && a[0] == scheme.True && a[1] == scheme.False {
-				o.Status = "deferred"
-				o.Reason = "r7rs feature is deliberately not advertised before the public CLI migration/release decision (#67)"
-			}
 		}
 		record(o)
 		return vm.Return(scheme.Unspecified), nil
@@ -235,7 +231,7 @@ func TestChibiSourceAudit(t *testing.T) {
 			t.Errorf("line %d: %s expected %s got %s", o.Line, o.Expression, o.Expected, o.Actual)
 		}
 	}
-	if report.AssertionsEvaluated != 1214 || report.TopLevelForms < 1000 || report.Counts["not-adopted"] != 10 || report.Counts["deferred"] != 1 {
+	if report.AssertionsEvaluated != 1214 || report.TopLevelForms < 1000 || report.Counts["not-adopted"] != 10 || report.Counts["deferred"] != 0 || report.Counts["pass"] != 1214 {
 		t.Fatalf("unexpected audit coverage: forms=%d checks=%d counts=%v", report.TopLevelForms, report.AssertionsEvaluated, report.Counts)
 	}
 	t.Logf("forms=%d assertions=%d counts=%v raw_suite_passed=%v no_unexpected_failures=%v", report.TopLevelForms, report.AssertionsEvaluated, report.Counts, report.SuitePassed, report.NoUnexpectedFailures)

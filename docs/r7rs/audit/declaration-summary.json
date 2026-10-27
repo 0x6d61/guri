@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "engine": "internal/core.Runtime",
+  "platform": "linux/amd64",
+  "upstream_revision": "b2087f3a320a56f79ede5c546fd45fdde582c4ed",
+  "upstream_sha256": "004d215a38f990bbf2bfaa8b4a395aa59ef98d155096f8e31cc361b7812f7d6a",
+  "comparator": "equal?; root inexact numbers: relative/absolute tolerance 1e-6; exact numbers never rounded",
+  "top_level_forms": 1188,
+  "assertions_evaluated": 1214,
+  "suite_passed": false,
+  "no_unexpected_failures": true,
+  "issue": 99,
+  "guri_version": "0.0.3",
+  "r7rs_advertised": true,
+  "counts": {
+    "not-adopted": 10,
+    "pass": 1214,
+    "deferred": 0
+  },
+  "assertions_not_reached": 20,
+  "optional_form_lines": [
+    2356,
+    2357,
+    2358,
+    2359,
+    2360,
+    2361,
+    2362,
+    2363,
+    2400,
+    2402
+  ],
+  "deferred_lines": []
+}
