@@ -222,3 +222,11 @@ filenameの型が違う場合は通常のerror-objectを送出します。
 - [環境、eval、loadとREPL](https://github.com/0x6d61/guri/wiki/Evaluation-REPL): datumの評価、変更禁止と対話用の環境、loadの規則と継続、内部REPLの入出力。
 
 - [プロセス情報、終了と時計](https://github.com/0x6d61/guri/wiki/System-Interface): command-line、環境変数、exitとemergency-exit、TAIと単調時計。
+
+## 拡張ライブラリ
+
+`(guri filesystem)`はファイルとディレクトリを操作する8手続きを提供します。
+標準の16ライブラリと分離し、REPLでも明示的にimportします。
+バイナリに含めるため、追加のSchemeライブラリの配置は不要です。
+`cond-expand`の`(library (guri filesystem))`で利用可能性を確認できます。
+個別の契約は[Filesystem](https://github.com/0x6d61/guri/wiki/Filesystem)を参照してください。

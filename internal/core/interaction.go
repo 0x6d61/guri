@@ -19,8 +19,8 @@ func (r *Runtime) interactionEnvironment() *evaluationEnvironment {
 	e.strict = false
 	copies := map[*binding]*scheme.Cell{}
 	all := libraryExports{}
-	for _, l := range r.modules {
-		if l.definition == nil {
+	for key, l := range r.modules {
+		if r.standard[key] && l.definition == nil {
 			for name, b := range l.exports {
 				all[name] = b
 			}
