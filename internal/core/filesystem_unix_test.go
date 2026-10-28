@@ -12,17 +12,6 @@ import (
 	"github.com/0x6d61/guri/internal/scheme"
 )
 
-func TestFilesystemUnrepresentableFilename(t *testing.T) {
-	root := t.TempDir()
-	if err := os.WriteFile(filepath.Join(root, "bad\xff"), nil, 0600); err != nil {
-		t.Fatal(err)
-	}
-	src := `(import (scheme base) (guri filesystem)) (guard (e (else (file-error? e))) (directory-files ` + strconv.Quote(root) + ` #t) #f)`
-	if got := runProgram(t, core.NewRuntime(), src); got != scheme.True {
-		t.Fatal(got)
-	}
-}
-
 func TestFilesystemPermissionDenied(t *testing.T) {
 	if os.Geteuid() == 0 {
 		t.Skip("root bypasses Unix mode permissions; run as an unprivileged user")

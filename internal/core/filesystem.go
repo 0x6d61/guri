@@ -106,6 +106,17 @@ func filesystemValue(ctx context.Context, name string, paths []string, flag bool
 		// replaces the checked directory before the removal operation.
 		return scheme.Unspecified, os.NewSyscallError("rmdir", syscall.Rmdir(path))
 	case "rename-file":
+		old, err := os.Lstat(path)
+		if err != nil {
+			return nil, err
+		}
+		new, err := os.Lstat(paths[1])
+		if err != nil && !os.IsNotExist(err) {
+			return nil, err
+		}
+		if err == nil && old.IsDir() != new.IsDir() {
+			return nil, fmt.Errorf("cannot rename between directory and non-directory: %s -> %s", path, paths[1])
+		}
 		return scheme.Unspecified, os.Rename(path, paths[1])
 	case "file-directory?", "file-regular?":
 		stat := os.Stat
