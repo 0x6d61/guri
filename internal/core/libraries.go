@@ -63,6 +63,7 @@ func NewRuntime(paths ...string) *Runtime {
 			r.modules[key] = &library{exports: exports, prepared: true, initialized: true}
 		}
 	}
+	r.installFilesystem()
 	return r
 }
 func (r *Runtime) newEngine() *Engine {

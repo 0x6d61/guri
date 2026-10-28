@@ -45,3 +45,5 @@
 - [プロセス情報、終了と時計](https://github.com/0x6d61/guri/wiki/System-Interface): command-line、環境変数、exitとemergency-exit、TAIと単調時計。
 
 - [R7RS-smallの結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit): 原本の測定結果、修正した衛生性、96見出しの証拠索引と残る制限。
+
+- [ファイルシステム操作](https://github.com/0x6d61/guri/wiki/Filesystem)

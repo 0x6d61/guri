@@ -35,6 +35,7 @@ GitHub Wikiは公開先として使用します。
 | [Evaluation-REPL.md](wiki/Evaluation-REPL.md) | [環境、eval、loadとREPL](https://github.com/0x6d61/guri/wiki/Evaluation-REPL) |
 | [System-Interface.md](wiki/System-Interface.md) | [プロセス情報、終了と時計](https://github.com/0x6d61/guri/wiki/System-Interface) |
 | [R7RS-Audit.md](wiki/R7RS-Audit.md) | [R7RS-smallの結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit) |
+| [Filesystem.md](wiki/Filesystem.md) | [ファイルシステム操作](https://github.com/0x6d61/guri/wiki/Filesystem) |
 | [_Sidebar.md](wiki/_Sidebar.md) | サイドバー |
 
 ## 変更時の手順
@@ -59,7 +60,7 @@ Wikiへのpush権限を持つ認証が必要です。
 wiki_dir=$(mktemp -d)
 git clone https://github.com/0x6d61/guri.wiki.git "$wiki_dir"
 cp docs/wiki/*.md "$wiki_dir/"
-git -C "$wiki_dir" add CLI.md Home.md Language-Specification.md Special-Forms.md Functions.md Roadmap.md R7RS-Conformance.md R7RS-Testing.md Runtime-Data-Model.md R7RS-Reader.md Bytecode-VM.md Core-Syntax.md Syntax-Rules.md Derived-Syntax.md Control-Features.md Dynamic-Wind.md Exceptions-Parameters.md Numbers.md Pairs-Lists-Symbols.md Characters-Strings.md Vectors-Bytevectors.md Graph-IO.md Records.md Ports.md Datum-File-IO.md Libraries.md Lazy-Evaluation.md Evaluation-REPL.md System-Interface.md R7RS-Audit.md _Sidebar.md
+git -C "$wiki_dir" add CLI.md Home.md Language-Specification.md Special-Forms.md Functions.md Roadmap.md R7RS-Conformance.md R7RS-Testing.md Runtime-Data-Model.md R7RS-Reader.md Bytecode-VM.md Core-Syntax.md Syntax-Rules.md Derived-Syntax.md Control-Features.md Dynamic-Wind.md Exceptions-Parameters.md Numbers.md Pairs-Lists-Symbols.md Characters-Strings.md Vectors-Bytevectors.md Graph-IO.md Records.md Ports.md Datum-File-IO.md Libraries.md Lazy-Evaluation.md Evaluation-REPL.md System-Interface.md R7RS-Audit.md Filesystem.md _Sidebar.md
 git -C "$wiki_dir" diff --cached --check
 git -C "$wiki_dir" diff --cached
 ```
