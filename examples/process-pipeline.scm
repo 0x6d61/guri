@@ -1,0 +1,23 @@
+(import (scheme base) (scheme read) (scheme write)
+        (scheme process-context) (guri process))
+
+(define args (cdr (command-line)))
+(if (and (pair? args) (string=? (car args) "--child"))
+    (begin
+      (display "child diagnostic\n" (current-error-port))
+      (let loop ((line (read-line)))
+        (unless (eof-object? line)
+          (display line)
+          (newline)
+          (loop (read-line)))))
+    (let ((child (list (car args) (car (command-line)) "--child")))
+      (call-with-values
+        (lambda ()
+          (run-pipeline (list child child)
+                        (list (cons 'input (string->utf8 "hello\n")))))
+        (lambda (statuses output diagnostics)
+          (write statuses)
+          (newline)
+          (display (utf8->string output))
+          (for-each (lambda (bytes) (display (utf8->string bytes)))
+                    diagnostics)))))

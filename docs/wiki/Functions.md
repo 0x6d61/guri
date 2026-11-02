@@ -103,6 +103,13 @@ Appendix Aに基づく全557公開束縛を列挙しています。
 明示的にimportして使用します。
 標準の557束縛の件数には含めません。
 
+### `(guri process)`（2手続き）
+
+`run-process`, `run-pipeline`
+
+[Process](https://github.com/0x6d61/guri/wiki/Process)に引数、返り値、入出力、終了状態、エラーと使用例を記載しています。
+明示的にimportして使用し、標準の557束縛には含めません。
+
 ## 使用例
 
 ```scheme

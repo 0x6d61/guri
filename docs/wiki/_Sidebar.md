@@ -47,3 +47,5 @@
 - [R7RS-smallの結合監査](https://github.com/0x6d61/guri/wiki/R7RS-Audit): 原本の測定結果、修正した衛生性、96見出しの証拠索引と残る制限。
 
 - [ファイルシステム操作](https://github.com/0x6d61/guri/wiki/Filesystem)
+
+- [外部プロセスとパイプ接続](https://github.com/0x6d61/guri/wiki/Process)

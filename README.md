@@ -60,6 +60,17 @@ make install PREFIX="$HOME/.local"
 cwd、スクリプトの隣、`examples/`、リポジトリの `lib/` は暗黙に探索しません。
 詳細は[ライブラリ仕様](docs/wiki/Libraries.md)を参照してください。
 
+## アプリケーション向け拡張
+
+`(guri filesystem)`でファイルとディレクトリを操作し、`(guri process)`で外部プロセスとパイプラインを同期実行できます。
+各ライブラリを明示的にimportします。
+引数と返り値は[ファイルシステム操作](docs/wiki/Filesystem.md)と[外部プロセス](docs/wiki/Process.md)を参照してください。
+
+```sh
+./build/guri examples/process-pipeline.scm "$PWD/build/guri"
+./build/guri examples/git-status.scm /path/to/projects  # Gitが必要
+```
+
 ## 仕様と対応状況
 
 - [言語仕様](docs/wiki/Language-Specification.md)と[構文](docs/wiki/Special-Forms.md)
