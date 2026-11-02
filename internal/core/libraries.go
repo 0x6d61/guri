@@ -64,6 +64,7 @@ func NewRuntime(paths ...string) *Runtime {
 		}
 	}
 	r.installFilesystem()
+	r.installProcess()
 	return r
 }
 func (r *Runtime) newEngine() *Engine {

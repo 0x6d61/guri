@@ -230,3 +230,8 @@ filenameの型が違う場合は通常のerror-objectを送出します。
 バイナリに含めるため、追加のSchemeライブラリの配置は不要です。
 `cond-expand`の`(library (guri filesystem))`で利用可能性を確認できます。
 個別の契約は[Filesystem](https://github.com/0x6d61/guri/wiki/Filesystem)を参照してください。
+
+`(guri process)`は、外部プロセスの同期実行とパイプ接続を行う`run-process`と`run-pipeline`を提供します。
+REPLでも明示的にimportし、`cond-expand`の`(library (guri process))`で利用可能性を確認できます。
+バイナリに含まれるため、追加のライブラリファイルは不要です。
+個別の契約は[Process](https://github.com/0x6d61/guri/wiki/Process)を参照してください。
