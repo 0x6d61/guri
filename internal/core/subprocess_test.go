@@ -147,17 +147,31 @@ func TestSubprocessEnvironment(t *testing.T) {
 	t.Setenv("GURI_PROCESS_INHERITED", "inherited")
 	t.Setenv("GURI_PROCESS_TEST", "parent")
 	dir := t.TempDir()
-	// Resolve macOS temporary directory symlinks before comparing getcwd.
-	resolved, err := filepath.EvalSymlinks(dir)
+	// Compare directory identity: Windows path casing and macOS symlinks can
+	// give getcwd a different spelling than the supplied directory.
+	src := fmt.Sprintf(`(call-with-values (lambda () (run-process %s '((directory . %s) (environment . (("GURI_PROCESS_TEST" . "child"))))))
+  (lambda (s o e) (vector s o e)))`, childCommand(t, "environment"), strconv.Quote(dir))
+	values := processRun(t, src).(*scheme.Vector).Values()
+	output := string(values[1].(*scheme.Bytevector).Bytes())
+	if values[0].(*scheme.Integer).BigInt().Sign() != 0 || values[2].(*scheme.Bytevector).Len() != 0 {
+		t.Fatal(values[0], output, values[2])
+	}
+	fields := strings.Split(output, "\n")
+	if len(fields) != 3 || fields[1] != "child" || fields[2] != "inherited" {
+		t.Fatalf("child environment: %q", output)
+	}
+	actual, err := os.Stat(fields[0])
+	if err != nil {
+		t.Fatal(output, err)
+	}
+	expected, err := os.Stat(dir)
 	if err != nil {
 		t.Fatal(err)
 	}
-	want := filepath.Clean(resolved) + "\nchild\ninherited"
-	src := fmt.Sprintf(`(call-with-values (lambda () (run-process %s '((directory . %s) (environment . (("GURI_PROCESS_TEST" . "child"))))))
-  (lambda (s o e) (and (= s 0) (string=? (utf8->string o) %s))))`, childCommand(t, "environment"), strconv.Quote(dir), strconv.Quote(want))
-	if got := processRun(t, src); got != scheme.True {
-		t.Fatal(got)
+	if !os.SameFile(actual, expected) {
+		t.Fatalf("child directory %q does not identify %q", fields[0], dir)
 	}
+
 	if os.Getenv("GURI_PROCESS_TEST") != "parent" {
 		t.Fatal("parent environment changed")
 	}

@@ -4,11 +4,12 @@ package core_test
 
 import (
 	"errors"
-	"github.com/0x6d61/guri/internal/scheme"
 	"os"
 	"strconv"
 	"syscall"
 	"testing"
+
+	"github.com/0x6d61/guri/internal/scheme"
 )
 
 func assertProcessReaped(t *testing.T, marker string) {
