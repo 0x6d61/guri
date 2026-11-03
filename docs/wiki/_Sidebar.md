@@ -49,3 +49,5 @@
 - [ファイルシステム操作](https://github.com/0x6d61/guri/wiki/Filesystem)
 
 - [外部プロセスとパイプ接続](https://github.com/0x6d61/guri/wiki/Process)
+
+- [JSONの読み書き](https://github.com/0x6d61/guri/wiki/JSON)

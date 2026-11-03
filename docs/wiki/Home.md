@@ -16,6 +16,7 @@ Goで実装したバイトコードVMで実行します。
 | [環境、eval、loadとREPL](https://github.com/0x6d61/guri/wiki/Evaluation-REPL) | 評価環境と対話実行 |
 | [バイトコードVM](https://github.com/0x6d61/guri/wiki/Bytecode-VM) | 命令、継続とproper tail recursion |
 | [適合性テスト](https://github.com/0x6d61/guri/wiki/R7RS-Testing) | テストの実行方法と結果の分類 |
+| [JSONの読み書き](https://github.com/0x6d61/guri/wiki/JSON) | 値の対応、ストリーム処理、制限と設定ファイルの更新 |
 | [バージョン計画](https://github.com/0x6d61/guri/wiki/Roadmap) | 移行完了範囲と残る作業 |
 
 プログラムは必要なライブラリをimportしてから実行します。

@@ -63,8 +63,9 @@ cwd、スクリプトの隣、`examples/`、リポジトリの `lib/` は暗黙�
 ## アプリケーション向け拡張
 
 `(guri filesystem)`でファイルとディレクトリを操作し、`(guri process)`で外部プロセスとパイプラインを同期実行できます。
+`(srfi 180)`でJSONの読み書きとストリーム処理を行えます。
 各ライブラリを明示的にimportします。
-引数と返り値は[ファイルシステム操作](docs/wiki/Filesystem.md)と[外部プロセス](docs/wiki/Process.md)を参照してください。
+引数と返り値は[ファイルシステム操作](docs/wiki/Filesystem.md)、[外部プロセス](docs/wiki/Process.md)、[JSON](docs/wiki/JSON.md)を参照してください。
 
 ```sh
 ./build/guri examples/process-pipeline.scm "$PWD/build/guri"

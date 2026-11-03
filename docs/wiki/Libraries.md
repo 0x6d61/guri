@@ -235,3 +235,11 @@ filenameの型が違う場合は通常のerror-objectを送出します。
 REPLでも明示的にimportし、`cond-expand`の`(library (guri process))`で利用可能性を確認できます。
 バイナリに含まれるため、追加のライブラリファイルは不要です。
 個別の契約は[Process](https://github.com/0x6d61/guri/wiki/Process)を参照してください。
+
+### JSON
+
+`(srfi 180)`は、JSONの読み書きとストリーム処理を行うSRFIライブラリです。
+全12公開束縛をバイナリに含み、REPLでも明示的にimportします。
+`cond-expand`の`(library (srfi 180))`で利用可能性を確認できます。
+16標準ライブラリの件数には含めません。
+個別の契約は[JSON](https://github.com/0x6d61/guri/wiki/JSON)を参照してください。

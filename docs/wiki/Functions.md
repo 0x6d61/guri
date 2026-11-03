@@ -110,6 +110,12 @@ Appendix Aに基づく全557公開束縛を列挙しています。
 [Process](https://github.com/0x6d61/guri/wiki/Process)に引数、返り値、入出力、終了状態、エラーと使用例を記載しています。
 明示的にimportして使用し、標準の557束縛には含めません。
 
+### `(srfi 180)`（12束縛）
+
+`json-error?`, `json-error-reason`, `json-null?`, `json-nesting-depth-limit`, `json-number-of-character-limit`, `json-generator`, `json-fold`, `json-read`, `json-lines-read`, `json-sequence-read`, `json-accumulator`, `json-write`
+
+[JSON](https://github.com/0x6d61/guri/wiki/JSON)に値の対応、引数、返り値、ストリーム処理、制限、エラーと使用例を記載しています。
+
 ## 使用例
 
 ```scheme
