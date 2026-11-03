@@ -12,6 +12,7 @@ const (
 	ErrorOrdinary ErrorKind = 0
 	ErrorRead     ErrorKind = 1
 	ErrorFile     ErrorKind = 2
+	ErrorJSON     ErrorKind = 4
 )
 
 var exceptionType = func() *scheme.RecordType {
@@ -25,7 +26,7 @@ var exceptionType = func() *scheme.RecordType {
 
 // NewErrorObject is the internal bridge for future read/file primitives.
 func NewErrorObject(kind ErrorKind, message string, irritants ...scheme.Value) (scheme.Value, error) {
-	if kind&^(ErrorRead|ErrorFile) != 0 {
+	if kind&^(ErrorRead|ErrorFile|ErrorJSON) != 0 {
 		return nil, scheme.ErrType
 	}
 	s, err := scheme.NewString(message)
